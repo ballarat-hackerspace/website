@@ -181,9 +181,6 @@ li, li > p {
   max-width: 100%;
 }
 
-.google-calendar .calendar-title {
-  margin: 0 0 8px 0;
-}
 .google-calendar iframe {
   max-width: 100%;
   width: 100%;
@@ -479,7 +476,7 @@ li, li > p {
   top: 0;
   left: 0;
   height: 480px;
-  background: #595959 url('/images/bhack-space-1.jpg');
+  background: #000000 url('/images/promo-header.jpg');
   background-position: 50% 50%;
   background-size: cover;
   z-index: -1;
@@ -1307,7 +1304,7 @@ li, li > p {
 .section .intro {
   max-width: 800px;
   margin: 0 auto;
-  margin-bottom: 60px;
+  margin-bottom: 32px;
   font-weight: 300;
   color: #666;
   font-size: 20px;

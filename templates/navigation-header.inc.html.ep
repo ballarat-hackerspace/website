@@ -18,15 +18,7 @@
               <li class="nav-item <%= 'active' if ($active eq 'home') %>"><a href="/">Home</a></li>
               <li class="nav-item <%= 'active' if ($active eq 'about') %>"><a href="/about">About</a></li>
               <li class="nav-item <%= 'active' if ($active eq 'blog') %>"><a href="/blog">Blog</a></li>
-              <li class="nav-item <%= 'active' if ($active eq 'work') %> dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="work.html">Work <i class="fa fa-angle-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="work.html">Our Work</a></li>
-                  <li><a href="case-study-1.html">Single Case Study 1</a></li>
-                  <li><a href="case-study-2.html">Single Case Study 2</a></li>
-                  <li><a href="blog-post.html">Single Blog Post</a></li>
-                </ul>
-              </li><!--//dropdown-->
+              <li class="nav-item <%= 'active' if ($active eq 'workshops') %>"><a href="/workshops">Workshops</a></li><!--//dropdown-->
               <li class="nav-item <%= 'active' if ($active eq 'join') %>"><a href="/join">Join</a></li>
               <li class="nav-item <%= 'active' if ($active eq 'contact') %> last"><a href="/contact">Contact</a></li>
             </ul><!--//nav-->
