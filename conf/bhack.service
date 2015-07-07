@@ -12,3 +12,8 @@ PIDFile=/var/run/bhackd.pid
 ExecStart=/usr/bin/hypnotoad /srv/ballarathackerspace.org.au/bhackd -f
 ExecStop=/usr/bin/hypnotoad -s /srv/ballarathackerspace.org.au/bhackd
 ExecReload=/usr/bin/hypnotoad /srv/ballarathackerspace.org.au/bhackd
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=bhackd.service
