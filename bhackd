@@ -16,6 +16,10 @@ get '/blog' => sub {
   shift->render('blog');
 };
 
+get '/blog/:date/:title' => sub {
+  shift->redirect_to('blog');
+};
+
 get '/conduct' => sub {
   shift->render('conduct');
 };
