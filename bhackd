@@ -36,5 +36,10 @@ get '/workshops' => sub {
   shift->render('workshops');
 };
 
+app->config(hypnotoad => {
+  listen    => ['http://127.0.0.1:10001'],
+  pid_file  => '/var/run/bhackd.pid'
+});
+
 app->secrets(['foo']);
 app->start;
