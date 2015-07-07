@@ -1,0 +1,14 @@
+[Unit]
+Description=Ballarat Hackerspace website daemon
+Requires=network.target
+After=network.target
+# put here other service requirements
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+SyslogIdentifier=bhackd
+PIDFile=/var/run/bhackd.pid
+ExecStart=/usr/bin/hypnotoad /srv/ballarathackerspace.org.au/bhackd -f
+ExecStop=/usr/bin/hypnotoad -s /srv/ballarathackerspace.org.au/bhackd
+ExecReload=/usr/bin/hypnotoad /srv/ballarathackerspace.org.au/bhackd
