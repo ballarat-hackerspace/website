@@ -32,8 +32,16 @@ get '/join' => sub {
   shift->render('join');
 };
 
+get '/sponsors' => sub {
+  shift->render('sponsors');
+};
+
 get '/workshops' => sub {
   shift->render('workshops');
+};
+
+any '/*whatever' => {whatever => ''} => sub {
+  shift->redirect_to('/');
 };
 
 app->config(hypnotoad => {

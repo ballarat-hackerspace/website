@@ -122,8 +122,8 @@ a.btn-cta-secondary:hover,
   margin-bottom: 0;
 }
 .nav>li>a {
-  padding-left: 8px;
-  padding-right8px;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 .text-highlight {
   color: #217997;

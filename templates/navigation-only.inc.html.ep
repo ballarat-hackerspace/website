@@ -18,6 +18,7 @@
             <li class="nav-item <%= 'active' if ($active eq 'about') %>"><a href="/about">About</a></li>
             <li class="nav-item <%= 'active' if ($active eq 'blog') %>"><a href="/blog">Blog</a></li>
             <li class="nav-item <%= 'active' if ($active eq 'workshops') %>"><a href="/workshops">Workshops</a></li><!--//dropdown-->
+            <li class="nav-item <%= 'active' if ($active eq 'sponsors') %>"><a href="/sponsors">Sponsors</a></li>
             <li class="nav-item <%= 'active' if ($active eq 'join') %>"><a href="/join">Join</a></li>
             <li class="nav-item <%= 'active' if ($active eq 'contact') %> last"><a href="/contact">Contact</a></li>
           </ul><!--//nav-->

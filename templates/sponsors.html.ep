@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <title>About Us</title>
+
+  %= include 'header.inc'
+</head>
+
+<body>
+  <!-- header -->
+  %= include 'navigation-only.inc', active => 'sponsors'
+
+  <!-- sponsors section -->
+  <section id="sponsors" class="section">
+    <div class="container">
+      <h2 class="title text-center">Corporate Sponsors</h2>
+      <div class="row">
+        <div class="col-sm-offset-2 col-sm-3 text-center">
+          <a href="http://www.lateralplains.com"><img src="images/sponsors/logo-lateral-plains.png"></img></a>
+        </div>
+        <div class="col-sm-offset-2 col-sm-3 text-center">
+          <a href="http://www.sparxsystems.com"><img src="images/sponsors/logo-sparx.png"></img></a>
+        </div>
+      </div>
+    </div><!-- container -->
+  </section><!-- sponsors section -->
+
+  <section id="seeders" class="section">
+    <div class="container">
+      <h2 class="title text-center">Seeders</h2>
+      <div class="row">
+        <div class="col-sm-6 text-center">
+          <h4>Scott Weston</h4>
+        </div>
+        <div class="col-sm-6 text-center">
+          <h4>Ian Firns</h4>
+        </div>
+        <div class="col-sm-6 text-center">
+          <h4>Stuart Clarke</h4>
+        </div>
+        <div class="col-sm-6 text-center">
+          <h4>Brett James</h4>
+        </div>
+      </div>
+    </div><!--//container-->
+  </section><!-- photos section-->
+
+  <!-- footer -->
+  %= include 'footer.inc'
+
+  <!-- scripts -->
+  %= include 'scripts.inc'
+</body>
+</html>
