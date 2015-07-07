@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <title>About Us</title>
+
+  %= include 'header.inc'
+</head>
+
+<body>
+  <!-- header -->
+  %= include 'navigation-only.inc', active => 'about'
+
+  <!-- ******team Section****** -->
+  <section id="team" class="section">
+    <div class="container">
+      <h2 class="title text-center">About Us</h2>
+      <p>The Ballarat Hackerspace is modeled on an <a href="http://hackerspaces.org/">international community of like minded spaces</a> that started in Germany back in 1995. It supports and encourages Science, Technology, Engineering, Art and Mathematics culture in the Ballarat region by providing a physical space for residents to meet, interact, create and innovate.</p>
+
+      <p>We hold public meetups on the 1st, 3rd and 5th Tuesdays of each month (refer to the <a href="/#calendar">Calendar</a>). These meetups are where we invite you to join us and chat, participate in show and tell, get help or advice, or talk about your projects.</p>
+    </div><!--//container-->
+  </section><!--//team-section-->
+
+  <section id="space" class="section">
+    <div class="container">
+      <h2 class="title text-center">The Space</h2>
+      <p>We moved into our new space at Room 903 of the Federation University SMB Campus in January 2015. Please come along and check us out at our next meetup, or any time we are open. Check the calendar or the online community for opening times. If you would like to support our community please join the Ballarat Hackerspace.</p>
+      <p>You are welcome to join the IRC channel, or follow us on Twitter or Google+</p>
+
+      <h3>Before visiting the space</h3>
+      <p>The space is a workshop, so we require enclosed shoes to be worn while visiting. There are rules that apply in the space for everyone’s safety &amp; enjoyment.</p>
+
+      <h3>Location</h3>
+      <p>Our street address is:</p>
+      <blockquote>
+        Room 903<br/>
+        107 Lydiard Street South,<br/>
+        Ballarat, Victoria<br/>
+        3350
+      </blockquote>
+
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3162.557667332649!2d143.857577!3d-37.565484000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad144fa1820aff1%3A0xcccfffb2cb152dd7!2sBallarat+Hackerspace!5e0!3m2!1sen!2sau!4v1422321706092" width="100%" height="300" frameborder="0" style="border:0"></iframe>
+    </div><!--//container-->
+  </section><!--//team-section-->
+
+  <section id="association" class="section">
+    <div class="container">
+      <h2 class="title text-center">The Association</h2>
+      <p>The Ballarat Hackerspace is an Incorporated association (in Victoria) and follows the Rules of Association that it was founded with.</p>
+      <p>As part of this, we elect a Committee as chartered in the rules. The current committee were elected on Saturday, 27th of June, 2015.</p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Position</th>
+            <th>Elected Representative</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>President</td>
+            <td>Scott Weston</td>
+          </tr>
+          <tr>
+            <td>Secretary</td>
+            <td>Ian Firns</td>
+          </tr>
+          <tr>
+            <td>Treasurer</td>
+            <td>Brett James</td>
+          </tr>
+          <tr>
+            <td>Office Member</td>
+            <td>Robert Layton</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!--//container-->
+  </section><!--//association-section-->
+
+  <section id="conduct" class="section section-highlight">
+    <div class="container">
+      <h2 class="title text-center">Code of Conduct</h2>
+      <p>Ballarat Hackerspace is dedicated to providing a harassment-free experience for everyone, regardless of gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, or religion. We do not tolerate harassment of people at our events or space in any form. People violating these rules may be sanctioned or expelled from the space or the event at the discretion of any Ballarat Hackerspace member.</p>
+      <a href="/conduct" class="btn btn-cta btn-cta-primary">Read More</a>
+    </div><!--//container-->
+  </section>
+
+  <section id="movement" class="section">
+    <div class="container">
+      <h2 class="title text-center">The Movement</h2>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/WkiX7R1-kaY" frameborder="0" allowfullscreen=""></iframe>
+      </div>
+    </div><!--//container-->
+  </section>
+
+  <!-- footer -->
+  %= include 'footer.inc'
+
+  <!-- scripts -->
+  %= include 'scripts.inc'
+</body>
+</html>

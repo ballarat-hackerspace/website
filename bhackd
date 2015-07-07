@@ -1,0 +1,36 @@
+#!/usr/bin/perl
+#
+
+use Mojolicious::Lite;
+
+
+get '/' => sub {
+  shift->render('index');
+};
+
+get '/about' => sub {
+  shift->render('about');
+};
+
+get '/blog' => sub {
+  shift->render('blog');
+};
+
+get '/conduct' => sub {
+  shift->render('conduct');
+};
+
+get '/contact' => sub {
+  shift->render('contact');
+};
+
+get '/join' => sub {
+  shift->render('join');
+};
+
+get '/workshops' => sub {
+  shift->render('workshops');
+};
+
+app->secrets(['foo']);
+app->start;

@@ -1,0 +1,52 @@
+  <!-- footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col col-sm-6 links-col">
+            <div class="footer-col-inner">
+              <h3 class="sub-title">Quick Links</h3>
+              <ul class="list-unstyled">
+                <li><a href="/about">About</a></li>
+                <li><a href="/conduct">Code of Conduct</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/workshops">Workshops</a></li>
+                <li><a href="/join">Join</a></li>
+              </ul>
+            </div><!--//footer-col-inner-->
+          </div><!--//foooter-col-->
+          <div class="footer-col col-sm-6 contact-col">
+            <div class="footer-col-inner">
+              <h3 class="sub-title">Get In Touch</h3>
+              <p class="intro"></p>
+              <div class="row">
+                <p class="adr clearfix col-md-12 col-sm-4">
+                  <span class="fs1" aria-hidden="true" data-icon="&#xe01d;"></span>
+                  <span class="adr-group">
+                    <span class="street-address">56 College Green Road</span><br />
+                    <span class="city">Bristol</span><br />
+                    <span class="postal-code">BS1 XR18</span><br />
+                    <span class="country-name">UK</span>
+                  </span>
+                </p>
+                <p class="tel col-md-12 col-sm-4"><span class="fs1" aria-hidden="true" data-icon="&#x77;"></span><a href="tel:+08001234567">0800 123 4567</a></p>
+                <p class="email col-md-12 col-sm-4"><span class="fs1" aria-hidden="true" data-icon="&#xe010;"></span><a href="#">hello@yourdevstudio.com</a></p>
+              </div>
+            </div><!--//footer-col-inner-->
+          </div><!--//foooter-col-->
+        </div>
+      </div>
+    </div><!--//footer-content-->
+
+    <div class="bottom-bar">
+      <div class="container center">
+        <ul class="social-icons list-inline">
+          <li><a href="https://github.com/ballarat-hackerspace/"><i class="fa fa-github-alt"></i></a></li>
+          <li><a href="https://plus.google.com/communities/106879016585907671427"><i class="fa fa-google-plus"></i></a></li>
+          <li><a href="https://twitter.com/bHackerspace"><i class="fa fa-twitter"></i></a></li>
+        </ul>
+        <small class="copyright text-center">All published content is licensed under the <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC‑BY‑SA 4.0</a> International license.</small>
+      </div><!--//container-->
+    </div><!--//bottom-bar-->
+  </footer><!--//footer-->

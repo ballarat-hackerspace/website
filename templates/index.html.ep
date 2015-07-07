@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <title>Ballarat Hackerspace</title>
+
+  %= include 'header.inc'
+</head>
+
+<body>
+  <!-- header -->
+  %= include 'navigation-header.inc', active => 'home'
+  <section class="section promo-header">
+    <div class="container text-center">
+      <p class="intro text-center">We are dedicated to providing educational resources to our community, through outreach, supporting other organisations and events, teaching classes, and by providing a means to network with other professionals and hobbyists through our regular meetings.</p>
+      <a class="btn btn-cta btn-cta-primary" href="/about">More About Us</a>
+    </div>
+  </section><!-- why -->
+
+  
+  %= include 'navigation-footer.inc', active => 'home'
+
+  <!-- blog section -->
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="item col-md-8 col-sm-7 col-xs-12">
+        </div>
+        <div class="item col-md-4 col-sm-5 col-xs-12">
+          <div id="calendar" class="google-calendar">
+            <h4 class="calendar-title">Calendar</h4>
+            <iframe class="google-calendar" src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;mode=AGENDA&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=cieqouel1mafmv7voq0lt6dkrqpgts7l%40import.calendar.google.com&amp;color=%23AB8B00&amp;ctz=Australia%2FSydney" style=" border-width:0" frameborder="0" scrolling="no"></iframe>
+          </div>
+        </div><!--//item-->
+      </div><!--//row-->
+    </div><!--//container-->
+  </section><!-- blog -->
+
+  <!-- ******Logos Section****** -->
+  <section id="logos" class="logos section">
+    <div class="container text-center">
+      <h2 class="title">Who we have worked with</h2>
+      <p class="intro">SaaS / Mobile apps / Marketing sites / Internal apps</p>
+      <ul class="logo-list list-inline row">
+        <li class="col-md-3 col-sm-3 col-xs-6"><a href="#"><img class="img-responsive" src="images/logos/logo-1.png" alt="" /></a></li>
+        <li class="col-md-3 col-sm-3 col-xs-6 xs-break"><a href="#"><img class="img-responsive" src="images/logos/logo-2.png" alt="" /></a></li>
+        <li class="col-md-3 col-sm-3 col-xs-6"><a href="#"><img class="img-responsive" src="images/logos/logo-3.png" alt="" /></a></li>
+        <li class="col-md-3 col-sm-3 col-xs-6"><a href="#"><img class="img-responsive" src="images/logos/logo-4.png" alt="" /></a></li>
+      </ul><!--//logo-list-->
+      <ul class="logo-list list-inline row last">
+        <li class="col-md-3 col-sm-3 col-xs-6"><a href="#"><img class="img-responsive" src="images/logos/logo-5.png" alt="" /></a></li>
+        <li class="col-md-3 col-sm-3 col-xs-6 xs-break"><a href="#"><img class="img-responsive" src="images/logos/logo-6.png" alt="" /></a></li>
+        <li class="col-md-3 col-sm-3 col-xs-6"><a href="#"><img class="img-responsive" src="images/logos/logo-7.png" alt="" /></a></li>
+        <li class="col-md-3 col-sm-3 col-xs-6"><a href="#"><img class="img-responsive" src="images/logos/logo-8.png" alt="" /></a></li>
+      </ul><!--//logos-list-->
+    </div><!--//container-->
+  </section><!--//logos-->
+
+  <!-- ******Latest blog Section****** -->
+  <section id="latest-blog" class="latest-blog section">
+    <div class="container">
+      <h2 class="title text-center">Latest Blog Posts</h2>
+      <div class="row">
+        <div class="item col-md-6 col-sm-6 col-xs-12">
+          <div class="item-inner">
+            <figure class="figure">
+              <a href="blog-post.html"><img class="img-responsive" src="images/blog/blog-thumb-1.jpg" alt="" /></a>
+            </figure>
+            <div class="content-wrapper text-center">
+              <h3 class="sub-title"><a href="blog-post.html">DevStudio helps XYZ launch</a></h3>
+              <div class="desc">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sodales dolor ut ligula faucibus, nec mattis nibh eleifend. Duis et enim at lacus pharetra mollis molestie nec magna. Maecenas tristique laoreet tristique. Ut pellentesque diam nec odio hendrerit euismod.</p>
+              </div><!--//desc-->
+            </div><!--//content-wrapper text-center-->
+          </div><!--//item-inner-->
+        </div><!--//item-->
+
+        <div class="item col-md-6 col-sm-6 col-xs-12">
+          <div class="item-inner">
+            <figure class="figure">
+              <a href="blog-post.html"><img class="img-responsive" src="images/blog/blog-thumb-2.jpg" alt="" /></a>
+            </figure>
+            <div class="content-wrapper text-center">
+              <h3 class="sub-title"><a href="blog-post.html">devAid - Free Bootstrap Theme</a></h3>
+              <div class="desc">
+                <p>Mauris libero leo, dapibus a congue ut, mollis sed nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus augue nec nulla ultricies, <a href="http://themes.3rdwavemedia.com/website-templates/devaid-free-bootstrap-theme-developers/" target="_blank">Download now</a> vitae tincidunt lacus scelerisque.</p>
+              </div><!--//desc-->
+            </div><!--//content-wrapper text-center-->
+          </div><!--//item-inner-->
+        </div><!--//item-->
+
+        <div class="item col-md-6 col-sm-6 col-xs-12">
+          <div class="item-inner">
+            <figure class="figure">
+              <a href="blog-post.html"><img class="img-responsive"  src="images/blog/blog-thumb-3.jpg" alt="" /></a>
+            </figure>
+            <div class="content-wrapper text-center">
+              <h3 class="sub-title"><a href="blog-post.html">DevStudio Team Lorem Ipsum</a></h3>
+              <div class="desc">
+                <p>In vel mauris consequat, ullamcorper diam id, eleifend tellus. Phasellus elementum facilisis eleifend. Nullam imperdiet odio massa, et blandit augue porta vehicula. Proin venenatis ullamcorper enim, in vulputate nisi luctus eget. Justo vitae tincidunt vestibulum. Cras consectetur lacinia massa.</p>
+              </div><!--//desc-->
+            </div><!--//content-wrapper text-center-->
+          </div><!--//item-inner-->
+        </div><!--//item-->
+        <div class="item col-md-6 col-sm-6 col-xs-12">
+          <div class="item-inner">
+            <figure class="figure">
+              <a href="blog-post.html"><img class="img-responsive" src="images/blog/blog-thumb-4.jpg" alt="" /></a>
+            </figure>
+            <div class="content-wrapper text-center">
+              <h3 class="sub-title"><a href="blog-post.html">Our Consectetur Adipiscing</a></h3>
+              <div class="desc">
+                <p>Aenean eget molestie ipsum, in commodo felis. Sed vitae enim est. Nunc at eros id purus vulputate elementum in vel nisi. Donec tempus turpis et viverra semper. Curabitur facilisis sem elit, vitae condimentum enim auctor ac. Sed orci magna, euismod eu mi eu, fringilla tincidunt orci. Phasellus molestie.</p>
+              </div><!--//desc-->
+            </div><!--//content-wrapper text-center-->
+          </div><!--//item-inner-->
+        </div><!--//item-->
+      </div><!--//row-->
+    </div><!--//container-->
+  </section><!--//latest-blog-->
+
+  <!-- footer -->
+  %= include 'footer.inc'
+
+  <!-- scripts -->
+  %= include 'scripts.inc'
+</body>
+</html>
+

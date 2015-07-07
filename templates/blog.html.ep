@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <title>About Us</title>
+
+  %= include 'header.inc'
+</head>
+
+<body>
+  <!-- header -->
+  %= include 'navigation-only.inc', active => 'blog'
+
+  <!-- photos section -->
+  <section id="team" class="section">
+    <div class="container">
+      <h2 class="title text-center">Blog</h2>
+      <p>We'll get the blog back up and running really soon. In the meantime please feel free to check out what's happening at the space on our <a href="http://plus.bhack.in/">Google+ community page</a>.</p>
+      <div class="text-center">
+        <a class="btn btn-cta btn-cta-primary" href="http://plus.bhack.in/">Google+ community page</a>
+      </div>
+    </div><!--//container-->
+  </section><!--//team-section-->
+
+  <section id="photos" class="section">
+    <div class="container">
+      <p>In the meantime checkout some of these recent happenings in and around the hackerspace.</p>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <img class="img-responsive" src="images/photos/govhack-project-discussion-large.jpg"></img>
+        </div>
+        <div class="col-sm-4">
+          <img class="img-responsive" src="images/photos/hackerspace-tour-large.jpg"></img>
+        </div>
+        <div class="col-sm-4">
+          <img class="img-responsive" src="images/photos/esp8266-large.jpg"></img>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <img class="img-responsive" src="images/photos/led-marquee-arachnid-labs-large.jpg"></img>
+        </div>
+        <div class="col-sm-4">
+          <img class="img-responsive" src="images/photos/temperature-sensors-large.jpg"></img>
+        </div>
+        <div class="col-sm-4">
+          <img class="img-responsive" src="images/photos/rapid-mame-build-large.jpg"></img>
+        </div>
+      </div>
+    </div><!--//container-->
+  </section><!-- photos section-->
+
+  <!-- footer -->
+  %= include 'footer.inc'
+
+  <!-- scripts -->
+  %= include 'scripts.inc'
+</body>
+</html>
