@@ -17,6 +17,7 @@
     <div class="container">
 % if ($style eq 'markdown') {
       <h2 class="title text-center"><%= $title %></h2>
+      <p class="subtitle text-center"><%= $date->strftime("%a, %e %b %Y") %></p>
       <%== $content %>
 % } elsif ($style eq 'html') {
       <%== $content %>
@@ -25,6 +26,14 @@
         <%== $content %>
       </pre>
 % }
+      <div class="blog-tags">
+        <p>
+          <i class="fa fa-tag"></i>
+% for my $t (@{$tags}) {
+          <span class="blog-tag"><a href="<%= url_for('blog')->query([tags => $t]) %>"><%= $t %></a></span>
+% }
+        </p>
+      </div>
     </div><!--//container-->
   </section><!--//team-section-->
 

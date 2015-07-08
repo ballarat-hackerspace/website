@@ -8,8 +8,6 @@ You could say it is getting _exciting_!
 
 <!--more-->
 
-
-
 ### Memberships are now open
 
 We are proud to officially open the Ballarat Hackerspace for membership. Memberships help keep the hackerspace open, power running, packets flowing, equipment working and be a useful resource for the community. All of the membership fees go into keeping the hackerspace a friendly and useful resource for all of us.
@@ -23,7 +21,6 @@ The existing 1st, 3rd and 5th Tuesdays of each month 7pm to 9pm meetings will co
 Membership dues are paid monthly and we are taking expressions of interest for a “pay as you go” daily rate as a future option (feel free to discuss this with us in the space or via the [Google+ community](http://plus.bhack.in)).
 
 
-
 ### Key benefits of being a workshop member at the Ballarat Hackerspace:
 
 - Full access to the space during all scheduled open times
@@ -31,7 +28,6 @@ Membership dues are paid monthly and we are taking expressions of interest for a
 - Access to equipment and internet
 - Learning and networking opportunities
 - Subsidy to future hackerspace events
-
 
 
 ### Becoming a member

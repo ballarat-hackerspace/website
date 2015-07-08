@@ -18,7 +18,7 @@
       <h2 class="title text-center">Blog</h2>
 % if ($tags) {
       <div class="row">
-        <div class="col-sm-12"><a href="<%= url_for('current')->query([tags => undef]) %>"><i class="fa fa-times"></i></a> <%= $tags %></div>
+        <div class="col-sm-12">Filtering: <a href="<%= url_for('current')->query([tags => undef]) %>"><i class="fa fa-times"></i></a> <%= $tags %></div>
       </div>
 % }
       <div class="row">
