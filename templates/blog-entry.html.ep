@@ -15,19 +15,18 @@
   <!-- photos section -->
   <section id="team" class="section">
     <div class="container">
-      <h2 class="title text-center">Blog</h2>
-      <div class="row">
-% for my $b (@{$summary}) {
-        <div class="col-sm-4">
-          <a href="<%= url_for('blog-page', date => $b->{date}->strftime("%Y%m%d"), slug => $b->{slug}) %>"><h4><%= $b->{title} %></h4></a>
-          <p><%= $b->{date}->strftime("%a, %e %b %Y") %></p>
-          <%== $b->{excerpt} %>
-          <p><%= $b->{tags} %></p>
-        </div>
+% if ($style eq 'markdown') {
+      <h2 class="title text-center"><%= $title %></h2>
+      <%== $content %>
+% } elsif ($style eq 'html') {
+      <%== $content %>
+% } elsif ($style eq 'text') {
+      <pre>
+        <%== $content %>
+      </pre>
 % }
-      </div>
-    </div><!-- container -->
-  </section><!-- team-section -->
+    </div><!--//container-->
+  </section><!--//team-section-->
 
   <!-- footer -->
   %= include 'footer.inc'
