@@ -3,13 +3,13 @@
   <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-  <script type="text/javascript" src="js/plugins/bootstrap-hover-dropdown.min.js"></script>
-  <script type="text/javascript" src="js/plugins/back-to-top.js"></script>
-  <script type="text/javascript" src="js/plugins/jquery.placeholder.js"></script>
-  <script type="text/javascript" src="js/plugins/jquery.matchheight-min.js"></script>
-  <script type="text/javascript" src="js/plugins/jquery.fitvids.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="/js/plugins/bootstrap-hover-dropdown.min.js"></script>
+  <script type="text/javascript" src="/js/plugins/back-to-top.js"></script>
+  <script type="text/javascript" src="/js/plugins/jquery.placeholder.js"></script>
+  <script type="text/javascript" src="/js/plugins/jquery.matchheight-min.js"></script>
+  <script type="text/javascript" src="/js/plugins/jquery.fitvids.js"></script>
+  <script type="text/javascript" src="/js/main.js"></script>
 
   <!-- Flexslider -->
-  <script type="text/javascript" src="js/plugins/jquery.flexslider-min.js"></script>
-  <script type="text/javascript" src="js/plugins/flexslider-custom.js"></script>
+  <script type="text/javascript" src="/js/plugins/jquery.flexslider-min.js"></script>
+  <script type="text/javascript" src="/js/plugins/flexslider-custom.js"></script>
