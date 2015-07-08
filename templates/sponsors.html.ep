@@ -32,16 +32,20 @@
       <h2 class="title text-center">Seeders</h2>
       <div class="row">
         <div class="col-sm-6 text-center">
-          <h4>Scott Weston</h4>
+          <h4>Scott Weston
+            (<span class="trophy" title="1 year"><i class="fa fa-trophy"></i></span>)</h4>
         </div>
         <div class="col-sm-6 text-center">
-          <h4>Ian Firns</h4>
+          <h4>Ian Firns
+            (<span class="trophy" title="1 year"><i class="fa fa-trophy"></i></span>)</h4>
         </div>
         <div class="col-sm-6 text-center">
-          <h4>Stuart Clarke</h4>
+          <h4>Stuart Clarke
+            (<span class="trophy" title="1 year"><i class="fa fa-trophy"></i></span>)</h4>
         </div>
         <div class="col-sm-6 text-center">
-          <h4>Brett James</h4>
+          <h4>Brett James
+            (<span class="trophy" title="1 year"><i class="fa fa-trophy"></i></span>)</h4>
         </div>
       </div>
     </div><!--//container-->

@@ -18,6 +18,9 @@ p {
   line-height: 1.5;
   text-align: justify;
 }
+.trophy {
+  color: gold;
+}
 a {
   color: #5cbbdb;
   -webkit-transition: all 0.4s ease-in-out;
