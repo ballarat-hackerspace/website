@@ -1,0 +1,6 @@
+{
+  "secrets": ["foo"],
+  "blog": {
+    "directory": "./blog"
+  }
+}

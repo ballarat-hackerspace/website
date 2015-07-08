@@ -19,10 +19,12 @@
       <div class="row">
 % for my $b (@{$summary}) {
         <div class="col-sm-4">
-          <a href="<%= url_for('blog-page', date => $b->{date}->strftime("%Y%m%d"), slug => $b->{slug}) %>"><h4><%= $b->{title} %></h4></a>
-          <p><%= $b->{date}->strftime("%a, %e %b %Y") %></p>
-          <%== $b->{excerpt} %>
-          <p><%= $b->{tags} %></p>
+          <div class="blog-summary">
+            <a href="<%= url_for('blog-page', date => $b->{date}->strftime("%Y%m%d"), slug => $b->{slug}) %>"><h4 class="blog-title"><%= $b->{title} %></h4></a>
+            <p class="blog-date"><%= $b->{date}->strftime("%a, %e %b %Y") %></p>
+            <%== $b->{excerpt} %>
+            <p class="blog-tags"><%= $b->{tags} %></p>
+          </div>
         </div>
 % }
       </div>

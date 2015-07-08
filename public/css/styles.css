@@ -189,6 +189,21 @@ li, li > p {
   width: 100%;
   height: 480px;
 }
+
+.blog-summary .blog-title {
+  margin-bottom: 4px;
+}
+
+.blog-date {
+  color: #888;
+  font-size: 12px;
+}
+
+.blog-tags {
+  color: #888;
+  font-size: 12px;
+}
+
 /* ======= Homepage Headline Background & Slideshow ======= */
 .bg-slider-wrapper {
   content: "";

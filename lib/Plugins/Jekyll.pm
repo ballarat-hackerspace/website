@@ -18,7 +18,6 @@
 package Plugins::Jekyll;
 use Mojo::Base 'Mojolicious::Plugin';
 
-use Data::Dumper;
 use File::Basename qw(basename);
 use File::Spec;
 use Mojo::Util qw(slurp trim);
