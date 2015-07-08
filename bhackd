@@ -22,7 +22,7 @@ use lib "$FindBin::Bin/lib";
 use Mojolicious::Lite;
 use Plugins::Jekyll;
 
-plugin 'JSONConfig'      => {file => './bhackd.conf'};
+plugin 'JSONConfig'      => {file => '/etc/bhackd.conf'};
 plugin 'Plugins::Jekyll' => app->config->{blog};
 
 get '/' => sub {
