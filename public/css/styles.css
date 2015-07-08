@@ -204,6 +204,9 @@ li, li > p {
   font-size: 12px;
 }
 
+.blog-tags .blog-tag:after { content: ", "; }
+.blog-tags .blog-tag:last-child:after { content: ""; }
+
 /* ======= Homepage Headline Background & Slideshow ======= */
 .bg-slider-wrapper {
   content: "";

@@ -16,14 +16,26 @@
   <section id="team" class="section">
     <div class="container">
       <h2 class="title text-center">Blog</h2>
+% if ($tags) {
+      <div class="row">
+        <div class="col-sm-12"><a href="<%= url_for('current')->query([tags => undef]) %>"><i class="fa fa-times"></i></a> <%= $tags %></div>
+      </div>
+% }
       <div class="row">
 % for my $b (@{$summary}) {
-        <div class="col-sm-4">
+        <div class="col-sm-6 col-md-4">
           <div class="blog-summary">
-            <a href="<%= url_for('blog-page', date => $b->{date}->strftime("%Y%m%d"), slug => $b->{slug}) %>"><h4 class="blog-title"><%= $b->{title} %></h4></a>
+            <a href="<%= url_for('blog-entry', date => $b->{date}->strftime("%Y%m%d"), slug => $b->{slug}) %>"><h4 class="blog-title"><%= $b->{title} %></h4></a>
             <p class="blog-date"><%= $b->{date}->strftime("%a, %e %b %Y") %></p>
             <%== $b->{excerpt} %>
-            <p class="blog-tags"><%= $b->{tags} %></p>
+            <div class="blog-tags">
+              <p>
+                <i class="fa fa-tag"></i>
+% for my $t (@{$b->{tags}}) {
+                <span class="blog-tag"><a href="<%= url_for('current')->query([tags => $t]) %>"><%= $t %></a></span>
+% }
+              </p>
+            </div>
           </div>
         </div>
 % }

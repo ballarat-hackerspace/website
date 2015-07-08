@@ -35,9 +35,11 @@ get '/about' => sub {
 
 get '/blog' => sub {
   my $c = shift;
-  my $summary = $c->blog_summary;
 
-  $c->stash(summary => $summary);
+  my $tags = $c->param('tags');
+  my $summary = $c->blog_summary(tags => $tags);
+
+  $c->stash(summary => $summary, tags => $tags);
   $c->render('blog');
 };
 
@@ -52,7 +54,7 @@ get '/blog/:date/:slug' => sub {
   }
 
   $c->redirect_to('blog');
-} => 'blog-page';
+} => 'blog-entry';
 
 get '/conduct' => sub {
   shift->render('conduct');

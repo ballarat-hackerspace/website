@@ -20,7 +20,7 @@ use Mojo::Base 'Mojolicious::Plugin';
 
 use File::Basename qw(basename);
 use File::Spec;
-use Mojo::Util qw(slurp trim);
+use Mojo::Util qw(dumper slurp trim);
 use Text::MultiMarkdown qw(markdown);
 use Time::Piece;
 use YAML::Tiny;
@@ -39,6 +39,20 @@ our $VERSION = '1.1';
 
 has conf => sub { +{} };
 
+# short circuit grep
+sub sgrep(&@) {
+  my $t = shift @_;
+  for (@_) { return 1 if &$t };
+  return 0;
+}
+
+# check for element in array
+sub in_array {
+  my $n = shift;
+  my @h = ref $_[0] eq 'ARRAY' ? @{$_[0]} : @_;
+  return scalar(sgrep { $n eq $_ } @h);
+}
+
 sub register {
   my ($plugin, $app, $conf) = @_;
 
@@ -52,6 +66,8 @@ sub register {
     my $self = shift;
     my @entries = ();
 
+    my %params = @_ > 1 ? @_ : ref $_[0] eq 'HASH' ? %{ $_[0] } : ();
+
     if (opendir DIR, $conf->{directory}) {
       my @files = readdir(DIR);
       closedir(DIR);
@@ -63,8 +79,13 @@ sub register {
       # parse files and filter valid parses only
       @entries = grep { $_->{status} == 200 }
                    map { $self->blog_parse_file($_, content => 0) } @files;
+
     }
 
+    # parse any tags
+    if ($params{tags} && @entries) {
+      @entries = grep { in_array($params{tags}, $_->{tags}) } @entries;
+    }
 
     return \@entries;
   });
@@ -122,6 +143,9 @@ sub register {
       $stash->{extension} = lc $3;
       $stash->{style} = TYPE_MAP->{lc $3} // 'unknown';
     }
+
+    # split tags
+    $stash->{tags} = [ map { trim $_ } split /,/, $stash->{tags} ] if $stash->{tags};
 
     # grab excerpt as appropriate
     if ($params{excerpt} != 0) {
