@@ -15,6 +15,7 @@
   <!-- contact section -->
   <section id="contact" class="section">
     <div class="container">
+      <h2 class="title text-center">Contact Us</h2>
       <h3>In Person</h3>
       <p>We have regular maker meetups where visitors are welcome. See the meetings page for more details of what goes on and check the calendar for other times we are open.</p>
 
