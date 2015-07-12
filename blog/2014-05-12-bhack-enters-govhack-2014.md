@@ -1,4 +1,5 @@
 ---
+feature: /images/blog/govhack-logo.png
 title: bHack enters GovHack 2014
 tags: govhack, 2014
 ---

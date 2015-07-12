@@ -1,4 +1,5 @@
 ---
+feature: /images/blog/open-sign.jpg
 title: Ballarat Hackerspace is Now Open!
 tags: space
 ---

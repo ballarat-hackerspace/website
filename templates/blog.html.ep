@@ -21,10 +21,14 @@
         <div class="col-sm-12">Filtering: <a href="<%= url_for('current')->query([tags => undef]) %>"><i class="fa fa-times"></i></a> <%= $tags %></div>
       </div>
 % }
-      <div class="row">
+      <div class="row masonry-container">
 % for my $b (@{$summary}) {
-        <div class="col-sm-6 col-md-4">
-          <div class="blog-summary">
+        <div class="blog-summary col-sm-6 col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+% if ($b->{feature}) {
+          <a href="<%= url_for('blog-entry', date => $b->{date}->strftime("%Y%m%d"), slug => $b->{slug}) %>"><img src="<%= $b->{feature} %>" class="img-responsive"></img></a>
+% }
             <a href="<%= url_for('blog-entry', date => $b->{date}->strftime("%Y%m%d"), slug => $b->{slug}) %>"><h4 class="blog-title"><%= $b->{title} %></h4></a>
             <p class="blog-date"><%= $b->{date}->strftime("%a, %e %b %Y") %></p>
             <%== $b->{excerpt} %>
@@ -35,6 +39,7 @@
                 <span class="blog-tag"><a href="<%= url_for('current')->query([tags => $t]) %>"><%= $t %></a></span>
 % }
               </p>
+            </div>
             </div>
           </div>
         </div>
@@ -48,5 +53,22 @@
 
   <!-- scripts -->
   %= include 'scripts.inc'
+
+  <!-- masonry -->
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.js"></script>
+
+  <script>
+
+    $(document).ready(function() {
+      var container = $('.masonry-container');
+      container.imagesLoaded(function() {
+        container.masonry({
+          columnWidth: '.blog-summary',
+          itemSelector: '.blog-summary'
+        });
+      });
+    });
+  </script>
 </body>
 </html>

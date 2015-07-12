@@ -1,5 +1,6 @@
 ---
-title: bHack enters GovHack 2014
+feature: /images/blog/tuning-into-hamvention.jpg
+title: Tuning in for Hamvention 2014
 tags: govhack, 2014
 ---
 The [Ballarat Amateur Radio Group](http://www.barg.org.au) are holding their annual [Hamvention](http://www.barg.org.au/hamvention.htm) event at the Ballarat Greyhound Racing Club on Sunday, 19th of October.

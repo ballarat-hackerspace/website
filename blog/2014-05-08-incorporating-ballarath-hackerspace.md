@@ -1,4 +1,5 @@
 ---
+feature: /images/blog/incorporating.jpg
 title: Incorporating the first Ballarat Hackerspace
 tags: incorporation
 ---

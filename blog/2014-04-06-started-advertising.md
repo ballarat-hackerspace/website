@@ -1,4 +1,5 @@
 ---
+feature: /images/blog/ballarat-hackerspace-billboard.jpg
 title: Started Advertising
 tags: notice
 ---

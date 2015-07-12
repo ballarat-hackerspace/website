@@ -1,4 +1,5 @@
 ---
+feature: /images/blog/red-carpet.jpg
 title: We're heading to the GovHack Red Carpet awards
 tags: govhack, 2014
 ---
