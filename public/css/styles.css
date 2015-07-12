@@ -54,30 +54,26 @@ a.btn:focus {
 }
 a.btn-cta,
 .btn-cta {
-  padding: 8px 30px;
 }
 a.btn-cta-primary,
 .btn-cta-primary {
   background: #eea740;
-  border: none;
   color: #fff;
 }
 a.btn-cta-primary:hover,
 .btn-cta-primary:hover {
   background: #ec9c29;
-  border: none;
   color: #fff;
 }
 a.btn-cta-secondary,
 .btn-cta-secondary {
   background: #666;
-  border: none;
   color: #fff;
 }
 a.btn-cta-secondary:hover,
 .btn-cta-secondary:hover {
   background: #555;
-  border: none;
+//  border: none;
   color: #fff;
 }
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
@@ -92,7 +88,6 @@ a.btn-cta-secondary:hover,
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  height: 40px;
   border-color: #eeeeee;
 }
 .form-control::-webkit-input-placeholder {
@@ -365,6 +360,11 @@ li, li > p {
   height: 32px;
 }
 .header h1.logo img {
+  -webkit-transition: all 0.6s ease-in-out;
+  -moz-transition: all 0.6s ease-in-out;
+  -ms-transition: all 0.6s ease-in-out;
+  -o-transition: all 0.6s ease-in-out;
+  transition: all 0.6s ease-in-out;
   height: 48px;
 }
 
@@ -1312,7 +1312,7 @@ li, li > p {
 
 /* ======= About Us ======= */
 .section {
-  padding: 48px 0;
+  padding: 64px 0 32px 0;
 }
 .section .title {
   font-size: 36px;
