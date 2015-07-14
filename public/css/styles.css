@@ -112,6 +112,12 @@ a.btn-cta-secondary:hover,
   -moz-box-shadow: none;
   box-shadow: none;
 }
+.img-border {
+  border: 2px solid #eea740;
+}
+.img-border:hover {
+  border-color: #ec9c29;
+}
 .img-h3-padding {
   margin-top: 68px;
 }

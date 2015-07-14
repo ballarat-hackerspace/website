@@ -13,8 +13,15 @@
   %= include 'navigation-header.inc', active => 'home'
   <section class="section promo-header">
     <div class="container text-center">
-      <p class="intro text-center">We'll be announcing the dates of our new 3D Printing Workshop in the coming weeks, so stay tuned for more information.</p>
-      <a class="btn btn-cta btn-cta-primary" href="/workshops">Find Out More</a>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-1">
+          <p class="intro text-center">We're running our first 3D Printing Workshop starting 19 Sep 2015. Build your very own 3D Printer to own.</p>
+          <a href="https://ballarathackerspace.tidyclub.com/public/events/2451-3d-printing-workshop-build-your-own" class="btn btn-cta btn-cta-primary"><h5>Get your Tickets now!</h5></a>
+        </div>
+        <div class="col-sm-4 hidden-xs">
+          <img class="img-responsive img-border" src="/images/workshops/prusa-i3-2.jpg"></img>
+        </div>
+      </div>
     </div>
   </section><!-- why -->
 
