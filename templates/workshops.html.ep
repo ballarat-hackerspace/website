@@ -27,19 +27,7 @@
           <p>There are over 100,000 items you can print right now on design-sharing website Thingiverse – all free and able to be customised!</p>
           <p>If you have ever wanted to get into 3D printing, now is your chance. The Ballarat Hackerspace is presenting a workshop, with all of the necessary components, for you to build your own 3D printer.</p>
 
-          <!-- MailChimp -->
-          <form action="//bhack.us8.list-manage.com/subscribe/post?u=b741039b4a45ae572edb8f8e5&amp;id=8f60d4d964" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate role="form">
-            <div id="mc_embed_signup_scroll" class="form-group">
-              <label for="mce-EMAIL">Register for Interest</label>
-              <div class="input-group col-md-8">
-                <input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="name@example.org" required>
-                <span class="input-group-btn">
-                  <input type="submit" value="Register" name="subscribe" id="mc-embedded-subscribe" class="btn btn-cta btn-cta-primary">
-                </span>
-              </div>
-            </div>
-            <div style="position: absolute; left: -5000px;"><input type="text" name="b_b741039b4a45ae572edb8f8e5_8f60d4d964" tabindex="-1" value=""></div>
-          </form><!-- MailChimp -->
+          <a href="https://ballarathackerspace.tidyclub.com/public/events/2451-3d-printing-workshop-build-your-own" class="btn btn-cta btn-cta-primary"><h4>Get your Tickets now!</h4></a>
         </div>
         <div class="col-sm-6 col-md-4">
           <img class="img-responsive img-h3-padding" src="/images/workshops/prusa-i3-2.jpg"></img>
