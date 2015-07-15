@@ -1,5 +1,5 @@
 ---
-feature: /images/blog/govhack-logo.png
+feature: /images/blog/bhackteam.jpg
 title: Highlights from Govhack Ballarat
 tags: govhack, 2015, hackerspace
 ---
@@ -50,3 +50,6 @@ Many thanks are in place for George Fong and Matt Morris for organising the even
 For the Ballarat Hackerspace members turning up and having a fun time together.
 
 Lastly for all the participants who turned up - it's a great way to learn new things and meet people!
+
+[govhack_logo]: http://www.govhack.org/wp-content/themes/parallelus-salutation/images/logo.png
+
