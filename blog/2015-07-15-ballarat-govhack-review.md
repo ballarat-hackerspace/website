@@ -51,5 +51,7 @@ For the Ballarat Hackerspace members turning up and having a fun time together.
 
 Lastly for all the participants who turned up - it's a great way to learn new things and meet people!
 
+An <a href="https://www.flickr.com/photos/superroach/sets/72157654987908408">Album of photos for Govhack Ballarat</a> taken By Brett James is also available.
+
 [govhack_logo]: http://www.govhack.org/wp-content/themes/parallelus-salutation/images/logo.png
 
