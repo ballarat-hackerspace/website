@@ -11,6 +11,8 @@ server {
 	}
 
         location /door/api {
+		allow 192.168.7.0/24;
+		deny all;
 		rewrite /door/api/([^/]+) /$1 break;
                 proxy_pass http://boiler.bhack:8080;
         }
