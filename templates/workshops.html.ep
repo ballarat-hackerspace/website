@@ -27,7 +27,7 @@
           <p>There are over 100,000 items you can print right now on design-sharing website Thingiverse – all free and able to be customised!</p>
           <p>If you have ever wanted to get into 3D printing, now is your chance. The Ballarat Hackerspace is presenting a workshop, with all of the necessary components, for you to build your own 3D printer.</p>
 
-          <a href="https://ballarathackerspace.tidyclub.com/public/events/2451-3d-printing-workshop-build-your-own" class="btn btn-cta btn-cta-primary"><h5>Get your Tickets now!</h5></a>
+          <a href="https://ballarathackerspace.tidyclub.com/public/events/2451-3d-printing-workshop-build-your-own" class="btn btn-lg btn-cta-secondary">Grab a Ticket!</a>
         </div>
         <div class="col-sm-6 col-md-4">
           <img class="img-responsive img-h3-padding" src="/images/workshops/prusa-i3-2.jpg"></img>
