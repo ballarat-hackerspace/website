@@ -4,6 +4,17 @@ server {
 
 	server_name ballarathackerspace.org.au;
 
+	location /door {
+		root /srv/ballarathackerspace.org.au;
+		index index.html;
+		try_files $uri $uri/ =404;
+	}
+
+        location /door/api {
+		rewrite /door/api/([^/]+) /$1 break;
+                proxy_pass http://boiler.bhack:8080;
+        }
+
 	location / {
 		proxy_pass http://127.0.0.1:10001;
 		proxy_http_version 1.1;
