@@ -51,6 +51,9 @@
   <!-- footer -->
   %= include 'footer.inc'
 
+  <!-- authenticate -->
+  %= include 'authenticate.inc'
+
   <!-- scripts -->
   %= include 'scripts.inc'
 </body>

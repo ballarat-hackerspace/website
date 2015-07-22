@@ -54,6 +54,9 @@
   <!-- scripts -->
   %= include 'scripts.inc'
 
+  <!-- authenticate -->
+  %= include 'authenticate.inc'
+
   <!-- masonry -->
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.js"></script>

@@ -20,18 +20,23 @@ use FindBin;
 use lib "$FindBin::Bin/lib";
 
 use Mojolicious::Lite;
+use Mojo::UserAgent;
+use Mojo::Util qw(dumper);
 use Plugins::Jekyll;
 
-plugin 'JSONConfig'      => {file => '/etc/bhackd.conf'};
-plugin 'Plugins::Jekyll' => app->config->{blog};
+plugin 'JSONConfig'        => {file => '/etc/bhackd.conf'};
+plugin 'Plugins::Jekyll'   => app->config->{blog} // {};
+plugin 'Plugins::TidyClub' => app->config->{tidyclub} // {};
 
-get '/' => sub {
-  shift->render('index');
-};
+app->secrets(app->config->{secrets});
 
-get '/about' => sub {
-  shift->render('about');
-};
+get '/'           => 'index';
+get '/about'      => 'about';
+get '/conduct'    => 'conduct';
+get '/contact'    => 'contact';
+get '/join'       => 'join';
+get '/sponsors'   => 'sponsors';
+get '/workshops'  => 'workshops';
 
 get '/blog' => sub {
   my $c = shift;
@@ -56,34 +61,42 @@ get '/blog/:date/:slug' => sub {
   $c->redirect_to('blog');
 } => 'blog-entry';
 
-get '/conduct' => sub {
-  shift->render('conduct');
+post '/login' => sub {
+  my $c = shift;
+
+  my $e   = $c->param('email');
+  my $p   = $c->param('password');
+  my $url = $c->param('rt') // 'index';
+
+  $c->render_later;
+  $c->tidyclub->login(email => $e, password => $p, sub {
+    return $c->redirect_to($url);
+  });
 };
 
-get '/contact' => sub {
-  shift->render('contact');
+any '/logout' => sub {
+  my $c = shift;
+
+  $c->tidyclub->logout;
+
+  # extract the redirect url and fall back to the index
+  my $url = $c->param('rt') // 'index';
+
+  return $c->redirect_to($url);
 };
 
-get '/join' => sub {
-  shift->render('join');
+# members only
+group {
+  under '/members' => sub {
+    my $c = shift;
+
+    return 1 if $c->tidyclub->is_authenticated;
+    return $c->redirect_to('/');
+  };
+
+  get '/' => 'members';
 };
 
-get '/sponsors' => sub {
-  shift->render('sponsors');
-};
+any '/*catch' => {catch => ''} => sub { shift->redirect_to('/'); };
 
-get '/workshops' => sub {
-  shift->render('workshops');
-};
-
-any '/*whatever' => {whatever => ''} => sub {
-  shift->redirect_to('/');
-};
-
-app->config(hypnotoad => {
-  listen    => ['http://127.0.0.1:10001'],
-  pid_file  => '/var/run/bhackd.pid'
-});
-
-app->secrets(app->config->{secrets});
 app->start;

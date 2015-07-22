@@ -2,7 +2,7 @@
     <header id="header" class="header navbar-fixed-top">
       <div class="container">
         <h1 class="logo">
-          <a href="index.html"><img src="/images/bhack-logo-title-white.svg"></img></a>
+          <a href="/"><img src="/images/bhack-logo-title-white.svg"></img></a>
         </h1><!--//logo-->
         <nav class="main-nav navbar-right" role="navigation">
           <div class="navbar-header">
@@ -15,14 +15,24 @@
           </div><!--//navbar-header-->
           <div id="navbar-collapse" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="nav-item <%= 'active' if ($active eq 'home') %>"><a href="/">Home</a></li>
               <li class="nav-item <%= 'active' if ($active eq 'about') %>"><a href="/about">About</a></li>
               <li class="nav-item <%= 'active' if ($active eq 'blog') %>"><a href="/blog">Blog</a></li>
               <li class="nav-item <%= 'active' if ($active eq 'workshops') %>"><a href="/workshops">Workshops</a></li><!--//dropdown-->
               <li class="nav-item <%= 'active' if ($active eq 'sponsors') %>"><a href="/sponsors">Sponsors</a></li>
+% if ($c->tidyclub->is_authenticated) {
+              <li class="nav-item <%= 'active' if ($active eq 'members') %>"><a href="/members">Members</a></li>
+% } else {
               <li class="nav-item <%= 'active' if ($active eq 'join') %>"><a href="/join">Join</a></li>
+% }
               <li class="nav-item <%= 'active' if ($active eq 'contact') %> last"><a href="/contact">Contact</a></li>
             </ul><!--//nav-->
+            <form class="navbar-form navbar-left" role="search">
+% if ($c->tidyclub->is_authenticated) {
+              <a href="/logout" class="btn btn-cta btn-cta-secondary""><i class="fa fa-sign-out"></i></a>
+% } else {
+              <a href="#login" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-sign-in"></i></a>
+% }
+            </form>
           </div><!--//navabr-collapse-->
         </nav><!--//main-nav-->
       </div><!--//container-->
