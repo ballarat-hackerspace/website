@@ -26,6 +26,11 @@
 % }
         </p>
       </div>
+      <div class="row">
+        <div id="comments-container" class="col-sm-12">
+          <div id="comments"></div>
+        </div>
+      </div>
     </div><!--//container-->
   </section><!--//team-section-->
 
@@ -37,5 +42,23 @@
 
   <!-- scripts -->
   %= include 'scripts.inc'
+
+  <script src="https://apis.google.com/js/plusone.js"></script>
+  <script>
+    var render_comments = function() {
+      gapi.comments.render('comments', {
+        href: window.location,
+        height: '100',
+        width: $('#comments-container').width(),
+        first_party_property: 'BLOGGER',
+        view_type: 'FILTERED_POSTMOD'
+      });
+
+      // TODO: fix the crazy min-height of 600px, come on Google!
+    };
+
+    $(window).on('resize', render_comments);
+    render_comments();
+  </script>
 </body>
 </html>
