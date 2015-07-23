@@ -113,17 +113,28 @@ sub register {
           my ($delay, $tx) = @_;
           my ($data, $err) = process_response($tx);
 
-          unless($err) {
-            $data->{token}        = $delay->data('token');
-            $data->{token_expiry} = gmtime->epoch + 120000;
+          return $c->$cb($err, '') if $err;
 
-            warn dumper $data;
+          $data->{token}        = $delay->data('token');
+          $data->{token_expiry} = gmtime->epoch + 7200; # 2 hour token life
 
-            $c->session(TIDYCLUB_SESSION_KEY() => $data);
+          $delay->data(tidyclub => $data);
+
+          my $path = sprintf '/api/v1/contacts/%d/groups', $data->{id};
+
+          $self->_ua->get($url->path($path) => {Authorization => "Bearer $data->{token}"} => $delay->begin);
+        },
+        sub {
+          my ($delay, $tx) = @_;
+          my ($data, $err) = process_response($tx);
+
+          # check we are in the group label "Members"
+          unless ($err && !grep { $_->{label} eq 'Members' } @{$data}) {
+            $c->session(TIDYCLUB_SESSION_KEY() => $delay->data('tidyclub'));
           }
 
           $c->$cb($err, $data);
-        }
+        },
       );
     }
     else {
@@ -162,4 +173,3 @@ sub process_response {
 }
 
 1;
-
