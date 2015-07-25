@@ -26,7 +26,18 @@
     <div class="container">
       <h2 class="title text-center">The Space</h2>
       <p>We moved into our new space at Room 903 of the Federation University SMB Campus in January 2015. Please come along and check us out at our next meetup, or any time we are open. Check the calendar or the online community for opening times. If you would like to support our community please join the Ballarat Hackerspace.</p>
-      <p>You are welcome to join the IRC channel, or follow us on Twitter or Google+</p>
+      <p>You are welcome to join the <a href="/contact#irc-channel">IRC channel</a>, or follow us on <a href="https://twitter.com/bHackerspace">Twitter</a> or <a href="https://plus.google.com/communities/106879016585907671427">Google+</a></p>
+
+      <h3>Facilities</h3>
+      <ul>
+        <li>Electronics area with soldering (wand and reflow), desoldering, scopes and meters</li>
+        <li>3D printing</li>
+        <li>Small scale CNC</li>
+        <li>Internet access</li>
+        <li>Projector/Presentation</li>
+        <li>Kitchenette</li>
+      </ul>
+
 
       <h3>Before visiting the space</h3>
       <p>The space is a workshop, so we require enclosed shoes to be worn while visiting. There are rules that apply in the space for everyone’s safety &amp; enjoyment.</p>

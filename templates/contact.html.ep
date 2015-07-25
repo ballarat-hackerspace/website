@@ -51,7 +51,7 @@
         </tbody>
       </table>
 
-      <h3>On IRC</h3>
+      <h3 id="irc-channel">On IRC</h3>
       <p>Come and hang out on our IRC (Internet Relay Chat) channel on freenode. You can use the web client or your own client at irc.freenode.net #bhack.</p>
 
       <ul>
