@@ -129,7 +129,7 @@ sub register {
           my ($data, $err) = process_response($tx);
 
           # check we are in the group label "Members"
-          unless ($err && !grep { $_->{label} eq 'Members' } @{$data}) {
+          if (!$err && !!grep { $_->{label} eq 'Members' } @{$data}) {
             $c->session(TIDYCLUB_SESSION_KEY() => $delay->data('tidyclub'));
           }
 
