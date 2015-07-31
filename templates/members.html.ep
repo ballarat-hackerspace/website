@@ -29,6 +29,9 @@
 
       <h3>Device Register</h3>
       <p>TODO: register your device for use in the Hackerspace ecosystem.</p>
+
+      <h3>LIFX Party</h3>
+      <p>TODO: send some notifications/sequences to the LIFX bulbs in the space.</p>
     </div><!--//row-->
   </section><!--//job-->
 

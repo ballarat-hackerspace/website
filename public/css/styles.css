@@ -54,6 +54,17 @@ a:focus {
   -webkit-box-shadow: inset 0 -2px #e8930c;
   box-shadow: inset 0 -2px #e8930c;
 }
+.btn-cta-primary:hover {
+  border-bottom-color: #d7880b;
+  -webkit-box-shadow: inset 0 -2px #d7880b;
+  box-shadow: inset 0 -2px #d7880b;
+}
+.btn-cta-secondary:hover {
+  border-bottom-color: #237ab5;
+  -webkit-box-shadow: inset 0 -2px #237ab5;
+  box-shadow: inset 0 -2px #237ab5;
+}
+
 .btn-cta-primary:visited,
 .btn-cta-primary:hover,
 .btn-cta-primary:focus { color: #fff; }
@@ -178,6 +189,12 @@ li, li > p {
   bottom: 8px;
   position: fixed;
   right: 8px;
+}
+#topcontrol:hover {
+  border-bottom-color: #d7880b;
+  -webkit-box-shadow: inset 0 -2px #d7880b;
+  box-shadow: inset 0 -2px #d7880b;
+  cursor: pointer;
 }
 #topcontrol:active {
   bottom: 7px;
