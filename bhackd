@@ -97,6 +97,19 @@ group {
   get '/' => 'members';
 };
 
+# local network only
+group {
+  under '/local' => sub {
+    my $c = shift;
+
+    return 1 if $c->tx->remote_address eq '127.0.0.1';
+    return undef
+  };
+
+  get '/door'   => 'door';
+  get '/boiler' => 'boiler';
+};
+
 any '/*catch' => {catch => ''} => sub { shift->redirect_to('/'); };
 
 app->start;

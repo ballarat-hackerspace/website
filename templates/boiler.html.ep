@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <title>Boiler</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+  <!-- <meta http-equiv="refresh" content="30"> -->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,800,700' rel='stylesheet'>
+  <style>
+    * { color: #fff; font-family: 'Open Sans', sans-serif; }
+    body { background-color: #000; background-image: url('/images/boiler/steam.gif'); background-repeat: no-repeat; overflow: hidden; }
+    .container { overflow: hidden; position: relative; width: 661px; }
+    #logo { padding-right: 15px; text-align: right; }
+    #weather { font-size: 28pt; font-weight: 800; padding-right: 15px; text-align: right; }
+    #clock { bottom: 0; font-size: 108px; position: absolute; text-align: right; width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="logo"><img src="/images/boiler/bhack-banner-reverse-640.png" /></div>
+    <div id="weather"><i class="fa fa-spinner fa-spin"></i></div>
+    <div id="clock"></div>
+  </div>
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.0.2/jquery.simpleWeather.min.js"></script>
+  <script>
+    $().ready(function(){
+      var _weather = $('#weather');
+      $.simpleWeather({
+        location: 'Ballarat, Victoria, Australia',
+        woeid: '',
+        unit: 'c',
+        success: function(weather) {
+          _weather.html('Forecast: ' + weather.high + '&deg; and ' + weather.text);
+        },
+        error: function(error) {
+          _weather.html('<p>'+error+'</p>');
+        }
+      });
+
+      $('.container').height($(window).height());
+
+      setInterval(function() {
+        $('#clock').text(moment().format('HH:mm'));
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
