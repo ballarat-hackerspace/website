@@ -102,8 +102,8 @@ group {
   under '/local' => sub {
     my $c = shift;
 
-    return 1 if $c->tx->remote_address eq '127.0.0.1';
-    return undef
+    return 1 if grep { $c->tx->remote_address =~ m/$_/ } @{$c->app->config->{local}};
+    return $c->redirect_to('/');
   };
 
   get '/door'   => 'door';
