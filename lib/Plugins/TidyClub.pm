@@ -50,6 +50,22 @@ sub register {
     return $tc->{id};
   });
 
+  $app->helper('tidyclub.is_authenticated_group' => sub {
+    my ($c, $group) = @_;
+
+    return undef unless $group;
+
+    my $tc = $c->session(TIDYCLUB_SESSION_KEY) // {};
+
+    # check token expiry
+    if ($tc->{token_expiry} && $tc->{token_expiry} <= gmtime->epoch) {
+      delete $c->session->{TIDYCLUB_SESSION_KEY()};
+      $tc = {};
+    }
+
+    return $tc->{id};
+  });
+
   $app->helper('tidyclub.user' => sub {
     return shift->session(TIDYCLUB_SESSION_KEY) // {};
   });
@@ -130,7 +146,11 @@ sub register {
 
           # check we are in the group label "Members"
           if (!$err && !!grep { $_->{label} eq 'Members' } @{$data}) {
-            $c->session(TIDYCLUB_SESSION_KEY() => $delay->data('tidyclub'));
+            my $tc = $delay->data('tidyclub');
+
+            # add groups to data and store all in session
+            $tc->{groups} = [map { lc $_->{label} } @{$data}];
+            $c->session(TIDYCLUB_SESSION_KEY() => $tc);
           }
 
           $c->$cb($err, $data);
