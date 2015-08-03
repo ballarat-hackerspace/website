@@ -1,0 +1,12 @@
+CACHE MANIFEST
+# NOTE: Update the version to trigger clients to re-cache content
+# Version: 41.19
+
+CACHE:
+/assets/door/favicon.ico
+/assets/door/logo.png
+/assets/door/jquery.min.js
+/assets/door/manifest.json
+
+NETWORK:
+*

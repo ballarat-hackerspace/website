@@ -1,0 +1,258 @@
+<!doctype html>
+<html manifest="/assets/door/door.appcache">
+<head>
+  <title>Door</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta content="#007FFF" name="theme-color">
+  <link rel="manifest" href="/assets/door/manifest.json">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link id="theme-style" rel="stylesheet" href="/css/styles.css">
+  <style>
+    body { text-align: center; }
+
+    .banner {
+      background-color: rgba(48, 48, 48, 0.95);
+      color: #fff;
+      margin: 0 0 16px 0;
+      min-height: 80px;
+    }
+    .banner > h1 { margin: 0; padding: 16px; }
+    .banner img { height: 48px; margin: 16px 0; }
+
+    .controls {
+      margin: 0 auto 16px auto;
+      max-width: 320px;
+      text-align: center;
+    }
+    .footer { bottom: 0; height: 48px; position: fixed; width: 100%; }
+
+    .btn {
+      display: inline-block;
+      font-size: 20px;
+      margin-bottom: 8px;
+      max-width: 304px;
+    }
+
+    .btn-big {
+      font-size: 64px;
+      margin-bottom: 16px;
+      padding: 16px;
+    }
+
+    .dim {
+      background-color: #ccc;
+    }
+
+    .dim:hover {
+      background-color: #bbb;
+    }
+
+    #advance-toggle { color: #eee; }
+    #advance {
+      border-top: 1px solid #eee;
+      display: none;
+      font-size: 32px;
+      margin: 16px auto 48px auto;
+      text-align: center;
+      padding: 15px;
+    }
+
+    #motion {
+      display: none;
+    }
+
+    #notice {
+      font-size: 24px;
+      text-align: center;
+      padding: 8px;
+    }
+
+    #working {
+      color: #ccc;
+      font-size: 20px;
+      font-weight: 900;
+      font-family: courier;
+      position: fixed;
+      top: 0px;
+      right: 5px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <a href="/"><img src="/assets/door/bhack-door-logo-title.svg"></img></a>
+  </div>
+  <div class="controls">
+    <a id="enter" class="btn btn-block btn-big btn-cta btn-cta-green">Enter</a>
+    <div>
+      <div>
+        <a id="motion-arm" class="btn btn-block btn-cta btn-cta-blue">Enable Alarm</a>
+      </div>
+      <div>
+        <a id="motion-disarm-dec" class="btn btn-cta btn-cta-orange"><i class="fa fa-fw fa-chevron-left"></i></a>
+        <a id="motion-disarm" class="btn btn-cta btn-cta-orange">Disable Alarm</a>
+        <a id="motion-disarm-inc"  class="btn btn-cta btn-cta-orange"><i class="fa fa-fw fa-chevron-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <a id="advance-toggle"><i class="fa fa-cog"></i></a>
+
+  <div id="advance" class="controls">
+    <a id="open" class="btn btn-cta btn-cta-green">Open Strike</a>
+    <a id="close" class="btn btn-cta btn-cta-red">Close Strike</a>
+  </div>
+
+  <footer class="footer">
+    <div class="bottom-bar">
+      <small class="copyright text-center">Ballarat Hackerspace</small>
+    </div>
+  </footer>
+
+  <div id="noticeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i aria-hidden="true" class="fa fa-times"></i></button>
+          <h4 id="notice-title" class="modal-title">Ooops!</h4>
+        </div>
+        <div class="modal-body">
+          <p id="notice"></p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script>
+    var disarm_duration = 1;
+
+    if (window.applicationCache) {
+      window.applicationCache.addEventListener('updateready', function() {
+        window.location.reload();
+      });
+    }
+
+    function motion_arm() {
+      $.ajax({
+        timeout: 5000,
+        dataType: 'json',
+        method: 'GET',
+        url: "/cam/enablemotion",
+        success: function(data) {
+          console.log(data);
+          $('#notice').html("Motion detection enabled.");
+          $('#noticeModal').modal('show');
+        },
+        error: function(data) {
+          console.log(data);
+          $('#notice').html("Failed to enable motion detection, try again.");
+          $('#noticeModal').modal('show');
+        }
+      });
+    }
+
+    function motion_disarm() {
+      $.ajax({
+        timeout: 5000,
+        dataType: 'json',
+        method: 'GET',
+        url: "/cam/disablemotion?delay=" + disarm_duration,
+        success: function(data) {
+          console.log(data);
+          $('#notice').html("Motion detection paused for " + disarm_duration+ " hour(s)");
+          $('#noticeModal').modal('show');
+        },
+        error: function(data) {
+          console.log(data);
+          $('#notice').html("Failed to disable motion detection, try again.");
+          $('#noticeModal').modal('show');
+        }
+      });
+    }
+
+    function detect_hackerspace() {
+      $('#working').fadeIn(150);
+      $.ajax({
+        timeout: 500,
+        dataType: 'json',
+        method: 'GET',
+        url: "/door/access",
+        success: function(data) {
+          $('#working').fadeOut(150);
+          if (data['pong'])
+            $('#enter').removeClass('btn-cta-red').addClass('btn-cta-green');
+          else
+            $('#enter').removeClass('btn-cta-green').addClass('btn-cta-red');
+
+          setTimeout(detect_hackerspace, 5000);
+        },
+        error: function(data) {
+          $('#working').fadeOut(150);
+          console.log("ajax failed");
+          $('#enter').removeClass('btn-cta-green').addClass('btn-cta-red');
+          setTimeout(detect_hackerspace, 500);
+        }
+      });
+    }
+
+    function getlink(command){
+      var url = "/door/" + command;
+
+      $('meta[name=theme-color]').attr('content', "#808080");
+
+      $.ajax({
+        timeout: 10000,
+        dataType: 'json',
+        method: 'GET',
+        url: url,
+        success: function(data) {
+          $('meta[name=theme-color]').attr('content', "#00FF00");
+        },
+        error: function(data) {
+          $('meta[name=theme-color]').attr('content', "#ff0000");
+          $('#notice').html("Are you sure you're on the hackerspace WiFi?");
+          $('#noticeModal').modal('show');
+        }
+      });
+    }
+
+    function motion_disarm_adjust(delta) {
+      // clamp duration
+      disarm_duration = Math.min(8, Math.max(1, disarm_duration + delta));
+
+      $('#motion-disarm').text("Disable Alarm: " + disarm_duration + "HR");
+    }
+
+    $(document).ready(function(){
+      // bind functions to the buttons
+      $("#enter").click(function() { getlink("enter"); });
+      $("#open").click(function() { getlink("open"); });
+      $("#close").click(function(){ getlink("close"); });
+
+      // disable motion detection for a while
+      $('#motion-disarm-inc').click(function() { motion_disarm_adjust(1);  });
+      $('#motion-disarm-dec').click(function() { motion_disarm_adjust(-1); });
+      $('#motion-disarm').click(function() { motion_disarm(); });
+      $('#motion-disarm').text("Disable Alarm: " + disarm_duration + "HR");
+
+      // enable motion detection
+      $('#motion-arm').click(function() { motion_arm(); });
+
+      // advance controls
+      $('#advance-toggle').click(function() { $('#advance').fadeToggle(); });
+
+      // switch the buttons to green when we're on the wifi
+      setTimeout(detect_hackerspace, 500);
+    });
+  </script>
+
+  <div id="working">&bull;</div>
+</body>
+</html>

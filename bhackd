@@ -30,6 +30,28 @@ plugin 'Plugins::TidyClub' => app->config->{tidyclub} // {};
 
 app->secrets(app->config->{secrets});
 
+helper 'is_local' => sub {
+  my $c = shift;
+  return 1 if grep { $c->tx->remote_address =~ m/$_/ } @{$c->app->config->{local}};
+  return undef;
+};
+
+helper 'is_gatekeeper' => sub {
+  return 1 if shift->tidyclub->is_authenticated_group('seeders');
+  return undef;
+};
+
+helper 'device.is_whitelisted' => sub {
+  my $c = shift;
+  my $ip = $c->tx->remote_address;
+
+  # get arp via syscall
+  my $mac = `arp -a $ip | awk '{printf \$4}'`;
+
+  # do lookup
+  return !!grep { $_ eq $mac } @{$c->app->config->{whitelist}{mac}};
+};
+
 get '/'           => 'index';
 get '/about'      => 'about';
 get '/conduct'    => 'conduct';
@@ -101,13 +123,30 @@ group {
 group {
   under '/local' => sub {
     my $c = shift;
-
-    return 1 if grep { $c->tx->remote_address =~ m/$_/ } @{$c->app->config->{local}};
+    return 1 if $c->is_local;
     return $c->redirect_to('/');
   };
 
-  get '/door'   => 'door';
   get '/boiler' => 'boiler';
+};
+
+# door endpoints require additional device whitelisting checks
+group {
+  under '/door' => sub {
+    my $c = shift;
+    return 1 if $c->is_local || $c->is_gatekeeper;
+    return $c->redirect_to('/');
+  };
+
+  get '/' => 'door';
+  get '/access' => sub {
+    my $c = shift;
+    $c->render(json => {pong => $c->device->is_whitelisted});
+  };
+
+  get '/enter' => sub {};
+  get '/open'  => sub {};
+  get '/close' => sub {};
 };
 
 any '/*catch' => {catch => ''} => sub { shift->redirect_to('/'); };
