@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12 text-center">
-            <h4 style="margin-top:0;">Proudly supported by our sponsors</h4>
+            <p class="text-center">Proudly supported by our sponsors</p>
           </div>
         </div>
         <div class="row">

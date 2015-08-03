@@ -101,7 +101,7 @@
     </div>
   </div>
 
-  <a id="advance-toggle"><i class="fa fa-cog"></i></a>
+  <a id="advance-toggle"><i class="fa fa-2x fa-cog"></i></a>
 
   <div id="advance" class="controls">
     <a id="open" class="btn btn-cta btn-cta-green">Open Strike</a>

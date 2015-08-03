@@ -18,22 +18,39 @@
       <h2 class="title text-center">Members</h2>
       <p>Welcome to the Members only area. Whilst we strongly encourage all of our contents to be open and freely available to the general public, there are some things that are considered priveleged.</p>
 
-      <h3>Boiler</h3>
-      <p>TODO: send a message to the boiler.</p>
+      <div class="row">
+        <div class="col-sm-6">
+          <a href="/door"><h3>Door</h3></a>
+          <p>Grant access through the hackerspace door.</p>
+        </div>
 
-      <h3>Digital Library</h3>
-      <p>TODO: browse the digital library.</p>
+        <div class="col-sm-6">
+          <h3>Boiler</h3>
+          <p>TODO: send a message to the boiler.</p>
+        </div>
 
-      <h3>Marquee</h3>
-      <p>TODO: send a message to the marquee.</p>
+        <div class="col-sm-6">
+          <h3>Digital Library</h3>
+          <p>TODO: browse the digital library.</p>
+        </div>
 
-      <h3>Device Register</h3>
-      <p>TODO: register your device for use in the Hackerspace ecosystem.</p>
+        <div class="col-sm-6">
+          <h3>Marquee</h3>
+          <p>TODO: send a message to the marquee.</p>
+        </div>
 
-      <h3>LIFX Party</h3>
-      <p>TODO: send some notifications/sequences to the LIFX bulbs in the space.</p>
-    </div><!--//row-->
-  </section><!--//job-->
+        <div class="col-sm-6">
+          <h3>Device Register</h3>
+          <p>TODO: register your device for use in the Hackerspace ecosystem.</p>
+        </div>
+
+        <div class="col-sm-6">
+          <h3>LIFX Party</h3>
+          <p>TODO: send some notifications/sequences to the LIFX bulbs in the space.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- footer -->
   %= include 'footer.inc'

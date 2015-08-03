@@ -25,7 +25,8 @@ use Mojo::Util qw(dumper);
 use Plugins::Jekyll;
 
 plugin 'JSONConfig'        => {file => '/etc/bhackd.conf'};
-plugin 'Plugins::Jekyll'   => app->config->{blog} // {};
+plugin 'Plugins::Door'     => app->config->{door}     // {};
+plugin 'Plugins::Jekyll'   => app->config->{blog}     // {};
 plugin 'Plugins::TidyClub' => app->config->{tidyclub} // {};
 
 app->secrets(app->config->{secrets});
@@ -46,10 +47,11 @@ helper 'device.is_whitelisted' => sub {
   my $ip = $c->tx->remote_address;
 
   # get arp via syscall
-  my $mac = `arp -a $ip | awk '{printf \$4}'`;
+  my $config = $c->app->config->{device};
+  my $mac = `$config->{arp} -a $ip | awk '{printf \$4}'`;
 
   # do lookup
-  return !!grep { $_ eq $mac } @{$c->app->config->{whitelist}{mac}};
+  return !!grep { $_ eq $mac } @{$config->{whitelist}};
 };
 
 get '/'           => 'index';
@@ -144,9 +146,23 @@ group {
     $c->render(json => {pong => $c->device->is_whitelisted});
   };
 
-  get '/enter' => sub {};
-  get '/open'  => sub {};
-  get '/close' => sub {};
+  get '/enter' => sub {
+    my $c = shift;
+    $c->render_later;
+    $c->door->enter(sub { shift; $c->render(status => shift, json => shift); });
+  };
+
+  get '/open'  => sub {
+    my $c = shift;
+    $c->render_later;
+    $c->door->open(sub { shift; $c->render(status => shift, json => shift); });
+  };
+
+  get '/close' => sub {
+    my $c = shift;
+    $c->render_later;
+    $c->door->close(sub { shift; $c->render(status => shift, json => shift); });
+  };
 };
 
 any '/*catch' => {catch => ''} => sub { shift->redirect_to('/'); };
