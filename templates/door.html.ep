@@ -124,8 +124,8 @@
         <div class="modal-body">
           <p id="notice"></p>
         </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+      </div>
+    </div>
   </div><!-- /.modal -->
 
   <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -148,10 +148,12 @@
         success: function(data) {
           console.log(data);
           $('#notice').html("Motion detection enabled.");
+          $('#noticeModal .modal-header').removeClass('modal-header-error').addClass('modal-header-success');
           $('#noticeModal').modal('show');
         },
         error: function(data) {
           console.log(data);
+          $('#noticeModal .modal-header').removeClass('modal-header-green').addClass('modal-header-red');
           $('#notice').html("Failed to enable motion detection, try again.");
           $('#noticeModal').modal('show');
         }
@@ -218,6 +220,7 @@
         error: function(data) {
           $('meta[name=theme-color]').attr('content', "#ff0000");
           $('#notice').html("Are you sure you're on the hackerspace WiFi?");
+          $('#noticeModal .modal-header').removeClass('modal-header-green').addClass('modal-header-red');
           $('#noticeModal').modal('show');
         }
       });

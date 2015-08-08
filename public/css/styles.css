@@ -1718,6 +1718,18 @@ li, li > p {
   line-height: inherit;
   opacity: 1;
 }
+
+.modal-header-green {
+  background: #2ecc71 !important;
+  color: #fff;
+}
+
+
+.modal-header-red {
+  background: #e74c3c !important;
+  color: #fff;
+}
+
 /* ======= Bootstrap Image Gallery ======== */
 .blueimp-gallery {
   background: rgba(16, 19, 23, 0.9);
