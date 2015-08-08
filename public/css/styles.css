@@ -121,7 +121,10 @@ a:focus {
 
 .header .main-nav .navbar-form { padding: 0 0 0 8px; }
 
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-family: "Oswald";
+  font-weight: bold;
+}
 .h1, .h2, .h3, h1, h2, h3 { margin-top: 32px; }
 .h4, .h5, .h6, h4, h5, h6 { margin-top: 16px; }
 
@@ -399,7 +402,6 @@ li, li > p {
   font-size: 12px;
 }
 .header h1.logo {
-  font-family: "Russo One", arial, sans-serif;
   margin-top: 0;
   margin-bottom: 0;
   font-weight: 800;
@@ -598,7 +600,7 @@ li, li > p {
 }
 .promo .title {
   font-size: 36px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
   margin-bottom: 15px;
@@ -620,7 +622,7 @@ li, li > p {
 }
 .home-promo .title {
   font-size: 26px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
   margin-bottom: 45px;
@@ -652,7 +654,7 @@ li, li > p {
 }
 .who .title {
   font-size: 36px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
   color: #555;
   margin-top: 0;
@@ -697,7 +699,7 @@ li, li > p {
   padding-right: 0;
 }
 .latest-work .title {
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Open Sans Condensend', arial, sans-serif;
   font-weight: 800;
   font-size: 36px;
   color: #555;
@@ -780,7 +782,7 @@ li, li > p {
   color: rgba(255, 255, 255, 0.8);
 }
 .latest-work .item .content .project-title {
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   text-align: center;
   font-size: 22px;
   font-weight: bold;
@@ -834,7 +836,7 @@ li, li > p {
 }
 .testimonials .title {
   font-size: 36px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
   color: #555;
   margin-top: 0;
@@ -902,7 +904,7 @@ li, li > p {
   margin-top: 0;
   margin-bottom: 30px;
   color: #555;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 700;
 }
 .logos .intro {
@@ -934,7 +936,7 @@ li, li > p {
   font-weight: 300;
   margin-top: 0;
   margin-bottom: 30px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
@@ -952,7 +954,7 @@ li, li > p {
   font-weight: 300;
 }
 .cta-section .contact-info .info {
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
 }
 .cta-section .contact-info a {
@@ -968,7 +970,7 @@ li, li > p {
 }
 .work-list .title {
   font-size: 28px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
   color: #555;
   margin-top: 0;
@@ -1094,7 +1096,7 @@ li, li > p {
   padding: 80px 0;
 }
 .case-study-article .project-title {
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
   margin-bottom: 30px;
   color: #555;
@@ -1266,7 +1268,7 @@ li, li > p {
 }
 .services .title {
   font-size: 28px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
   color: #555;
   margin-top: 0;
@@ -1330,7 +1332,7 @@ li, li > p {
 }
 .section .title {
   font-size: 36px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
   color: #555;
   margin-top: 0;
@@ -1373,7 +1375,7 @@ li, li > p {
 }
 .team .title {
   font-size: 36px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
   color: #555;
   margin-top: 0;
@@ -1459,7 +1461,7 @@ li, li > p {
 }
 .photos .title {
   font-size: 36px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
   color: #555;
   margin-top: 0;
@@ -1580,7 +1582,7 @@ li, li > p {
 }
 .contact-section .title {
   font-size: 36px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
   color: #555;
   margin-top: 0;
@@ -1600,7 +1602,7 @@ li, li > p {
 .contact-section .contact-info li {
   margin-right: 60px;
   margin-bottom: 30px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
 }
 .contact-section .contact-info li a {
   color: #666;
@@ -1659,7 +1661,7 @@ li, li > p {
   right: 30px;
 }
 .map-section .gmap-wrapper .map-overlay .title {
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 800;
   color: #666;
   font-size: 20px;
@@ -1700,7 +1702,7 @@ li, li > p {
   border-radius: 0;
 }
 .modal .modal-title {
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   color: #fff;
 }
 .modal .modal-body {
@@ -1750,7 +1752,7 @@ li, li > p {
 }
 .footer .footer-content .sub-title {
   color: rgba(255, 255, 255, 0.9);
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: 'Oswald', arial, sans-serif;
   font-weight: 700;
   font-size: 18px;
   margin-bottom: 30px;
