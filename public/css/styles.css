@@ -254,6 +254,14 @@ li, li > p {
   height: 480px;
 }
 
+.blog-container {
+  max-width: 991px;
+}
+
+.blog-container img {
+  margin-bottom: 16px;
+}
+
 .blog-summary .blog-title {
   margin-bottom: 4px;
 }
