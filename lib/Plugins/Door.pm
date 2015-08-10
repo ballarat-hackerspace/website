@@ -43,12 +43,14 @@ sub _process_request {
   my ($self, $c, $mode) = (shift, shift, shift);
   my $args = @_%2 ? shift : {@_};
 
+  my $mac = $args->{mac} // '00:00:00:00:00:00';
+
   if ($cb) {
     return $c->delay(
       sub {
         my ($delay) = @_;
 
-        $self->_ua->get($self->url->path($mode) => $delay->begin);
+        $self->_ua->get($self->url->path($mode)->query(mac => $mac) => $delay->begin);
       },
       sub {
         my ($delay, $tx) = @_;
@@ -59,7 +61,7 @@ sub _process_request {
     );
   }
   else {
-    my $tx = $self->_ua->get($self->url->path($mode));
+    my $tx = $self->_ua->get($self->url->path($mode)->query(mac => $mac));
     my ($data, $err) = _process_response($tx);
 
     return ($err ? 500 : 200, $err // $data);
