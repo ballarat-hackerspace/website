@@ -16,7 +16,7 @@
   <section id="team" class="section">
     <div class="container">
       <h2 class="title text-center">Members</h2>
-      <p>Welcome to the Members only area. Whilst we strongly encourage all of our contents to be open and freely available to the general public, there are some things that are considered privileged.</p>
+      <p>Welcome to the Members only area. Whilst we strongly encourage all of our contents to be open and freely available to the general public, there are some things that are considered privileged. If you are looking for your membership or payment management then you will need to login to <a href="https://ballarathackerspace.tidyclub.com/users/sign_in">TidyClub</a> directly.</p>
 
       <div class="row">
         <div class="col-sm-6">
@@ -42,6 +42,11 @@
         <div class="col-sm-6">
           <h3>Device Register</h3>
           <p>TODO: register your device for use in the Hackerspace ecosystem.</p>
+        </div>
+
+        <div class="col-sm-6">
+          <h3>Digger</h3>
+          <p>TODO: drive the digger around the space.</p>
         </div>
 
         <div class="col-sm-6">
