@@ -384,7 +384,7 @@ li, li > p {
   color: #fff;
   width: 100%;
   z-index: 40;
-  padding: 15px inherit;
+  padding: 15px;
   background: rgba(48, 48, 48, 0.95);
   -webkit-transition: all 0.6s ease-in-out;
   -moz-transition: all 0.6s ease-in-out;
@@ -397,7 +397,7 @@ li, li > p {
   padding-right: 15px;
 }
 .header.header-shrink {
-  padding: 0px inherit;
+  padding: 0px 15px;
 }
 .header.header-shrink .main-nav .navbar-toggle {
   padding-top: 9px;
