@@ -17,6 +17,12 @@ server {
 
 		rewrite /door/api/([^/]+) /$1 break;
                 proxy_pass http://boiler.bhack:8080;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+
+        location /lifx {
+                rewrite /lifx/([^/]+) /$1 break;
+                proxy_pass http://localhost:5439;
         }
 
 	location / {
