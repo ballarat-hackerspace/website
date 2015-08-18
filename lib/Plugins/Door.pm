@@ -20,7 +20,7 @@ use Mojo::Base 'Mojolicious::Plugin';
 
 use Carp 'croak';
 use Mojo::UserAgent;
-use Mojo::Util qw(dumper);
+use Mojo::Util qw(dumper unquote);
 use Time::Piece;
 
 our $VERSION = '0.1';
@@ -43,14 +43,16 @@ sub _process_request {
   my ($self, $c, $mode) = (shift, shift, shift);
   my $args = @_%2 ? shift : {@_};
 
-  my $mac = $args->{mac} // '00:00:00:00:00:00';
+  my $user = unquote $args->{device}{email};
+  my $name = unquote $args->{device}{name};
+  my $mac  = $args->{device}{mac};
 
   if ($cb) {
     return $c->delay(
       sub {
         my ($delay) = @_;
 
-        $self->_ua->get($self->url->path($mode)->query(mac => $mac) => $delay->begin);
+        $self->_ua->get($self->url->path($mode)->query(mac => $mac, name => $name, user => $user) => $delay->begin);
       },
       sub {
         my ($delay, $tx) = @_;
@@ -61,7 +63,7 @@ sub _process_request {
     );
   }
   else {
-    my $tx = $self->_ua->get($self->url->path($mode)->query(mac => $mac));
+    my $tx = $self->_ua->get($self->url->path($mode)->query(mac => $mac, name => $name, user => $user));
     my ($data, $err) = _process_response($tx);
 
     return ($err ? 500 : 200, $err // $data);
