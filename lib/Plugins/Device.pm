@@ -60,7 +60,6 @@ sub register {
 
     my $devices = !!($sth->execute($mac)) ? $sth->fetchall_arrayref({}) : undef;
 
-    warn dumper $devices;
     return @{$devices} ? $devices->[0] : undef
   });
 
