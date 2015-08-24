@@ -20,6 +20,11 @@
 
       <div class="row">
         <div class="col-sm-6">
+          <a href="<%= url_for('members-devices') %>"><h3>Device Register</h3></a>
+          <p>register your device for use in the Hackerspace ecosystem.</p>
+        </div>
+
+        <div class="col-sm-6">
           <a href="/door"><h3>Door</h3></a>
           <p>Grant access through the hackerspace door.</p>
         </div>
@@ -37,11 +42,6 @@
         <div class="col-sm-6">
           <h3>Marquee</h3>
           <p>TODO: send a message to the marquee.</p>
-        </div>
-
-        <div class="col-sm-6">
-          <h3>Device Register</h3>
-          <p>TODO: register your device for use in the Hackerspace ecosystem.</p>
         </div>
 
         <div class="col-sm-6">

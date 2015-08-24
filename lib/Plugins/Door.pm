@@ -45,7 +45,7 @@ sub _process_request {
 
   my $user = unquote $args->{device}{email};
   my $name = unquote $args->{device}{name};
-  my $mac  = $args->{device}{mac};
+  my $mac  = $args->{device}{uuid};
 
   if ($cb) {
     return $c->delay(

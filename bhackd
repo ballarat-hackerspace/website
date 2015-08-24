@@ -22,6 +22,9 @@ use lib "$FindBin::Bin/lib";
 use Mojolicious::Lite;
 use Mojo::UserAgent;
 use Mojo::Util qw(dumper);
+use Time::Piece;
+
+
 use Plugins::Jekyll;
 
 plugin 'JSONConfig'        => {file => '/etc/bhackd.conf'};
@@ -103,11 +106,39 @@ group {
   under '/members' => sub {
     my $c = shift;
 
+    # stash for later
+    $c->stash('uuid' => $c->device->uuid);
+
     return 1 if $c->tidyclub->is_authenticated;
     return $c->redirect_to('/');
   };
 
   get '/' => 'members';
+
+  # device management
+  get '/devices' => sub {
+    my $c = shift;
+    $c->stash(devices => $c->device->find);
+    $c->render('members-devices');
+  } => 'members-devices';
+
+  post '/devices/add' => sub {
+    my $c = shift;
+
+    $c->device->add(
+      uuid   => $c->param('uuid'),
+      email  => $c->param('email'),
+      device => $c->param('device')
+    );
+    $c->redirect_to('members-devices');
+  } => 'members-devices-add';
+
+  get '/devices/remove/:id' => sub {
+    my $c = shift;
+
+    $c->device->remove($c->param('id'));
+    $c->redirect_to('members-devices');
+  } => 'members-devices-remove';
 };
 
 # local network only
@@ -125,6 +156,10 @@ group {
 group {
   under '/door' => sub {
     my $c = shift;
+
+    # stash for later
+    $c->stash('uuid' => $c->device->uuid);
+
     return 1 if $c->is_local || $c->is_gatekeeper;
     return $c->redirect_to('/');
   };
