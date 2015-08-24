@@ -22,6 +22,7 @@ use lib "$FindBin::Bin/lib";
 use Mojolicious::Lite;
 use Mojo::UserAgent;
 use Mojo::Util qw(dumper);
+use NetAddr::IP;
 use Time::Piece;
 
 
@@ -37,7 +38,11 @@ app->secrets(app->config->{secrets});
 
 helper 'is_local' => sub {
   my $c = shift;
-  return 1 if grep { $c->tx->remote_address =~ m/$_/ } @{$c->app->config->{local}};
+
+  my $ip = NetAddr::IP->new($c->tx->remote_address);
+
+  return 1 if grep { $ip->within(NetAddr::IP->new($_)) } @{$c->app->config->{local}};
+
   return undef;
 };
 
