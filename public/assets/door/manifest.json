@@ -1,6 +1,6 @@
 {
   "name": "bhack door",
-  "version": "201505121425",
+  "version": "201508251803",
   "description": "Open/Close bhack door",
   "icons": [
     {
@@ -10,7 +10,7 @@
       "density": "4.0"
     }
   ],
-  "start_url": "index.html",
+  "start_url": "/door",
   "display": "standalone",
   "orientation": "portrait",
   "author": "Ballarat Hackerspace, http://ballrathackerspace.org.au"
