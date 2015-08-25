@@ -40,6 +40,14 @@ server {
 	location = /50x.html {
 		root /srv/ballarathackerspace.org.au;
 	}
+
+	location = /webcam.jpg {
+		proxy_pass http://cam.bhack.in/?action=snapshot;
+                proxy_hide_header Cache-Control;
+                proxy_hide_header Expires;
+                proxy_hide_header Pragma;
+		expires 15s;
+	}
 }
 
 server {
