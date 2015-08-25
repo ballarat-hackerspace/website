@@ -88,7 +88,7 @@
     <a href="/"><img src="/assets/door/bhack-door-logo-title.svg"></img></a>
   </div>
   <div class="controls">
-    <a id="enter" class="btn btn-block btn-big btn-cta btn-cta-green">Enter</a>
+    <a id="enter" class="btn btn-block btn-big btn-cta">Enter</a>
     <div>
       <div>
         <a id="motion-arm" class="btn btn-block btn-cta btn-cta-blue">Enable Alarm</a>

@@ -46,6 +46,11 @@ helper 'is_local' => sub {
   return undef;
 };
 
+helper 'is_dooropener' => sub {
+  return 1 if shift->tidyclub->is_authenticated_group('workshop members');
+  return undef;
+};
+
 helper 'is_gatekeeper' => sub {
   return 1 if shift->tidyclub->is_authenticated_group('seeders');
   return undef;
@@ -172,11 +177,15 @@ group {
   get '/' => 'door';
   get '/access' => sub {
     my $c = shift;
+    return $c->render(status => 403, json => '') unless $c->is_dooropener && $c->device->is_whitelisted;
+
     $c->render(json => {pong => $c->device->is_whitelisted});
   };
 
   get '/enter' => sub {
     my $c = shift;
+    return $c->render(status => 403, json => '') unless $c->is_dooropener && $c->device->is_whitelisted;
+
     $c->render_later;
     $c->door->enter(
       device => $c->device->is_whitelisted,
@@ -186,6 +195,8 @@ group {
 
   get '/open'  => sub {
     my $c = shift;
+    return $c->render(status => 403, json => '') unless $c->is_dooropener && $c->device->is_whitelisted;
+
     $c->render_later;
     $c->door->open(
       device => $c->device->is_whitelisted,
@@ -195,6 +206,8 @@ group {
 
   get '/close' => sub {
     my $c = shift;
+    return $c->render(status => 403, json => '') unless $c->is_dooropener && $c->device->is_whitelisted;
+
     $c->render_later;
     $c->door->close(
       device => $c->device->is_whitelisted,

@@ -63,7 +63,7 @@ sub register {
       $tc = {};
     }
 
-    return $tc->{id};
+    return !!grep { $group = $_ } @{$tc->{groups}};
   });
 
   $app->helper('tidyclub.user' => sub {
