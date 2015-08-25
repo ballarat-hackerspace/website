@@ -39,7 +39,7 @@ app->secrets(app->config->{secrets});
 helper 'is_local' => sub {
   my $c = shift;
 
-  my $ip = NetAddr::IP->new($c->tx->remote_address);
+  my $ip = NetAddr::IP->new($c->req->headers->header('X-Forwarded-For'));
 
   return 1 if grep { $ip->within(NetAddr::IP->new($_)) } @{$c->app->config->{local}};
 
