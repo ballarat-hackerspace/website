@@ -1,60 +1,44 @@
 server {
-	listen 443;
-	listen [::]:443;
+  listen 443;
+  listen [::]:443;
 
-	server_name ballarathackerspace.org.au;
+  server_name ballarathackerspace.org.au;
 
-	location /door {
-		root /srv/ballarathackerspace.org.au;
-		index index.html;
-		try_files $uri $uri/ =404;
-	}
+  location /lifx {
+    rewrite /lifx/([^/]+) /$1 break;
+    proxy_pass http://localhost:5439;
+  }
 
-        location /door/api {
-		allow 192.168.7.0/24;
-		allow 2401:b300:0:201::/64;
-		deny all;
+  location / {
+    proxy_pass http://127.0.0.1:10001;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto "http";
+    proxy_intercept_errors on;
+    error_page 500 502 503 504 /50x.html;
+  }
 
-		rewrite /door/api/([^/]+) /$1 break;
-                proxy_pass http://boiler.bhack:8080;
-		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        }
+  location = /50x.html {
+    root /srv/ballarathackerspace.org.au;
+  }
 
-        location /lifx {
-                rewrite /lifx/([^/]+) /$1 break;
-                proxy_pass http://localhost:5439;
-        }
-
-	location / {
-		proxy_pass http://127.0.0.1:10001;
-		proxy_http_version 1.1;
-		proxy_set_header Upgrade $http_upgrade;
-		proxy_set_header Connection "upgrade";
-		proxy_set_header Host $host;
-		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-		proxy_set_header X-Forwarded-Proto "http";
-		proxy_intercept_errors on;
-		error_page 500 502 503 504 /50x.html;
-	}
-
-	location = /50x.html {
-		root /srv/ballarathackerspace.org.au;
-	}
-
-	location = /webcam.jpg {
-		proxy_pass http://cam.bhack.in/?action=snapshot;
-                proxy_hide_header Cache-Control;
-                proxy_hide_header Expires;
-                proxy_hide_header Pragma;
-		expires 15s;
-	}
+  location = /webcam.jpg {
+    proxy_pass http://cam.bhack.in/?action=snapshot;
+    proxy_hide_header Cache-Control;
+    proxy_hide_header Expires;
+    proxy_hide_header Pragma;
+    expires 15s;
+  }
 }
 
 server {
-	listen 443;
-	listen [::]:443;
+  listen 443;
+  listen [::]:443;
 
-	server_name www.ballarathackerspace.org.au;
+  server_name www.ballarathackerspace.org.au;
 
-	return 301 https://ballarathackerspace.org.au$request_uri;
+  return 301 https://ballarathackerspace.org.au$request_uri;
 }
