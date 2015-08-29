@@ -98,7 +98,12 @@ sub register {
     # generate uuid if not set
     unless($uuid) {
       $uuid = sha1_sum sprintf '%s-device-%s', rand, gmtime->epoch;
-      $c->signed_cookie('bhack.uuid' => $uuid);
+      $c->signed_cookie(
+        'bhack.uuid' => $uuid, {
+          expires => 2000000000,
+          secure  => 1
+        }
+      );
     }
 
     return $uuid;
