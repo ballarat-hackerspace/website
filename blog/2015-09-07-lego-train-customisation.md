@@ -4,7 +4,7 @@ feature: /images/blog/lego-logo.jpg
 title: LEGO Train Custom Printing
 tags: LEGO, train, 3d printing
 ---
-One of our younger members has a passion for LEGO train sets. The member's passion coupled with their effective spread spectrum nagging methods have found me scouring [Thingiverse](www.thingiverse.com) to provide some customised pieces recently.
+One of our younger members has a passion for LEGO train sets. The member's passion coupled with their effective spread spectrum nagging methods have found me scouring [Thingiverse](http://www.thingiverse.com) to provide some customised pieces recently.
 
 <!--more-->
 
@@ -14,8 +14,7 @@ One of our younger members has a passion for LEGO train sets. The member's passi
   </div>
   <div class="col-sm-6">
     <p>To manage expectation of the young member, I thought it best to start with something small and more manageablye. A small piece would not only be a quicker print but more likely to keep them occupied as it took form.</p>
-    <p>The piece I settled on was a <a href="http://www.thingiverse.com/thing:338593">track buffer stop</a> by <a href=
-http://www.thingiverse.com/hanst">hanst</a>. It was printed in orange PLA on the space's Printrbot without any crazy tweaks required. It was sliced in Cura with supports enabled, at 0.2mm resolution. Our Printrbot has no headed bed so a little Gluestick was added to improve platform adhesion and minimise any pillowing of the bottom. The resulting print came out nice and clean with minimal cleanup required on the holes that receive the Tecnik pieces.</p>
+    <p>The piece I settled on was a <a href="http://www.thingiverse.com/thing:338593">track buffer stop</a> by <a href="http://www.thingiverse.com/hanst">hanst</a>. It was printed in orange PLA on the space's Printrbot without any crazy tweaks required. It was sliced in Cura with supports enabled, at 0.2mm resolution. Our Printrbot has no headed bed so a little Gluestick was added to improve platform adhesion and minimise any pillowing of the bottom. The resulting print came out nice and clean with minimal cleanup required on the holes that receive the Tecnik pieces.</p>
   </div>
 </div>
 <div class="row">
