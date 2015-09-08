@@ -39,7 +39,7 @@
         <div class="col-md-4 col-sm-5 col-xs-12">
           <div id="calendar" class="google-calendar">
             <h1 class="title">Calendar</h1>
-            <iframe class="google-calendar" src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;mode=AGENDA&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=cieqouel1mafmv7voq0lt6dkrqpgts7l%40import.calendar.google.com&amp;color=%23AB8B00&amp;ctz=Australia%2FSydney" style=" border-width:0" frameborder="0" scrolling="no"></iframe>
+            <iframe class="google-calendar" src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;mode=AGENDA&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=ballarathackerspace.org.au_2fmk24ubcsrn35rlq9b8iq4r48%40group.calendar.google.com&amp;color=%23AB8B00&amp;ctz=Australia%2FSydney" style=" border-width:0" frameborder="0" scrolling="no"></iframe>
           </div>
         </div><!--//item-->
       </div><!--//row-->
