@@ -26,7 +26,7 @@ server {
   }
 
   location = /webcam.jpg {
-    proxy_pass http://cam.bhack.in/?action=snapshot;
+    proxy_pass http://axis205.bhack/jpg/image.jpg;
     proxy_hide_header Cache-Control;
     proxy_hide_header Expires;
     proxy_hide_header Pragma;
