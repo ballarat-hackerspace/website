@@ -1,3 +1,5 @@
+proxy_cache_path /srv/cache levels=1:2 keys_zone=WEBCAM:10m inactive=14d max_size=1g;
+
 server {
   listen 443;
   listen [::]:443;
@@ -7,6 +9,30 @@ server {
   location /lifx {
     rewrite /lifx/([^/]+) /$1 break;
     proxy_pass http://localhost:5439;
+  }
+
+  location = /50x.html {
+    root /srv/ballarathackerspace.org.au;
+  }
+
+  location ~ /webcam(.+).jpg {
+    rewrite /webcam(.+).jpg /jpg/image.jpg?id=$1 break;
+    proxy_cache WEBCAM;
+    proxy_connect_timeout 10s;
+    proxy_cache_use_stale error timeout invalid_header updating;
+    proxy_cache_valid 14d;
+    proxy_ignore_headers Cache-Control Expires;
+    proxy_cache_lock on;
+    proxy_pass http://axis205.bhack;
+    proxy_set_header Host $host;
+  }
+
+  location = /webcam.jpg {
+    proxy_pass http://axis205.bhack/jpg/image.jpg;
+    proxy_hide_header Cache-Control;
+    proxy_hide_header Expires;
+    proxy_hide_header Pragma;
+    expires 15s;
   }
 
   location / {
@@ -19,18 +45,6 @@ server {
     proxy_set_header X-Forwarded-Proto "http";
     proxy_intercept_errors on;
     error_page 500 502 503 504 /50x.html;
-  }
-
-  location = /50x.html {
-    root /srv/ballarathackerspace.org.au;
-  }
-
-  location = /webcam.jpg {
-    proxy_pass http://axis205.bhack/jpg/image.jpg;
-    proxy_hide_header Cache-Control;
-    proxy_hide_header Expires;
-    proxy_hide_header Pragma;
-    expires 15s;
   }
 }
 
