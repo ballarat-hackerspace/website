@@ -12,7 +12,7 @@ server {
   }
 
   location /digger {
-    rewrite /digger/([^/]+) /$1 break;
+    rewrite /digger/(.*) /$1 break;
     proxy_pass http://localhost:5000;
   }
 
