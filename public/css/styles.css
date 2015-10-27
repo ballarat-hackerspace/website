@@ -1224,6 +1224,8 @@ li, li > p {
 .case-study-article .testimonial-wrapper .meta .profile .name .source-title {
   color: #999999;
 }
+.carousel-banner {
+}
 .flexslider {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -1585,6 +1587,7 @@ li, li > p {
   font-style: italic;
 }
 .custom-quote p {
+  font-size: 32px;
   line-height: 1.6;
 }
 .custom-quote .fa {
@@ -1595,7 +1598,7 @@ li, li > p {
   font-style: normal;
 }
 .custom-quote .source .name {
-  color: #666666;
+  color: #999;
 }
 .custom-quote .source .title {
   font-size: 13px;
