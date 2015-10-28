@@ -8,7 +8,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-offset-2 col-sm-8 text-center">
+          <div class="col-sm-6 text-center">
+            <a href="http://www.sedadvisory.com.au/"><img src="/images/sponsors/logo-sed-dark-background.png"></img></a>
+          </div>
+          <div class="col-sm-6 text-center">
             <a href="http://www.lateralplains.com"><img src="/images/sponsors/logo-mono-lateral-plains.png"></img></a>
           </div>
         </div>
