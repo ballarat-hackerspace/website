@@ -110,10 +110,7 @@ The following GIF slows this down (100 on, 200 off) to show what this code is do
 
 <div class="container text-center">
 <div class="row">
-    <video autoplay loop muted>
-        <!--<source src="/images/blog/digger/pulse.webm" type="video/webm">-->
-        <source src="/images/blog/digger/dub.mp4" type="video/mp4">
-    </video>
+    <iframe width="420" height="315" src="https://www.youtube.com/embed/cvrfWQoMrUc" frameborder="0" allowfullscreen></iframe>
     <p class='text-center'>Digger tracks moving at a slowed down pace (but still the same ratio).</p>
 </div>
 </div>
