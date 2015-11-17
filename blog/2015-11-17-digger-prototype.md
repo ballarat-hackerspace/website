@@ -20,7 +20,7 @@ This project has taught me heaps about electronics and 3D printing, and let me f
 
 <div class="container text-center">
 <div class="row">
-    <img src="/images/blog/digger/asis.png">
+    <img src="/images/blog/digger/asis.jpg">
     <p class='text-center'>Here is what it looks like at the moment.</p>
 </div>
 </div>
@@ -35,7 +35,7 @@ The project ended up being lots of testing, reworking, and tinkering, to come up
 To get started, we developed a circuit that lets us perform the current-switching requirement.
 
 <div class="container text-center">
-    <img src="/images/blog/digger/v1.png">
+    <img src="/images/blog/digger/v1.jpg">
     <p class='text-center'>Losing track of wires is an issue at this stage.</p>
 </div>
 
@@ -43,7 +43,7 @@ Once we had that complete, @firnsy found a motor controller board that did the s
 This drastically simplified the process, allowing us to control the motors from the Particle Core, a few NOT gates, and these motor controller boards.
 
 <div class="container text-center">
-    <img src="/images/blog/digger/holderv1.png">
+    <img src="/images/blog/digger/holderv1.jpg">
     <p class='text-center'>Life is much easier when there is a circuit board that does what you want. Orange bit to be explained soon.</p>
 </div>
 
@@ -60,7 +60,7 @@ We have a signal input (coming from the Particle Core) heading into the input of
 This all handily fits on a breadboard, which we are planning to use for a while, at least until I learn how to use the CNC machine to make my own circuits.
 
 <div class="container text-center">
-    <img src="/images/blog/digger/prototype_open.png">
+    <img src="/images/blog/digger/prototype_open.jpg">
     <p class='text-center'>The Particle Core connects to the 74HC04N chip, the 74HC04N chip connects to the motor controller...</p>
 </div>
 
@@ -68,7 +68,7 @@ Of course, the Particle Core takes 5V in, and the motors take 12V in. To fix thi
 Of course, I did screw this up at one point, sending 12V straight to the Particle Core, blowing the fuse and getting a nice puff of smoke.
 
 <div class="container text-center">
-    <img src="/images/blog/digger/spark.png">
+    <img src="/images/blog/digger/spark.jpg">
     <p class='text-center'>I owe @firnsy a new Particle Core. Notice the mark on the IC to the right.</p>
 </div>
 
