@@ -295,6 +295,11 @@ li, li > p {
   font-size: 12px;
 }
 
+/* Images in the blog are centered */
+.img-center{
+	margin: auto auto;
+}
+
 .blog-tags .blog-tag:after { content: ", "; }
 .blog-tags .blog-tag:last-child:after { content: ""; }
 

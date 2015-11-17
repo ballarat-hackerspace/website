@@ -5,12 +5,6 @@ title: Digger Prototype Complete!
 tags: digger, build, electronics, particle, spark, core
 ---
 
-<style>
-text-center {
-	text-align: center;
-}
-</style>
-
 **After months of toil** the digger prototype is now complete.
 The digger started as "let's take this controllable toy digger, and cut the controller off it".
 Now, we have a working prototype, allowing for a user to control the digger via the internet.
@@ -18,11 +12,9 @@ You can see [the controls here](https://ballarathackerspace.org.au/digger/), but
 
 This project has taught me heaps about electronics and 3D printing, and let me flex my programming muscles in new ways.
 
-<div class="container text-center">
-<div class="row">
-    <img src="/images/blog/digger/asis.jpg">
+<div class="col-sm-12 text-center">
+    <img class="img-responsive img-center" src="/images/blog/digger/asis.jpg">
     <p class='text-center'>Here is what it looks like at the moment.</p>
-</div>
 </div>
 
 The toy digger works off a number of motors that control the arm movement, tracks, and rotation.
@@ -34,16 +26,16 @@ The project ended up being lots of testing, reworking, and tinkering, to come up
 
 To get started, we developed a circuit that lets us perform the current-switching requirement.
 
-<div class="container text-center">
-    <img src="/images/blog/digger/v1.jpg">
+<div class="text-center">
+    <img class="img-responsive img-center" src="/images/blog/digger/v1.jpg">
     <p class='text-center'>Losing track of wires is an issue at this stage.</p>
 </div>
 
 Once we had that complete, @firnsy found a motor controller board that did the same thing.
 This drastically simplified the process, allowing us to control the motors from the Particle Core, a few NOT gates, and these motor controller boards.
 
-<div class="container text-center">
-    <img src="/images/blog/digger/holderv1.jpg">
+<div class="text-center">
+    <img class="img-responsive img-center" src="/images/blog/digger/holderv1.jpg">
     <p class='text-center'>Life is much easier when there is a circuit board that does what you want. Orange bit to be explained soon.</p>
 </div>
 
@@ -59,16 +51,16 @@ We have a signal input (coming from the Particle Core) heading into the input of
 
 This all handily fits on a breadboard, which we are planning to use for a while, at least until I learn how to use the CNC machine to make my own circuits.
 
-<div class="container text-center">
-    <img src="/images/blog/digger/prototype_open.jpg">
+<div class="text-center">
+    <img class="img-responsive img-center" src="/images/blog/digger/prototype_open.jpg">
     <p class='text-center'>The Particle Core connects to the 74HC04N chip, the 74HC04N chip connects to the motor controller...</p>
 </div>
 
 Of course, the Particle Core takes 5V in, and the motors take 12V in. To fix this, we use a 12V battery and then a regulator to reduce the power.
 Of course, I did screw this up at one point, sending 12V straight to the Particle Core, blowing the fuse and getting a nice puff of smoke.
 
-<div class="container text-center">
-    <img src="/images/blog/digger/spark.jpg">
+<div class="text-center">
+    <img class="img-responsive img-center" src="/images/blog/digger/spark.jpg">
     <p class='text-center'>I owe @firnsy a new Particle Core. Notice the mark on the IC to the right.</p>
 </div>
 
@@ -108,11 +100,11 @@ This does a few things. First, it allows you to turn on either the left or right
 This code also does PWM (Pulse Width Modulation). We found that just turning the motors on full was a bit... crazy... so we decided on turning them on and off really fast instead. At present, TIME_ON is 10 milliseconds, and TIME_OFF is 20 milliseconds.
 The following GIF slows this down (100 on, 200 off) to show what this code is doing:
 
-<div class="container text-center">
-<div class="row">
-    <iframe width="420" height="315" src="https://www.youtube.com/embed/cvrfWQoMrUc" frameborder="0" allowfullscreen></iframe>
+<div class="text-center">
+	<div class="video-container">
+        <iframe src="https://www.youtube.com/embed/7D6kG-VsuDQ" frameborder="0" allowfullscreen=""></iframe>
+      </div>
     <p class='text-center'>Digger tracks moving at a slowed down pace (but still the same ratio).</p>
-</div>
 </div>
 
 
