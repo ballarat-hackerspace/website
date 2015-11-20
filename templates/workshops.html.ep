@@ -13,10 +13,22 @@
   %= include 'navigation-only.inc', active => 'workshops'
 
   <!-- ******team Section****** -->
-  <section id="team" class="section">
+  <section id="workshops" class="section">
     <div class="container">
-      <h2 class="title text-center">Workshops</h2>
+      <h1 class="title text-center">Workshops</h1>
 
+      <ul>
+        <li><a href="#3dprinting">Build your own 3D Printer Workshop</a></li>
+        <li><a href="#raspberrypi">Raspberry PI Workshop</a> <sup>(<i class="fa fa-briefcase"></i> currently being developed)</sup></li>
+        <li><a href="#multicopter">Multicopter Workshop</a> <sup>(<i class="fa fa-briefcase"></i> currently being developed)</sup></li>
+      </ul>
+    </div>
+  </section>
+
+  <hr noshade>
+
+  <section id="3dprinting" class="section">
+    <div class="container">
       <h2>Build your own 3D Printer Workshop</h2>
 
       <div class="row">
@@ -26,8 +38,9 @@
           <p>You can print your own tools and toys, learn to work with open source hardware, improve upon publicly available designs, and learn about one of the biggest trends for future development.</p>
           <p>There are over 100,000 items you can print right now on design-sharing website Thingiverse – all free and able to be customised!</p>
           <p>If you have ever wanted to get into 3D printing, now is your chance. The Ballarat Hackerspace is presenting a workshop, with all of the necessary components, for you to build your own 3D printer.</p>
+          <p>Our last workshop was a great success and we will defintely be repeating it, just register your interest below to get updates directly to your inbox</p>
 
-          <a href="https://ballarathackerspace.tidyclub.com/public/events/2451-3d-printing-workshop-build-your-own" class="btn btn-lg btn-cta btn-cta-secondary">Grab a Ticket!</a>
+          <a href="https://ballarathackerspace.tidyclub.com/public/registration/new" class="btn btn-lg btn-cta btn-cta-secondary">Register to receive news about our next 3D printer workshop</a>
         </div>
         <div class="col-sm-6 col-md-4">
           <img class="img-responsive img-h3-padding" src="/images/workshops/prusa-i3-2.jpg"></img>
@@ -79,40 +92,76 @@
       <h4>Important Note:</h4>
       <p>Working with some of these tools (soldering irons, hobby knives, etc) presents a limited opportunity for injury. Participants will be shown how to complete the build safely, but should know that they’re responsible for their own safety.</p>
     </div><!--//container-->
-  </section><!--//team-section-->
 
-  <section id="conduct" class="section section-highlight">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <h3>Prusa i3 Technical Details:</h3>
-          <ul>
-            <li>Print volume (X, Y, Z): 200mm x 200mm x 180mm</li>
-            <li>Z Axis Positioning Accuracy: 0.004mm</li>
-            <li>XY Axis Positioning Accuracy: 0.012mm</li>
-            <li>The Layer Thickness: 0.1 mm-0.4mm</li>
-            <li>Layer Resolution: 100 microns</li>
-            <li>Printing Filament: ABS, PLA</li>
-            <li>Filament Diameter: 1.75mm</li>
-            <li>Nozzle Diameter: 0.4 mm</li>
-            <li>Print Speed: 40 - 100 mm/s</li>
-            <li>Print Plate Size: 213*200mm</li>
-            <li>Max heated bed temperature: 110 deg C(adjustable)</li>
-            <li>Max extruder temperature: about 240 deg C</li>
-            <li>Connectivity: USB, SD card (via LCD user interface)</li>
-            <li>Electronics: MKS Gen V 1.1 (Ramps Compatible)</li>
-            <li>Power supply: 100-120VAC/4.8A or 200-240VAC/2.4A</li>
-            <li>Output: DC 12V/ 30A</li>
-            <li>CAD Input data file format: STL, G-code</li>
-            <li>Operating System: Windows / Linux / Mac</li>
-          </ul>
+    <section id="details" class="section section-highlight">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <h3>Prusa i3 Technical Details:</h3>
+            <ul>
+              <li>Print volume (X, Y, Z): 200mm x 200mm x 180mm</li>
+              <li>Z Axis Positioning Accuracy: 0.004mm</li>
+              <li>XY Axis Positioning Accuracy: 0.012mm</li>
+              <li>The Layer Thickness: 0.1 mm-0.4mm</li>
+              <li>Layer Resolution: 100 microns</li>
+              <li>Printing Filament: ABS, PLA</li>
+              <li>Filament Diameter: 1.75mm</li>
+              <li>Nozzle Diameter: 0.4 mm</li>
+              <li>Print Speed: 40 - 100 mm/s</li>
+              <li>Print Plate Size: 213*200mm</li>
+              <li>Max heated bed temperature: 110 deg C(adjustable)</li>
+              <li>Max extruder temperature: about 240 deg C</li>
+              <li>Connectivity: USB, SD card (via LCD user interface)</li>
+              <li>Electronics: MKS Gen V 1.1 (Ramps Compatible)</li>
+              <li>Power supply: 100-120VAC/4.8A or 200-240VAC/2.4A</li>
+              <li>Output: DC 12V/ 30A</li>
+              <li>CAD Input data file format: STL, G-code</li>
+              <li>Operating System: Windows / Linux / Mac</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <img class="img-responsive img-h3-padding" src="/images/workshops/prusa-i3-1.jpg"></img>
+          </div>
         </div>
-        <div class="col-sm-6">
-          <img class="img-responsive img-h3-padding" src="/images/workshops/prusa-i3-1.jpg"></img>
+      </div><!--//container-->
+    </section><!--//details-section-->
+  </section><!--//3dprinting-section-->
+
+  <hr noshade>
+
+  <section id="raspberrypi" class="section">
+    <div class="container">
+      <h2>Raspberry PI Workshop</h2>
+      <div class="row">
+        <div class="col-sm-6 col-md-8">
+          <p>We are currently working on the details of this workshop, if you'd like to be one of the first to know more simply register below.</p>
+
+          <a href="https://ballarathackerspace.tidyclub.com/public/registration/new" class="btn btn-lg btn-cta btn-cta-secondary">Register interest</a>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <img class="img-responsive" title="Raspberry PI" src="/images/workshops/raspberry-pi2-model-b-1gb-sm.jpg">
         </div>
       </div>
-    </div><!--//container-->
-  </section><!--//team-section-->
+    </div>
+  </section>
+
+  <hr noshade>
+
+  <section id="multicopter" class="section">
+    <div class="container">
+      <h2>Multicopter Workshop</h2>
+      <div class="row">
+        <div class="col-sm-6 col-md-8">
+          <p>We are currently working on the details of this workshop, if you'd like to be one of the first to know more simply register below.</p>
+
+          <a href="https://ballarathackerspace.tidyclub.com/public/registration/new" class="btn btn-lg btn-cta btn-cta-secondary">Register interest</a>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <img class="img-responsive" title="Nighthawk" src="/images/workshops/quadcopter-nighthawk.jpg">
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- footer -->
   %= include 'footer.inc'
