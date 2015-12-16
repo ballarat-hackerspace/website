@@ -28,12 +28,12 @@ server {
     proxy_cache_valid 14d;
     proxy_ignore_headers Cache-Control Expires;
     proxy_cache_lock on;
-    proxy_pass http://axis205.bhack;
+    proxy_pass http://192.168.7.6;
     proxy_set_header Host $host;
   }
 
   location = /webcam.jpg {
-    proxy_pass http://axis205.bhack/jpg/image.jpg;
+    proxy_pass http://192.168.7.6/jpg/image.jpg;
     proxy_hide_header Cache-Control;
     proxy_hide_header Expires;
     proxy_hide_header Pragma;
