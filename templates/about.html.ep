@@ -12,16 +12,50 @@
   <!-- header -->
   %= include 'navigation-only.inc', active => 'about'
 
-  <!-- ******team Section****** -->
+  <!-- about team -->
   <section id="team" class="section">
     <div class="container">
       <h2 class="title text-center">About Us</h2>
       <p>The Ballarat Hackerspace is modeled on an <a href="http://hackerspaces.org/">international community of like minded spaces</a> that started in Germany back in 1995. It supports and encourages Science, Technology, Engineering, Art and Mathematics culture in the Ballarat region by providing a physical space for residents to meet, interact, create and innovate.</p>
 
       <p>We hold public meetups on the 1st and 3rd Tuesdays of each month (refer to the <a href="/#calendar">Calendar</a>). These meetups are where we invite you to join us and chat, participate in show and tell, get help or advice, or talk about your projects.</p>
-    </div><!--//container-->
-  </section><!--//team-section-->
+    </div>
+  </section>
 
+  <!-- about timetable -->
+  <section id="timetable" class="section">
+    <div class="container">
+      <h2 class="title text-center">The Timetable</h2>
+      <p>To satiate public curiosity and accessibilty we are open for walk-ins at the following times:</p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Open Times</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Monday</td>
+            <td>6pm &ndash; 9pm</td>
+          </tr>
+          <tr>
+            <td>Tuesday</td>
+            <td>4pm &ndash; 9pm</td>
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td>9am &ndash; 3pm</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><b>Note:</b> Non-probabtionary Workshop members have 24/7 access to the space.</p>
+    </div>
+  </section>
+
+  <!-- about space -->
   <section id="space" class="section">
     <div class="container">
       <h2 class="title text-center">The Space</h2>
