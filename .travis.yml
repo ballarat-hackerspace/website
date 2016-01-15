@@ -8,10 +8,15 @@ before_install:
 
 install:
   - docker build -t hub.srw.io/bhack-website .
-  - docker run -d -p 127.0.0.1:80:3000 hub.srw.io/bhack-website
+  - docker run -d -p 127.0.0.1:3000:3000 hub.srw.io/bhack-website
   - docker ps -a
+
+before_script:
+  - sleep 15
 
 script:
   - |-
-    [[ $(curl -sf -o /dev/null -w %{http_code} http://localhost/images/bhack-logo-title-black.svg) -eq 200 ]]
+    [[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/images/bhack-logo-title-black.svg) -eq 200 ]]
+
+after_success:
   - docker push hub.srw.io/bhack-website
