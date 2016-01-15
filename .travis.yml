@@ -1,22 +1,19 @@
 sudo: required
-
 services:
-  - docker
-
+- docker
 before_install:
-  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" hub.srw.io
-
+- docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" hub.srw.io
 install:
-  - docker build -t hub.srw.io/bhack-website .
-  - docker run -d -p 127.0.0.1:3000:3000 hub.srw.io/bhack-website
-  - docker ps -a
-
+- docker build -t hub.srw.io/bhack-website .
+- docker run -d -p 127.0.0.1:3000:3000 hub.srw.io/bhack-website
+- docker ps -a
 before_script:
-  - sleep 15
-
+- sleep 15
 script:
-  - |-
-    [[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/images/bhack-logo-title-black.svg) -eq 200 ]]
-
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/images/bhack-logo-title-black.svg)
+  -eq 200 ]]'
 after_success:
-  - docker push hub.srw.io/bhack-website
+- docker push hub.srw.io/bhack-website
+notifications:
+  slack:
+    secure: E6WNnEngATgonU2nlFKbHStrOSUoP7Lp1XrMfxmH8Yau5FK1430J2tzmTTbdDw9R38PJd1RXhMzxDuE8bU3YsltnoiLJGKtNOoJBWRxFMO7rD7q+ol03mP0GB6uRwn5Hjy8MiFH62biSD/L94naE6TCbd8+6aT3Db7fF51TbeV5GppuT+fsbiQtZL9C6Mmgr6CRKmu4r/7pPNDiOifRRbFSf3vb4vRMkpF/eJf7zXaTcDf+1uAqQHHQOsuvguHY+/FyDuW5I07aDAEAO5AAgOFKxGJXuR9DYE5uAeH3+i4yQiGWEQCyCc9+XpUZYLxi9WL1xLrQECnGW9zgqAvkGOegh+ao3OHx0yXNCygj4fH0IZu7UaBbyRv62kXU/0RLFNQnder3osXShT6BBXo9VIK8Fv25bimyQgHsmDejnwrA3afYnJZW7YVnac2/MO/mHrE/OBM40gR0pZpOyxWSWsruy5H6v+J7+CmkbjD3/8bh5HEUpGaCheB1VW7Q5Ky7mRQ3FNEGENAnyDyM2oHre/lBiEjWOxMsKNxlgeBdCA4hYF7wQPeoaLukhaHkOn9iazgrdeEloEiOYw86RBH3FEQ0qAki1TPAVKrqVCmYC8K8cPfPSrJCko8agVSoO4sIPo38D/FvdfNxN4mLgAdwbYWSu84Y6K9Z8WJfkaIrZktI=
