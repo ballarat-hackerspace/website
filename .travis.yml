@@ -12,5 +12,6 @@ install:
   - docker ps -a
 
 script:
-  - [[ $(curl -sf -o /dev/null -w %{http_code} http://localhost/images/bhack-logo-title-black.svg) -eq 200 ]]
+  - |-
+    [[ $(curl -sf -o /dev/null -w %{http_code} http://localhost/images/bhack-logo-title-black.svg) -eq 200 ]]
   - docker push hub.srw.io/bhack-website
