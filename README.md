@@ -13,6 +13,8 @@ Ballarat Hackerspace website written with for Mojolicious framework.
 
 ## Running a test instance
 
+### The non docker way
+
 If you're testing on a remote machine forward port 3000 via ssh (or open access through firewall) and
 run:
 
@@ -22,3 +24,12 @@ $ ./bhackd prefork
 
 Then browse to `http://localhost:3000/` (replace `localhost` as appropriate if you're running the
 test instance on another server).
+
+### The docker way
+
+```
+$ docker build bhack-website .
+$ docker run --rm -it -p 80:3000 bhack-website
+```
+
+Now browse to port 80 (or whatever port you used above)
