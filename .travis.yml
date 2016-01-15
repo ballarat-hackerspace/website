@@ -1,0 +1,16 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" hub.srw.io
+
+install:
+  - docker build -t hub.srw.io/bhack-website .
+  - docker run -d -p 127.0.0.1:80:3000 hub.srw.io/bhack-website
+  - docker ps -a
+
+script:
+  - [[ $(curl -sf -o /dev/null -w %{http_code} http://localhost/images/bhack-logo-title-black.svg) -eq 200 ]]
+  - docker push hub.srw.io/bhack-website
