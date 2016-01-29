@@ -15,12 +15,25 @@
     <div class="container text-center">
       <div class="row">
         <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+              <img class="img-responsive" src="/images/lca2016-logo-white.svg" style="margin: 0 auto 32px auto; max-width: 384px">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-8">
+              <p class="text-center">We'll be attending the linux.conf.au down in Geelong for next week so there will be no standard open times between Mon, 1 Feb and Tue, 5 Feb.</p>
+              <p class="text-center">Normal times will resume on Sat, 6 Feb.</p>
+            </div>
+          </div>
+          <!--
           <div class="text-center custom-quote">
             <p class="text-center">To invent, you need a good imagination and a pile of junk.<br/>
             <div class="source">
               <span class="name">&dash; Thomas Edison</span>
             </div>
           </div>
+          --!>
 
           <div id="carousel-example-generic" class="carousel slide hide" data-ride="carousel">
             <!-- Indicators -->
