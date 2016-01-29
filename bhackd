@@ -39,9 +39,10 @@ app->secrets(app->config->{secrets});
 helper 'is_local' => sub {
   my $c = shift;
 
-  my $ip = NetAddr::IP->new($c->req->headers->header('X-Forwarded-For'));
-
-  return 1 if grep { $ip->within(NetAddr::IP->new($_)) } @{$c->app->config->{local}};
+  for my $hop (split /[, ]/, $c->req->headers->header('X-Forwarded-For') // '') {
+    my $ip = NetAddr::IP->new($hop);
+    return 1 if grep { $ip->within(NetAddr::IP->new($_)) } @{$c->app->config->{local}};
+  }
 
   return undef;
 };
