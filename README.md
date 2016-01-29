@@ -1,5 +1,6 @@
-Ballarat Hackerspace website written with for Mojolicious framework.
+[![Build Status](https://travis-ci.org/ballarat-hackerspace/website.svg?branch=master)](https://travis-ci.org/ballarat-hackerspace/website)
 
+Ballarat Hackerspace website written with for Mojolicious framework.
 
 ## Configuring for the server in the space (Debian / Jessie):
 
