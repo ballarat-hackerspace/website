@@ -28,11 +28,11 @@ use Time::Piece;
 
 use Plugins::Jekyll;
 
-plugin 'JSONConfig'        => {file => '/etc/bhackd.conf'};
-plugin 'Plugins::Device'   => app->config->{device}   // {};
-plugin 'Plugins::Door'     => app->config->{door}     // {};
-plugin 'Plugins::Jekyll'   => app->config->{blog}     // {};
-plugin 'Plugins::TidyClub' => app->config->{tidyclub} // {};
+plugin 'JSONConfig'      => {file => '/etc/bhackd.conf'};
+plugin 'Plugins::Device' => app->config->{device} // {};
+plugin 'Plugins::Door'   => app->config->{door}   // {};
+plugin 'Plugins::Jekyll' => app->config->{blog}   // {};
+plugin 'Plugins::TidyHQ' => app->config->{tidyhq} // {};
 
 app->secrets(app->config->{secrets});
 
@@ -48,12 +48,12 @@ helper 'is_local' => sub {
 };
 
 helper 'is_dooropener' => sub {
-  return 1 if shift->tidyclub->is_authenticated_group('workshop members');
+  return 1 if shift->tidyhq->is_authenticated_group('workshop members');
   return undef;
 };
 
 helper 'is_gatekeeper' => sub {
-  return 1 if shift->tidyclub->is_authenticated_group('seeders');
+  return 1 if shift->tidyhq->is_authenticated_group('seeders');
   return undef;
 };
 
@@ -96,7 +96,7 @@ post '/login' => sub {
   my $url = $c->param('rt') // 'index';
 
   $c->render_later;
-  $c->tidyclub->login(email => $e, password => $p, sub {
+  $c->tidyhq->login(email => $e, password => $p, sub {
     return $c->redirect_to($url);
   });
 };
@@ -104,7 +104,7 @@ post '/login' => sub {
 any '/logout' => sub {
   my $c = shift;
 
-  $c->tidyclub->logout;
+  $c->tidyhq->logout;
 
   # extract the redirect url and fall back to the index
   my $url = $c->param('rt') // 'index';
@@ -120,7 +120,7 @@ group {
     # stash for later
     $c->stash('uuid' => $c->device->uuid);
 
-    return 1 if $c->tidyclub->is_authenticated;
+    return 1 if $c->tidyhq->is_authenticated;
     return $c->redirect_to('/');
   };
 

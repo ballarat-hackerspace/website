@@ -41,7 +41,7 @@
             </thead>
             <tbody>
 % for my $d (@{$devices}) {
-%   if ($d->{email} eq $c->tidyclub->user->{email_address} || $c->is_gatekeeper) {
+%   if ($d->{email} eq $c->tidyhq->user->{email_address} || $c->is_gatekeeper) {
               <tr class="<%= $d->{uuid} eq $uuid ? 'success' : '' %>">
                 <td class="hidden-xs"><%= $d->{email} %></td>
                 <td><%= $d->{name} %></td>
@@ -86,7 +86,7 @@
                 <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-                    <input name="email" type="text" class="form-control" placeholder="Email" value="<%= $c->tidyclub->user->{email_address} %>" readonly>
+                    <input name="email" type="text" class="form-control" placeholder="Email" value="<%= $c->tidyhq->user->{email_address} %>" readonly>
                   </div>
                 </div>
                 <div class="form-group">

@@ -24,7 +24,7 @@
           <li><a href="https://github.com/ballarat-hackerspace/" data-toggle="tooltip" data-placement="top" title="GitHub"><i class="fa fa-github-alt"></i></a></li>
           <li><a href="https://plus.google.com/communities/106879016585907671427" data-toggle="tooltip" data-placement="top" title="Google+"><i class="fa fa-google-plus"></i></a></li>
           <li><a href="https://twitter.com/bHackerspace" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-          <li><a href="https://ballarathackerspace.tidyclub.com/users/sign_in" data-toggle="tooltip" data-placement="top" title="TidyClub"><i class="fa fa-group"></i></a></li>
+          <li><a href="https://ballarathackerspace.tidyhq.com/users/sign_in" data-toggle="tooltip" data-placement="top" title="TidyHQ"><i class="fa fa-group"></i></a></li>
         </ul>
         <small class="copyright text-center">All published content is licensed under the <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC‑BY‑SA 4.0</a> International license.</small>
       </div><!--//container-->

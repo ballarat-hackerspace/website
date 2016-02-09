@@ -15,7 +15,7 @@
 # under the License.
 #
 
-package Plugins::TidyClub;
+package Plugins::TidyHQ;
 use Mojo::Base 'Mojolicious::Plugin';
 
 use Carp 'croak';
@@ -26,7 +26,7 @@ use Time::Piece;
 our $VERSION = '0.1';
 
 use constant {
-  TIDYCLUB_SESSION_KEY => 'tidyclub',
+  TIDYHQ_SESSION_KEY => 'tidyhq',
 };
 
 has _ua => sub { Mojo::UserAgent->new };
@@ -34,48 +34,48 @@ has _ua => sub { Mojo::UserAgent->new };
 sub register {
   my ($self, $app, $config) = @_;
 
-  my $url = Mojo::URL->new(sprintf 'https://%s.tidyclub.com/', $config->{organisation});
+  my $url = Mojo::URL->new(sprintf 'https://%s.tidyhq.com/', $config->{organisation});
 
-  $app->helper('tidyclub.is_authenticated' => sub {
+  $app->helper('tidyhq.is_authenticated' => sub {
     my $c = shift;
 
-    my $tc = $c->session(TIDYCLUB_SESSION_KEY) // {};
+    my $tc = $c->session(TIDYHQ_SESSION_KEY) // {};
 
     # check token expiry
     if ($tc->{token_expiry} && $tc->{token_expiry} <= gmtime->epoch) {
-      delete $c->session->{TIDYCLUB_SESSION_KEY()};
+      delete $c->session->{TIDYHQ_SESSION_KEY()};
       $tc = {};
     }
 
     return $tc->{id};
   });
 
-  $app->helper('tidyclub.is_authenticated_group' => sub {
+  $app->helper('tidyhq.is_authenticated_group' => sub {
     my ($c, $group) = @_;
 
     return undef unless $group;
 
-    my $tc = $c->session(TIDYCLUB_SESSION_KEY) // {};
+    my $tc = $c->session(TIDYHQ_SESSION_KEY) // {};
 
     # check token expiry
     if ($tc->{token_expiry} && $tc->{token_expiry} <= gmtime->epoch) {
-      delete $c->session->{TIDYCLUB_SESSION_KEY()};
+      delete $c->session->{TIDYHQ_SESSION_KEY()};
       $tc = {};
     }
 
     return !!grep { $group = $_ } @{$tc->{groups}};
   });
 
-  $app->helper('tidyclub.user' => sub {
-    return shift->session(TIDYCLUB_SESSION_KEY) // {};
+  $app->helper('tidyhq.user' => sub {
+    return shift->session(TIDYHQ_SESSION_KEY) // {};
   });
 
-  $app->helper('tidyclub.user.groups' => sub {
+  $app->helper('tidyhq.user.groups' => sub {
     my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
     my $c = shift;
     my $args = @_%2 ? shift : {@_};
 
-    my $tc = $c->session(TIDYCLUB_SESSIONKEY());
+    my $tc = $c->session(TIDYHQ_SESSIONKEY());
 
     if ($cb) {
       return $c->delay(
@@ -95,7 +95,7 @@ sub register {
     }
   });
 
-  $app->helper('tidyclub.login' => sub {
+  $app->helper('tidyhq.login' => sub {
     my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
     my $c = shift;
     my $args = @_%2 ? shift : {@_};
@@ -134,7 +134,7 @@ sub register {
           $data->{token}        = $delay->data('token');
           $data->{token_expiry} = gmtime->epoch + 7200; # 2 hour token life
 
-          $delay->data(tidyclub => $data);
+          $delay->data(tidyhq => $data);
 
           my $path = sprintf '/api/v1/contacts/%d/groups', $data->{id};
 
@@ -146,11 +146,11 @@ sub register {
 
           # check we are in the group label "Members"
           if (!$err && !!grep { $_->{label} eq 'Members' } @{$data}) {
-            my $tc = $delay->data('tidyclub');
+            my $tc = $delay->data('tidyhq');
 
             # add groups to data and store all in session
             $tc->{groups} = [map { lc $_->{label} } @{$data}];
-            $c->session(TIDYCLUB_SESSION_KEY() => $tc);
+            $c->session(TIDYHQ_SESSION_KEY() => $tc);
           }
 
           $c->$cb($err, $data);
@@ -167,8 +167,8 @@ sub register {
     }
   });
 
-  $app->helper('tidyclub.logout' => sub {
-    delete shift->session->{TIDYCLUB_SESSION_KEY()};
+  $app->helper('tidyhq.logout' => sub {
+    delete shift->session->{TIDYHQ_SESSION_KEY()};
   });
 }
 

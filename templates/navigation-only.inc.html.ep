@@ -18,7 +18,7 @@
             <li class="nav-item <%= 'active' if ($active eq 'blog') %>"><a href="/blog">Blog</a></li>
             <li class="nav-item <%= 'active' if ($active eq 'workshops') %>"><a href="/workshops">Workshops</a></li><!--//dropdown-->
             <li class="nav-item <%= 'active' if ($active eq 'sponsors') %>"><a href="/sponsors">Sponsors</a></li>
-% if ($c->tidyclub->is_authenticated) {
+% if ($c->tidyhq->is_authenticated) {
             <li class="nav-item <%= 'active' if ($active eq 'members') %>"><a href="/members">Members</a></li>
 % } else {
             <li class="nav-item <%= 'active' if ($active eq 'join') %>"><a href="/join">Join</a></li>
@@ -26,7 +26,7 @@
             <li class="nav-item <%= 'active' if ($active eq 'contact') %> last"><a href="/contact">Contact</a></li>
           </ul><!--//nav-->
           <form class="navbar-form navbar-left" role="search">
-% if ($c->tidyclub->is_authenticated) {
+% if ($c->tidyhq->is_authenticated) {
             <a href="<%= url_for('logout')->query(rt => url_for('current')) %>" class="btn btn-cta btn-cta-secondary"><i class="fa fa-sign-out"></i></a>
 % } else {
             <a href="#login" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-sign-in"></i></a>
