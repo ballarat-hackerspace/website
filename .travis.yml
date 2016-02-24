@@ -4,14 +4,20 @@ services:
 before_install:
 - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" hub.srw.io
 install:
-- docker build -t hub.srw.io/bhack-website .
+- docker build -t hub.srw.io/bhack-website -f Dockerfile.git .
 - docker run -d -p 127.0.0.1:3000:3000 hub.srw.io/bhack-website
 - docker ps -a
 before_script:
 - sleep 15
 script:
-- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/images/bhack-logo-title-black.svg)
-  -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/images/bhack-logo-title-black.svg) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/blog) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/contact) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/workshops) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/about) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/sponsors) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/join) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/not_found) -eq 302 ]]'
 after_success:
 - docker push hub.srw.io/bhack-website
 notifications:
