@@ -22,8 +22,7 @@
 
         <ul>
             <li><a href="#3dprinting">Build your own 3D Printer Workshop</a></li>
-            <li><a href="#raspberrypi">Raspberry PI Workshop</a> <sup>(<i class="fa fa-briefcase"></i> currently being
-                developed)</sup></li>
+            <li><a href="#raspberrypi">Raspberry PI Workshop</a></li>
             <li><a href="#multicopter">Multicopter Workshop</a> <sup>(<i class="fa fa-briefcase"></i> currently being
                 developed)</sup></li>
         </ul>
@@ -229,7 +228,7 @@
                         </ol>
 
                         <a href="https://ballarathackerspace.tidyhq.com/events/4544-raspberry-pi-3-workshop"
-                           class="btn btn-lg btn-cta btn-cta-secondary">Enrol in our upcoming course - Sat, 9 Apr 16</a>
+                           class="btn btn-lg btn-cta btn-cta-secondary">Enrol in our upcoming course - Wed, May 4 16</a>
                         <!-- <a href="https://ballarathackerspace.tidyhq.com/public/registration/new" class="btn btn-lg btn-cta btn-cta-secondary">Register to receive news about our next 3D printer workshop</a> -->
                     </div>
                 </div>
