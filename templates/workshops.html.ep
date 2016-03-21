@@ -39,24 +39,17 @@
             <div class="col-sm-6 col-md-8">
                 <h3>Why Build Your Own?</h3>
 
-                <p>3D Printers allow you to print objects, allowing you to design and build new custom built
-                    objects.</p>
+                <p>3D Printers allow you to print objects, allowing you to design and build new custom built objects.</p>
 
-                <p>You can print your own tools and toys, learn to work with open source hardware, improve upon publicly
-                    available designs, and learn about one of the biggest trends for future development.</p>
+                <p>You can print your own tools and toys, learn to work with open source hardware, improve upon publicly available designs, and learn about one of the biggest trends for future development.</p>
 
-                <p>There are over 100,000 items you can print right now on design-sharing website Thingiverse – all free
-                    and able to be customised!</p>
+                <p>There are over 100,000 items you can print right now on design-sharing website Thingiverse – all free and able to be customised!</p>
 
-                <p>If you have ever wanted to get into 3D printing, now is your chance. The Ballarat Hackerspace is
-                    presenting a workshop, with all of the necessary components, for you to build your own 3D
-                    printer.</p>
+                <p>If you have ever wanted to get into 3D printing, now is your chance. The Ballarat Hackerspace is presenting a workshop, with all of the necessary components, for you to build your own 3D printer.</p>
 
-                <p>Our last workshop was a great success and we will defintely be repeating it, just register your
-                    interest below to get updates directly to your inbox</p>
+                <p>Our last workshop was a great success and we will defintely be repeating it, just register your interest below to get updates directly to your inbox</p>
 
-                <a href="https://ballarathackerspace.tidyhq.com/public/events/4195-3d-printing-workshop-build-your-own"
-                   class="btn btn-lg btn-cta btn-cta-secondary">Enrol in our upcoming course - Sat, 9 Apr 16</a>
+                <a href="https://ballarathackerspace.tidyhq.com/public/events/4195-3d-printing-workshop-build-your-own" class="btn btn-lg btn-cta btn-cta-secondary">Enrol in our upcoming course - Sat, 9 Apr 16</a>
                 <!-- <a href="https://ballarathackerspace.tidyhq.com/public/registration/new" class="btn btn-lg btn-cta btn-cta-secondary">Register to receive news about our next 3D printer workshop</a> -->
             </div>
             <div class="col-sm-6 col-md-4">
@@ -65,15 +58,10 @@
         </div>
         <h4>Why build one with your own hands, in our workshop?</h4>
         <ul>
-            <li>People who assemble 3D Printers have much greater printing success vs people who buy complete units.
-            </li>
-            <li>You can understand the inner workings of the machines, allowing for easier debugging and
-                customisation.
-            </li>
+            <li>People who assemble 3D Printers have much greater printing success vs people who buy complete units.</li>
+            <li>You can understand the inner workings of the machines, allowing for easier debugging and customisation.</li>
             <li>You’ll learn about Open Hardware and Open Software, and where to find help.</li>
-            <li>You can make it the way YOU want it – change the hardware, re-write the software, etc. It will never be
-                obsolete.
-            </li>
+            <li>You can make it the way YOU want it – change the hardware, re-write the software, etc. It will never be obsolete.</li>
         </ul>
 
         <h4>Why the Prusa i3 Printer?</h4>
@@ -81,7 +69,7 @@
             <li>It’s one of the easiest to assemble, using 80% fewer parts than prior versions.</li>
             <li>It’s open source – upgrades / improved parts for it can (and are) made for it by anyone.</li>
             <li>It’s easily portable and prints great!</li>
-            <li>The build area is 200mm x 200mm x 180mm – bigger than a lot of other printers.</li>
+            <li>The build area is 200mm x 200mm x 180mm &mdash; bigger than a lot of other printers.</li>
         </ul>
 
         <h3>What’s included?</h3>
@@ -91,49 +79,29 @@
             <li>Hardware (rods, bearings, rails, etc), complete electronics and heated build platform.</li>
             <li>Assembly Manual (digital video), and tools for maintaining your printer.</li>
             <li>Basic supplies to get you started in printing (plastic, blue tape, etc)</li>
-            <li>A USB flash drive with the software you’ll need, a PDF copy of the manual, and sample files to print
-            </li>
+            <li>A USB flash drive with the software you’ll need, a PDF copy of the manual, and sample files to print</li>
             <li>6 months membership to the Ballarat Hackerspace (existing members will be credited)</li>
         </ul>
 
-        <p>We’re building printers the way we like them and not using the cheapest available pieces like some eBay kits
-            are. The printer is an open source design that allows you to easily modify and upgrade to your personal
-            preference.</p>
+        <p>We’re building printers the way we like them and not using the cheapest available pieces like some eBay kits are. The printer is an open source design that allows you to easily modify and upgrade to your personal preference.</p>
 
         <h3>What’s the Cost:</h3>
-
         <p>The total cost for the course is $900, discounted to $750 for members.</p>
-
-        <p>There is a minimum deposit of $256 to secure your position in the workshop which is refundable up to 7 days
-            before commencement of the first workshop session.</p>
+        <p>There is a minimum deposit of $256 to secure your position in the workshop which is refundable up to 7 days before commencement of the first workshop session.</p>
 
         <h3>Class Size:</h3>
-
         <p>Classes are currently limited to 6 printers at a time.</p>
-
-        <p>Groups of two people are fine to work on each printer if necessary, but no larger due to space
-            constraints.</p>
+        <p>Groups of two people are fine to work on each printer if necessary, but no larger due to space constraints.</p>
 
         <h3>Running Time:</h3>
-
-        <p>The dedicated assembly classes will run on Wednesday nights from 6pm to 8.30pm. Granted that you receive
-            membership to the Hackerspace for 6 months means that you use any other open times to complete your printer
-            sooner. Total assembly time is approximately 12-16 hours (4 or 5 dedicated workshop sessions), you may
-            finish sooner if you forge ahead.</p>
+        <p>The dedicated assembly classes will run on Wednesday nights from 6pm to 8.30pm. Granted that you receive membership to the Hackerspace for 6 months means that you use any other open times to complete your printer sooner. Total assembly time is approximately 12-16 hours (4 or 5 dedicated workshop sessions), you may finish sooner if you forge ahead.</p>
 
         <h3>Prerequisites:</h3>
-
-        <p>All participants are encouraged to bring a laptop if they own one so that they can install the software and
-            test it. If you don’t have a laptop that’s fine, you’ll be able to bring the software home and install it,
-            and we’ll use one of our laptops to test it in class.</p>
-
+        <p>All participants are encouraged to bring a laptop if they own one so that they can install the software and test it. If you don’t have a laptop that’s fine, you’ll be able to bring the software home and install it, and we’ll use one of our laptops to test it in class.</p>
         <p>Assembling these printers requires use of basic tools and software. All tools are provided.</p>
 
         <h4>Important Note:</h4>
-
-        <p>Working with some of these tools (soldering irons, hobby knives, etc) presents a limited opportunity for
-            injury. Participants will be shown how to complete the build safely, but should know that they’re
-            responsible for their own safety.</p>
+        <p>Working with some of these tools (soldering irons, hobby knives, etc) presents a limited opportunity for injury. Participants will be shown how to complete the build safely, but should know that they’re responsible for their own safety.</p>
     </div><!--//container-->
 
     <section id="details" class="section section-highlight">
@@ -145,12 +113,12 @@
                         <li>Print volume (X, Y, Z): 200mm x 200mm x 180mm</li>
                         <li>Z Axis Positioning Accuracy: 0.004mm</li>
                         <li>XY Axis Positioning Accuracy: 0.012mm</li>
-                        <li>The Layer Thickness: 0.1 mm-0.4mm</li>
+                        <li>The Layer Thickness: 0.1mm-0.4mm</li>
                         <li>Layer Resolution: 100 microns</li>
                         <li>Printing Filament: ABS, PLA</li>
                         <li>Filament Diameter: 1.75mm</li>
-                        <li>Nozzle Diameter: 0.4 mm</li>
-                        <li>Print Speed: 40 - 100 mm/s</li>
+                        <li>Nozzle Diameter: 0.4mm</li>
+                        <li>Print Speed: 40-100mm/s</li>
                         <li>Print Plate Size: 213*200mm</li>
                         <li>Max heated bed temperature: 110 deg C(adjustable)</li>
                         <li>Max extruder temperature: about 240 deg C</li>
@@ -173,73 +141,45 @@
 <hr noshade>
 
 <section id="raspberrypi" class="section">
-    <div class="container">
-        <h2>Raspberry Pi 3 Workshop</h2>
+  <div class="container">
+    <h2>Raspberry Pi 3 Workshop</h2>
+    <div class="row">
+      <div class="col-sm-6">
+        <h3>An Introduction To Hacking</h3>
 
-        <div class="row">
-            <div class="col-sm-6 col-md-8">
-                <div class="row">
-                    <div class="col-sm-6 col-md-8">
-                        <h3>An Introduction To Hacking</h3>
+        <p>Raspberry Pi is a credit card-sized computer that plugs into your TV and a keyboard. It can be used as a standalone computer, in electronics projects, games, and can also play HD video as a media center. In this workshop, you'll learn the details about what exactly the Raspberry Pi is, what hardware and software are included, how to get one up and running, how to interact with the Linux command line interface, how to write your first program for it, and how to get it to interact with a web service on the Internet.</p>
+        <p>Whether you're a software or hardware developer, maker, product manager, designer, technologist, or entrepreneur, this class will be incredibly useful to those interested in learning more about this amazing hardware.</p>
+      </div>
 
-                        <p>Raspberry Pi is a credit card-sized computer that plugs into your TV and a keyboard. It can
-                            be used as a standalone computer, in electronics projects, games, and can also play HD video
-                            as a media center. In this workshop, you'll learn the details about what exactly the
-                            Raspberry Pi is, what hardware and software are included, how to get one up and running, how
-                            to interact with the Linux command line interface, how to write your first program for it,
-                            and how to get it to interact with a web service on the Internet.</p>
-
-                        <p>Whether you're a software or hardware developer, maker, product manager, designer,
-                            technologist, or entrepreneur, this class will be incredibly useful to those interested in
-                            learning more about this amazing hardware.</p>
-
-                        <p>This four week workshop, aimed at the novice hacker, covers topics including:</p>
-                        <ul>
-                            <li>Programming with Python</li>
-                            <li>Connecting the Pi to the outside world</li>
-                            <li>Controlling circuits with code</li>
-                            <li>Temperature sensing</li>
-                            <li>Taking photos and videos automatically</li>
-                        </ul>
-                        <p>The workshop is project based and each week, we will do a two hour session, the first hour
-                            guiding you through some new concepts, and the second hour more focused on exploring and
-                            building new things towards the project goals - temperature monitoring, an alarm system and
-                            your first robot.</p>
-
-                        <h3>What's Included?</h3>
-
-                        <p>Participants in the course will take home their own Raspberry Pi 3 and all the circuitry
-                            needed to develop these projects (That's more than $120 worth).</p>
-
-                        <p>You'll also get a free month's membership to the hackerspace, allowing you to come in and ask
-                            more questions and use our tools.</p>
-
-                        <p>Click here to sign up today for the course, starting April Xth.</p>
-
-                        <p>Note: If you already have a Raspberry Pi (and you don't want us to get you another one),
-                            please make sure to select that option in the tickets.</p>
-
-                        <h3>What's the Cost?</h3>
-
-                        <p>There are two options for participating in the course:</p>
-                        <ol>
-                            <li>$219 + GST: 4 week course, Raspberry Pi 3, all materials to make the circuits</li>
-                            <li>$149 + GST As above, except you bring your own Raspberry Pi (any model should work)</li>
-                        </ol>
-
-                        <a href="https://ballarathackerspace.tidyhq.com/public/events/4544-raspberry-pi-3-workshop"
-                           class="btn btn-lg btn-cta btn-cta-secondary">Enrol in our upcoming course - Wed, May 4 16</a>
-                        <!-- <a href="https://ballarathackerspace.tidyhq.com/public/registration/new" class="btn btn-lg btn-cta btn-cta-secondary">Register to receive news about our next 3D printer workshop</a> -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-6">
-                <img class="img-responsive" title="Raspberry PI"
-                     src="/images/workshops/raspberry-pi2-model-b-1gb-sm.jpg">
-            </div>
-        </div>
+      <div class="col-sm-6">
+        <img class="img-responsive" title="Raspberry PI" src="/images/workshops/raspberry-pi2-model-b-1gb-sm.jpg">
+      </div>
     </div>
+    <p>This four week workshop, aimed at the novice hacker, covers topics including:</p>
+    <ul>
+      <li>Programming with Python</li>
+      <li>Connecting the Pi to the outside world</li>
+      <li>Controlling circuits with code</li>
+      <li>Temperature sensing</li>
+      <li>Taking photos and videos automatically</li>
+    </ul>
+    <p>The workshop is project based and each week, we will do a two hour session, the first hour guiding you through some new concepts, and the second hour more focused on exploring and building new things towards the project goals - temperature monitoring, an alarm system and your first robot.</p>
+
+    <h3>What's Included?</h3>
+    <p>Participants in the course will take home their own Raspberry Pi 3 and all the circuitry needed to develop these projects (That's more than $120 worth).</p> 
+    <p>You'll also get a free month's membership to the hackerspace, allowing you to come in and ask more questions and use our tools.</p>
+    <p>Note: If you already have a Raspberry Pi (and you don't want us to get you another one), please make sure to select that option in the tickets.</p>
+
+    <h3>What's the Cost?</h3>
+    <p>There are two options for participating in the course:</p>
+    <ol>
+      <li>$219 + GST: 4 week course, Raspberry Pi 3, all materials to make the circuits</li>
+      <li>$149 + GST As above, except you bring your own Raspberry Pi (any model should work)</li>
+    </ol>
+
+    <a href="https://ballarathackerspace.tidyhq.com/public/events/4544-raspberry-pi-3-workshop" class="btn btn-lg btn-cta btn-cta-secondary">Enrol in our upcoming course - Wed, 4 May 16</a>
+    <!-- <a href="https://ballarathackerspace.tidyhq.com/public/registration/new" class="btn btn-lg btn-cta btn-cta-secondary">Register to receive news about our next 3D printer workshop</a> -->
+  </div>
 </section>
 
 <hr noshade>
