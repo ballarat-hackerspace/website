@@ -7,7 +7,7 @@
   <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
   <!-- <meta http-equiv="refresh" content="30"> -->
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,800,700' rel='stylesheet'>
+  <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,800,700' rel='stylesheet'>
   <style>
     * { color: #fff; font-family: 'Open Sans', sans-serif; }
     body { background-color: #000; background-image: url('/images/boiler/steam.gif'); background-repeat: no-repeat; overflow: hidden; }
