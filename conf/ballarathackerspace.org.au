@@ -36,9 +36,46 @@ server {
     proxy_pass http://192.168.7.6;
     proxy_set_header Host $host;
   }
-
   location = /webcam.jpg {
     proxy_pass http://192.168.7.6/jpg/image.jpg;
+    proxy_hide_header Cache-Control;
+    proxy_hide_header Expires;
+    proxy_hide_header Pragma;
+    expires 15s;
+  }
+
+  location ~ /linksys01(.+).jpg {
+    rewrite /linksys01(.+).jpg /img/snapshot.cgi?id=$1 break;
+    proxy_cache WEBCAM;
+    proxy_connect_timeout 10s;
+    proxy_cache_use_stale error timeout invalid_header updating;
+    proxy_cache_valid 14d;
+    proxy_ignore_headers Cache-Control Expires;
+    proxy_cache_lock on;
+    proxy_pass http://192.168.7.17;
+    proxy_set_header Host $host;
+  }
+  location = /linksys01.jpg {
+    proxy_pass http://192.168.7.17/img/snapshot.cgi;
+    proxy_hide_header Cache-Control;
+    proxy_hide_header Expires;
+    proxy_hide_header Pragma;
+    expires 15s;
+  }
+
+  location ~ /linksys02(.+).jpg {
+    rewrite /linksys02(.+).jpg /img/snapshot.cgi?id=$1 break;
+    proxy_cache WEBCAM;
+    proxy_connect_timeout 10s;
+    proxy_cache_use_stale error timeout invalid_header updating;
+    proxy_cache_valid 14d;
+    proxy_ignore_headers Cache-Control Expires;
+    proxy_cache_lock on;
+    proxy_pass http://192.168.7.18;
+    proxy_set_header Host $host;
+  }
+  location = /linksys02.jpg {
+    proxy_pass http://192.168.7.18/img/snapshot.cgi;
     proxy_hide_header Cache-Control;
     proxy_hide_header Expires;
     proxy_hide_header Pragma;
