@@ -23,8 +23,7 @@
         <ul>
             <li><a href="#3dprinting">Build your own 3D Printer Workshop</a></li>
             <li><a href="#raspberrypi">Raspberry PI Workshop</a></li>
-            <li><a href="#multicopter">Multicopter Workshop</a> <sup>(<i class="fa fa-briefcase"></i> currently being
-                developed)</sup></li>
+            <li><a href="#multicopter">Multicopter Workshop</a> <sup>(<i class="fa fa-briefcase"></i> currently being developed)</sup></li>
         </ul>
     </div>
 </section>
@@ -40,17 +39,12 @@
                 <h3>Why Build Your Own?</h3>
 
                 <p>3D Printers allow you to print objects, allowing you to design and build new custom built objects.</p>
-
                 <p>You can print your own tools and toys, learn to work with open source hardware, improve upon publicly available designs, and learn about one of the biggest trends for future development.</p>
-
                 <p>There are over 100,000 items you can print right now on design-sharing website Thingiverse – all free and able to be customised!</p>
-
                 <p>If you have ever wanted to get into 3D printing, now is your chance. The Ballarat Hackerspace is presenting a workshop, with all of the necessary components, for you to build your own 3D printer.</p>
-
                 <p>Our last workshop was a great success and we will defintely be repeating it, just register your interest below to get updates directly to your inbox</p>
 
-                <a href="https://ballarathackerspace.tidyhq.com/public/events/4195-3d-printing-workshop-build-your-own" class="btn btn-lg btn-cta btn-cta-secondary">Enrol in our upcoming course - Sat, 9 Apr 16</a>
-                <!-- <a href="https://ballarathackerspace.tidyhq.com/public/registration/new" class="btn btn-lg btn-cta btn-cta-secondary">Register to receive news about our next 3D printer workshop</a> -->
+                <a href="https://ballarathackerspace.tidyhq.com/public/registration/new" class="btn btn-lg btn-cta btn-cta-secondary">Register Interest</a>
             </div>
             <div class="col-sm-6 col-md-4">
                 <img class="img-responsive img-h3-padding" src="/images/workshops/prusa-i3-2.jpg"></img>
@@ -190,11 +184,8 @@
 
         <div class="row">
             <div class="col-sm-6 col-md-8">
-                <p>We are currently working on the details of this workshop, if you'd like to be one of the first to
-                    know more simply register below.</p>
-
-                <a href="https://ballarathackerspace.tidyhq.com/public/registration/new"
-                   class="btn btn-lg btn-cta btn-cta-secondary">Register interest</a>
+                <p>We are currently working on the details of this workshop, if you'd like to be one of the first to know more simply register below.</p>
+                <a href="https://ballarathackerspace.tidyhq.com/public/registration/new" class="btn btn-lg btn-cta btn-cta-secondary">Register Interest</a>
             </div>
             <div class="col-sm-6 col-md-4">
                 <img class="img-responsive" title="Nighthawk" src="/images/workshops/quadcopter-nighthawk.jpg">
