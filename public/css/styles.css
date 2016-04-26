@@ -1372,6 +1372,11 @@ li, li > p {
   margin-top: 0;
   margin-bottom: 15px;
 }
+
+.section .title.space {
+  margin-top: 64px;
+}
+
 .section .intro {
   max-width: 800px;
   margin: 0 auto;
