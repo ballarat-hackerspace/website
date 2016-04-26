@@ -64,6 +64,7 @@ get '/contact'    => 'contact';
 get '/join'       => 'join';
 get '/sponsors'   => 'sponsors';
 get '/workshops'  => 'workshops';
+get '/security'   => 'security';
 
 get '/blog' => sub {
   my $c = shift;

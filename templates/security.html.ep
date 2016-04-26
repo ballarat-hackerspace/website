@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <title>Security Cameras</title>
+
+  %= include 'header.inc'
+</head>
+
+<body>
+  <!-- header -->
+  %= include 'navigation-only.inc', active => ''
+
+  <!-- ******team Section****** -->
+  <section id="team" class="section">
+    <div class="container">
+      <h2 class="title text-center">Security Cameras</h2>
+
+      <div class="col-sm-6">
+        <img class="img-responsive img-h3-padding" src="/webcam.jpg">
+      </div>
+      <div class="col-sm-6">
+        <img class="img-responsive img-h3-padding" src="/linksys01.jpg">
+      </div>
+      <div class="col-sm-6">
+        <img class="img-responsive img-h3-padding" src="/linksys02.jpg">
+      </div>
+
+    </div><!--//row-->
+  </section><!--//job-->
+
+  <!-- footer -->
+  %= include 'footer.inc'
+
+  <!-- scripts -->
+  %= include 'scripts.inc'
+</body>
+</html>
