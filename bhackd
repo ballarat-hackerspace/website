@@ -59,6 +59,7 @@ helper 'is_gatekeeper' => sub {
 
 get '/'           => 'index';
 get '/about'      => 'about';
+get '/faq'      => 'faq';
 get '/conduct'    => 'conduct';
 get '/contact'    => 'contact';
 get '/join'       => 'join';
