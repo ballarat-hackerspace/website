@@ -22,7 +22,7 @@
 
         <ul>
             <li><a href="#3dprinting">Build your own 3D Printer Workshop</a></li>
-            <li><a href="#raspberrypi">Raspberry PI Workshop</a></li>
+            <li><a href="#raspberrypi">Raspberry PI Workshop (currently closed!)</a></li>
             <li><a href="#multicopter">Multicopter Workshop</a> <sup>(<i class="fa fa-briefcase"></i> currently being developed)</sup></li>
         </ul>
     </div>
@@ -137,6 +137,7 @@
 <section id="raspberrypi" class="section">
   <div class="container">
     <h2>Raspberry Pi 3 Workshop</h2>
+    <div class="alert alert-warning" role="alert">This workshop is currently running. <a href="https://ballarathackerspace.tidyhq.com/public/registration/new">Register here</a> if you'd like to be notified when it runs next.</div>
     <div class="row">
       <div class="col-sm-6">
         <h3>An Introduction To Hacking</h3>
@@ -171,8 +172,7 @@
       <li>$149 + GST As above, except you bring your own Raspberry Pi (any model should work)</li>
     </ol>
 
-    <a href="https://ballarathackerspace.tidyhq.com/public/events/4544-raspberry-pi-3-workshop" class="btn btn-lg btn-cta btn-cta-secondary">Enrol in our upcoming course - Wed, 4 May 16</a>
-    <!-- <a href="https://ballarathackerspace.tidyhq.com/public/registration/new" class="btn btn-lg btn-cta btn-cta-secondary">Register to receive news about our next 3D printer workshop</a> -->
+    <a href="https://ballarathackerspace.tidyhq.com/public/registration/new" class="btn btn-lg btn-cta btn-cta-secondary">Register to receive news about our next RPi3 workshop</a>
   </div>
 </section>
 
