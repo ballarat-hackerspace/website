@@ -22,8 +22,8 @@
 
         <ul>
             <li><a href="#3dprinting">Build your own 3D Printer Workshop</a></li>
-            <li><a href="#raspberrypi">Raspberry PI Workshop (currently closed!)</a></li>
-            <li><a href="#multicopter">Multicopter Workshop</a> <sup>(<i class="fa fa-briefcase"></i> currently being developed)</sup></li>
+            <li><a href="#raspberrypi">Raspberry PI Workshop</a> <span>(<i class="fa fa-hourglass-half"></i> in session, currently closed!)</span></li>
+            <li><a href="#multicopter">Multicopter Workshop</a> <span>(<i class="fa fa-briefcase"></i> currently being developed)</span></li>
         </ul>
     </div>
 </section>
