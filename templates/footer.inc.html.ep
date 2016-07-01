@@ -8,14 +8,19 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-4 text-center">
+          <div class="col-sm-6 text-center">
             <a href="https://www.eurekative.com.au"><img src="/images/sponsors/logo-mono-eurekative.png"></img></a>
           </div>
-          <div class="col-sm-4 text-center">
+          <div class="col-sm-6 text-center">
             <a href="http://www.lateralplains.com"><img src="/images/sponsors/logo-mono-lateral-plains.png"></img></a>
           </div>
-          <div class="col-sm-4 text-center">
+        </div>
+        <div class="row">
+          <div class="col-sm-6 text-center">
             <a href="http://www.sedadvisory.com.au/"><img src="/images/sponsors/logo-sed-dark-background.png"></img></a>
+          </div>
+          <div class="col-sm-6 text-center">
+            <a href="http://www.datapipeline.com.au/"><img src="images/sponsors/logo-datapipeline-black.svg" height="84px"></img></a>
           </div>
         </div>
       </div>
