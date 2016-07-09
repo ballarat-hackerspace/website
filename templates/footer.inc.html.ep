@@ -9,16 +9,17 @@
         </div>
         <div class="row">
           <div class="col-sm-3 text-center">
-            <a href="https://www.eurekative.com.au"><img class="sponsor-logo" src="/images/sponsors/logo-mono-eurekative.png"></img></a>
+            <!-- Don't call these things sp*ns*r images or l*g*s -- adblockers will block it -->
+            <a href="https://www.eurekative.com.au"><img class="footer-image" src="/images/sponsors/logo-mono-eurekative.png"></img></a>
           </div>
           <div class="col-sm-3 text-center">
-            <a href="http://www.lateralplains.com"><img class="sponsor-logo" src="/images/sponsors/logo-mono-lateral-plains.png"></img></a>
+            <a href="http://www.lateralplains.com"><img class="footer-image" src="/images/sponsors/logo-mono-lateral-plains.png"></img></a>
           </div>
           <div class="col-sm-3 text-center">
-            <a href="http://www.sedadvisory.com.au/"><img class="sponsor-logo" src="/images/sponsors/logo-sed-dark-background.png"></img></a>
+            <a href="http://www.sedadvisory.com.au/"><img class="footer-image" src="/images/sponsors/logo-sed-dark-background.png"></img></a>
           </div>
           <div class="col-sm-3 text-center">
-            <a href="http://www.datapipeline.com.au/"><img class="sponsor-logo" src="images/sponsors/logo-datapipeline-black.svg"></img></a>
+            <a href="http://www.datapipeline.com.au/"><img class="footer-image" src="images/sponsors/logo-datapipeline-black.svg"></img></a>
           </div>
         </div>
       </div>
