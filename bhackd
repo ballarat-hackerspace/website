@@ -23,6 +23,7 @@ use Mojolicious::Lite;
 use Mojo::UserAgent;
 use Mojo::Util qw(dumper);
 use NetAddr::IP;
+use Text::MultiMarkdown qw(markdown);
 use Time::Piece;
 
 
@@ -59,7 +60,7 @@ helper 'is_gatekeeper' => sub {
 
 get '/'           => 'index';
 get '/about'      => 'about';
-get '/faq'      => 'faq';
+get '/faq'        => 'faq';
 get '/conduct'    => 'conduct';
 get '/contact'    => 'contact';
 get '/join'       => 'join';
@@ -112,6 +113,16 @@ any '/logout' => sub {
   my $url = $c->param('rt') // 'index';
 
   return $c->redirect_to($url);
+};
+
+get '/modelrules' => sub {
+  my $c = shift;
+
+  #my $ua = Mojo::UserAgent->new;
+  #my $tx = $ua->get('https://raw.githubusercontent.com/ballarat-hackerspace/association/master/rules-of-the-association.md');
+  #$c->stash(rules_content => markdown($tx->res->body));
+
+  $c->render('modelrules');
 };
 
 # members only

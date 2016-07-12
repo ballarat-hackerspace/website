@@ -91,8 +91,8 @@
   <section id="association" class="section">
     <div class="container">
       <h2 class="title text-center">The Association</h2>
-      <p>The Ballarat Hackerspace is a volunter based, non-profit incorporated association (in Victoria) and follows the Rules of Association that it was founded with.</p>
-      <p>As part of this, we elect a Committee as chartered in the rules. The current committee were elected on Saturday, 27th of June, 2015.</p>
+      <p>The Ballarat Hackerspace is a volunter based, non-profit incorporated association (in Victoria) and follows the <a href="<%= url_for('modelrules') %>">Rules of Association</a> that it was founded with.</p>
+      <p>As part of this, we elect a Committee as chartered in the rules. The current committee were elected on Saturday, 9th of July, 2015.</p>
 
       <table class="table">
         <thead>
@@ -116,7 +116,15 @@
           </tr>
           <tr>
             <td>Official Member</td>
+            <td>Andrew Dunn</td>
+          </tr>
+          <tr>
+            <td>Official Member</td>
             <td>Robert Layton</td>
+          </tr>
+          <tr>
+            <td>Official Member</td>
+            <td>Denis Sheehan</td>
           </tr>
         </tbody>
       </table>
