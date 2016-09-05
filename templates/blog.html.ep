@@ -15,7 +15,7 @@
   <!-- photos section -->
   <section id="team" class="section">
     <div class="container">
-      <h2 class="title text-center">Blog</h2>
+    url_for  <h2 class="title text-center">Blog</h2>
 % if ($tags) {
       <div class="row">
         <div class="col-sm-12">Filtering: <a href="<%= url_for('current')->query([tags => undef]) %>"><i class="fa fa-times"></i></a> <%= $tags %></div>
