@@ -35,7 +35,7 @@ Work begun on each project Saturday morning, with a large desk holding us all in
 
 For anyone reading this thinking of next year? Don't forget about your video! It is the second most important part of your project, and your chance to get on your soapbox and tell the world what you learned with your chosen datasets or projects. It can be easy to forget about, as editing a video can be an art in itself. It involves telling the audience what you've done, showing and inspiring them. Govhack have been wise in saying that you need to spend most of Sunday in doing this, and it is not something to take lightly - You will likely be tired after a long weekend of collaboration and hacking data.
 
-The projects have been submitted, and we will hear results of them after the judges labor through each project. A nice suprise was the Spirit of Govhack award.  Given to those that show the best "hacker" ethos. For Ballarat, This was split between two people. 
+The projects have been submitted, and we will hear results of them after the judges labor through each project. A nice surprise was the Spirit of Govhack award.  Given to those that show the best "hacker" ethos. For Ballarat, This was split between two people.
 
 The first being a duo team called Rstar Team - Ye Tian and Wenyan Ren. In Australia for less than a year, with Wenyan 7 Months in with their first child - congratulations and strong dedication to participate! 
 

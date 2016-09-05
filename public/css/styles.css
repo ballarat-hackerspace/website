@@ -1776,7 +1776,20 @@ li, li > p {
 .blueimp-gallery {
   background: rgba(16, 19, 23, 0.9);
 }
-/* ======= Footer ======= */
+
+
+/*
+** SPONSORS
+*/
+#sponsors .sponsor-logo,
+#footer-bar .footer-image {
+  height: 84px;
+  margin: 16px 0;
+}
+
+/*
+** FOOTER
+*/
 .footer .footer-content {
   background: #333;
   color: rgba(255, 255, 255, 0.5);
@@ -1838,6 +1851,12 @@ li, li > p {
   left: 15px;
   top: 0;
 }
+
+.footer .footer-image {
+  height: 42px;
+  margin: 8px 0;
+}
+
 .footer .bottom-bar {
   background: #222;
   color: rgba(255, 255, 255, 0.5);

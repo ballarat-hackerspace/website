@@ -57,12 +57,10 @@
   <!-- authenticate -->
   %= include 'authenticate.inc'
 
-  <!-- masonry -->
+  <!-- masonry layout -->
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.js"></script>
-
   <script>
-
     $(document).ready(function() {
       var container = $('.masonry-container');
       container.imagesLoaded(function() {
