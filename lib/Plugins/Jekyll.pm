@@ -99,7 +99,7 @@ sub _cache_posts {
 
     # filter only valid filenames and sort to reverse chronological order
     @files = sort {$b cmp $a}
-               grep { /^\d{4}-\d{2}-\d{2}-[^\.]+\.\w+/ } @files;
+               grep { /^\d{4}-\d{2}-\d{2}-[^\.]+\.[A-Za-z]+/ } @files;
 
     # parse files and filter valid parses only
     @files = grep { $self->_parse_file($_, content => 0)->{status} == 200 } @files;
