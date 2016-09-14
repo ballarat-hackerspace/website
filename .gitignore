@@ -4,3 +4,6 @@ bhackd.conf
 # don't store temp files
 blog/*~
 blog/.*
+
+# Don't add JetBrain's folder
+.idea/
