@@ -27,6 +27,7 @@ our $VERSION = '0.1';
 
 has 'db'  => sub { return DBI->connect(shift->dsn, '', ''); };
 has 'dsn';
+has 'uuid';
 
 sub register {
   my ($self, $app, $config) = @_;
@@ -52,7 +53,8 @@ sub register {
     my $c = shift;
     my $db = $self->db;
 
-    my $uuid = $c->signed_cookie('bhack.uuid');
+    my $uuid = $c->device->uuid;
+
     my $sth = $db->prepare('SELECT * FROM devices WHERE uuid=?');
     my $devices = !!($sth->execute($uuid)) ? $sth->fetchall_arrayref({}) : undef;
 
@@ -93,17 +95,26 @@ sub register {
     my $c = shift;
 
     # ensure we've set a uuid cookie from here on out
-    my $uuid = $c->signed_cookie('bhack.uuid');
+    my $uuid = $self->uuid;
+
+    # fetch from the cookie
+    unless($uuid) {
+      $uuid = $c->signed_cookie('bhack.uuid');
+      $self->uuid($uuid);
+    }
 
     # generate uuid if not set
     unless($uuid) {
       $uuid = sha1_sum sprintf '%s-device-%s', rand, gmtime->epoch;
-      $c->signed_cookie(
-        'bhack.uuid' => $uuid, {
-          expires => 2000000000,
-          secure  => 1
-        }
-      );
+      $self->uuid($uuid);
+
+      my $options = {
+        expires  => 2000000000,
+        httponly => 1,
+        path     => '/',
+      };
+
+      $c->signed_cookie('bhack.uuid', $uuid, $options);
     }
 
     return $uuid;

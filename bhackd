@@ -142,7 +142,10 @@ group {
   # device management
   get '/devices' => sub {
     my $c = shift;
-    $c->stash(devices => $c->device->find);
+    $c->stash(
+      uuid    => $c->device->uuid,
+      devices => $c->device->find
+    );
     $c->render('members-devices');
   } => 'members-devices';
 

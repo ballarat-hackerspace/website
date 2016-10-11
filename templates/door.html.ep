@@ -40,7 +40,7 @@
     .btn-big {
       font-size: 64px;
       margin-bottom: 16px;
-      padding: 16px;
+      padding: 32px 16px;
     }
 
     .dim {

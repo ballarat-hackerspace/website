@@ -18,13 +18,16 @@
       <h2 class="title text-center">Members <i class="fa fa-fw fa-angle-right"></i> Devices</h2>
       <p>As a member you have privileged access to particular items on the network. To ensure the best experience whilst at the Ballarat Hackerspace please ensure you register your devices.</p>
 
-      <div class="text-right">
+      <div>
+        <span>Device UUID: <%= $uuid %></span>
+        <span class="pull-right">
 % if ($c->device->is_whitelisted) {
-        <a href="" class="btn btn-cta btn-cta-green" data-toggle="modal"><i class="fa fa-fw fa-check"></i> Device Registered</a>
+          <a href="" class="btn btn-cta btn-cta-green" data-toggle="modal"><i class="fa fa-fw fa-check"></i> Device Registered</a>
 % } else {
-        <a href="#device-add" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-fw fa-plus"></i> Register this Device</a>
+          <a href="#device-add" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-fw fa-plus"></i> Register this Device</a>
 
 % }
+        </span>
       </div>
 
       <div class="row">
