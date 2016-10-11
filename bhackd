@@ -42,7 +42,7 @@ helper 'is_local' => sub {
 
   for my $hop (split /[, ]/, $c->req->headers->header('X-Forwarded-For') // '') {
     my $ip = NetAddr::IP->new($hop);
-    return 1 if grep { $ip->within(NetAddr::IP->new($_)) } @{$c->app->config->{local}};
+    return 1 if $ip && grep { $ip->within(NetAddr::IP->new($_)) } @{$c->app->config->{local}};
   }
 
   return undef;
