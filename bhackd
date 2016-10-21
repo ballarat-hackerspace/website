@@ -20,8 +20,9 @@ use FindBin;
 use lib "$FindBin::Bin/lib";
 
 use Mojolicious::Lite;
+use Mojo::JSON qw(decode_json encode_json);
 use Mojo::UserAgent;
-use Mojo::Util qw(dumper);
+use Mojo::Util qw(b64_decode b64_encode dumper sha1_sum);
 use NetAddr::IP;
 use Text::MultiMarkdown qw(markdown);
 use Time::Piece;
@@ -49,13 +50,57 @@ helper 'is_local' => sub {
 };
 
 helper 'is_dooropener' => sub {
-  return 1 if shift->tidyhq->is_authenticated_group('workshop members');
-  return undef;
+  my $c = shift;
+  my $bhack = $c->stash('bhack');
+  return undef unless $c->tidyhq->has_active_membership({tidyhq => $bhack});
+  return undef unless $c->tidyhq->in_group('workshop members', {tidyhq => $bhack});
+
+  return 1;
 };
 
 helper 'is_gatekeeper' => sub {
-  return 1 if shift->tidyhq->is_authenticated_group('seeders');
-  return undef;
+  my $c = shift;
+  my $bhack = $c->stash('bhack');
+  return undef unless $c->tidyhq->has_active_membership({tidyhq => $bhack});
+  return undef unless $c->tidyhq->in_group('seeders', {tidyhq => $bhack});
+
+  return 1;
+};
+
+hook 'before_dispatch' => sub {
+  my $c = shift;
+
+  # default cookie value
+  my $bhack = {
+    uuid => sha1_sum sprintf('%s-device-%s', rand, gmtime->epoch)
+  };
+
+  # load bhack cookie
+  if (my $cookie = $c->signed_cookie('bhack')) {
+    $cookie =~ y/-/=/;
+    $bhack = decode_json b64_decode $cookie;
+  }
+
+  $c->stash(bhack => $bhack);
+};
+
+hook 'after_dispatch' => sub {
+  my $c = shift;
+
+  # save bhack cookie
+  my $bhack = $c->stash('bhack') // {};
+  $bhack->{timestamp} = gmtime->epoch;
+
+  my $cookie = b64_encode encode_json($bhack), '';
+  $cookie =~ y/=/-/;
+
+  my $options = {
+    expires  => 2000000000,
+    httponly => 1,
+    path     => '/',
+  };
+
+  $c->signed_cookie('bhack', $cookie, $options);
 };
 
 get '/'           => 'index';

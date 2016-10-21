@@ -20,7 +20,7 @@ use Mojo::Base 'Mojolicious::Plugin';
 
 use Carp 'croak';
 use DBI;
-use Mojo::Util qw(dumper sha1_sum);
+use Mojo::Util qw(dumper);
 use Time::Piece;
 
 our $VERSION = '0.1';
@@ -95,29 +95,12 @@ sub register {
     my $c = shift;
 
     # ensure we've set a uuid cookie from here on out
-    my $uuid = $self->uuid;
+    if (my $bhack = $c->stash('bhack')) {
+      return $bhack->{uuid};
 
-    # fetch from the cookie
-    unless($uuid) {
-      $uuid = $c->signed_cookie('bhack.uuid');
-      $self->uuid($uuid);
     }
 
-    # generate uuid if not set
-    unless($uuid) {
-      $uuid = sha1_sum sprintf '%s-device-%s', rand, gmtime->epoch;
-      $self->uuid($uuid);
-
-      my $options = {
-        expires  => 2000000000,
-        httponly => 1,
-        path     => '/',
-      };
-
-      $c->signed_cookie('bhack.uuid', $uuid, $options);
-    }
-
-    return $uuid;
+    return undef;
   });
 }
 

@@ -19,8 +19,9 @@ package Plugins::TidyHQ;
 use Mojo::Base 'Mojolicious::Plugin';
 
 use Carp 'croak';
+use Mojo::JSON qw(encode_json);
 use Mojo::UserAgent;
-use Mojo::Util qw(dumper);
+use Mojo::Util qw(b64_encode dumper);
 use Time::Piece;
 
 our $VERSION = '0.1';
@@ -36,34 +37,60 @@ sub register {
 
   my $url = Mojo::URL->new(sprintf 'https://%s.tidyhq.com/', $config->{organisation});
 
-  $app->helper('tidyhq.is_authenticated' => sub {
-    my $c = shift;
+  $app->helper('tidyhq.has_active_membership' => sub {
+    my ($c, $options) = @_;
 
-    my $tc = $c->session(TIDYHQ_SESSION_KEY) // {};
+    $options //= {};
+
+    my $tidyhq = $options->{tidyhq} // $c->session(TIDYHQ_SESSION_KEY) // {};
 
     # check token expiry
-    if ($tc->{token_expiry} && $tc->{token_expiry} <= gmtime->epoch) {
+    if ($tidyhq->{token_expiry} && $tidyhq->{token_expiry} <= gmtime->epoch) {
       delete $c->session->{TIDYHQ_SESSION_KEY()};
-      $tc = {};
+      $tidyhq = {};
     }
 
-    return $tc->{id};
+    my $now = gmtime;
+
+    for my $m ( @{$tidyhq->{memberships} // []} ) {
+      continue unless $m->{status} eq 'activated';
+      my $ed = Time::Piece->strptime($m->{end_date}, '%Y-%m-%d');
+      return 1 if ($ed - $now) > 0;
+    }
+
+    return 0;
   });
 
-  $app->helper('tidyhq.is_authenticated_group' => sub {
-    my ($c, $group) = @_;
+  $app->helper('tidyhq.in_group' => sub {
+    my ($c, $group, $options) = @_;
+
+    $options //= {};
 
     return undef unless $group;
 
-    my $tc = $c->session(TIDYHQ_SESSION_KEY) // {};
+    my $tidyhq = $options->{tidyhq} // $c->session(TIDYHQ_SESSION_KEY) // {};
 
     # check token expiry
-    if ($tc->{token_expiry} && $tc->{token_expiry} <= gmtime->epoch) {
+    if ($tidyhq->{token_expiry} && $tidyhq->{token_expiry} <= gmtime->epoch) {
       delete $c->session->{TIDYHQ_SESSION_KEY()};
-      $tc = {};
+      $tidyhq = {};
     }
 
-    return !!grep { $group = $_ } @{$tc->{groups}};
+    return !!grep { $_ eq $group } @{$tidyhq->{groups} // []};
+  });
+
+  $app->helper('tidyhq.is_authenticated' => sub {
+    my $c = shift;
+
+    my $tidyhq = $c->session(TIDYHQ_SESSION_KEY) // {};
+
+    # check token expiry
+    if ($tidyhq->{token_expiry} && $tidyhq->{token_expiry} <= gmtime->epoch) {
+      delete $c->session->{TIDYHQ_SESSION_KEY()};
+      $tidyhq = {};
+    }
+
+    return $tidyhq->{id};
   });
 
   $app->helper('tidyhq.user' => sub {
@@ -75,13 +102,13 @@ sub register {
     my $c = shift;
     my $args = @_%2 ? shift : {@_};
 
-    my $tc = $c->session(TIDYHQ_SESSIONKEY());
+    my $tidyhq = $c->session(TIDYHQ_SESSIONKEY());
 
     if ($cb) {
       return $c->delay(
         sub {
           my ($delay) = @_;
-          $self->_ua->get($url->path('/api/v1/contacts/me/groups') => {Authorization => "Bearer $tc->{token}"} => $delay->begin);
+          $self->_ua->get($url->path('/api/v1/contacts/me/groups') => {Authorization => "Bearer $tidyhq->{token}"} => $delay->begin);
         },
         sub {
           my ($delay, $tx) = @_;
@@ -138,22 +165,81 @@ sub register {
 
           my $path = sprintf '/api/v1/contacts/%d/groups', $data->{id};
 
-          $self->_ua->get($url->path($path) => {Authorization => "Bearer $data->{token}"} => $delay->begin);
+          $self->_ua->get($url->path($path) => {Authorization => "Bearer ".$delay->data('token')} => $delay->begin);
         },
         sub {
           my ($delay, $tx) = @_;
           my ($data, $err) = process_response($tx);
 
-          # check we are in the group label "Members"
-          if (!$err && !!grep { $_->{label} eq 'Members' } @{$data}) {
-            my $tc = $delay->data('tidyhq');
+          return $c->$cb($err, '') if $err;
 
-            # add groups to data and store all in session
-            $tc->{groups} = [map { lc $_->{label} } @{$data}];
-            $c->session(TIDYHQ_SESSION_KEY() => $tc);
+          if (!!grep { $_->{label} eq 'Members' } @{$data}) {
+            my $tidyhq = $delay->data('tidyhq');
+
+            $tidyhq->{groups} = [map { lc $_->{label} } @{$data}];
+            $delay->data(tidyhq => $tidyhq);
           }
 
-          $c->$cb($err, $data);
+          $self->_ua->get($url->path('/api/v1/membership_levels') => {Authorization => "Bearer ".$delay->data('token')} => $delay->begin);
+        },
+        sub {
+          my ($delay, $tx) = @_;
+          my ($data, $err) = process_response($tx);
+
+          return $c->$cb($err, '') if $err;
+
+          my $membership_levels = {};
+          map { $membership_levels->{$_->{id}} = lc $_->{name}} @{$data};
+          $delay->data(membership_levels => $membership_levels);
+
+          my $token  = $delay->data('token');
+          my $tidyhq = $delay->data('tidyhq');
+
+          my $path = sprintf '/api/v1/contacts/%d/memberships', $tidyhq->{id};
+
+          $self->_ua->get($url->path($path) => {Authorization => "Bearer ".$delay->data('token')} => $delay->begin);
+        },
+        sub {
+          my ($delay, $tx) = @_;
+          my ($data, $err) = process_response($tx);
+
+          my $tidyhq = $delay->data('tidyhq');
+
+          # check we are in the group label "Members"
+          if (!$err && !!@{$data}) {
+            my $membership_levels = $delay->data('membership_levels');
+            my $memberships = [];
+
+            for my $m (@{$data}) {
+              push @{$memberships}, {
+                end_date => $m->{end_date},
+                name     => $membership_levels->{$m->{membership_level_id}},
+                status   => $m->{state},
+              };
+            }
+
+            # add groups to data and store all in session
+            $tidyhq->{memberships} = $memberships;
+            $c->session(TIDYHQ_SESSION_KEY() => $tidyhq);
+
+            # store in bhack session
+            my $bhack = $c->stash('bhack');
+            my $bhack_tidyhq = {
+              email_address => $tidyhq->{email_address},
+              first_name    => $tidyhq->{first_name},
+              groups        => $tidyhq->{groups},
+              id            => $tidyhq->{id},
+              last_name     => $tidyhq->{last_name},
+              nick_name     => $tidyhq->{nick_name},
+              memberships   => $tidyhq->{memberships},
+            };
+
+            $bhack = {%{$bhack}, %{$bhack_tidyhq}};
+
+            $c->stash('bhack' => $bhack);
+          }
+
+          $c->$cb($err, $tidyhq);
         },
       );
     }
