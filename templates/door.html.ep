@@ -107,7 +107,7 @@
 
   <footer class="footer">
     <div class="bottom-bar">
-      <small class="copyright text-center">Ballarat Hackerspace</small>
+      <small class="copyright text-center">Ballarat Hackerspace - v3.0</small>
     </div>
   </footer>
 
@@ -116,7 +116,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i aria-hidden="true" class="fa fa-times"></i></button>
-          <h4 id="notice-title" class="modal-title">Ooops!</h4>
+          <h4 id="notice-title" class="modal-title"></h4>
         </div>
         <div class="modal-body">
           <p id="notice"></p>
@@ -138,20 +138,22 @@
 
     function alarm_enable() {
       $.ajax({
-        timeout: 5000,
+        timeout: 10000,
         dataType: 'json',
         method: 'GET',
         url: "/alarm/enable",
         success: function(data) {
           console.log(data);
-          $('#notice').html("Alarm/Motion detection enabled.");
-          $('#noticeModal .modal-header').removeClass('modal-header-error').addClass('modal-header-success');
+          $('#notice-title').html("AlarmBot");
+          $('#notice').html("Alarm and motion detection has been enabled.");
+          $('#noticeModal .modal-header').removeClass('modal-header-red').addClass('modal-header-green');
           $('#noticeModal').modal('show');
         },
         error: function(data) {
           console.log(data);
-          $('#noticeModal .modal-header').removeClass('modal-header-green').addClass('modal-header-red');
+          $('#notice-title').html("AlarmBot");
           $('#notice').html("Failed to enable alarm/motion detection, try again.");
+          $('#noticeModal .modal-header').removeClass('modal-header-green').addClass('modal-header-red');
           $('#noticeModal').modal('show');
         }
       });
@@ -159,18 +161,22 @@
 
     function alarm_disable(duration) {
       $.ajax({
-        timeout: 5000,
+        timeout: 10000,
         dataType: 'json',
         method: 'GET',
         url: "/alarm/disable?for=" + duration,
         success: function(data) {
           console.log(data);
-          $('#notice').html("Alarm/Motion detection paused for " + alarm_disable_duration+ " hour(s)");
+          $('#notice-title').html("AlarmBot");
+          $('#notice').html("Alarm/Motion detection has been paused for " + alarm_disable_duration+ " hour(s)");
+          $('#noticeModal .modal-header').removeClass('modal-header-red').addClass('modal-header-green');
           $('#noticeModal').modal('show');
         },
         error: function(data) {
           console.log(data);
+          $('#notice-title').html("AlarmBot");
           $('#notice').html("Failed to disable alarm/motion detection, try again.");
+          $('#noticeModal .modal-header').removeClass('modal-header-green').addClass('modal-header-red');
           $('#noticeModal').modal('show');
         }
       });
@@ -216,6 +222,7 @@
         },
         error: function(data) {
           $('meta[name=theme-color]').attr('content', "#ff0000");
+          $('#notice-title').html("Ooops!");
           $('#notice').html("Are you sure you're on the hackerspace WiFi?");
           $('#noticeModal .modal-header').removeClass('modal-header-green').addClass('modal-header-red');
           $('#noticeModal').modal('show');
@@ -237,8 +244,8 @@
       $("#close").click(function(){ door_command("close"); });
 
       // disable alarm/motion detection for a while
-      $('#alarm-disable-inc').click(function() { alarm_disarm_adjust(1);  });
-      $('#alarm-disable-dec').click(function() { alarm_disarm_adjust(-1); });
+      $('#alarm-disable-inc').click(function() { alarm_disable_adjust(1);  });
+      $('#alarm-disable-dec').click(function() { alarm_disable_adjust(-1); });
       $('#alarm-disable').click(function() { alarm_disable(alarm_disable_duration); });
       $('#alarm-disable').text("Disable Alarm: " + alarm_disable_duration + "HR");
 

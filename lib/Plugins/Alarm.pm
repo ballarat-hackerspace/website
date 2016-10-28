@@ -34,7 +34,7 @@ sub register {
   $self->url(Mojo::URL->new($config->{url} // "http://boiler.bhack/alarm/"));
 
   $app->helper('alarm.enable'  => sub { $self->_process_request(shift, 'enable',  @_) });
-  $app->helper('alarm.disable' => sub { $self->_process_request(shift, 'disabl', @_) });
+  $app->helper('alarm.disable' => sub { $self->_process_request(shift, 'disable', @_) });
 }
 
 sub _process_request {
