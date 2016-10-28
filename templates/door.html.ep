@@ -16,10 +16,7 @@
 
     .banner {
       background-color: rgba(48, 48, 48, 0.95);
-      color: #fff;
-      margin: 0 0 16px 0;
-      min-height: 80px;
-    }
+      color: #fff; margin: 0 0 16px 0; min-height: 80px; }
     .banner > h1 { margin: 0; padding: 16px; }
     .banner img { height: 48px; margin: 16px 0; }
 
@@ -91,12 +88,12 @@
     <a id="enter" class="btn btn-block btn-big btn-cta">Enter</a>
     <div>
       <div>
-        <a id="motion-arm" class="btn btn-block btn-cta btn-cta-blue">Enable Alarm</a>
+        <a id="alarm-enable" class="btn btn-block btn-cta btn-cta-blue">Enable Alarm</a>
       </div>
       <div>
-        <a id="motion-disarm-dec" class="btn btn-cta btn-cta-orange"><i class="fa fa-fw fa-chevron-left"></i></a>
-        <a id="motion-disarm" class="btn btn-cta btn-cta-orange">Disable Alarm</a>
-        <a id="motion-disarm-inc"  class="btn btn-cta btn-cta-orange"><i class="fa fa-fw fa-chevron-right"></i></a>
+        <a id="alarm-disable-dec" class="btn btn-cta btn-cta-orange"><i class="fa fa-fw fa-chevron-left"></i></a>
+        <a id="alarm-disable" class="btn btn-cta btn-cta-orange">Disable Alarm</a>
+        <a id="alarm-disable-inc"  class="btn btn-cta btn-cta-orange"><i class="fa fa-fw fa-chevron-right"></i></a>
       </div>
     </div>
   </div>
@@ -131,7 +128,7 @@
   <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script>
-    var disarm_duration = 1;
+    var alarm_disable_duration = 1;
 
     if (window.applicationCache) {
       window.applicationCache.addEventListener('updateready', function() {
@@ -139,41 +136,41 @@
       });
     }
 
-    function motion_arm() {
+    function alarm_enable() {
       $.ajax({
         timeout: 5000,
         dataType: 'json',
         method: 'GET',
-        url: "/cam/enablemotion",
+        url: "/alarm/enable",
         success: function(data) {
           console.log(data);
-          $('#notice').html("Motion detection enabled.");
+          $('#notice').html("Alarm/Motion detection enabled.");
           $('#noticeModal .modal-header').removeClass('modal-header-error').addClass('modal-header-success');
           $('#noticeModal').modal('show');
         },
         error: function(data) {
           console.log(data);
           $('#noticeModal .modal-header').removeClass('modal-header-green').addClass('modal-header-red');
-          $('#notice').html("Failed to enable motion detection, try again.");
+          $('#notice').html("Failed to enable alarm/motion detection, try again.");
           $('#noticeModal').modal('show');
         }
       });
     }
 
-    function motion_disarm() {
+    function alarm_disable(duration) {
       $.ajax({
         timeout: 5000,
         dataType: 'json',
         method: 'GET',
-        url: "/cam/disablemotion?delay=" + disarm_duration,
+        url: "/alarm/disable?for=" + duration,
         success: function(data) {
           console.log(data);
-          $('#notice').html("Motion detection paused for " + disarm_duration+ " hour(s)");
+          $('#notice').html("Alarm/Motion detection paused for " + alarm_disable_duration+ " hour(s)");
           $('#noticeModal').modal('show');
         },
         error: function(data) {
           console.log(data);
-          $('#notice').html("Failed to disable motion detection, try again.");
+          $('#notice').html("Failed to disable alarm/motion detection, try again.");
           $('#noticeModal').modal('show');
         }
       });
@@ -204,7 +201,7 @@
       });
     }
 
-    function getlink(command){
+    function door_command(command){
       var url = "/door/" + command;
 
       $('meta[name=theme-color]').attr('content', "#808080");
@@ -226,27 +223,27 @@
       });
     }
 
-    function motion_disarm_adjust(delta) {
+    function alarm_disable_adjust(delta) {
       // clamp duration
-      disarm_duration = Math.min(8, Math.max(1, disarm_duration + delta));
+      alarm_disable_duration = Math.min(8, Math.max(1, alarm_disable_duration + delta));
 
-      $('#motion-disarm').text("Disable Alarm: " + disarm_duration + "HR");
+      $('#alarm-disable').text("Disable Alarm: " + alarm_disable_duration + "HR");
     }
 
     $(document).ready(function(){
       // bind functions to the buttons
-      $("#enter").click(function() { getlink("enter"); });
-      $("#open").click(function() { getlink("open"); });
-      $("#close").click(function(){ getlink("close"); });
+      $("#enter").click(function() { door_command("enter"); });
+      $("#open").click(function() { door_command("open"); });
+      $("#close").click(function(){ door_command("close"); });
 
-      // disable motion detection for a while
-      $('#motion-disarm-inc').click(function() { motion_disarm_adjust(1);  });
-      $('#motion-disarm-dec').click(function() { motion_disarm_adjust(-1); });
-      $('#motion-disarm').click(function() { motion_disarm(); });
-      $('#motion-disarm').text("Disable Alarm: " + disarm_duration + "HR");
+      // disable alarm/motion detection for a while
+      $('#alarm-disable-inc').click(function() { alarm_disarm_adjust(1);  });
+      $('#alarm-disable-dec').click(function() { alarm_disarm_adjust(-1); });
+      $('#alarm-disable').click(function() { alarm_disable(alarm_disable_duration); });
+      $('#alarm-disable').text("Disable Alarm: " + alarm_disable_duration + "HR");
 
-      // enable motion detection
-      $('#motion-arm').click(function() { motion_arm(); });
+      // enable alarm/motion detection
+      $('#alarm-enable').click(function() { alarm_enable(); });
 
       // advance controls
       $('#advance-toggle').click(function() { $('#advance').fadeToggle(); });

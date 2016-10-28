@@ -31,6 +31,7 @@ use Time::Piece;
 use Plugins::Jekyll;
 
 plugin 'JSONConfig'      => {file => '/etc/bhackd.conf'};
+plugin 'Plugins::Alarm'  => app->config->{alarm}  // {};
 plugin 'Plugins::Device' => app->config->{device} // {};
 plugin 'Plugins::Door'   => app->config->{door}   // {};
 plugin 'Plugins::Jekyll' => app->config->{blog}   // {};
@@ -273,6 +274,38 @@ group {
     $c->render_later;
     $c->door->close(
       device => $c->device->is_whitelisted,
+      sub { shift; $c->render(status => shift, json => shift); }
+    );
+  };
+};
+
+group {
+  under '/alarm' => sub {
+    my $c = shift;
+
+    # stash for later
+    $c->stash('uuid' => $c->device->uuid);
+
+    return 1 if $c->is_local || $c->is_gatekeeper;
+    return $c->redirect_to('/');
+  };
+
+  get '/disable' => sub {
+    my $c = shift;
+    return $c->render(status => 403, json => '') unless $c->is_dooropener && $c->device->is_whitelisted;
+
+    $c->render_later;
+    $c->alarm->disable(
+      duration => $c->param('for'),
+      sub { shift; $c->render(status => shift, json => shift); }
+    );
+  };
+  get '/enable' => sub {
+    my $c = shift;
+    return $c->render(status => 403, json => '') unless $c->is_dooropener && $c->device->is_whitelisted;
+
+    $c->render_later;
+    $c->alarm->enable(
       sub { shift; $c->render(status => shift, json => shift); }
     );
   };
