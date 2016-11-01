@@ -22,7 +22,7 @@
 
         <ul>
             <li><a href="#3dprinting">Build your own 3D Printer Workshop</a></li>
-            <li><a href="#raspberrypi">Raspberry PI Workshop</a> <span> - Open Now! </span></li>
+            <li><a href="#raspberrypi">Raspberry PI Workshop</a> <span></span></li>
             <li><a href="#multicopter">Multicopter Workshop</a></li>
         </ul>
     </div>
@@ -44,7 +44,7 @@
                 <p>If you have ever wanted to get into 3D printing, now is your chance. The Ballarat Hackerspace is presenting a workshop, with all of the necessary components, for you to build your own 3D printer.</p>
                 <p>Our last workshop was a great success and we will defintely be repeating it, just register your interest below to get updates directly to your inbox</p>
 
-                <a href="https://ballarathackerspace.tidyhq.com/public/registration/new" class="btn btn-lg btn-cta btn-cta-secondary">Register Interest</a>
+                <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
             </div>
             <div class="col-sm-6 col-md-4">
                 <img class="img-responsive img-h3-padding" src="/images/workshops/prusa-i3-2.jpg"></img>
@@ -137,7 +137,6 @@
 <section id="raspberrypi" class="section">
   <div class="container">
     <h2>Raspberry Pi 3 Workshop</h2>
-    <div class="alert alert-success" role="alert">This workshop is now enrolling for an October 26th start! <a href="http://tdy.cl/e/_oQxvtk">Register here!</a></div>
     <div class="row">
       <div class="col-sm-6">
         <h3>An Introduction To Hacking</h3>
@@ -172,8 +171,7 @@
       <li>$195 + GST As above, except you bring your own Raspberry Pi (any model should work)</li>
     </ol>
 
-    <a href="http://tdy.cl/e/_oQxvtk" class="btn btn-lg btn-cta btn-cta-secondary">Click here to join!</a>
-    <p>Workshop starts October 26th, runs for 6 weeks on Wednesday nights between 6pm and 8pm.</p>
+    <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
   </div>
 </section>
 
@@ -186,7 +184,6 @@
         <div class="row">
             <div class="col-sm-6 col-md-8">
 
-                    <div class="alert alert-warning" role="alert">This workshop will begin soon! <a href="http://tdy.cl/e/PNLyjfI">Register here</a> for more information and to get a ticket</div>
                 <p>Ever wanted to take to the skies, and see things from a different perspective? Perhaps you would like to test your skills in learning Acrobatic flight? Join us for an exciting workshop where you build your own drone!</p>
                 <p>Drones have exploded in popularity, and this Ballarat Hackerspace workshop is a fantastic opportunity to get into this exciting hobby. The rate of technological change in this field can make it daunting to get started, but our resident drone expert Brett James will be leading this workshop to get you started on the right track.</p>
                 <p>The prototype for this workshop was flown by one of the members at the Ballarat Hackerspace at the D1 Drone Racing Nationals and was able to reach the semi-finals with it - it has plenty of power to be controlled and applications from racing to photography.</p>
@@ -221,12 +218,11 @@
                 <h3>    What's the cost?:</h3>
                 <p>$495 - for a four week course with all components, and Three Months of Casual Membership. Existing members will have the membership added to their current schedule.</p>
                 <p>More information is available at the <a href="http://tdy.cl/e/PNLyjfI">workshop page</a></p>
-
-               <a href="http://tdy.cl/e/PNLyjfI" class="btn btn-lg btn-cta btn-cta-secondary">Sign up for the workshop</a>
+                <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
             </div>
             <div class="col-sm-6 col-md-4">
                 <img class="img-responsive" title="Nighthawk" src="/images/workshops/quadcopter-nighthawk.jpg">
-                               <a href="http://tdy.cl/e/PNLyjfI" class="btn btn-lg btn-cta btn-cta-secondary">Sign up for the workshop</a>
+                <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
             </div>
         </div>
     </div>
