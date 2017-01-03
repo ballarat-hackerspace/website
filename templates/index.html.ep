@@ -89,7 +89,10 @@
       <div class="row">
         <div class="col-md-8 col-sm-7 col-xs-12">
           <h1 class="title">Welcome</h1>
-          <p>We are dedicated to providing educational resources to our community, through outreach, supporting other organisations and events, teaching classes, and by providing a means to network with other professionals and hobbyists through our regular meetings.</p>
+
+          <p>We are a non-profit community group dedicated to providing education and resources to encourage skills in science, technology, engineering, arts and mathematics (STEAM). The Ballarat Hackerspace provides tools, connections, community and other resources to help improve the skills of its members and the community, as well as encourage a culture of participating in technology advances, rather than passively using them.</p>
+          <p>We run regular workshops, community meetups, and encourage growth in the community in the broader Victorian goldfields region.</p>
+
           <p>We are generally <a href="/about#timetable">open for public walk-ins</a> on Mondays, Tuesdays and Saturdays with a dedicated meetup on the 1st Tuesday of each month having a dedicated theme. These meetups are where we invite you to join us to chat, participate in show and tell, get help or advice, or talk about your projects &mdash; <b>BIG</b> and <i>small</i>.</p>
           <p><a class="btn btn-cta btn-cta-primary" href="/about">More About Us</a></p>
 
