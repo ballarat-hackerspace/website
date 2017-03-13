@@ -224,11 +224,8 @@
             $('#error').html(_error).fadeIn(150);
           }
           else {
-            _error = data;
+            console.error(data);
           }
-
-          console.error(_error);
-
 
           $('#enter').removeClass('btn-cta-green').addClass('btn-cta-red');
           setTimeout(detect_hackerspace, 500);
