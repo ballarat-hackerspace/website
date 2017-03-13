@@ -27,6 +27,11 @@
     }
     .footer { bottom: 0; height: 48px; position: fixed; width: 100%; }
 
+    #error {
+      display: none;
+      font-size: 20px;
+    }
+
     .btn {
       display: inline-block;
       font-size: 20px;
@@ -96,6 +101,7 @@
         <a id="alarm-disable-inc"  class="btn btn-cta btn-cta-orange"><i class="fa fa-fw fa-chevron-right"></i></a>
       </div>
     </div>
+    <p id="error" class="text-center"></p>
   </div>
 
   <a id="advance-toggle"><i class="fa fa-2x fa-cog"></i></a>
@@ -107,7 +113,7 @@
 
   <footer class="footer">
     <div class="bottom-bar">
-      <small class="copyright text-center">Ballarat Hackerspace - v3.0</small>
+      <small class="copyright text-center">Ballarat Hackerspace - v3.1</small>
     </div>
   </footer>
 
@@ -190,6 +196,7 @@
         method: 'GET',
         url: "/door/access",
         success: function(data) {
+          $('#error').fadeOut(150);
           $('#working').fadeOut(150);
           if (data['pong'])
             $('#enter').removeClass('btn-cta-red').addClass('btn-cta-green');
@@ -200,7 +207,29 @@
         },
         error: function(data) {
           $('#working').fadeOut(150);
-          console.log("ajax failed");
+
+          var _error = 'Unknown Error';
+
+          if (('responseJSON' in data) && ('code' in data.responseJSON)) {
+            if (data.responseJSON.code == 4001) {
+              _error = 'Inactive Membership';
+            }
+            else if (data.responseJSON.code == 4002) {
+              _error = 'Insufficient Membership';
+            }
+            else if (data.responseJSON.code == 4003) {
+              _error = 'Unregistered Device';
+            }
+
+            $('#error').html(_error).fadeIn(150);
+          }
+          else {
+            _error = data;
+          }
+
+          console.error(_error);
+
+
           $('#enter').removeClass('btn-cta-green').addClass('btn-cta-red');
           setTimeout(detect_hackerspace, 500);
         }

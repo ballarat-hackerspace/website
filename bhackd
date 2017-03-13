@@ -50,13 +50,15 @@ helper 'is_local' => sub {
   return undef;
 };
 
-helper 'is_dooropener' => sub {
+helper 'is_not_dooropener' => sub {
   my $c = shift;
   my $bhack = $c->stash('bhack');
-  return undef unless $c->tidyhq->has_active_membership({tidyhq => $bhack});
-  return undef unless $c->tidyhq->in_group('workshop members', {tidyhq => $bhack});
 
-  return 1;
+  return {'code' => 4001, 'error' => 'Inactive Membership'   } unless $c->tidyhq->has_active_membership({tidyhq => $bhack});
+  return {'code' => 4002, 'error' => 'Insuffienct Membership'} unless $c->tidyhq->in_group('workshop members', {tidyhq => $bhack});
+  return {'code' => 4003, 'error' => 'Unregistered Device'   } unless $c->device->is_whitelisted;
+
+  return undef;
 };
 
 helper 'is_gatekeeper' => sub {
@@ -240,14 +242,20 @@ group {
   get '/' => 'door';
   get '/access' => sub {
     my $c = shift;
-    return $c->render(status => 403, json => '') unless $c->is_dooropener && $c->device->is_whitelisted;
 
-    $c->render(json => {pong => $c->device->is_whitelisted});
+    if (my $status = $c->is_not_dooropener) {
+      return $c->render(status => 403, json => $status);
+    }
+
+    $c->render(json => {code => 2000, pong => $c->device->is_whitelisted});
   };
 
   get '/enter' => sub {
     my $c = shift;
-    return $c->render(status => 403, json => '') unless $c->is_dooropener && $c->device->is_whitelisted;
+
+    if (my $status = $c->is_not_dooropener) {
+      return $c->render(status => 403, json => $status);
+    }
 
     $c->render_later;
     $c->door->enter(
@@ -258,7 +266,10 @@ group {
 
   get '/open'  => sub {
     my $c = shift;
-    return $c->render(status => 403, json => '') unless $c->is_dooropener && $c->device->is_whitelisted;
+
+    if (my $status = $c->is_not_dooropener) {
+      return $c->render(status => 403, json => $status);
+    }
 
     $c->render_later;
     $c->door->open(
@@ -269,7 +280,10 @@ group {
 
   get '/close' => sub {
     my $c = shift;
-    return $c->render(status => 403, json => '') unless $c->is_dooropener && $c->device->is_whitelisted;
+
+    if (my $status = $c->is_not_dooropener) {
+      return $c->render(status => 403, json => $status);
+    }
 
     $c->render_later;
     $c->door->close(
@@ -292,7 +306,10 @@ group {
 
   get '/disable' => sub {
     my $c = shift;
-    return $c->render(status => 403, json => '') unless $c->is_dooropener && $c->device->is_whitelisted;
+
+    if (my $status = $c->is_not_dooropener) {
+      return $c->render(status => 403, json => $status);
+    }
 
     $c->render_later;
     $c->alarm->disable(
@@ -302,7 +319,10 @@ group {
   };
   get '/enable' => sub {
     my $c = shift;
-    return $c->render(status => 403, json => '') unless $c->is_dooropener && $c->device->is_whitelisted;
+
+    if (my $status = $c->is_not_dooropener) {
+      return $c->render(status => 403, json => $status);
+    }
 
     $c->render_later;
     $c->alarm->enable(

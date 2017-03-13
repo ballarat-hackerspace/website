@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # NOTE: Update the version to trigger clients to re-cache content
-# Version: 41.20
+# Version: 42.20
 
 CACHE:
 /assets/door/favicon.ico
