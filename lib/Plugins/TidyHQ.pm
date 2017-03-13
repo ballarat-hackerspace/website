@@ -52,10 +52,11 @@ sub register {
 
     my $now = gmtime;
 
-    for my $m ( @{$tidyhq->{memberships} // []} ) {
-      continue unless $m->{status} eq 'activated';
-      my $ed = Time::Piece->strptime($m->{end_date}, '%Y-%m-%d');
-      return 1 if ($ed - $now) > 0;
+    for my $membership ( @{$tidyhq->{memberships} // []} ) {
+      next unless $membership->{status} eq 'activated';
+
+      my $end_date = Time::Piece->strptime($membership->{end_date}, '%Y-%m-%d');
+      return 1 if ($end_date - $now) > 0;
     }
 
     return 0;
