@@ -113,6 +113,7 @@ get '/conduct'    => 'conduct';
 get '/contact'    => 'contact';
 get '/join'       => 'join';
 get '/sponsors'   => 'sponsors';
+get '/women'      => 'women';
 get '/workshops'  => 'workshops';
 get '/security'   => 'security';
 
