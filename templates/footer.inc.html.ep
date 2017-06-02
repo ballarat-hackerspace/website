@@ -9,7 +9,7 @@
         </div>
         <!-- Don't call these things sp*ns*r images or l*g*s -- adblockers will block it -->
         <div class="row hidden-sm">
-          <div class="col-md-offset-1 col-md-2 text-center">
+          <div class="col-md-2 text-center">
             <a href="https://www.eurekative.com.au"><img class="footer-image" src="/images/goodguys/logo-mono-eurekative.png"></img></a>
           </div>
           <div class="col-md-2 text-center">
@@ -23,6 +23,9 @@
           </div>
           <div class="col-md-2 text-center">
             <a href="http://www.datapipeline.com.au/"><img class="footer-image" src="/images/goodguys/logo-datapipeline.png"></img></a>
+          </div>
+          <div class="col-md-2 text-center">
+            <a href="http://www.ballarat.vic.gov.au/"><img class="footer-image" src="/images/goodguys/city_of_ballarat.jpeg"></img></a>
           </div>
         </div>
         <div class="row visible-sm-block">
@@ -40,6 +43,9 @@
           </div>
           <div class="col-sm-4 text-center">
             <a href="http://www.datapipeline.com.au/"><img class="footer-image" src="/images/goodguys/logo-datapipeline.png"></img></a>
+          </div>
+          <div class="col-sm-4 text-center">
+            <a href="http://www.ballarat.vic.gov.au/"><img class="footer-image" src="/images/goodguys/city_of_ballarat.jpeg"></img></a>
           </div>
         </div>
       </div>
