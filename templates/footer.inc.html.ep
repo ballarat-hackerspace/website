@@ -10,42 +10,42 @@
         <!-- Don't call these things sp*ns*r images or l*g*s -- adblockers will block it -->
         <div class="row hidden-sm">
           <div class="col-md-2 text-center">
-            <a href="https://www.eurekative.com.au"><img class="footer-image" src="/images/goodguys/logo-mono-eurekative.png"></img></a>
+            <a href="https://www.eurekative.com.au"><img class="footer-image" src="/images/spnsrs/logo-mono-eurekative.png"></img></a>
           </div>
           <div class="col-md-2 text-center">
-            <a href="https://lab79.io/"><img class="footer-image" src="/images/goodguys/logo-lab_79.svg"></img></a>
+            <a href="https://lab79.io/"><img class="footer-image" src="/images/spnsrs/logo-lab_79.svg"></img></a>
           </div>
           <div class="col-md-2 text-center">
-            <a href="http://www.lateralplains.com"><img class="footer-image" src="/images/goodguys/logo-mono-lateral-plains.png"></img></a>
+            <a href="http://www.lateralplains.com"><img class="footer-image" src="/images/spnsrs/logo-mono-lateral-plains.png"></img></a>
           </div>
           <div class="col-md-2 text-center">
-            <a href="http://www.sedadvisory.com.au/"><img class="footer-image" src="/images/goodguys/logo-sed-dark-background.png"></img></a>
+            <a href="http://www.sedadvisory.com.au/"><img class="footer-image" src="/images/spnsrs/logo-sed-dark-background.png"></img></a>
           </div>
           <div class="col-md-2 text-center">
-            <a href="http://www.datapipeline.com.au/"><img class="footer-image" src="/images/goodguys/logo-datapipeline.png"></img></a>
+            <a href="http://www.datapipeline.com.au/"><img class="footer-image" src="/images/spnsrs/logo-datapipeline.png"></img></a>
           </div>
           <div class="col-md-2 text-center">
-            <a href="http://www.ballarat.vic.gov.au/"><img class="footer-image" src="/images/goodguys/city_of_ballarat.jpeg"></img></a>
+            <a href="http://www.ballarat.vic.gov.au/"><img class="footer-image" src="/images/spnsrs/city_of_ballarat.jpeg"></img></a>
           </div>
         </div>
         <div class="row visible-sm-block">
           <div class="col-sm-4 text-center">
-            <a href="https://www.eurekative.com.au"><img class="footer-image" src="/images/goodguys/logo-mono-eurekative.png"></img></a>
+            <a href="https://www.eurekative.com.au"><img class="footer-image" src="/images/spnsrs/logo-mono-eurekative.png"></img></a>
           </div>
           <div class="col-sm-4 text-center">
-            <a href="https://lab79.io/"><img class="footer-image" src="/images/goodguys/logo-lab_79.svg"></img></a>
+            <a href="https://lab79.io/"><img class="footer-image" src="/images/spnsrs/logo-lab_79.svg"></img></a>
           </div>
           <div class="col-sm-4 text-center">
-            <a href="http://www.lateralplains.com"><img class="footer-image" src="/images/goodguys/logo-mono-lateral-plains.png"></img></a>
+            <a href="http://www.lateralplains.com"><img class="footer-image" src="/images/spnsrs/logo-mono-lateral-plains.png"></img></a>
           </div>
           <div class="col-sm-offset-2 col-sm-4 text-center">
-            <a href="http://www.sedadvisory.com.au/"><img class="footer-image" src="/images/goodguys/logo-sed-dark-background.png"></img></a>
+            <a href="http://www.sedadvisory.com.au/"><img class="footer-image" src="/images/spnsrs/logo-sed-dark-background.png"></img></a>
           </div>
           <div class="col-sm-4 text-center">
-            <a href="http://www.datapipeline.com.au/"><img class="footer-image" src="/images/goodguys/logo-datapipeline.png"></img></a>
+            <a href="http://www.datapipeline.com.au/"><img class="footer-image" src="/images/spnsrs/logo-datapipeline.png"></img></a>
           </div>
           <div class="col-sm-4 text-center">
-            <a href="http://www.ballarat.vic.gov.au/"><img class="footer-image" src="/images/goodguys/city_of_ballarat.jpeg"></img></a>
+            <a href="http://www.ballarat.vic.gov.au/"><img class="footer-image" src="/images/spnsrs/city_of_ballarat.jpeg"></img></a>
           </div>
         </div>
       </div>
