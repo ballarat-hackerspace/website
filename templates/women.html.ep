@@ -32,17 +32,20 @@
                 <h3>The Ballarat Hackerspace is committed to increasing STEAM participation by women.</h3>
                 <p>We are pleased to announce that the Ballarat Hackerspace is open on Wednesday nights to women, for free, from June 14th 2017.</p>
                 <p>On Wednesday nights our champion Kim Redfern will open and run the space between 6pm and 8pm. The nights are inclusive of women and girls of all ages.</p>
-                <p>Come to our opening night on June 14th and please RSVP using this button:</p>
-
-                <div class="col-sm-12 col-md-12 text-center">
-                    <a href="https://ballarathackerspace.tidyhq.com/schedule/events/14152-womens-night" class="btn btn-success btn-lg">Register now!</a>
-                </div>
+                <p>Our Raspberry Pi workshop is full! We will be rerunning it again in the near future.</p>
+                <p>However, <b>you are still welcome to come on Wednesdays!</b> We are still open for those not in the workshop, and you can still drop by and work on your own projects, have a chat or just see what its all about.</p>
+                
+                <p>If you want to be notified when the next workshop will be running, click this button and sign up</p>
+                
+                <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
+                
+                <p>(You don't need a membership, just register an account and we will email you with information about any new courses.)</p>
 
                 <h4>Format</h4>
                 <p>The nights will be run as "open-workshops". What this means is that we will have a theme for the night, but there is no requirement to stick to the theme, and we actively encourage doing your own projects or going off-book with the themed projects.</p>
 
                 <h4>Themes</h4>
-                <p><b>June 14th:</b> Official opening between 6pm and 6.30pm, followed by workshopping.</p>
+                <p style="text-decoration: line-through;"><b>June 14th:</b> Official opening between 6pm and 6.30pm, followed by workshopping.</p>
                 <p><b>June 14th to July 19th:</b> Introduction to the Raspberry Pi, including programming, electronics and general hacking around.</p>
                 <p><b>July 26th to August 16th:</b> Building a 3D printer (or two), including setting up and using 3D printers.</p>
                 <p>We will continue to add to this list. The Ballarat Hackerspace encourages you to get in and suggest your own topics, and even run them if you are feeling brave! We would also like more volunteers to help open the space (giving Kim the odd week off), other setup, course development and sponsorship. Contact us if you would like to help in any way.</p>
