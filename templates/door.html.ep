@@ -249,7 +249,7 @@
         error: function(data) {
           $('meta[name=theme-color]').attr('content', "#ff0000");
           $('#notice-title').html("Ooops!");
-          $('#notice').html("Are you sure you're on the hackerspace WiFi?");
+          $('#notice').html("Are you sure you're on the hackerspace WiFi?<br/>Are you using the latest Door App?");
           $('#noticeModal .modal-header').removeClass('modal-header-green').addClass('modal-header-red');
           $('#noticeModal').modal('show');
         }

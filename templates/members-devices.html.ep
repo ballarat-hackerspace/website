@@ -15,21 +15,30 @@
   <!-- ******team Section****** -->
   <section id="team" class="section">
     <div class="container">
-      <h2 class="title text-center">Members <i class="fa fa-fw fa-angle-right"></i> Devices</h2>
-      <p>As a member you have privileged access to particular items on the network. To ensure the best experience whilst at the Ballarat Hackerspace please ensure you register your devices.</p>
-
-      <div>
-        <span>Device UUID: <%= $uuid %></span>
-        <span class="pull-right">
-% if ($c->device->is_whitelisted) {
-          <a href="" class="btn btn-cta btn-cta-green" data-toggle="modal"><i class="fa fa-fw fa-check"></i> Device Registered</a>
-% } else {
-          <a href="#device-add" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-fw fa-plus"></i> Register this Device</a>
-
-% }
-        </span>
+% if (my $user = $c->stash('tidyhq')) {
+      <div class="row">
+        <div class="col-sm-12">
+        </div>
       </div>
+% }
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="title text-center">Members <i class="fa fa-fw fa-angle-right"></i> Devices</h2>
+          <p>As a member you have privileged access to particular items on the network. To ensure the best experience whilst at the Ballarat Hackerspace please ensure you register your devices.</p>
 
+          <div>
+            <span>Device UUID: <%= $uuid %></span>
+            <span class="pull-right">
+    % if ($c->device->is_whitelisted) {
+              <a href="" class="btn btn-cta btn-cta-green" data-toggle="modal"><i class="fa fa-fw fa-check"></i> Device Registered</a>
+    % } else {
+              <a href="#device-add" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-fw fa-plus"></i> Register this Device</a>
+
+    % }
+            </span>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-sm-12">
           <h3>Registered Devices</h3>
@@ -44,7 +53,7 @@
             </thead>
             <tbody>
 % for my $d (@{$devices}) {
-%   if ($d->{email} eq $c->tidyhq->user->{email_address} || $c->is_gatekeeper) {
+%   if ($d->{email} eq $c->tidyhq->user->{contact}{email_address} || $c->is_gatekeeper) {
               <tr class="<%= $d->{uuid} eq $uuid ? 'success' : '' %>">
                 <td class="hidden-xs"><%= $d->{email} %></td>
                 <td><%= $d->{name} %></td>
@@ -89,7 +98,7 @@
                 <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-                    <input name="email" type="text" class="form-control" placeholder="Email" value="<%= $c->tidyhq->user->{email_address} %>" readonly>
+                    <input name="email" type="text" class="form-control" placeholder="Email" value="<%= $c->tidyhq->user->{contact}{email_address} %>" readonly>
                   </div>
                 </div>
                 <div class="form-group">

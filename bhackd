@@ -84,7 +84,8 @@ hook 'before_dispatch' => sub {
     $bhack = decode_json b64_decode $cookie;
   }
 
-  $c->stash(bhack => $bhack);
+  $c->stash(bhack  => $bhack);
+  $c->stash(tidyhq => $c->tidyhq->user);
 };
 
 hook 'after_dispatch' => sub {

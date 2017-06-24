@@ -25,13 +25,15 @@ use Time::Piece;
 
 our $VERSION = '0.1';
 
+has 'token';
 has 'url';
 has _ua => sub { Mojo::UserAgent->new };
 
 sub register {
   my ($self, $app, $config) = @_;
 
-  $self->url(Mojo::URL->new($config->{url} // "http://boiler.bhack/alarm/"));
+  $self->url(Mojo::URL->new($config->{url} // 'http://boiler.bhack/alarm/'));
+  $self->token($config->{token} // 'bad');
 
   $app->helper('alarm.enable'  => sub { $self->_process_request(shift, 'enable',  @_) });
   $app->helper('alarm.disable' => sub { $self->_process_request(shift, 'disable', @_) });
@@ -50,13 +52,11 @@ sub _process_request {
       sub {
         my ($delay) = @_;
 
-        $self->_ua->get($self->url->path($mode)->query(for => $duration) => $delay->begin);
+        $self->_ua->get($self->url->path($mode)->query(for => $duration) => {'X-Alarm-Token' => $self->token} => $delay->begin);
       },
       sub {
         my ($delay, $tx) = @_;
         my ($data, $err) = _process_response($tx);
-
-        warn dumper $data, $err;
 
         $c->$cb($err ? 500 : 200, $err // $data);
       },

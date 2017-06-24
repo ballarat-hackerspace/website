@@ -25,13 +25,15 @@ use Time::Piece;
 
 our $VERSION = '0.1';
 
+has 'token';
 has 'url';
 has _ua => sub { Mojo::UserAgent->new };
 
 sub register {
   my ($self, $app, $config) = @_;
 
-  $self->url(Mojo::URL->new($config->{url} // "http://boiler.bhack:8080/"));
+  $self->url(Mojo::URL->new($config->{url} // 'http://boiler.bhack/door/'));
+  $self->token($config->{token} // 'bad');
 
   $app->helper('door.close' => sub { $self->_process_request(shift, 'close', @_) });
   $app->helper('door.enter' => sub { $self->_process_request(shift, 'enter', @_) });
@@ -52,7 +54,7 @@ sub _process_request {
       sub {
         my ($delay) = @_;
 
-        $self->_ua->get($self->url->path($mode)->query(mac => $mac, name => $name, user => $user) => $delay->begin);
+        $self->_ua->get($self->url->path($mode)->query(mac => $mac, name => $name, user => $user) => {'X-Door-Token' => $self->token} => $delay->begin);
       },
       sub {
         my ($delay, $tx) = @_;

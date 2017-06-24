@@ -18,10 +18,20 @@
       <h2 class="title text-center">Members</h2>
       <p>Welcome to the Members only area. Whilst we strongly encourage all of our contents to be open and freely available to the general public, there are some things that are considered privileged. If you are looking for your membership or payment management then you will need to login to <a href="https://ballarathackerspace.tidyhq.com/users/sign_in">TidyHQ</a> directly.</p>
 
+% if (my $user = $c->stash('tidyhq')) {
+      <div class="row">
+        <div class="col-sm-12">
+          <p>Name: <%= $user->{contact}{first_name} %> <%= $user->{contact}{last_name} %></p>
+%   for my $membership (@{$user->{memberships}}) {
+          <p>Membership: <%= uc $membership->{name} %> (valid to <%= $membership->{end_date}->strftime('%e %B %Y') %>)</p>
+%   }
+        </div>
+      </div>
+% }
       <div class="row">
         <div class="col-sm-6">
           <a href="<%= url_for('members-devices') %>"><h3>Device Register</h3></a>
-          <p>register your device for use in the Hackerspace ecosystem.</p>
+          <p>Register your device for use in the Hackerspace ecosystem.</p>
         </div>
 
         <div class="col-sm-6">
@@ -31,27 +41,27 @@
 
         <div class="col-sm-6">
           <h3>Boiler</h3>
-          <p>TODO: send a message to the boiler.</p>
+          <p>TODO: Send a message to the boiler.</p>
         </div>
 
         <div class="col-sm-6">
           <h3>Digital Library</h3>
-          <p>TODO: browse the digital library.</p>
+          <p>TODO: Browse the digital library.</p>
         </div>
 
         <div class="col-sm-6">
           <h3>Marquee</h3>
-          <p>TODO: send a message to the marquee.</p>
+          <p>TODO: Send a message to the marquee.</p>
         </div>
 
         <div class="col-sm-6">
           <h3>Digger</h3>
-          <p>TODO: drive the digger around the space.</p>
+          <p>TODO: Drive the digger around the space.</p>
         </div>
 
         <div class="col-sm-6">
           <h3>LIFX Party</h3>
-          <p>TODO: send some notifications/sequences to the LIFX bulbs in the space.</p>
+          <p>TODO: Send some notifications/sequences to the LIFX bulbs in the space.</p>
         </div>
       </div>
     </div>

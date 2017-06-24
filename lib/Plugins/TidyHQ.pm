@@ -30,12 +30,20 @@ use constant {
   TIDYHQ_SESSION_KEY => 'tidyhq',
 };
 
-has _ua => sub { Mojo::UserAgent->new };
+has _ua   => sub { Mojo::UserAgent->new };
 
 sub register {
   my ($self, $app, $config) = @_;
 
   my $url = Mojo::URL->new(sprintf 'https://%s.tidyhq.com/', $config->{organisation});
+
+  $self->{url} = $url;
+  $self->{config} = $config;
+
+  $self->{proxy} = {
+    members => {},
+    tidyhq  => {}
+  };
 
   $app->helper('tidyhq.has_active_membership' => sub {
     my ($c, $options) = @_;
@@ -50,13 +58,16 @@ sub register {
       $tidyhq = {};
     }
 
-    my $now = gmtime;
+    if (my $uid = $tidyhq->{id}) {
+      my $user = $self->proxy_user_get($uid);
+      my $now = gmtime;
 
-    for my $membership ( @{$tidyhq->{memberships} // []} ) {
-      next unless $membership->{status} eq 'activated';
+      for my $membership ( @{$user->{memberships} // []} ) {
+        next unless $membership->{status} eq 'activated';
 
-      my $end_date = Time::Piece->strptime($membership->{end_date}, '%Y-%m-%d');
-      return 1 if ($end_date - $now) > 0;
+        #my $end_date = Time::Piece->strptime($membership->{end_date}, '%Y-%m-%d');
+        return 1 if ($membership->{end_date} - $now) > 0;
+      }
     }
 
     return 0;
@@ -77,7 +88,13 @@ sub register {
       $tidyhq = {};
     }
 
-    return !!grep { $_ eq $group } @{$tidyhq->{groups} // []};
+    if (my $uid = $tidyhq->{id}) {
+      my $user = $self->proxy_user_get($uid);
+
+      return !!grep { $_ eq $group } @{$user->{contact}{groups} // []};
+    }
+
+    return 0;
   });
 
   $app->helper('tidyhq.is_authenticated' => sub {
@@ -95,7 +112,9 @@ sub register {
   });
 
   $app->helper('tidyhq.user' => sub {
-    return shift->session(TIDYHQ_SESSION_KEY) // {};
+    my $session = shift->session(TIDYHQ_SESSION_KEY) // {};
+    my $user = $self->proxy_user_get($session->{id});
+    return $user;
   });
 
   $app->helper('tidyhq.user.groups' => sub {
@@ -159,88 +178,33 @@ sub register {
 
           return $c->$cb($err, '') if $err;
 
-          $data->{token}        = $delay->data('token');
-          $data->{token_expiry} = gmtime->epoch + 7200; # 2 hour token life
+          my $user = $self->proxy_user_get($data->{id});
 
-          $delay->data(tidyhq => $data);
+          $user->{token}        = $delay->data('token');
+          $user->{token_expiry} = gmtime->epoch + 7200; # 2 hour token life
 
-          my $path = sprintf '/api/v1/contacts/%d/groups', $data->{id};
+          warn dumper 'USER', $user;
 
-          $self->_ua->get($url->path($path) => {Authorization => "Bearer ".$delay->data('token')} => $delay->begin);
-        },
-        sub {
-          my ($delay, $tx) = @_;
-          my ($data, $err) = process_response($tx);
+          # store all in session
+          $c->session(TIDYHQ_SESSION_KEY() => $user);
 
-          return $c->$cb($err, '') if $err;
+          # store in bhack session
+          my $bhack = $c->stash('bhack');
+          my $bhack_tidyhq = {
+            email_address => $user->{email_address},
+            first_name    => $user->{first_name},
+            groups        => $user->{groups},
+            id            => $user->{id},
+            last_name     => $user->{last_name},
+            nick_name     => $user->{nick_name},
+            memberships   => $user->{memberships},
+          };
 
-          if (!!grep { $_->{label} eq 'Members' } @{$data}) {
-            my $tidyhq = $delay->data('tidyhq');
+          $bhack = {%{$bhack}, %{$bhack_tidyhq}};
 
-            $tidyhq->{groups} = [map { lc $_->{label} } @{$data}];
-            $delay->data(tidyhq => $tidyhq);
-          }
+          $c->stash('bhack' => $bhack);
 
-          $self->_ua->get($url->path('/api/v1/membership_levels') => {Authorization => "Bearer ".$delay->data('token')} => $delay->begin);
-        },
-        sub {
-          my ($delay, $tx) = @_;
-          my ($data, $err) = process_response($tx);
-
-          return $c->$cb($err, '') if $err;
-
-          my $membership_levels = {};
-          map { $membership_levels->{$_->{id}} = lc $_->{name}} @{$data};
-          $delay->data(membership_levels => $membership_levels);
-
-          my $token  = $delay->data('token');
-          my $tidyhq = $delay->data('tidyhq');
-
-          my $path = sprintf '/api/v1/contacts/%d/memberships', $tidyhq->{id};
-
-          $self->_ua->get($url->path($path) => {Authorization => "Bearer ".$delay->data('token')} => $delay->begin);
-        },
-        sub {
-          my ($delay, $tx) = @_;
-          my ($data, $err) = process_response($tx);
-
-          my $tidyhq = $delay->data('tidyhq');
-
-          # check we are in the group label "Members"
-          if (!$err && !!@{$data}) {
-            my $membership_levels = $delay->data('membership_levels');
-            my $memberships = [];
-
-            for my $m (@{$data}) {
-              push @{$memberships}, {
-                end_date => $m->{end_date},
-                name     => $membership_levels->{$m->{membership_level_id}},
-                status   => $m->{state},
-              };
-            }
-
-            # add groups to data and store all in session
-            $tidyhq->{memberships} = $memberships;
-            $c->session(TIDYHQ_SESSION_KEY() => $tidyhq);
-
-            # store in bhack session
-            my $bhack = $c->stash('bhack');
-            my $bhack_tidyhq = {
-              email_address => $tidyhq->{email_address},
-              first_name    => $tidyhq->{first_name},
-              groups        => $tidyhq->{groups},
-              id            => $tidyhq->{id},
-              last_name     => $tidyhq->{last_name},
-              nick_name     => $tidyhq->{nick_name},
-              memberships   => $tidyhq->{memberships},
-            };
-
-            $bhack = {%{$bhack}, %{$bhack_tidyhq}};
-
-            $c->stash('bhack' => $bhack);
-          }
-
-          $c->$cb($err, $tidyhq);
+          $c->$cb($err, $user);
         },
       );
     }
@@ -261,6 +225,7 @@ sub register {
 
 sub process_response {
   my $tx = shift;
+
   my ($data, $err);
 
   if ($err = $tx->error) {
@@ -273,10 +238,108 @@ sub process_response {
     $data = Mojo::Parameters->new($tx->res->body)->to_hash;
   }
 
-  # no data is an error of itself
+  # no data is an error in and of itself
   $err = $data ? '' : $err || 'Unknown error';
 
   return ($data, $err);
+}
+
+sub proxy_auth_token {
+  my $self = shift;
+
+  my $config = $self->{config};
+  my $tidyhq = $self->{proxy}{tidyhq};
+  my $url = $self->{url};
+
+  if (! defined $tidyhq->{token_expiry} || $tidyhq->{token_expiry} <= gmtime->epoch) {
+
+    my $params = {
+      client_id     => $config->{client_id},
+      client_secret => $config->{client_secret},
+      grant_type    => 'password',
+      username      => $config->{proxy_email},
+      password      => $config->{proxy_password},
+    };
+
+    my $tx = $self->_ua->post($url->path('/oauth/token'), form => $params);
+
+    my ($data, $err) = process_response($tx);
+
+    return undef if $err;
+
+    # delay store token for final session store
+    $self->{proxy}{tidyhq} = {
+      token        => $data->{'access_token'},
+      token_expiry => gmtime->epoch + 7200,  # 2 hour token life
+    };
+  }
+
+  return $self->{proxy}{tidyhq}{token};
+}
+
+sub proxy_user_get {
+  my $self = shift;
+  my $uid  = shift;
+
+  return undef unless $uid;
+
+  my $url = $self->{url};
+  my $user = $self->{members}{$uid};
+
+  # update if not existing
+  unless($user) {
+    my $token = $self->proxy_auth_token;
+
+    my $headers = {Authorization => "Bearer $token"};
+
+    my $path = sprintf '/api/v1/contacts/%d', $uid;
+    my $tx = $self->_ua->get($url->path($path) => $headers);
+    my ($data, $err) = process_response($tx);
+
+    return undef if $err;
+
+    $user->{id}      = $data->{id};
+    $user->{contact} = $data;
+
+    $path = sprintf '/api/v1/contacts/%d/groups', $data->{id};
+    $tx = $self->_ua->get($url->path($path) => $headers);
+    ($data, $err) = process_response($tx);
+
+    if (!!grep { $_->{label} eq 'Members' } @{$data}) {
+      $user->{contact}{groups} = [map { lc $_->{label} } @{$data}];
+    }
+
+    $tx = $self->_ua->get($url->path('/api/v1/membership_levels') => $headers);
+    ($data, $err) = process_response($tx);
+
+    return undef if $err;
+
+    my $membership_levels = {};
+    map { $membership_levels->{$_->{id}} = lc $_->{name}} @{$data};
+
+    $path = sprintf '/api/v1/contacts/%d/memberships', $uid;
+    $tx =  $self->_ua->get($url->path($path) => $headers);
+    ($data, $err) = process_response($tx);
+
+    # check we are in the group label "Members"
+    if (!$err && !!@{$data}) {
+      my $memberships = [];
+
+      for my $m (@{$data}) {
+        push @{$memberships}, {
+          end_date => Time::Piece->strptime($m->{end_date}, '%Y-%m-%d'),
+          name     => $membership_levels->{$m->{membership_level_id}},
+          status   => $m->{state},
+        };
+      }
+
+      # add groups to data and store all in session
+      $user->{memberships} = $memberships;
+      $self->{members}{$uid} = $user;
+    }
+  }
+
+  return $user;
 }
 
 1;
