@@ -21,6 +21,11 @@ server {
     proxy_pass http://localhost:5002;
   }
 
+  location /ws2812 {
+    rewrite /ws2812/(.*) /$1 break;
+    proxy_pass http://localhost:9541;
+  }
+
   location = /50x.html {
     root /srv/ballarathackerspace.org.au;
   }
