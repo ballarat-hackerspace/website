@@ -60,6 +60,10 @@ sub _process_request {
         my ($delay, $tx) = @_;
         my ($data, $err) = _process_response($tx);
 
+        # display RED on the LED strip if $err
+        if ($err) { $self->_ua->get('https://ballarathackerspace.org.au/ws2812/a|10'); }
+        else { $self->_ua->get('https://ballarathackerspace.org.au/ws2812/k|10'); }
+
         $c->$cb($err ? 500 : 200, $err // $data);
       },
     );
@@ -67,6 +71,10 @@ sub _process_request {
   else {
     my $tx = $self->_ua->get($self->url->path($mode)->query(mac => $mac, name => $name, user => $user));
     my ($data, $err) = _process_response($tx);
+
+    # display RED on the LED strip if $err otherwise GREEN
+    if ($err) { $self->_ua->get('https://ballarathackerspace.org.au/ws2812/a|10'); }
+    else { $self->_ua->get('https://ballarathackerspace.org.au/ws2812/k|10'); }
 
     return ($err ? 500 : 200, $err // $data);
   }
