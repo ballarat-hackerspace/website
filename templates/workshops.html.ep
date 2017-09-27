@@ -149,29 +149,22 @@
         <img class="img-responsive" title="Raspberry PI" src="/images/workshops/raspberry-pi2-model-b-1gb-sm.jpg">
       </div>
     </div>
-    <p>This six week workshop, aimed at the novice hacker, covers topics including:</p>
+    <p>This three week workshop, aimed at the novice hacker, covers topics including:</p>
     <ul>
       <li>Programming with Python</li>
       <li>Connecting the Pi to the outside world</li>
       <li>Controlling circuits with code</li>
-      <li>Temperature sensing</li>
-      <li>Taking photos and videos automatically</li>
     </ul>
-    <p>The workshop is project based and each week, we will do a two hour session, the first hour guiding you through some new concepts, and the second hour more focused on exploring and building new things towards the project goals - temperature monitoring, an alarm system and your first robot.</p>
+    <p>The workshop is project based and each week, we will do a two hour session, the first hour guiding you through some new concepts, and the second hour more focused on exploring and building new things towards the project goals - building a radar system.</p>
 
     <h3>What's Included?</h3>
     <p>Participants in the course will take home their own Raspberry Pi 3 and all the circuitry needed to develop these projects (That's more than $120 worth!).</p>
-    <p>You'll also get a three month's casual membership to the hackerspace, allowing you to come in and ask more questions and use our tools (existing members can pro-rata).</p>
-    <p>Note: If you already have a Raspberry Pi (and you don't want us to get you another one), please make sure to select that option in the tickets for a cheaper price.</p>
+    <p>You'll also get a one month casual membership to the hackerspace, allowing you to come in and ask more questions and use our tools (existing members can pro-rata).</p>
 
     <h3>What's the Cost?</h3>
-    <p>There are two options for participating in the course:</p>
-    <ol>
-      <li>$256 + GST: 6 week course, Raspberry Pi 3, all materials to make the circuits</li>
-      <li>$195 + GST As above, except you bring your own Raspberry Pi (any model should work)</li>
-    </ol>
+    <p>$256 + GST: 3 week course, Raspberry Pi 3, all materials to make the circuits</p>
 
-    <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
+    <a href="https://ballarathackerspace.tidyhq.com/public/schedule/events/16279-raspberry-pi-workshop-beginners" class="btn btn-lg btn-cta btn-cta-secondary">Get your ticket before November 4th!</a>
   </div>
 </section>
 
