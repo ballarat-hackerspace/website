@@ -1,12 +1,18 @@
 CACHE MANIFEST
 # NOTE: Update the version to trigger clients to re-cache content
-# Version: 43.00
+# Version: 43.10
 
 CACHE:
 /assets/door/favicon.ico
 /assets/door/logo.png
 /assets/door/jquery.min.js
 /assets/door/manifest.json
+/images/door-logo-36.png
+/images/door-logo-48.png
+/images/door-logo-72.png
+/images/door-logo-96.png
+/images/door-logo-144.png
+/images/door-logo-192.png
 
 NETWORK:
 *
