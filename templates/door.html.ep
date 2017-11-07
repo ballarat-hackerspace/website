@@ -113,7 +113,7 @@
 
   <footer class="footer">
     <div class="bottom-bar">
-      <small class="copyright text-center">Ballarat Hackerspace - v3.2</small>
+      <small class="copyright text-center">Ballarat Hackerspace - v3.3</small>
     </div>
   </footer>
 
@@ -166,6 +166,7 @@
     }
 
     function alarm_disable(duration) {
+      $('#alarm-disable').disable();
       $.ajax({
         timeout: 10000,
         dataType: 'json',
@@ -177,6 +178,7 @@
           $('#notice').html("Alarm/Motion detection has been paused for " + alarm_disable_duration+ " hour(s)");
           $('#noticeModal .modal-header').removeClass('modal-header-red').addClass('modal-header-green');
           $('#noticeModal').modal('show');
+          $('#alarm-disable').enable();
         },
         error: function(data) {
           console.log(data);
@@ -184,6 +186,7 @@
           $('#notice').html("Failed to disable alarm/motion detection, try again.");
           $('#noticeModal .modal-header').removeClass('modal-header-green').addClass('modal-header-red');
           $('#noticeModal').modal('show');
+          $('#alarm-disable').enable();
         }
       });
     }
