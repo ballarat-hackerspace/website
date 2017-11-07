@@ -113,7 +113,7 @@
 
   <footer class="footer">
     <div class="bottom-bar">
-      <small class="copyright text-center">Ballarat Hackerspace - v3.3</small>
+      <small class="copyright text-center">Ballarat Hackerspace - v3.4</small>
     </div>
   </footer>
 
@@ -135,6 +135,7 @@
   <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script>
     var alarm_disable_duration = 1;
+    var alarm_disable_wait = false;
 
     if (window.applicationCache) {
       window.applicationCache.addEventListener('updateready', function() {
@@ -166,7 +167,10 @@
     }
 
     function alarm_disable(duration) {
-      $('#alarm-disable').click(function() { return(false); });
+      if (alarm_disable_wait) { return(false); }
+      alarm_disable_wait = true;
+
+      $('#alarm-disable').removeClass('btn-cta-orange');
       $.ajax({
         timeout: 10000,
         dataType: 'json',
@@ -178,7 +182,8 @@
           $('#notice').html("Alarm/Motion detection has been paused for " + alarm_disable_duration+ " hour(s)");
           $('#noticeModal .modal-header').removeClass('modal-header-red').addClass('modal-header-green');
           $('#noticeModal').modal('show');
-          $('#alarm-disable').click(function() { alarm_disable(alarm_disable_duration); });
+          $('#alarm-disable').addClass('btn-cta-orange');
+          alarm_disable_wait = false;
         },
         error: function(data) {
           console.log(data);
@@ -186,7 +191,8 @@
           $('#notice').html("Failed to disable alarm/motion detection, try again.");
           $('#noticeModal .modal-header').removeClass('modal-header-green').addClass('modal-header-red');
           $('#noticeModal').modal('show');
-          $('#alarm-disable').click(function() { alarm_disable(alarm_disable_duration); });
+          $('#alarm-disable').addClass('btn-cta-orange');
+          alarm_disable_wait = false;
         }
       });
     }
