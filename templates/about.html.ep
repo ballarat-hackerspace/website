@@ -20,6 +20,32 @@
     </div>
   </section>
 
+  <section id="donations" class="section section-highlight">
+    <div class="container">
+      <h2 class="title text-center">Donations</h2>
+      <p>The Ballarat Hackerspace is a registered non-profit volunteer
+        run organisation. We are entirely funded by our members and the
+        generous donations of our sponsors.  If you would like to
+        support the work of the Ballarat Hackerspace Association to
+        help with the running costs of the Hackerspace (e.g. rent,
+        consumables, workshops, etc.) then any donation would be
+        gladly accepted and put to good use!</p>
+      <p>Donations to the association can be made via bank deposit to:</p>
+      <blockquote>
+        Account Name: Ballarat Hackerspace Inc<br/>
+        BSB : 193-879<br/>
+        Account No: 468 349 494
+      </blockquote>
+      <p>Or you can donate via Bitcoin or Bitcoin Cash to the following address:</p>
+      <blockquote>
+        <a href="https://blockchain.info/address/1BHackHL8bYsGb5PBaXURAot2ymLZtRpTo">1BHackHL8bYsGb5PBaXURAot2ymLZtRpTo</a>
+      </blockquote>
+      <p>If instead of money you have time to donate then please
+        <a href="/contact">contact us</a> to tell us how you'd like to
+        help.</p>
+    </div><!--//container-->
+  </section>
+
   <!-- about timetable -->
   <section id="timetable" class="section">
     <div class="container">
@@ -35,15 +61,19 @@
         </thead>
         <tbody>
           <tr>
-            <td>Monday</td>
+            <td>Monday - All Welcome</td>
             <td>6pm &ndash; 9pm</td>
           </tr>
           <tr>
-            <td>Tuesday</td>
+            <td>Tuesday - All Welcome</td>
             <td>4pm &ndash; 9pm</td>
           </tr>
           <tr>
-            <td>Saturday</td>
+            <td>Wednesday - Women and family/friends</td>
+            <td>6pm &ndash; 9pm</td>
+          </tr>
+          <tr>
+            <td>Saturday - All Welcome</td>
             <td>9am &ndash; 3pm</td>
           </tr>
         </tbody>
