@@ -121,7 +121,7 @@
     <div class="container">
       <h2 class="title text-center">The Association</h2>
       <p>The Ballarat Hackerspace is a volunteer based, non-profit incorporated association (in Victoria) and follows the <a href="<%= url_for('modelrules') %>">Rules of Association</a> that it was founded with.</p>
-      <p>As part of this, we elect a Committee as chartered in the rules. The current committee were elected on Saturday, 9th of July, 2015.</p>
+      <p>As part of this, we elect a Committee as chartered in the rules. The current committee elected on Saturday, 23rd of September, 2017 are:</p>
 
       <table class="table">
         <thead>
