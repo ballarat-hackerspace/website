@@ -55,7 +55,7 @@ helper 'is_not_dooropener' => sub {
   my $bhack = $c->stash('bhack');
 
   return {'code' => 4001, 'error' => 'Inactive Membership'   } unless $c->tidyhq->has_active_membership({tidyhq => $bhack});
-  return {'code' => 4002, 'error' => 'Insuffienct Membership'} unless $c->tidyhq->in_group('workshop members', {tidyhq => $bhack});
+  return {'code' => 4002, 'error' => 'Insuffienct Membership'} unless $c->tidyhq->in_group('full-time members', {tidyhq => $bhack});
   return {'code' => 4003, 'error' => 'Unregistered Device'   } unless $c->device->is_whitelisted;
 
   return undef;
