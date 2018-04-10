@@ -61,23 +61,24 @@
         <tbody>
           <tr>
             <td>Monday - All Welcome</td>
-            <td>6pm &ndash; 9pm</td>
+            <td>6pm &ndash; 9pm<sup>&dagger;</sup></td>
           </tr>
           <tr>
             <td>Tuesday - All Welcome</td>
-            <td>4pm &ndash; 9pm</td>
+            <td>4pm &ndash; 9pm<sup>&dagger;</sup></td>
           </tr>
           <tr>
             <td>Wednesday - <a href="/women">Women and family/friends</a></td>
-            <td>6pm &ndash; 9pm</td>
+            <td>6pm &ndash; 9pm<sup>&dagger;</sup></td>
           </tr>
           <tr>
             <td>Saturday - All Welcome</td>
-            <td>9am &ndash; 3pm</td>
+            <td>9am &ndash; 3pm<sup>&dagger;</sup></td>
           </tr>
         </tbody>
       </table>
 
+      <p><b>&dagger;</b>: The hackerspace will close up to 1 hour earlier if there are no members or visitors at that time. If you need us to keep the hackerspace open for you in this last hour please let us know via twitter or slack, we're happy to stay open if people need to use the space!</p>
       <p><b>Note:</b> Non-probationary Workshop members have 24/7 access to the space.</p>
     </div>
   </section>
