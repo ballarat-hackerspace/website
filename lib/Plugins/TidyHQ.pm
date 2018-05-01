@@ -37,6 +37,8 @@ sub register {
 
   my $url = Mojo::URL->new(sprintf 'https://%s.tidyhq.com/', $config->{organisation});
 
+  $app->log->info('TidyHQ proxy registered for: ' . $url);
+
   $self->{url} = $url;
   $self->{config} = $config;
 

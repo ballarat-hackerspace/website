@@ -10,10 +10,6 @@
   <script type="text/javascript" src="/js/plugins/jquery.fitvids.js"></script>
   <script type="text/javascript" src="/js/main.js"></script>
 
-  <!-- flexslider -->
-  <script type="text/javascript" src="/js/plugins/jquery.flexslider-min.js"></script>
-  <script type="text/javascript" src="/js/plugins/flexslider-custom.js"></script>
-
   <script>
     $(document).ready(function() {
       // initialise tooltips

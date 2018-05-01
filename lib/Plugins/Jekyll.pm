@@ -20,7 +20,8 @@ use Mojo::Base 'Mojolicious::Plugin';
 
 use File::Basename qw(basename);
 use File::Spec;
-use Mojo::Util qw(dumper slurp trim);
+use Mojo::File;
+use Mojo::Util qw(dumper trim);
 use Text::MultiMarkdown qw(markdown);
 use Time::Piece;
 use YAML::Tiny;
@@ -52,6 +53,8 @@ sub register {
 
   # prepare the cache
   $plugin->_cache_posts($conf->{directory});
+
+  $app->log->info(sprintf('Processing Jekyll blogs at: %s (%s)', $conf->{directory}, $conf->{style}));
 
   $app->helper(blog_summary => sub {
     my $self = shift;
@@ -139,13 +142,13 @@ sub _parse_file {
   $params{excerpt} //= 1;
 
   # build our path
-  my $path = File::Spec->catpath(undef, $self->conf->{directory}, $filename);
+  my $path = Mojo::File->new($self->conf->{directory}, $filename);
 
   # ensure the path exists
-  return { status => 404, bytes => undef } unless -r $path;
+  return { status => 404, bytes => undef } unless -r $path->to_string;
 
   # slurp
-  my $bytes = slurp $path;
+  my $bytes = $path->slurp;
 
   # ensure header exists
   return { status => 500, bytes => undef } unless $bytes =~ m/---(.*)---\r?\n/s;
@@ -159,7 +162,7 @@ sub _parse_file {
   $stash->{style} = 'unknown';
 
   # load filename implied details
-  my $file = basename($path);
+  my $file = $path->basename;
 
   if ($file =~ m/^(\d{4}-\d{2}-\d{2})-([^\.]+)\.(\w+)/) {
     $stash->{date} = Time::Piece->strptime($1, "%Y-%m-%d");

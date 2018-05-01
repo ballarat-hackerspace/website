@@ -23,19 +23,26 @@ use Mojolicious::Lite;
 use Mojo::JSON qw(decode_json encode_json);
 use Mojo::UserAgent;
 use Mojo::Util qw(b64_decode b64_encode dumper sha1_sum);
+
 use NetAddr::IP;
 use Text::MultiMarkdown qw(markdown);
 use Time::Piece;
 
+use constant {
+  CONFIG_PATH => $ENV{BHACKD_CONFIG} // '/etc/bhackd.conf'
+};
 
 use Plugins::Jekyll;
 
-plugin 'JSONConfig'      => {file => '/etc/bhackd.conf'};
+app->log->info('Configuration: ' . CONFIG_PATH);
+
+plugin 'JSONConfig'      => {file => CONFIG_PATH};
 plugin 'Plugins::Alarm'  => app->config->{alarm}  // {};
 plugin 'Plugins::Device' => app->config->{device} // {};
 plugin 'Plugins::Door'   => app->config->{door}   // {};
 plugin 'Plugins::Jekyll' => app->config->{blog}   // {};
 plugin 'Plugins::TidyHQ' => app->config->{tidyhq} // {};
+
 
 app->secrets(app->config->{secrets});
 
