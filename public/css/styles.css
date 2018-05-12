@@ -530,10 +530,12 @@ li, li > p {
 /* ======= Promo section ======= */
 .promo-header {
   background-color: #222;
+  max-height: 100vh;
+  padding: 0!important;
 }
 
 .section:first-of-type {
-  padding-top: 108px!important;
+  padding-top: 108px;
 }
 
 .section+.promo-header .intro,
@@ -1153,11 +1155,20 @@ li, li > p {
   color: #999999;
 }
 
+.carousel, .carousel-inner, .carousel-inner > .item {
+  max-height: 100vh;
+}
+
+.carousel {
+  overflow: hidden
+}
+
 .carousel-banner {
   opacity: 0.3;
 }
 
 .carousel-caption { 
+  font-size: 24px;
   padding-bottom: 48px;
 }
 
