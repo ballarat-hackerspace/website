@@ -10,7 +10,7 @@
 
 <body>
   <!-- header -->
-  %= include 'navigation-only.inc', active => 'contact'
+  %= include 'navigation.inc', active => 'contact'
 
   <!-- contact section -->
   <section id="contact" class="section">

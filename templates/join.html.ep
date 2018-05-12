@@ -10,7 +10,7 @@
 
 <body>
   <!-- header -->
-  %= include 'navigation-only.inc', active => 'join'
+  %= include 'navigation.inc', active => 'join'
 
   <!-- ******team Section****** -->
   <section id="team" class="section">

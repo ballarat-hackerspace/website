@@ -10,7 +10,7 @@
 
 <body>
   <!-- header -->
-  %= include 'navigation-only.inc', active => 'blog'
+  %= include 'navigation.inc', active => 'blog'
 
   <!-- photos section -->
   <section id="team" class="section">

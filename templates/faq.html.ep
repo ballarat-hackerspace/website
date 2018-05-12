@@ -10,49 +10,35 @@
 
 <body>
   <!-- header -->
-  %= include 'navigation-only.inc', active => 'faq'
+  %= include 'navigation.inc', active => 'faq'
 
   <!-- about team -->
   <section id="team" class="section">
     <div class="container">
       <h2 class="title text-center">Frequently Asked Questions</h2>
-      
+
       <h3>When are you open?</h3>
-      <p>We are open Monday evening (6pm-9pm), Tuesday evening (4pm - 9pm) and Saturdays (9am - 3pm) to the general public.
-      More information is on our <a href="/about">About page</a>.
-      Full time members also have 24-7 access to the space. You are welcome to come in an have a chat if a member is at the space and the door is open.
-      </p>
-      
+      <p>We are open Monday evening (6pm-9pm), Tuesday evening (4pm - 9pm) and Saturdays (9am - 3pm) to the general public. More information is on our <a href="/about">About page</a>. Full time members also have 24-7 access to the space. You are welcome to come in an have a chat if a member is at the space and the door is open.</p>
+
       <h3>Do you do guided workshops?</h3>
-      <p>We are mainly an area for self-learning and exploration, however we do workshops on specific areas from time to time.
-      Head to our <a href="/workshops">Workshops</a> page for information on the current workshops planned and in progress.
-      </p>
-      
+      <p>We are mainly an area for self-learning and exploration, however we do workshops on specific areas from time to time. Head to our <a href="/workshops">Workshops</a> page for information on the current workshops planned and in progress.</p>
+
       <h3>Do you allow younger people to join?</h3>
-      <p>We do allow younger people to join, but please keep in mind that we do not do guided lessons (outside of workshops).
-      If your child wants to participate, they are more than welcome, but we recommend that are parent comes with them to the space and joins in.
-      Full memberships allow an adult to bring a child with them to the space (several of our members bring children), on the understanding that children are looked after by their parent.
-      </p>
+      <p>We do allow younger people to join, but please keep in mind that we do not do guided lessons (outside of workshops). If your child wants to participate, they are more than welcome, but we recommend that are parent comes with them to the space and joins in. Full memberships allow an adult to bring a child with them to the space (several of our members bring children), on the understanding that children are looked after by their parent. </p>
       <p>Members are responsible for their own safety when in the space, even younger members.</p>
-      
+
       <h3>How are you funded?</h3>
       <p>We are funded by our members, and also by our gracious sponsors.</p>
 
-      
       <h3>Can you build something for us?</h3>
-      <p>Members are welcome to do work, including paid work, using the resources of the hackerspace (as long as this otherwise fits in our agreement).
-      In that light, you are welcome to make a specific agreement with <i>members of the space</i>, but the hackerspace has no interest or liability in that agreement.
-      </p>
-      
+      <p>Members are welcome to do work, including paid work, using the resources of the hackerspace (as long as this otherwise fits in our agreement). In that light, you are welcome to make a specific agreement with <i>members of the space</i>, but the hackerspace has no interest or liability in that agreement.</p>
+
       <h3>Isn't hacking illegal?</h3>
-      <p>We don't do hacking in the "computer security" sense, which is breaking into computer systems.
-      We use the word "hack" in its original sense - to break something open, change how it works, and make it do new things.
-      </p>
+      <p>We don't do hacking in the "computer security" sense, which is breaking into computer systems. We use the word "hack" in its original sense - to break something open, change how it works, and make it do new things.</p>
       <p>The most illegal thing we do (which isn't illegal) is to void warranties.</p>
-      
+
       <h3>This sounds great - how can I help?</h3>
-      <p>We are looking for sponsorships from organisations that share our goals. Money from sponsorship goes into increasing workshops, new tools, and eventually a larger hackerspace.
-      </p>
+      <p>We are looking for sponsorships from organisations that share our goals. Money from sponsorship goes into increasing workshops, new tools, and eventually a larger hackerspace.</p>
       <p>Individuals can help by becoming a member and participating in the community!</p>
     </div>
   </section>

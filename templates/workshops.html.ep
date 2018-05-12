@@ -13,7 +13,7 @@
 
 <body>
 <!-- header -->
-%= include 'navigation-only.inc', active => 'workshops'
+%= include 'navigation.inc', active => 'workshops'
 
 <!-- ******team Section****** -->
 <section id="workshops" class="section">

@@ -10,7 +10,7 @@
 
 <body>
   <!-- header -->
-  %= include 'navigation-only.inc', active => 'home'
+  %= include 'navigation.inc', active => 'home'
 
   <section class="section promo-header">
     <div id="carousel-banner" class="carousel slide" data-ride="carousel">

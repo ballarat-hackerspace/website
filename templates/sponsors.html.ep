@@ -10,7 +10,7 @@
 
 <body>
   <!-- header -->
-  %= include 'navigation-only.inc', active => 'sponsors'
+  %= include 'navigation.inc', active => 'sponsors'
 
   <!-- sponsors section -->
   <section id="sponsors" class="section">
@@ -54,7 +54,7 @@
           <h4>Ian Firns (<span class="trophy" title="3 years"><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i></span>)</h4>
         </div>
         <div class="col-sm-6 text-center">
-          <h4>Brett James (<span class="trophy" title="2 years"><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i></span>)</h4>
+          <h4>Brett James (<span class="trophy" title="3 years"><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i></span>)</h4>
         </div>
         <div class="col-sm-6 text-center">
           <h4>Stuart Clark (<span class="trophy" title="1 year"><i class="fa fa-trophy"></i></span>)</h4>
