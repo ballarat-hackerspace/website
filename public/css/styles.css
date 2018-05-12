@@ -1657,6 +1657,7 @@ li, li > p {
 /*
 ** SPONSORS
 */
+
 #sponsors .spnsr-logo,
 #footer-bar .footer-image {
   height: 84px;
@@ -1666,6 +1667,7 @@ li, li > p {
 /*
 ** FOOTER
 */
+
 .footer .footer-content {
   background: #333;
   color: rgba(255, 255, 255, 0.5);
@@ -1749,6 +1751,11 @@ li, li > p {
 .footer .social-icons li {
   margin-bottom: 15px;
 }
+
+/*
+** SOCIAL ICONS
+*/
+
 .social-icons {
   list-style: none;
   padding: 10px 0;
@@ -1796,7 +1803,26 @@ li, li > p {
   text-align: center;
   padding: 0;
 }
-/* Extra small devices (phones, less than 768px) */
+
+/*
+** VIDEO
+*/
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+.video-container iframe, .video-container object, .video-container embed {
+  height:100%;
+  left:0;
+  position:absolute;
+  top:0;
+  width:100%;
+}
+
+/* extra small devices (phones, less than 768px) */
 @media (max-width: 767px) {
   .config-wrapper { display: none; }
   .header h1.logo {
