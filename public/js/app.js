@@ -9,6 +9,10 @@ $(document).ready(function() {
     }
   });
 
+  // set minimum height
+  var minHeight = $(window).height() - $('footer').height();
+  $('.page').css('min-height', minHeight + 'px');
+
   // initialise tooltips
   $('[data-toggle="tooltip"]').tooltip();
 });
