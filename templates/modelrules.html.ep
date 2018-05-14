@@ -1,21 +1,12 @@
-<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
-<head>
-  <title>Code of Conduct</title>
+% layout 'page', page_title => 'Model Rules';
 
-  %= include 'header.inc'
-</head>
+<!-- header -->
+%= include 'navigation.inc', active => ''
 
-<body>
-  <!-- header -->
-  %= include 'navigation.inc', active => ''
-
-  <!-- model rules -->
-  <section id="modelrules" class="section">
-    <div class="container">
-      <h2 class="title text-center">Model Rules</h2>
+<!-- model rules -->
+<section id="modelrules" class="section">
+  <div class="container">
+    <h2 class="title text-center">Model Rules</h2>
 
 <h1 id="consumeraffairsvictoria">CONSUMER AFFAIRS VICTORIA</h1>
 
@@ -1562,13 +1553,5 @@ Date:
 
 <p>The master copy of these rules can always be found on GitHub at <a href="https://github.com/ballarat-hackerspace/association/blob/master/rules-of-the-association.md">https://github.com/ballarat-hackerspace/association/blob/master/rules-of-the-association.md</a>.</p>
 
-    </div><!--//row-->
-  </section><!--//job-->
-
-  <!-- footer -->
-  %= include 'footer.inc'
-
-  <!-- scripts -->
-  %= include 'scripts.inc'
-</body>
-</html>
+  </div><!--//row-->
+</section><!--//job-->

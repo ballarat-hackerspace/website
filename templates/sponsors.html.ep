@@ -1,75 +1,55 @@
-<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
-<head>
-  <title>Sponsors</title>
+% layout 'page', page_title => 'Workshops';
 
-  %= include 'header.inc'
-</head>
+<!-- header -->
+%= include 'navigation.inc', active => 'sponsors'
 
-<body>
-  <!-- header -->
-  %= include 'navigation.inc', active => 'sponsors'
-
-  <!-- sponsors section -->
-  <section id="sponsors" class="section">
-    <div class="container">
-      <h2 class="title text-center">Corporate Sponsors</h2>
-      <div class="row">
-        <div class="col-sm-6 text-center">
-          <a href="https://www.eurekative.com.au/"><img class="spnsr-logo" src="/images/spnsrs/logo-eurekative.png"></img></a>
-        </div>
-        <div class="col-sm-6 text-center">
-          <a href="https://lab79.io/"><img class="spnsr-logo" src="/images/spnsrs/logo-lab_79.svg"></img></a>
-        </div>
+<!-- sponsors section -->
+<section id="sponsors" class="section">
+  <div class="container">
+    <h2 class="title text-center">Corporate Sponsors</h2>
+    <div class="row">
+      <div class="col-sm-6 text-center">
+        <a href="https://www.eurekative.com.au/"><img class="spnsr-logo" src="/images/spnsrs/logo-eurekative.png"></img></a>
       </div>
-      <div class="row">
-        <div class="col-sm-6 text-center">
-          <a href="http://www.lateralplains.com"><img class="spnsr-logo" src="/images/spnsrs/logo-lateral-plains.png"></img></a>
-        </div>
-        <div class="col-sm-6 text-center">
-          <a href="http://www.sedadvisory.com.au/"><img class="spnsr-logo" src="/images/spnsrs/logo-sed-light-background.png"></img></a>
-        </div>
+      <div class="col-sm-6 text-center">
+        <a href="https://lab79.io/"><img class="spnsr-logo" src="/images/spnsrs/logo-lab_79.svg"></img></a>
       </div>
-      <div class="row">
-        <div class="col-sm-6 text-center">
-          <a href="http://www.datapipeline.com.au/"><img class="spnsr-logo" src="/images/spnsrs/logo-datapipeline.png"></img></a>
-        </div>
-        <div class="col-sm-6 text-center">
-          <a href="http://www.ballarat.vic.gov.au/"><img class="spnsr-logo" src="/images/spnsrs/logo-city-of-ballarat-light-background.png"></img></a>
-        </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 text-center">
+        <a href="http://www.lateralplains.com"><img class="spnsr-logo" src="/images/spnsrs/logo-lateral-plains.png"></img></a>
       </div>
-    </div><!-- container -->
-  </section><!-- sponsors section -->
-
-  <section id="seeders" class="section">
-    <div class="container">
-      <h2 class="title text-center">Seeders</h2>
-      <div class="row">
-        <div class="col-sm-6 text-center">
-          <h4>Scott Weston (<span class="trophy" title="3 years"><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i></span>)</h4>
-        </div>
-        <div class="col-sm-6 text-center">
-          <h4>Ian Firns (<span class="trophy" title="3 years"><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i></span>)</h4>
-        </div>
-        <div class="col-sm-6 text-center">
-          <h4>Brett James (<span class="trophy" title="3 years"><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i></span>)</h4>
-        </div>
-        <div class="col-sm-6 text-center">
-          <h4>Stuart Clark (<span class="trophy" title="1 year"><i class="fa fa-trophy"></i></span>)</h4>
-        </div>
+      <div class="col-sm-6 text-center">
+        <a href="http://www.sedadvisory.com.au/"><img class="spnsr-logo" src="/images/spnsrs/logo-sed-light-background.png"></img></a>
       </div>
-    </div><!--//container-->
-  </section><!-- photos section-->
+    </div>
+    <div class="row">
+      <div class="col-sm-6 text-center">
+        <a href="http://www.datapipeline.com.au/"><img class="spnsr-logo" src="/images/spnsrs/logo-datapipeline.png"></img></a>
+      </div>
+      <div class="col-sm-6 text-center">
+        <a href="http://www.ballarat.vic.gov.au/"><img class="spnsr-logo" src="/images/spnsrs/logo-city-of-ballarat-light-background.png"></img></a>
+      </div>
+    </div>
+  </div><!-- container -->
+</section><!-- sponsors section -->
 
-  <!-- footer -->
-  %= include 'footer.inc'
-
-  <!-- authenticate -->
-  %= include 'authenticate.inc'
-
-  <!-- scripts -->
-  %= include 'scripts.inc'
-</body>
-</html>
+<section id="seeders" class="section">
+  <div class="container">
+    <h2 class="title text-center">Seeders</h2>
+    <div class="row">
+      <div class="col-sm-6 text-center">
+        <h4>Scott Weston (<span class="trophy" title="3 years"><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i></span>)</h4>
+      </div>
+      <div class="col-sm-6 text-center">
+        <h4>Ian Firns (<span class="trophy" title="3 years"><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i></span>)</h4>
+      </div>
+      <div class="col-sm-6 text-center">
+        <h4>Brett James (<span class="trophy" title="3 years"><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i><i class="fa fa-trophy"></i></span>)</h4>
+      </div>
+      <div class="col-sm-6 text-center">
+        <h4>Stuart Clark (<span class="trophy" title="1 year"><i class="fa fa-trophy"></i></span>)</h4>
+      </div>
+    </div>
+  </div><!--//container-->
+</section><!-- photos section-->

@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<!--[if IE 8]>
-<html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]>
-<html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en"> <!--<![endif]-->
-<head>
-    <title>Workshops</title>
+% layout 'page', page_title => 'Workshops';
 
-    %= include 'header.inc'
-</head>
-
-<body>
 <!-- header -->
 %= include 'navigation.inc', active => 'workshops'
 
@@ -31,105 +19,105 @@
 <hr noshade>
 
 <section id="3dprinting" class="section">
+  <div class="container">
+    <h2>Build your own 3D Printer Workshop</h2>
+
+    <div class="row">
+      <div class="col-sm-6 col-md-8">
+        <h3>Why Build Your Own?</h3>
+
+        <p>3D Printers allow you to print objects, allowing you to design and build new custom built objects.</p>
+        <p>You can print your own tools and toys, learn to work with open source hardware, improve upon publicly available designs, and learn about one of the biggest trends for future development.</p>
+        <p>There are over 100,000 items you can print right now on design-sharing website Thingiverse – all free and able to be customised!</p>
+        <p>If you have ever wanted to get into 3D printing, now is your chance. The Ballarat Hackerspace is presenting a workshop, with all of the necessary components, for you to build your own 3D printer.</p>
+        <p>Our last workshop was a great success and we will definitely be repeating it, just register your interest below to get updates directly to your inbox</p>
+
+        <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <img class="img-responsive img-h3-padding" src="/images/workshops/prusa-i3-2.jpg"></img>
+      </div>
+    </div>
+    <h4>Why build one with your own hands, in our workshop?</h4>
+    <ul>
+      <li>People who assemble 3D Printers have much greater printing success vs people who buy complete units.</li>
+      <li>You can understand the inner workings of the machines, allowing for easier debugging and customisation.</li>
+      <li>You’ll learn about Open Hardware and Open Software, and where to find help.</li>
+      <li>You can make it the way YOU want it – change the hardware, re-write the software, etc. It will never be obsolete.</li>
+    </ul>
+
+    <h4>Why the Prusa i3 Printer?</h4>
+    <ul>
+      <li>It’s one of the easiest to assemble, using 80% fewer parts than prior versions.</li>
+      <li>It’s open source – upgrades / improved parts for it can (and are) made for it by anyone.</li>
+      <li>It’s easily portable and prints great!</li>
+      <li>The build area is 200mm x 200mm x 180mm &mdash; bigger than a lot of other printers.</li>
+    </ul>
+
+    <h3>What’s included?</h3>
+
+    <p>Our workshops include everything needed to complete your Prusa i3 RepRap printer:</p>
+    <ul>
+      <li>Hardware (rods, bearings, rails, etc), complete electronics and heated build platform.</li>
+      <li>Assembly Manual (digital video), and tools for maintaining your printer.</li>
+      <li>Basic supplies to get you started in printing (plastic, blue tape, etc)</li>
+      <li>A USB flash drive with the software you’ll need, a PDF copy of the manual, and sample files to print</li>
+      <li>6 months membership to the Ballarat Hackerspace (existing members will be credited)</li>
+    </ul>
+
+    <p>We’re building printers the way we like them and not using the cheapest available pieces like some eBay kits are. The printer is an open source design that allows you to easily modify and upgrade to your personal preference.</p>
+
+    <h3>What’s the Cost:</h3>
+    <p>The total cost for the course is $900, discounted to $750 for members.</p>
+    <p>There is a minimum deposit of $256 to secure your position in the workshop which is refundable up to 7 days before commencement of the first workshop session.</p>
+
+    <h3>Class Size:</h3>
+    <p>Classes are currently limited to 6 printers at a time.</p>
+    <p>Groups of two people are fine to work on each printer if necessary, but no larger due to space constraints.</p>
+
+    <h3>Running Time:</h3>
+    <p>The dedicated assembly classes will run on Wednesday nights from 6pm to 8.30pm. Granted that you receive membership to the Hackerspace for 6 months means that you use any other open times to complete your printer sooner. Total assembly time is approximately 12-16 hours (4 or 5 dedicated workshop sessions), you may finish sooner if you forge ahead.</p>
+
+    <h3>Prerequisites:</h3>
+    <p>All participants are encouraged to bring a laptop if they own one so that they can install the software and test it. If you don’t have a laptop that’s fine, you’ll be able to bring the software home and install it, and we’ll use one of our laptops to test it in class.</p>
+    <p>Assembling these printers requires use of basic tools and software. All tools are provided.</p>
+
+    <h4>Important Note:</h4>
+    <p>Working with some of these tools (soldering irons, hobby knives, etc) presents a limited opportunity for injury. Participants will be shown how to complete the build safely, but should know that they’re responsible for their own safety.</p>
+  </div><!--//container-->
+
+  <section id="details" class="section section-highlight">
     <div class="container">
-        <h2>Build your own 3D Printer Workshop</h2>
-
-        <div class="row">
-            <div class="col-sm-6 col-md-8">
-                <h3>Why Build Your Own?</h3>
-
-                <p>3D Printers allow you to print objects, allowing you to design and build new custom built objects.</p>
-                <p>You can print your own tools and toys, learn to work with open source hardware, improve upon publicly available designs, and learn about one of the biggest trends for future development.</p>
-                <p>There are over 100,000 items you can print right now on design-sharing website Thingiverse – all free and able to be customised!</p>
-                <p>If you have ever wanted to get into 3D printing, now is your chance. The Ballarat Hackerspace is presenting a workshop, with all of the necessary components, for you to build your own 3D printer.</p>
-                <p>Our last workshop was a great success and we will definitely be repeating it, just register your interest below to get updates directly to your inbox</p>
-
-                <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <img class="img-responsive img-h3-padding" src="/images/workshops/prusa-i3-2.jpg"></img>
-            </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <h3>Prusa i3 Technical Details:</h3>
+          <ul>
+            <li>Print volume (X, Y, Z): 200mm x 200mm x 180mm</li>
+            <li>Z Axis Positioning Accuracy: 0.004mm</li>
+            <li>XY Axis Positioning Accuracy: 0.012mm</li>
+            <li>The Layer Thickness: 0.1mm-0.4mm</li>
+            <li>Layer Resolution: 100 microns</li>
+            <li>Printing Filament: ABS, PLA</li>
+            <li>Filament Diameter: 1.75mm</li>
+            <li>Nozzle Diameter: 0.4mm</li>
+            <li>Print Speed: 40-100mm/s</li>
+            <li>Print Plate Size: 213*200mm</li>
+            <li>Max heated bed temperature: 110 deg C(adjustable)</li>
+            <li>Max extruder temperature: about 240 deg C</li>
+            <li>Connectivity: USB, SD card (via LCD user interface)</li>
+            <li>Electronics: MKS Gen V 1.1 (Ramps Compatible)</li>
+            <li>Power supply: 100-120VAC/4.8A or 200-240VAC/2.4A</li>
+            <li>Output: DC 12V/ 30A</li>
+            <li>CAD Input data file format: STL, G-code</li>
+            <li>Operating System: Windows / Linux / Mac</li>
+          </ul>
         </div>
-        <h4>Why build one with your own hands, in our workshop?</h4>
-        <ul>
-            <li>People who assemble 3D Printers have much greater printing success vs people who buy complete units.</li>
-            <li>You can understand the inner workings of the machines, allowing for easier debugging and customisation.</li>
-            <li>You’ll learn about Open Hardware and Open Software, and where to find help.</li>
-            <li>You can make it the way YOU want it – change the hardware, re-write the software, etc. It will never be obsolete.</li>
-        </ul>
-
-        <h4>Why the Prusa i3 Printer?</h4>
-        <ul>
-            <li>It’s one of the easiest to assemble, using 80% fewer parts than prior versions.</li>
-            <li>It’s open source – upgrades / improved parts for it can (and are) made for it by anyone.</li>
-            <li>It’s easily portable and prints great!</li>
-            <li>The build area is 200mm x 200mm x 180mm &mdash; bigger than a lot of other printers.</li>
-        </ul>
-
-        <h3>What’s included?</h3>
-
-        <p>Our workshops include everything needed to complete your Prusa i3 RepRap printer:</p>
-        <ul>
-            <li>Hardware (rods, bearings, rails, etc), complete electronics and heated build platform.</li>
-            <li>Assembly Manual (digital video), and tools for maintaining your printer.</li>
-            <li>Basic supplies to get you started in printing (plastic, blue tape, etc)</li>
-            <li>A USB flash drive with the software you’ll need, a PDF copy of the manual, and sample files to print</li>
-            <li>6 months membership to the Ballarat Hackerspace (existing members will be credited)</li>
-        </ul>
-
-        <p>We’re building printers the way we like them and not using the cheapest available pieces like some eBay kits are. The printer is an open source design that allows you to easily modify and upgrade to your personal preference.</p>
-
-        <h3>What’s the Cost:</h3>
-        <p>The total cost for the course is $900, discounted to $750 for members.</p>
-        <p>There is a minimum deposit of $256 to secure your position in the workshop which is refundable up to 7 days before commencement of the first workshop session.</p>
-
-        <h3>Class Size:</h3>
-        <p>Classes are currently limited to 6 printers at a time.</p>
-        <p>Groups of two people are fine to work on each printer if necessary, but no larger due to space constraints.</p>
-
-        <h3>Running Time:</h3>
-        <p>The dedicated assembly classes will run on Wednesday nights from 6pm to 8.30pm. Granted that you receive membership to the Hackerspace for 6 months means that you use any other open times to complete your printer sooner. Total assembly time is approximately 12-16 hours (4 or 5 dedicated workshop sessions), you may finish sooner if you forge ahead.</p>
-
-        <h3>Prerequisites:</h3>
-        <p>All participants are encouraged to bring a laptop if they own one so that they can install the software and test it. If you don’t have a laptop that’s fine, you’ll be able to bring the software home and install it, and we’ll use one of our laptops to test it in class.</p>
-        <p>Assembling these printers requires use of basic tools and software. All tools are provided.</p>
-
-        <h4>Important Note:</h4>
-        <p>Working with some of these tools (soldering irons, hobby knives, etc) presents a limited opportunity for injury. Participants will be shown how to complete the build safely, but should know that they’re responsible for their own safety.</p>
+        <div class="col-sm-6">
+          <img class="img-responsive img-h3-padding" src="/images/workshops/prusa-i3-1.jpg"></img>
+        </div>
+      </div>
     </div><!--//container-->
-
-    <section id="details" class="section section-highlight">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h3>Prusa i3 Technical Details:</h3>
-                    <ul>
-                        <li>Print volume (X, Y, Z): 200mm x 200mm x 180mm</li>
-                        <li>Z Axis Positioning Accuracy: 0.004mm</li>
-                        <li>XY Axis Positioning Accuracy: 0.012mm</li>
-                        <li>The Layer Thickness: 0.1mm-0.4mm</li>
-                        <li>Layer Resolution: 100 microns</li>
-                        <li>Printing Filament: ABS, PLA</li>
-                        <li>Filament Diameter: 1.75mm</li>
-                        <li>Nozzle Diameter: 0.4mm</li>
-                        <li>Print Speed: 40-100mm/s</li>
-                        <li>Print Plate Size: 213*200mm</li>
-                        <li>Max heated bed temperature: 110 deg C(adjustable)</li>
-                        <li>Max extruder temperature: about 240 deg C</li>
-                        <li>Connectivity: USB, SD card (via LCD user interface)</li>
-                        <li>Electronics: MKS Gen V 1.1 (Ramps Compatible)</li>
-                        <li>Power supply: 100-120VAC/4.8A or 200-240VAC/2.4A</li>
-                        <li>Output: DC 12V/ 30A</li>
-                        <li>CAD Input data file format: STL, G-code</li>
-                        <li>Operating System: Windows / Linux / Mac</li>
-                    </ul>
-                </div>
-                <div class="col-sm-6">
-                    <img class="img-responsive img-h3-padding" src="/images/workshops/prusa-i3-1.jpg"></img>
-                </div>
-            </div>
-        </div><!--//container-->
-    </section><!--//details-section-->
+  </section><!--//details-section-->
 </section><!--//3dprinting-section-->
 
 <hr noshade>
@@ -171,63 +159,52 @@
 <hr noshade>
 
 <section id="multicopter" class="section">
-    <div class="container">
-                <h2>Multicopter/Drone Building Workshop</h2>
+  <div class="container">
+    <h2>Multicopter/Drone Building Workshop</h2>
 
-        <div class="row">
-            <div class="col-sm-6 col-md-8">
+    <div class="row">
+      <div class="col-sm-6 col-md-8">
 
-                <p>Ever wanted to take to the skies, and see things from a different perspective? Perhaps you would like to test your skills in learning Acrobatic flight? Join us for an exciting workshop where you build your own drone!</p>
-                <p>Drones have exploded in popularity, and this Ballarat Hackerspace workshop is a fantastic opportunity to get into this exciting hobby. The rate of technological change in this field can make it daunting to get started, but our resident drone expert Brett James will be leading this workshop to get you started on the right track.</p>
-                <p>The prototype for this workshop was flown by one of the members at the Ballarat Hackerspace at the D1 Drone Racing Nationals and was able to reach the semi-finals with it - it has plenty of power to be controlled and applications from racing to photography.</p>
+        <p>Ever wanted to take to the skies, and see things from a different perspective? Perhaps you would like to test your skills in learning Acrobatic flight? Join us for an exciting workshop where you build your own drone!</p>
+        <p>Drones have exploded in popularity, and this Ballarat Hackerspace workshop is a fantastic opportunity to get into this exciting hobby. The rate of technological change in this field can make it daunting to get started, but our resident drone expert Brett James will be leading this workshop to get you started on the right track.</p>
+        <p>The prototype for this workshop was flown by one of the members at the Ballarat Hackerspace at the D1 Drone Racing Nationals and was able to reach the semi-finals with it - it has plenty of power to be controlled and applications from racing to photography.</p>
 
-                <h3>Difficulty:</h3>
-                <p>This workshop is aimed at intermediate levels, with a moderate amount of soldering, a significant amount of electronics and some programming. We provide all tools and equipment you need, and can assist with any skills that you need to learn to complete the project. It is strongly recommended to have flight time on simulators (which we show how to set up using your transmitter) to become used to the controls.</p>
-                <p>On completing construction, you will have a functioning multicopter, capable of Line of Sight flying and ready to be expanded as you see fit for Assisted Sensor flight, Racing, and Photography. You will have gained confidence in flying using a transmitter before taking off.</p>
-                <h3>    Why build a multicopter/drone instead of grabbing one from the shelves?</h3>
-                <p>Building one of these will give you great understanding of the amazing array of sensors capable of giving you flight, and an appreciation for the culture of building your own. Understanding these functions will make repairs much easier - all parts are replaceable, and a moderate bump or crash can be easily fixed. Further, you will learn skills that allow you to plan and build upgrades to your drone, and build new drones in the future. Further, the electronics and programming skills developed have a wide range of applications.</p>
-                <p>You can choose exactly what purpose your device is, be it racing or landscape photography and there is room on this for expansion in the future. The flight controller software, frame kit and many other parts of the build are open source.</p>
-                <p>As part of your workshop ticket, you’ll receive three months casual membership, allowing you to come to the space, use the tools, and get guidance from our other members at the space.</p>
-                <h3>    What's included?</h3>
+        <h3>Difficulty:</h3>
+        <p>This workshop is aimed at intermediate levels, with a moderate amount of soldering, a significant amount of electronics and some programming. We provide all tools and equipment you need, and can assist with any skills that you need to learn to complete the project. It is strongly recommended to have flight time on simulators (which we show how to set up using your transmitter) to become used to the controls.</p>
+        <p>On completing construction, you will have a functioning multicopter, capable of Line of Sight flying and ready to be expanded as you see fit for Assisted Sensor flight, Racing, and Photography. You will have gained confidence in flying using a transmitter before taking off.</p>
+        <h3>    Why build a multicopter/drone instead of grabbing one from the shelves?</h3>
+        <p>Building one of these will give you great understanding of the amazing array of sensors capable of giving you flight, and an appreciation for the culture of building your own. Understanding these functions will make repairs much easier - all parts are replaceable, and a moderate bump or crash can be easily fixed. Further, you will learn skills that allow you to plan and build upgrades to your drone, and build new drones in the future. Further, the electronics and programming skills developed have a wide range of applications.</p>
+        <p>You can choose exactly what purpose your device is, be it racing or landscape photography and there is room on this for expansion in the future. The flight controller software, frame kit and many other parts of the build are open source.</p>
+        <p>As part of your workshop ticket, you’ll receive three months casual membership, allowing you to come to the space, use the tools, and get guidance from our other members at the space.</p>
+        <h3>    What's included?</h3>
 
-                <ul><li><i>Everything needed for Line of Sight flight</i></li>
-                <li>2.4Ghz Transmitter (9XR Pro) including the FrSky Module - both used for controlling the multicopter</li>
-                <li>Full Carbon Fiber Quadcopter frame kit (Based on a ZMR 250) with screws, spacers and power distribution board</li>
-                <li>Flight Control Board (The famous Naze 32)</li>
-                <li>Four Motors each capable of generating up to 800 Grams of thrust in a package that weighs less than 25 Grams!</li>
-                <li>Battery for flight, and for Transmitter</li>
-                <li>Basic Charger for both</li>
-                <li>Cabling to connect Transmitter to computer and simulation software for practice</li>
-                <li>All electronics ready for assembly</li>
-                </ul>
-                <p>We also provide access to all the tools you’ll need to build the drone, such as soldering irons and testing equipment, as part of your workshop ticket. You will need your own computer/laptop for flight simulation and some other components. If you don’t have access to one, please contact us before the course, as we can probably source one for you to use.</p>
-                <h3>    Running Time:</h3>
-                <p>4 Weeks of time have been allocated, with a Dedicated session on Saturdays (12pm-3pm) and recaps available on Monday nights (7-9pm). This workshop also includes three months of social club membership, where you can work on your kit, as well as get inspiration and advice for other projects you are thinking of. Who knows, weather permitting once the kits are completed we may all be able to go pick a local location and do some test flights.</p>
-                <h3>    Prerequisites:</h3>
-                <p>No flying experience is needed.</p>
-                <p>Basic soldering skills will be needed to complete the Kit - various parts will need to be cut and soldered together.</p>
-                <p>We recommend strongly that you bring a laptop in if you have one available. A computer is used to program the various electronic components (Flight control, Transmitter, ESC ) with guidance given on how to operate them.</p>
-                <p>We follow, and enforce, safe building and flying practices. Joining this workshop means you agree to Ballarat Hackerspaces rules around safety.</p>
-                <h3>    What's the cost?:</h3>
-                <p>$495 - for a four week course with all components, and Three Months of Casual Membership. Existing members will have the membership added to their current schedule.</p>
-                <p>More information is available at the <a href="http://tdy.cl/e/PNLyjfI">workshop page</a></p>
-                <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <img class="img-responsive" title="Nighthawk" src="/images/workshops/quadcopter-nighthawk.jpg">
-                <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
-            </div>
-        </div>
+        <ul><li><i>Everything needed for Line of Sight flight</i></li>
+          <li>2.4Ghz Transmitter (9XR Pro) including the FrSky Module - both used for controlling the multicopter</li>
+          <li>Full Carbon Fiber Quadcopter frame kit (Based on a ZMR 250) with screws, spacers and power distribution board</li>
+          <li>Flight Control Board (The famous Naze 32)</li>
+          <li>Four Motors each capable of generating up to 800 Grams of thrust in a package that weighs less than 25 Grams!</li>
+          <li>Battery for flight, and for Transmitter</li>
+          <li>Basic Charger for both</li>
+          <li>Cabling to connect Transmitter to computer and simulation software for practice</li>
+          <li>All electronics ready for assembly</li>
+        </ul>
+        <p>We also provide access to all the tools you’ll need to build the drone, such as soldering irons and testing equipment, as part of your workshop ticket. You will need your own computer/laptop for flight simulation and some other components. If you don’t have access to one, please contact us before the course, as we can probably source one for you to use.</p>
+        <h3>    Running Time:</h3>
+        <p>4 Weeks of time have been allocated, with a Dedicated session on Saturdays (12pm-3pm) and recaps available on Monday nights (7-9pm). This workshop also includes three months of social club membership, where you can work on your kit, as well as get inspiration and advice for other projects you are thinking of. Who knows, weather permitting once the kits are completed we may all be able to go pick a local location and do some test flights.</p>
+        <h3>    Prerequisites:</h3>
+        <p>No flying experience is needed.</p>
+        <p>Basic soldering skills will be needed to complete the Kit - various parts will need to be cut and soldered together.</p>
+        <p>We recommend strongly that you bring a laptop in if you have one available. A computer is used to program the various electronic components (Flight control, Transmitter, ESC ) with guidance given on how to operate them.</p>
+        <p>We follow, and enforce, safe building and flying practices. Joining this workshop means you agree to Ballarat Hackerspaces rules around safety.</p>
+        <h3>    What's the cost?:</h3>
+        <p>$495 - for a four week course with all components, and Three Months of Casual Membership. Existing members will have the membership added to their current schedule.</p>
+        <p>More information is available at the <a href="http://tdy.cl/e/PNLyjfI">workshop page</a></p>
+        <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <img class="img-responsive" title="Nighthawk" src="/images/workshops/quadcopter-nighthawk.jpg">
+        <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
+      </div>
     </div>
+  </div>
 </section>
-
-<!-- footer -->
-%= include 'footer.inc'
-
-<!-- authenticate -->
-%= include 'authenticate.inc'
-
-<!-- scripts -->
-%= include 'scripts.inc'
-</body>
-</html>

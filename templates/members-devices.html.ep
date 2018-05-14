@@ -1,125 +1,105 @@
-<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
-<head>
-  <title>Members</title>
+% layout 'page', page_title => 'Members';
 
-  %= include 'header.inc'
-</head>
+<!-- header -->
+%= include 'navigation.inc', active => 'members'
 
-<body>
-  <!-- header -->
-  %= include 'navigation.inc', active => 'members'
-
-  <!-- ******team Section****** -->
-  <section id="team" class="section">
-    <div class="container">
+<!-- ******team Section****** -->
+<section id="team" class="section">
+  <div class="container">
 % if (my $user = $c->stash('tidyhq')) {
-      <div class="row">
-        <div class="col-sm-12">
-        </div>
+    <div class="row">
+      <div class="col-sm-12">
       </div>
+    </div>
 % }
-      <div class="row">
-        <div class="col-sm-12">
-          <h2 class="title text-center">Members <i class="fa fa-fw fa-angle-right"></i> Devices</h2>
-          <p>As a member you have privileged access to particular items on the network. To ensure the best experience whilst at the Ballarat Hackerspace please ensure you register your devices.</p>
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center">Members <i class="fa fa-fw fa-angle-right"></i> Devices</h2>
+        <p>As a member you have privileged access to particular items on the network. To ensure the best experience whilst at the Ballarat Hackerspace please ensure you register your devices.</p>
 
-          <div>
-            <span>Device UUID: <%= $uuid %></span>
-            <span class="pull-right">
-    % if ($c->device->is_whitelisted) {
-              <a href="" class="btn btn-cta btn-cta-green" data-toggle="modal"><i class="fa fa-fw fa-check"></i> Device Registered</a>
-    % } else {
-              <a href="#device-add" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-fw fa-plus"></i> Register this Device</a>
+        <div>
+          <span><b>Device UUID:</b> <%= $uuid %></span>
+          <span class="pull-right">
+  % if ($c->device->is_whitelisted) {
+            <a href="" class="btn btn-cta btn-cta-green" data-toggle="modal"><i class="fa fa-fw fa-check"></i> Device Registered</a>
+  % } else {
+            <a href="#device-add" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-fw fa-plus"></i> Register this Device</a>
 
-    % }
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <h3>Registered Devices</h3>
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th class="hidden-xs">Member</th>
-                <th>Device</th>
-                <th>Registered</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-% for my $d (@{$devices}) {
-%   if ($d->{email} eq $c->tidyhq->user->{contact}{email_address} || $c->is_gatekeeper) {
-              <tr class="<%= $d->{uuid} eq $uuid ? 'success' : '' %>">
-                <td class="hidden-xs"><%= $d->{email} %></td>
-                <td><%= $d->{name} %></td>
-                <td><%= $d->{created} %></td>
-                <td><a href="<%= url_for('members-devices-remove', id => $d->{id}) %>" class="btn btn-cta btn-cta-sm btn-cta-red"><i class="fa fa-fw fa-remove"></i></a></td>
-              </tr>
-%   }
-% }
-            </tbody>
-          </table>
+  % }
+          </span>
         </div>
       </div>
     </div>
-  </section>
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Registered Devices</h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="hidden-xs">Member</th>
+              <th>Device</th>
+              <th>Registered</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+% for my $d (@{$devices}) {
+%   if ($d->{email} eq $c->tidyhq->user->{contact}{email_address} || $c->is_gatekeeper) {
+            <tr class="<%= $d->{uuid} eq $uuid ? 'success' : '' %>">
+              <td class="hidden-xs"><%= $d->{email} %></td>
+              <td><%= $d->{name} %></td>
+              <td><%= $d->{created} %></td>
+              <td><a href="<%= url_for('members-devices-remove', id => $d->{id}) %>" class="btn btn-cta btn-cta-sm btn-cta-red"><i class="fa fa-fw fa-remove"></i></a></td>
+            </tr>
+%   }
+% }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- footer -->
-  %= include 'footer.inc'
-
-  <!-- authenticate -->
-  %= include 'authenticate.inc'
-
-  <!-- device add modal -->
-  <div class="modal modal-device-add fade" id="device-add" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i aria-hidden="true" class="fa fa-times"></i></button>
-          <h4 class="modal-title">Devices <i class="fa fa-angle-right"></i> Register</h4>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <form action="<%= url_for('members-devices-add') %>" method="post" class="form-signin" role="form">
-                <input type="hidden" name="rt" value="<%= url_for('current') %>">
-                <input type="hidden" name="uuid" value="<%= $uuid  %>">
-                <div class="form-group">
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-fw fa-tag"></i></span>
-                    <input name="uuid" type="text" class="form-control" placeholder="Email" value="<%= $uuid %>" readonly>
-                  </div>
+<!-- device add modal -->
+<div class="modal modal-device-add fade" id="device-add" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i aria-hidden="true" class="fa fa-times"></i></button>
+        <h4 class="modal-title">Devices <i class="fa fa-angle-right"></i> Register</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <form action="<%= url_for('members-devices-add') %>" method="post" class="form-signin" role="form">
+              <input type="hidden" name="rt" value="<%= url_for('current') %>">
+              <input type="hidden" name="uuid" value="<%= $uuid  %>">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-fw fa-tag"></i></span>
+                  <input name="uuid" type="text" class="form-control" placeholder="Email" value="<%= $uuid %>" readonly>
                 </div>
-                <div class="form-group">
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-                    <input name="email" type="text" class="form-control" placeholder="Email" value="<%= $c->tidyhq->user->{contact}{email_address} %>" readonly>
-                  </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+                  <input name="email" type="text" class="form-control" placeholder="Email" value="<%= $c->tidyhq->user->{contact}{email_address} %>" readonly>
                 </div>
-                <div class="form-group">
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-fw fa-laptop"></i></span>
-                    <input name="device" type="text" class="form-control" placeholder="Device Name">
-                  </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-fw fa-laptop"></i></span>
+                  <input name="device" type="text" class="form-control" placeholder="Device Name">
                 </div>
-                <div>
-                  <button class="btn btn-cta btn-cta-secondary" data-dismiss="modal" aria-label="Close"><i class="fa fa-pencil" aria-hidden="true"></i> Cancel</button>
-                  <button class="btn btn-cta btn-cta-primary pull-right" type="submit"><i class="fa fa-plus"></i> Register</button>
-                </div>
-              </form>
-            </div>
+              </div>
+              <div>
+                <button class="btn btn-cta btn-cta-secondary" data-dismiss="modal" aria-label="Close"><i class="fa fa-pencil" aria-hidden="true"></i> Cancel</button>
+                <button class="btn btn-cta btn-cta-primary pull-right" type="submit"><i class="fa fa-plus"></i> Register</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- scripts -->
-  %= include 'scripts.inc'
-</body>
-</html>
+</div>

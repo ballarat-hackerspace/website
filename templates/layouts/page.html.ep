@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bhack">
+<head>
+  <title><%= $page_title %></title>
+
+  %= include 'header.inc'
+
+  <!-- scripts -->
+  %= include 'scripts.inc'
+</head>
+
+<body>
+%= content
+
+<!-- footer -->
+%= include 'footer.inc'
+
+<!-- authenticate -->
+%= include 'authenticate.inc'
+
+</body>
+</html>

@@ -1,81 +1,61 @@
-<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
-<head>
-  <title>About Us</title>
+% layout 'page', page_title => 'Contact Us';
 
-  %= include 'header.inc'
-</head>
+<!-- header -->
+%= include 'navigation.inc', active => 'contact'
 
-<body>
-  <!-- header -->
-  %= include 'navigation.inc', active => 'contact'
+<!-- contact section -->
+<section id="contact" class="section">
+  <div class="container">
+    <h2 class="title text-center">Contact Us</h2>
+    <h3>In Person</h3>
+    <p>We have regular maker meetups where visitors are welcome. See the <a href="/about#timetable">Timetable</a> for more details of what goes on and check the <a href="#/calendar">Calendar</a> for other times we are open.</p>
 
-  <!-- contact section -->
-  <section id="contact" class="section">
-    <div class="container">
-      <h2 class="title text-center">Contact Us</h2>
-      <h3>In Person</h3>
-      <p>We have regular maker meetups where visitors are welcome. See the <a href="/about#timetable">Timetable</a> for more details of what goes on and check the <a href="#/calendar">Calendar</a> for other times we are open.</p>
+    <h3>Committee Members</h3>
+    <p>Ballarat Hackerspace is a volunteer based non-profit association, incorporated in Victoria. Our official administrative body is a committee elected by the membership.</p>
+    <p>If you need to contact someone on the committee please use these email links:</p>
 
-      <h3>Committee Members</h3>
-      <p>Ballarat Hackerspace is a volunteer based non-profit association, incorporated in Victoria. Our official administrative body is a committee elected by the membership.</p>
-      <p>If you need to contact someone on the committee please use these email links:</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Elected Representative</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>President</td>
+          <td><a href="mailto:committee@ballarathackerspace.org.au?subject=ATTN: President -">Scott Weston</a></td>
+        </tr>
+        <tr>
+          <td>Vice President</td>
+          <td><a href="mailto:committee@ballarathackerspace.org.au?subject=ATTN: Robert -">Robert Layton</a></td>
+        </tr>
+        <tr>
+          <td>Secretary</td>
+          <td><a href="mailto:committee@ballarathackerspace.org.au?subject=ATTN: Secretary -">Ian Firns</a></td>
+        </tr>
+        <tr>
+          <td>Treasurer</td>
+          <td><a href="mailto:committee@ballarathackerspace.org.au?subject=ATTN: Treasurer -">Brett James</a></td>
+        </tr>
+      </tbody>
+    </table>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Position</th>
-            <th>Elected Representative</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>President</td>
-            <td><a href="mailto:committee@ballarathackerspace.org.au?subject=ATTN: President -">Scott Weston</a></td>
-          </tr>
-          <tr>
-            <td>Vice President</td>
-            <td><a href="mailto:committee@ballarathackerspace.org.au?subject=ATTN: Robert -">Robert Layton</a></td>
-          </tr>
-          <tr>
-            <td>Secretary</td>
-            <td><a href="mailto:committee@ballarathackerspace.org.au?subject=ATTN: Secretary -">Ian Firns</a></td>
-          </tr>
-          <tr>
-            <td>Treasurer</td>
-            <td><a href="mailto:committee@ballarathackerspace.org.au?subject=ATTN: Treasurer -">Brett James</a></td>
-          </tr>
-        </tbody>
-      </table>
+    <h3 id="irc-channel">On IRC</h3>
+    <p>Come and hang out on our IRC (Internet Relay Chat) channel on freenode. You can use the web client or your own client at irc.freenode.net #bhack.</p>
 
-      <h3 id="irc-channel">On IRC</h3>
-      <p>Come and hang out on our IRC (Internet Relay Chat) channel on freenode. You can use the web client or your own client at irc.freenode.net #bhack.</p>
+    <ul>
+      <li><a href="http://webchat.freenode.net/?channels=bhack">Direct Webchat Link</a></li>
+      <li><a href="irc://irc.freenode.net/bhack">Direct link for IRC clients</a></li>
+    </ul>
 
-      <ul>
-        <li><a href="http://webchat.freenode.net/?channels=bhack">Direct Webchat Link</a></li>
-        <li><a href="irc://irc.freenode.net/bhack">Direct link for IRC clients</a></li>
-      </ul>
+    <h3>Google+</h3>
+    <p>A lot of discussion and announcements happen on our <a href="http://plus.bhack.in/">Google+ community page</a>, both members and non-members are welcome.</p>
 
-      <h3>Google+</h3>
-      <p>A lot of discussion and announcements happen on our <a href="http://plus.bhack.in/">Google+ community page</a>, both members and non-members are welcome.</p>
+    <h3>Twitter</h3>
+    <p>You can tweet to <a href="https://twitter.com/bhackerspace">@bhackerspace</a>. Follow the account to get announcements and news from the Ballarat Hackerspace.</p>
 
-      <h3>Twitter</h3>
-      <p>You can tweet to <a href="https://twitter.com/bhackerspace">@bhackerspace</a>. Follow the account to get announcements and news from the Ballarat Hackerspace.</p>
-
-      <h3>Telegram</h3>
-      <p>You can join our Telegram channel at <a href="https://telegram.me/ballarathackerspace">telegram.me/ballarathackerspace</a></p>
-    </div><!--//container-->
-  </section><!--//team-section-->
-
-  <!-- footer -->
-  %= include 'footer.inc'
-
-  <!-- authenticate -->
-  %= include 'authenticate.inc'
-
-  <!-- scripts -->
-  %= include 'scripts.inc'
-</body>
-</html>
+    <h3>Telegram</h3>
+    <p>You can join our Telegram channel at <a href="https://telegram.me/ballarathackerspace">telegram.me/ballarathackerspace</a></p>
+  </div><!--//container-->
+</section>

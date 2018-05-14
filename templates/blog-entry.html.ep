@@ -1,46 +1,26 @@
-<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
-<head>
-  <title>Blog &gt; <%= $title %></title>
+% layout 'page', page_title => 'Blog > ' . $title;
 
-  %= include 'header.inc'
-</head>
+<!-- header -->
+%= include 'navigation.inc', active => 'blog'
 
-<body>
-  <!-- header -->
-  %= include 'navigation.inc', active => 'blog'
-
-  <!-- photos section -->
-  <section id="team" class="section">
-    <div class="container blog-container">
-      <h2 class="title text-center"><%= $title %></h2>
-      <p class="subtitle text-center"><%= $date->strftime("%a, %e %b %Y") %></p>
-      <%== $content %>
-      <div class="blog-tags">
-        <p>
-          <i class="fa fa-tag"></i>
+<!-- blog section -->
+<section class="section">
+  <div class="container blog-container">
+    <h2 class="title text-center"><%= $title %></h2>
+    <p class="subtitle text-center">By <%= ucfirst $author %> &mdash; <%= $date->strftime("%a, %e %b %Y") %></p>
+    <%== $content %>
+    <div class="blog-tags">
+      <p>
+        <i class="fa fa-tag"></i>
 % for my $t (@{$tags}) {
-          <span class="blog-tag"><a href="<%= url_for('blog')->query([tags => $t]) %>"><%= $t %></a></span>
+        <span class="blog-tag"><a href="<%= url_for('blog')->query([tags => $t]) %>"><%= $t %></a></span>
 % }
-        </p>
+      </p>
+    </div>
+    <div class="row">
+      <div id="comments-container" class="col-sm-12">
+        <div id="comments"></div>
       </div>
-      <div class="row">
-        <div id="comments-container" class="col-sm-12">
-          <div id="comments"></div>
-        </div>
-      </div>
-    </div><!--//container-->
-  </section><!--//team-section-->
-
-  <!-- footer -->
-  %= include 'footer.inc'
-
-  <!-- authenticate -->
-  %= include 'authenticate.inc'
-
-  <!-- scripts -->
-  %= include 'scripts.inc'
-</body>
-</html>
+    </div>
+  </div><!--//container-->
+</section>

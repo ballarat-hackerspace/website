@@ -1,75 +1,55 @@
-<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
-<head>
-  <title>Blog</title>
+% layout 'page', page_title => 'Blog';
 
-  %= include 'header.inc'
-</head>
+<!-- header -->
+%= include 'navigation.inc', active => 'blog'
 
-<body>
-  <!-- header -->
-  %= include 'navigation.inc', active => 'blog'
-
-  <!-- photos section -->
-  <section id="team" class="section">
-    <div class="container">
-      <h2 class="title text-center">Blog</h2>
+<!-- photos section -->
+<section class="section">
+  <div class="container">
+    <h2 class="title text-center">Blog</h2>
 % if ($tags) {
-      <div class="row">
-        <div class="col-sm-12">Filtering: <a href="<%= url_for('current')->query([tags => undef]) %>"><i class="fa fa-times"></i></a> <%= $tags %></div>
-      </div>
+    <div class="row">
+      <div class="col-sm-12">Filtering: <a href="<%= url_for('current')->query([tags => undef]) %>"><i class="fa fa-times"></i></a> <%= $tags %></div>
+    </div>
 % }
-      <div class="row masonry-container">
+    <div class="row masonry-container">
 % for my $b (@{$summary}) {
-        <div class="blog-summary col-sm-6 col-md-4">
-          <div class="panel panel-default">
-            <div class="panel-body">
+      <div class="blog-summary col-sm-6 col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
 % if ($b->{feature}) {
-          <a href="<%= url_for('blog-entry', date => $b->{date}->strftime("%Y%m%d"), slug => $b->{slug}) %>"><img src="<%= $b->{feature} %>" class="img-responsive"></img></a>
+        <a href="<%= url_for('blog-entry', date => $b->{date}->strftime("%Y%m%d"), slug => $b->{slug}) %>"><img src="<%= $b->{feature} %>" class="img-responsive"></img></a>
 % }
-            <a href="<%= url_for('blog-entry', date => $b->{date}->strftime("%Y%m%d"), slug => $b->{slug}) %>"><h4 class="blog-title"><%= $b->{title} %></h4></a>
-            <p class="blog-date"><%= $b->{date}->strftime("%a, %e %b %Y") %></p>
-            <%== $b->{excerpt} %>
-            <div class="blog-tags">
-              <p>
-                <i class="fa fa-tag"></i>
+          <a href="<%= url_for('blog-entry', date => $b->{date}->strftime("%Y%m%d"), slug => $b->{slug}) %>"><h4 class="blog-title"><%= $b->{title} %></h4></a>
+          <p class="blog-date"><%= $b->{date}->strftime("%a, %e %b %Y") %></p>
+          <%== $b->{excerpt} %>
+          <div class="blog-tags">
+            <p>
+              <i class="fa fa-tag"></i>
 % for my $t (@{$b->{tags}}) {
-                <span class="blog-tag"><a href="<%= url_for('current')->query([tags => $t]) %>"><%= $t %></a></span>
+              <span class="blog-tag"><a href="<%= url_for('current')->query([tags => $t]) %>"><%= $t %></a></span>
 % }
-              </p>
-            </div>
-            </div>
+            </p>
+          </div>
           </div>
         </div>
-% }
       </div>
-    </div><!-- container -->
-  </section><!-- team-section -->
+% }
+    </div>
+  </div><!-- container -->
+</section>
 
-  <!-- footer -->
-  %= include 'footer.inc'
-
-  <!-- scripts -->
-  %= include 'scripts.inc'
-
-  <!-- authenticate -->
-  %= include 'authenticate.inc'
-
-  <!-- masonry layout -->
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.js"></script>
-  <script>
-    $(document).ready(function() {
-      var container = $('.masonry-container');
-      container.imagesLoaded(function() {
-        container.masonry({
-          columnWidth: '.blog-summary',
-          itemSelector: '.blog-summary'
-        });
+<!-- masonry layout -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.js"></script>
+<script>
+  $(document).ready(function() {
+    var container = $('.masonry-container');
+    container.imagesLoaded(function() {
+      container.masonry({
+        columnWidth: '.blog-summary',
+        itemSelector: '.blog-summary'
       });
     });
-  </script>
-</body>
-</html>
+  });
+</script>
