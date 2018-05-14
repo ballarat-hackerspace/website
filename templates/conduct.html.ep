@@ -1,7 +1,4 @@
-% layout 'page', page_title => 'Code Of Conduct';
-
-<!-- header -->
-%= include 'navigation.inc', active => ''
+% layout 'page', active_page => '',  page_title => 'Code Of Conduct';
 
 <!-- ******team Section****** -->
 <section id="team" class="section">

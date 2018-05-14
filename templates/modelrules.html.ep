@@ -1,7 +1,4 @@
-% layout 'page', page_title => 'Model Rules';
-
-<!-- header -->
-%= include 'navigation.inc', active => ''
+% layout 'page', active_page => '', page_title => 'Model Rules';
 
 <!-- model rules -->
 <section id="modelrules" class="section">

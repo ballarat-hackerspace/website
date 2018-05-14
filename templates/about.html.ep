@@ -1,7 +1,4 @@
-% layout 'page', page_title => 'About Us';
-
-<!-- header -->
-%= include 'navigation.inc', active => 'about'
+% layout 'page', page_title => 'About Us', active_page => 'about';
 
 <!-- about team -->
 <section id="team" class="section">

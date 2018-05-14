@@ -1,10 +1,6 @@
-% layout 'page', page_title => 'FAQ';
+% layout 'page', active_page => 'faq', page_title => 'FAQ';
 
-<!-- header -->
-%= include 'navigation.inc', active => 'faq'
-
-<!-- about team -->
-<section id="team" class="section">
+<section class="section">
   <div class="container">
     <h2 class="title text-center">Frequently Asked Questions</h2>
 

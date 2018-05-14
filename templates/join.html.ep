@@ -1,7 +1,4 @@
-% layout 'page', page_title => 'Join';
-
-<!-- header -->
-%= include 'navigation.inc', active => 'join'
+% layout 'page', active_page => 'join', page_title => 'Join';
 
 <!-- ******team Section****** -->
 <section id="team" class="section">

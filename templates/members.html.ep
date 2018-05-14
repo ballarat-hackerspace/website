@@ -1,10 +1,6 @@
-% layout 'page', page_title => 'Members';
+% layout 'page', active_page => 'members', page_title => 'Members';
 
-<!-- header -->
-%= include 'navigation.inc', active => 'members'
-
-<!-- ******team Section****** -->
-<section id="team" class="section">
+<section class="section">
   <div class="container">
     <h2 class="title text-center">Members</h2>
     <p>Welcome to the Members only area. Whilst we strongly encourage all of our contents to be open and freely available to the general public, there are some things that are considered privileged. If you are looking for your membership or payment management then you will need to login to <a href="https://ballarathackerspace.tidyhq.com/users/sign_in">TidyHQ</a> directly.</p>

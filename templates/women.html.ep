@@ -1,75 +1,49 @@
-<!DOCTYPE html>
-<!--[if IE 8]>
-<html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]>
-<html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en"> <!--<![endif]-->
-<head>
-    <title>Women at the Ballarat Hackerspace</title>
+% layout 'page', page_title => 'Women at the Hackerspace', active_page => 'women';
 
-    %= include 'header.inc'
-</head>
+<section id="workshops" class="section">
+  <div class="container">
+    <h1 class="title text-center">Women at the Ballarat Hackerspace</h1>
+  </div>
+</section>
 
-<body>
-  <!-- header -->
-  %= include 'navigation.inc', active => 'women'
+<hr noshade>
 
-  <section id="workshops" class="section">
-    <div class="container">
-      <h1 class="title text-center">Women at the Ballarat Hackerspace</h1>
-    </div>
-  </section>
+<section id="3dprinting" class="section">
+  <div class="container">
+    <h2>Women's Wednesdays at the Hackerspace</h2>
 
-  <hr noshade>
+    <div class="row">
+      <div class="col-sm-6 col-md-8">
+        <h3>The Ballarat Hackerspace is committed to increasing STEAM participation by women.</h3>
+        <p>We are pleased to announce that the Ballarat Hackerspace is open on Wednesday nights to women, for free, from June 14th 2017.</p>
+        <p>On Wednesday nights our champion Kim Redfern will open and run the space between 6pm and 8pm. The nights are inclusive of women and girls of all ages.</p>
+        <p>Our Raspberry Pi workshop is full! We will be rerunning it again in the near future.</p>
+        <p>However, <b>you are still welcome to come on Wednesdays!</b> We are still open for those not in the workshop, and you can still drop by and work on your own projects, have a chat or just see what its all about.</p>
 
-  <section id="3dprinting" class="section">
-    <div class="container">
-      <h2>Women's Wednesdays at the Hackerspace</h2>
+        <p>If you want to be notified when the next workshop will be running, click this button and sign up</p>
 
-      <div class="row">
-        <div class="col-sm-6 col-md-8">
-          <h3>The Ballarat Hackerspace is committed to increasing STEAM participation by women.</h3>
-          <p>We are pleased to announce that the Ballarat Hackerspace is open on Wednesday nights to women, for free, from June 14th 2017.</p>
-          <p>On Wednesday nights our champion Kim Redfern will open and run the space between 6pm and 8pm. The nights are inclusive of women and girls of all ages.</p>
-          <p>Our Raspberry Pi workshop is full! We will be rerunning it again in the near future.</p>
-          <p>However, <b>you are still welcome to come on Wednesdays!</b> We are still open for those not in the workshop, and you can still drop by and work on your own projects, have a chat or just see what its all about.</p>
+        <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
 
-          <p>If you want to be notified when the next workshop will be running, click this button and sign up</p>
+        <p>(You don't need a membership, just register an account and we will email you with information about any new courses.)</p>
 
-          <a href="https://ballarathackerspace.tidyhq.com/signup/new?continue=%2Fpublic%2Fmemberships%2Fnew" class="btn btn-lg btn-cta btn-cta-secondary">Sign up to Register Interest</a>
+        <h4>Format</h4>
+        <p>The nights will be run as "open-workshops". What this means is that we will have a theme for the night, but there is no requirement to stick to the theme, and we actively encourage doing your own projects or going off-book with the themed projects.</p>
 
-          <p>(You don't need a membership, just register an account and we will email you with information about any new courses.)</p>
+        <h4>Themes</h4>
+        <p style="text-decoration: line-through;"><b>June 14th:</b> Official opening between 6pm and 6.30pm, followed by workshopping.</p>
+        <p style="text-decoration: line-through;"><b>June 14th to July 19th:</b> Introduction to the Raspberry Pi, including programming, electronics and general hacking around.</p>
+        <p style="text-decoration: line-through;"><b>July 26th to August 16th:</b> Building a 3D printer (or two), including setting up and using 3D printers.</p>
+        <p>We will continue to add to this list. The Ballarat Hackerspace encourages you to get in and suggest your own topics, and even run them if you are feeling brave! We would also like more volunteers to help open the space (giving Kim the odd week off), other setup, course development and sponsorship. Contact us if you would like to help in any way.</p>
 
-          <h4>Format</h4>
-          <p>The nights will be run as "open-workshops". What this means is that we will have a theme for the night, but there is no requirement to stick to the theme, and we actively encourage doing your own projects or going off-book with the themed projects.</p>
-
-          <h4>Themes</h4>
-          <p style="text-decoration: line-through;"><b>June 14th:</b> Official opening between 6pm and 6.30pm, followed by workshopping.</p>
-          <p style="text-decoration: line-through;"><b>June 14th to July 19th:</b> Introduction to the Raspberry Pi, including programming, electronics and general hacking around.</p>
-          <p style="text-decoration: line-through;"><b>July 26th to August 16th:</b> Building a 3D printer (or two), including setting up and using 3D printers.</p>
-          <p>We will continue to add to this list. The Ballarat Hackerspace encourages you to get in and suggest your own topics, and even run them if you are feeling brave! We would also like more volunteers to help open the space (giving Kim the odd week off), other setup, course development and sponsorship. Contact us if you would like to help in any way.</p>
-
-          <h4>Some important notes</h4>
-          <p>Kids are welcome, but we recommend 10 years or older, and must be accompanied by a guardian (we have lots of sharp things, hot things, heavy things, fragile things, pointing things, tall things and so on).</p>
-          <p>Usage of the space is under our normal agreements around space usage. As part of that, you'll need to register as a member and agree to our policy. However, there is no fee for Wednesday nights.</p>
-          <p>We would love you to become a member, and as part of that you'll get access to the space for the rest of the week too!</p>
-          <p>The Ballarat Hackerspace welcomes and encourages everyone to join in. Please see our <a href="/conduct">code of conduct</a> for more information.</p>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <img class="img-responsive img-h3-padding" src="/images/workshops/prusa-i3-2.jpg"></img>
-        </div>
+        <h4>Some important notes</h4>
+        <p>Kids are welcome, but we recommend 10 years or older, and must be accompanied by a guardian (we have lots of sharp things, hot things, heavy things, fragile things, pointing things, tall things and so on).</p>
+        <p>Usage of the space is under our normal agreements around space usage. As part of that, you'll need to register as a member and agree to our policy. However, there is no fee for Wednesday nights.</p>
+        <p>We would love you to become a member, and as part of that you'll get access to the space for the rest of the week too!</p>
+        <p>The Ballarat Hackerspace welcomes and encourages everyone to join in. Please see our <a href="/conduct">code of conduct</a> for more information.</p>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <img class="img-responsive img-h3-padding" src="/images/workshops/prusa-i3-2.jpg"></img>
       </div>
     </div>
-  </section>
-
-  <!-- footer -->
-  %= include 'footer.inc'
-
-  <!-- authenticate -->
-  %= include 'authenticate.inc'
-
-  <!-- scripts -->
-  %= include 'scripts.inc'
-</body>
-</html>
+  </div>
+</section>

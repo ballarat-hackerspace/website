@@ -1,7 +1,4 @@
-% layout 'page', page_title => 'Blog > ' . $title;
-
-<!-- header -->
-%= include 'navigation.inc', active => 'blog'
+% layout 'page', active_page => 'blog', page_title => 'Blog > ' . $title;
 
 <!-- blog section -->
 <section class="section">

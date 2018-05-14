@@ -1,7 +1,4 @@
-% layout 'page', page_title => 'Workshops';
-
-<!-- header -->
-%= include 'navigation.inc', active => 'sponsors'
+% layout 'page', active_page => 'sponsors', page_title => 'Sponsors';
 
 <!-- sponsors section -->
 <section id="sponsors" class="section">

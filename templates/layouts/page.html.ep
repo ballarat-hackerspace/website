@@ -10,7 +10,12 @@
 </head>
 
 <body>
+<!-- header -->
+%= include 'navigation.inc', active => $active_page
+
+  <div class="page">
 %= content
+  </div>
 
 <!-- footer -->
 %= include 'footer.inc'

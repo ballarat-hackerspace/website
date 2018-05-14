@@ -1,7 +1,4 @@
-% layout 'page', page_title => 'Contact Us';
-
-<!-- header -->
-%= include 'navigation.inc', active => 'contact'
+% layout 'page', active_page => 'contact', page_title => 'Contact Us';
 
 <!-- contact section -->
 <section id="contact" class="section">

@@ -1,7 +1,4 @@
-% layout 'page', page_title => 'Ballarat Hackerspace';
-
-<!-- header -->
-%= include 'navigation.inc', active => 'home'
+% layout 'page', active_page => 'home', page_title => 'Ballarat Hackerspace';
 
 <section class="section promo-header">
   <div id="carousel-banner" class="carousel slide" data-ride="carousel">

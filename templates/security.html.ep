@@ -1,9 +1,5 @@
-% layout 'page', page_title => 'Security Cameras';
+% layout 'page', active_page => '', page_title => 'Security Cameras';
 
-<!-- header -->
-%= include 'navigation.inc', active => ''
-
-<!-- ******team Section****** -->
 <section id="team" class="section">
   <div class="container">
     <h2 class="title text-center">Security Cameras</h2>
@@ -18,5 +14,5 @@
       <img class="img-responsive img-h3-padding" src="/linksys02.jpg">
     </div>
 
-  </div><!--//row-->
-</section><!--//job-->
+  </div>
+</section>
