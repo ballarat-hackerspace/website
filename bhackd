@@ -172,9 +172,9 @@ post '/login' => sub {
 
   $c->render_later;
   $c->tidyhq->login(email => $e, password => $p)->then(sub {
-    return $c->render(json => {'message' => 'success', status => 200});
+    return $c->render(json => {'message' => 'success'}, status => 200);
   }, sub {
-    return $c->render(json => {'message' => 'error', status => 400});
+    return $c->render(json => {'message' => 'error'}, status => 400);
   });
 };
 

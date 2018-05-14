@@ -171,9 +171,6 @@ sub register {
       $bhack = {%{$bhack}, %{$bhack_tidyhq}};
 
       $c->stash('bhack' => $bhack);
-    })->catch(sub {
-      my $err = shift;
-      warn "ERR: " . $err;
     });
 
     return $promise;
