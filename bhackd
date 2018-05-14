@@ -240,6 +240,9 @@ group {
     $c->device->remove($c->param('id'));
     $c->redirect_to('members-devices');
   } => 'members-devices-remove';
+
+  get '/workshops' => 'members-workshops';
+
 };
 
 # local network only

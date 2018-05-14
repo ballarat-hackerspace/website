@@ -25,12 +25,19 @@
         <a href="/door"><h3>Door</h3></a>
         <p>Grant access through the hackerspace door.</p>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <h3>Online Workshops</h3>
+        <p>TODO: Online workshop access.</p>
+      </div>
 
       <div class="col-sm-6">
         <h3>Boiler</h3>
         <p>TODO: Send a message to the boiler.</p>
       </div>
-
+    </div>
+    <div class="row">
       <div class="col-sm-6">
         <h3>Digital Library</h3>
         <p>TODO: Browse the digital library.</p>
@@ -40,7 +47,8 @@
         <h3>Marquee</h3>
         <p>TODO: Send a message to the marquee.</p>
       </div>
-
+    </div>
+    <div class="row">
       <div class="col-sm-6">
         <h3>Digger</h3>
         <p>TODO: Drive the digger around the space.</p>

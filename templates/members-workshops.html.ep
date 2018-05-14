@@ -1,0 +1,42 @@
+% layout 'page', active_page => 'workshops', page_title => 'Workshops';
+
+<!-- ******team Section****** -->
+<section id="workshops" class="section">
+  <div class="container">
+    <h1 class="title text-center">Online Workshops</h1>
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="workshop1">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1">Raspberry Pi - 101</a>
+          </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="workshop1">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <p>Foo</p>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="workshop2">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2">Arduino - 101</a>
+          </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="workshop2">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <p>Bar</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
