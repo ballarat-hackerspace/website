@@ -3,151 +3,176 @@
 <!-- about team -->
 <section id="team" class="section">
   <div class="container">
-    <h2 class="title text-center">About Us</h2>
-    <p>The Ballarat Hackerspace is modeled on an <a href="http://hackerspaces.org/">international community of like minded spaces</a> that started in Germany back in 1995. It supports and encourages Science, Technology, Engineering, Art and Mathematics culture in the Ballarat region by providing a physical space for residents to meet, interact, create and innovate.</p>
-  </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center">About Us</h2>
+        <p>The Ballarat Hackerspace is modeled on an <a href="http://hackerspaces.org/">international community of like minded spaces</a> that started in Germany back in 1995. It supports and encourages Science, Technology, Engineering, Art and Mathematics culture in the Ballarat region by providing a physical space for residents to meet, interact, create and innovate.</p>
+      </div>
 </section>
 
 <section id="donations" class="section section-highlight">
   <div class="container">
-    <h2 class="title text-center">Donations</h2>
-    <p>The Ballarat Hackerspace is a registered non-profit volunteer run organisation. We are entirely funded by our members and the generous donations of our sponsors. If you would like to support the work of the Ballarat Hackerspace Association to help with the running costs of the Hackerspace (e.g. rent, consumables, workshops, etc.) then any donation would be gladly accepted and put to good use!</p>
-    <p>Donations to the association can be made via bank deposit to:</p>
-    <blockquote>
-      Account Name: Ballarat Hackerspace Inc<br/>
-      BSB : 193-879<br/>
-      Account No: 468 349 494
-    </blockquote>
-    <p>Or you can donate Bitcoin or Bitcoin Cash to the following address:</p>
-    <blockquote>
-      <a href="https://blockchain.info/address/1BHackHL8bYsGb5PBaXURAot2ymLZtRpTo">1BHackHL8bYsGb5PBaXURAot2ymLZtRpTo</a>
-    </blockquote>
-    <p>If instead of money you have time to donate then please
-      <a href="/contact">contact us</a>.</p>
-  </div><!--//container-->
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center">Donations</h2>
+        <p>The Ballarat Hackerspace is a registered non-profit volunteer run organisation. We are entirely funded by our members and the generous donations of our sponsors. If you would like to support the work of the Ballarat Hackerspace Association to help with the running costs of the Hackerspace (e.g. rent, consumables, workshops, etc.) then any donation would be gladly accepted and put to good use!</p>
+        <p>Donations to the association can be made via bank deposit to:</p>
+        <blockquote>
+          Account Name: Ballarat Hackerspace Inc<br/>
+          BSB : 193-879<br/>
+          Account No: 468 349 494
+        </blockquote>
+        <p>Or you can donate Bitcoin or Bitcoin Cash to the following address:</p>
+        <blockquote>
+          <a href="https://blockchain.info/address/1BHackHL8bYsGb5PBaXURAot2ymLZtRpTo">1BHackHL8bYsGb5PBaXURAot2ymLZtRpTo</a>
+        </blockquote>
+        <p>If, instead of money, you have time to donate then please <a href="/contact">contact us</a>.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- about timetable -->
 <section id="timetable" class="section">
   <div class="container">
-    <h2 class="title text-center">The Timetable</h2>
-    <p>To satiate curiosity and accessibility we are open to the general public for walk-ins at the following times:</p>
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center">The Timetable</h2>
+        <p>To satiate curiosity and accessibility we are open to the general public for walk-ins at the following times:</p>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Day</th>
-          <th>Open Times</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Monday - All Welcome</td>
-          <td>6pm &ndash; 9pm<sup>&dagger;</sup></td>
-        </tr>
-        <tr>
-          <td>Tuesday - All Welcome</td>
-          <td>4pm &ndash; 9pm<sup>&dagger;</sup></td>
-        </tr>
-        <tr>
-          <td>Wednesday - <a href="/women">Women and family/friends</a></td>
-          <td>6pm &ndash; 9pm<sup>&dagger;</sup></td>
-        </tr>
-        <tr>
-          <td>Saturday - All Welcome</td>
-          <td>9am &ndash; 3pm<sup>&dagger;</sup></td>
-        </tr>
-      </tbody>
-    </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Open Times</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monday - All Welcome</td>
+              <td>6pm &ndash; 9pm<sup>&dagger;</sup></td>
+            </tr>
+            <tr>
+              <td>Tuesday - All Welcome</td>
+              <td>4pm &ndash; 9pm<sup>&dagger;</sup></td>
+            </tr>
+            <tr>
+              <td>Wednesday - <a href="/women">Women and family/friends</a></td>
+              <td>6pm &ndash; 9pm<sup>&dagger;</sup></td>
+            </tr>
+            <tr>
+              <td>Saturday - All Welcome</td>
+              <td>9am &ndash; 3pm<sup>&dagger;</sup></td>
+            </tr>
+          </tbody>
+        </table>
 
-    <p><b>&dagger;</b>: The hackerspace will close up to 1 hour earlier if there are no members or visitors at that time. If you need us to keep the hackerspace open for you in this last hour please let us know via twitter or slack, we're happy to stay open if people need to use the space!</p>
-    <p><b>Note:</b> Non-probationary Workshop members have 24/7 access to the space.</p>
+        <p><b>&dagger;</b>: The hackerspace will close up to 1 hour earlier if there are no members or visitors at that time. If you need us to keep the hackerspace open for you in this last hour please let us know via twitter or slack, we're happy to stay open if people need to use the space!</p>
+        <p><b>Note:</b> Non-probationary Workshop members have 24/7 access to the space.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- about space -->
 <section id="space" class="section">
   <div class="container">
-    <h2 class="title text-center">The Space</h2>
-    <p>We moved into our new space at Room 903, B Building, of the Federation University SMB Campus in January 2015. Please come along and check us out at our next meetup, or any time we are open. Check the calendar or the online community for opening times. If you would like to support our community please join the Ballarat Hackerspace.</p>
-    <p>You are welcome to join the <a href="/contact#irc-channel">IRC channel</a>, or follow us on <a href="https://twitter.com/bHackerspace">Twitter</a> or <a href="https://plus.google.com/communities/106879016585907671427">Google+</a></p>
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center">The Space</h2>
+        <p>We moved into our new space at Room 903, B Building, of the Federation University SMB Campus in January 2015. Please come along and check us out at our next meetup, or any time we are open. Check the calendar or the online community for opening times. If you would like to support our community please join the Ballarat Hackerspace.</p>
+        <p>You are welcome to join the <a href="/contact#irc-channel">IRC channel</a>, or follow us on <a href="https://twitter.com/bHackerspace">Twitter</a> or <a href="https://plus.google.com/communities/106879016585907671427">Google+</a></p>
 
-    <h3>Facilities</h3>
-    <ul>
-      <li>Electronics area with soldering (wand and reflow), desoldering, scopes and meters</li>
-      <li>3D printing</li>
-      <li>Small scale CNC</li>
-      <li>Internet access</li>
-      <li>Projector/Presentation</li>
-      <li>Kitchenette</li>
-    </ul>
+        <h3>Facilities</h3>
+        <ul>
+          <li>Electronics area with soldering (wand and reflow), desoldering, scopes and meters</li>
+          <li>3D printing</li>
+          <li>Small scale CNC</li>
+          <li>Internet access</li>
+          <li>Projector/Presentation</li>
+          <li>Kitchenette</li>
+        </ul>
 
+        <h3>Before visiting the space</h3>
+        <p>The space is a workshop, so we require enclosed shoes to be worn while visiting. There are rules that apply in the space for everyone’s safety &amp; enjoyment.</p>
 
-    <h3>Before visiting the space</h3>
-    <p>The space is a workshop, so we require enclosed shoes to be worn while visiting. There are rules that apply in the space for everyone’s safety &amp; enjoyment.</p>
+        <h3 id="space-location">Location</h3>
+        <p>Our street address is:</p>
+        <blockquote>
+          Room 903<br/>
+          B Building<br/>
+          107 Lydiard Street South,<br/>
+          Ballarat, Victoria<br/>
+          3350
+        </blockquote>
 
-    <h3>Location</h3>
-    <p>Our street address is:</p>
-    <blockquote>
-      Room 903<br/>
-      B Building<br/>
-      107 Lydiard Street South,<br/>
-      Ballarat, Victoria<br/>
-      3350
-    </blockquote>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3162.557667332649!2d143.857577!3d-37.565484000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad144fa1820aff1%3A0xcccfffb2cb152dd7!2sBallarat+Hackerspace!5e0!3m2!1sen!2sau!4v1422321706092" width="100%" height="300" frameborder="0" style="border:0"></iframe>
 
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3162.557667332649!2d143.857577!3d-37.565484000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad144fa1820aff1%3A0xcccfffb2cb152dd7!2sBallarat+Hackerspace!5e0!3m2!1sen!2sau!4v1422321706092" width="100%" height="300" frameborder="0" style="border:0"></iframe>
-  </div><!--//container-->
-</section><!--//team-section-->
+        <p><a target="_blank" class="btn btn-cta btn-cta-primary" href="https://www.google.com/maps/place/Ballarat+Hackerspace/@-37.565247,143.857645,17z/data=!4m2!3m1!1s0x0:0xcccfffb2cb152dd7?hl=en-US"><i class="fa fa-map-marker"></i> Google Map</a></p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="association" class="section">
   <div class="container">
-    <h2 class="title text-center">The Association</h2>
-    <p>The Ballarat Hackerspace is a volunteer based, non-profit incorporated association (in Victoria) and follows the <a href="<%= url_for('modelrules') %>">Rules of Association</a> that it was founded with.</p>
-    <p>As part of this, we elect a Committee as chartered in the rules. The current committee elected on Saturday, 23rd of September, 2017 are:</p>
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center">The Association</h2>
+        <p>The Ballarat Hackerspace is a volunteer based, non-profit incorporated association (in Victoria) and follows the <a href="<%= url_for('modelrules') %>">Rules of Association</a> that it was founded with.</p>
+        <p>As part of this, we elect a Committee as chartered in the rules. The current committee elected on Saturday, 23rd of September, 2017 are:</p>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Position</th>
-          <th>Elected Representative</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>President</td>
-          <td>Scott Weston</td>
-        </tr>
-        <tr>
-          <td>Vice President</td>
-          <td>Robert Layton</td>
-        </tr>
-        <tr>
-          <td>Secretary</td>
-          <td>Ian Firns</td>
-        </tr>
-        <tr>
-          <td>Treasurer</td>
-          <td>Brett James</td>
-        </tr>
-      </tbody>
-    </table>
-  </div><!--//container-->
-</section><!--//association-section-->
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Position</th>
+              <th>Elected Representative</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>President</td>
+              <td>Scott Weston</td>
+            </tr>
+            <tr>
+              <td>Vice President</td>
+              <td>Robert Layton</td>
+            </tr>
+            <tr>
+              <td>Secretary</td>
+              <td>Ian Firns</td>
+            </tr>
+            <tr>
+              <td>Treasurer</td>
+              <td>Brett James</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="conduct" class="section section-highlight">
   <div class="container">
-    <h2 class="title text-center">Code of Conduct</h2>
-    <p>Ballarat Hackerspace is dedicated to providing a harassment-free experience for everyone, regardless of gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, or religion. We do not tolerate harassment of people at our events or space in any form. People violating these rules may be sanctioned or expelled from the space or the event at the discretion of any Ballarat Hackerspace member.</p>
-    <a href="/conduct" class="btn btn-cta btn-cta-primary">Read More</a>
-  </div><!--//container-->
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center">Code of Conduct</h2>
+        <p>Ballarat Hackerspace is dedicated to providing a harassment-free experience for everyone, regardless of gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, or religion. We do not tolerate harassment of people at our events or space in any form. People violating these rules may be sanctioned or expelled from the space or the event at the discretion of any Ballarat Hackerspace member.</p>
+        <a href="/conduct" class="btn btn-cta btn-cta-primary">Read More</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="movement" class="section">
   <div class="container">
-    <h2 class="title text-center">The Movement</h2>
-    <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/WkiX7R1-kaY" frameborder="0" allowfullscreen=""></iframe>
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center">The Movement</h2>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/WkiX7R1-kaY" frameborder="0" allowfullscreen=""></iframe>
+        </div>
+      </div>
     </div>
-  </div><!--//container-->
+  </div>
 </section>

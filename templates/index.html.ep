@@ -60,8 +60,7 @@
         <p><a class="btn btn-cta btn-cta-primary" href="/about">More About Us</a></p>
 
         <h1 class="title space">Finding Us</h1>
-        <p>We are located on the Federation University Lydiard Street South Campus also known as the SMB Campus (<a href="https://federation.edu.au/about-us/our-campuses/smb-campus/campus-map" target="_blank">campus map, pdf</a>). We're in room 903 which can be found in the walkway between buildings B and C on the ground floor. If you get lost trying to find us just send us a <a href="https://twitter.com/bhackerspace">tweet</a> and we'll send out a search party!</p>
-        <p><a target="_blank" class="btn btn-cta btn-cta-primary" href="https://www.google.com/maps/place/Ballarat+Hackerspace/@-37.565247,143.857645,17z/data=!4m2!3m1!1s0x0:0xcccfffb2cb152dd7?hl=en-US">Google Map</a></p>
+        <p>We are located on the <a href="/about#space-location">Federation University</a> Lydiard Street South Campus also known as the SMB Campus (<a href="https://federation.edu.au/about-us/our-campuses/smb-campus/campus-map" target="_blank">campus map, pdf</a>). We're in room 903 which can be found in the walkway between buildings B and C on the ground floor. If you get lost trying to find us just send us a <a href="https://twitter.com/bhackerspace">tweet</a> and we'll send out a search party!</p>
       </div>
       <div class="col-md-4 col-sm-5 col-xs-12">
         <div id="calendar" class="google-calendar">
