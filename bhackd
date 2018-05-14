@@ -36,6 +36,10 @@ use Plugins::Jekyll;
 
 app->log->info('Configuration: ' . CONFIG_PATH);
 
+#
+# PLUGINS
+#
+
 plugin 'JSONConfig'      => {file => CONFIG_PATH};
 plugin 'Plugins::Alarm'  => app->config->{alarm}  // {};
 plugin 'Plugins::Device' => app->config->{device} // {};
@@ -43,8 +47,9 @@ plugin 'Plugins::Door'   => app->config->{door}   // {};
 plugin 'Plugins::Jekyll' => app->config->{blog}   // {};
 plugin 'Plugins::TidyHQ' => app->config->{tidyhq} // {};
 
-
-app->secrets(app->config->{secrets});
+#
+# HELPERS
+#
 
 helper 'is_local' => sub {
   my $c = shift;
@@ -76,6 +81,10 @@ helper 'is_gatekeeper' => sub {
 
   return 1;
 };
+
+#
+# HOOKS
+#
 
 hook 'before_dispatch' => sub {
   my $c = shift;
@@ -114,6 +123,10 @@ hook 'after_dispatch' => sub {
   $c->signed_cookie('bhack', $cookie, $options);
 };
 
+#
+# ROUTES
+#
+
 get '/'           => 'index';
 get '/about'      => 'about';
 get '/faq'        => 'faq';
@@ -151,13 +164,17 @@ get '/blog/:date/:slug' => sub {
 post '/login' => sub {
   my $c = shift;
 
-  my $e   = $c->param('email');
-  my $p   = $c->param('password');
-  my $url = $c->param('rt') // 'index';
+  my $data = $c->req->json;
+
+  my $e   = $data->{email}    // $c->param('email');
+  my $p   = $data->{password} // $c->param('password');
+  my $url = $data->{rt}       // $c->param('rt') // 'index';
 
   $c->render_later;
-  $c->tidyhq->login(email => $e, password => $p, sub {
-    return $c->redirect_to($url);
+  $c->tidyhq->login(email => $e, password => $p)->then(sub {
+    return $c->render(json => {'message' => 'success', status => 200});
+  }, sub {
+    return $c->render(json => {'message' => 'error', status => 400});
   });
 };
 
@@ -342,4 +359,5 @@ group {
 
 any '/*catch' => {catch => ''} => sub { shift->redirect_to('/'); };
 
+app->secrets(app->config->{secrets});
 app->start;

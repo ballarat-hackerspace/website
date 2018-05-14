@@ -20,6 +20,7 @@ use Mojo::Base 'Mojolicious::Plugin';
 
 use Carp 'croak';
 use Mojo::JSON qw(encode_json);
+use Mojo::Promise;
 use Mojo::UserAgent;
 use Mojo::Util qw(b64_encode dumper);
 use Time::Piece;
@@ -119,31 +120,6 @@ sub register {
     return $user;
   });
 
-  $app->helper('tidyhq.user.groups' => sub {
-    my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
-    my $c = shift;
-    my $args = @_%2 ? shift : {@_};
-
-    my $tidyhq = $c->session(TIDYHQ_SESSIONKEY());
-
-    if ($cb) {
-      return $c->delay(
-        sub {
-          my ($delay) = @_;
-          $self->_ua->get($url->path('/api/v1/contacts/me/groups') => {Authorization => "Bearer $tidyhq->{token}"} => $delay->begin);
-        },
-        sub {
-          my ($delay, $tx) = @_;
-          my ($data, $err) = process_reponse($tx);
-
-          $c->$cb($err, $data);
-        }
-      );
-    }
-    else {
-    }
-  });
-
   $app->helper('tidyhq.login' => sub {
     my $cb = ref $_[-1] eq 'CODE' ? pop : undef;
     my $c = shift;
@@ -157,67 +133,50 @@ sub register {
       username      => $args->{email},
     };
 
-    if ($cb) {
-      return $c->delay(
-        sub {
-          my ($delay) = @_;
-          $self->_ua->post($url->path('/oauth/token'), form => $params => $delay->begin);
-        },
-        sub {
-          my ($delay, $tx) = @_;
-          my ($data, $err) = process_response($tx);
-
-          return $c->$cb($err, '') if $err;
-
-          # delay store token for final session store
-          $delay->data(token => $data->{access_token});
-
-          $self->_ua->get($url->path('/api/v1/contacts/me') => {Authorization => "Bearer $data->{access_token}"} => $delay->begin);
-        },
-        sub {
-          my ($delay, $tx) = @_;
-          my ($data, $err) = process_response($tx);
-
-          return $c->$cb($err, '') if $err;
-
-          my $user = $self->proxy_user_get($data->{id});
-
-          $user->{token}        = $delay->data('token');
-          $user->{token_expiry} = gmtime->epoch + 7200; # 2 hour token life
-
-          warn dumper 'USER', $user;
-
-          # store all in session
-          $c->session(TIDYHQ_SESSION_KEY() => $user);
-
-          # store in bhack session
-          my $bhack = $c->stash('bhack');
-          my $bhack_tidyhq = {
-            email_address => $user->{email_address},
-            first_name    => $user->{first_name},
-            groups        => $user->{groups},
-            id            => $user->{id},
-            last_name     => $user->{last_name},
-            nick_name     => $user->{nick_name},
-            memberships   => $user->{memberships},
-          };
-
-          $bhack = {%{$bhack}, %{$bhack_tidyhq}};
-
-          $c->stash('bhack' => $bhack);
-
-          $c->$cb($err, $user);
-        },
-      );
-    }
-    else {
-      my $tx = $self->_ua->post($url, form => $params);
+    my $promise = $self->_ua->post_p($url->path('/oauth/token'), form => $params)->then(sub {
+      my $tx = shift;
       my ($data, $err) = process_response($tx);
 
-      die $err if $err;
+      return Mojo::Promise->new->reject($err) if $err;
 
-      return $data;
-    }
+      return Mojo::Promise->all(
+        $self->_ua->get_p($url->path('/api/v1/contacts/me') => {Authorization => "Bearer $data->{access_token}"}),
+        Mojo::Promise->new->resolve($data->{access_token})
+      );
+    })->then(sub {
+      my $tx = shift->[0];
+      my $access_token = shift->[0];
+      my ($data, $err) = process_response($tx);
+
+      my $user = $self->proxy_user_get($data->{id});
+
+      $user->{token}        = $access_token;
+      $user->{token_expiry} = gmtime->epoch + 7200; # 2 hour token life
+
+      # store all in session
+      $c->session(TIDYHQ_SESSION_KEY() => $user);
+
+      # store in bhack session
+      my $bhack = $c->stash('bhack');
+      my $bhack_tidyhq = {
+        email_address => $user->{email_address},
+        first_name    => $user->{first_name},
+        groups        => $user->{groups},
+        id            => $user->{id},
+        last_name     => $user->{last_name},
+        nick_name     => $user->{nick_name},
+        memberships   => $user->{memberships},
+      };
+
+      $bhack = {%{$bhack}, %{$bhack_tidyhq}};
+
+      $c->stash('bhack' => $bhack);
+    })->catch(sub {
+      my $err = shift;
+      warn "ERR: " . $err;
+    });
+
+    return $promise;
   });
 
   $app->helper('tidyhq.logout' => sub {
@@ -272,7 +231,7 @@ sub proxy_auth_token {
     # delay store token for final session store
     $self->{proxy}{tidyhq} = {
       token        => $data->{'access_token'},
-      token_expiry => gmtime->epoch + 7200,  # 2 hour token life
+      token_expiry => gmtime->epoch + 7200,  # 2 hour proxy token life
     };
   }
 
@@ -288,7 +247,9 @@ sub proxy_user_get {
   my $url = $self->{url};
   my $user = $self->{members}{$uid};
 
-  # update if not existing
+  my $now = gmtime;
+
+  # update user as appropriate
   unless($user) {
     my $token = $self->proxy_auth_token;
 
@@ -300,17 +261,21 @@ sub proxy_user_get {
 
     return undef if $err;
 
-    $user->{id}      = $data->{id};
-    $user->{contact} = $data;
+    $user = {
+      id      => $data->{id},
+      contact => $data,
+      updated => $now
+    };
 
+    # fetch and process user's groups
     $path = sprintf '/api/v1/contacts/%d/groups', $data->{id};
     $tx = $self->_ua->get($url->path($path) => $headers);
     ($data, $err) = process_response($tx);
 
-    if (!!grep { $_->{label} eq 'Members' } @{$data}) {
-      $user->{contact}{groups} = [map { lc $_->{label} } @{$data}];
-    }
+    # store all groups (lowercase'd)
+    $user->{contact}{groups} = [map { lc $_->{label} } @{$data}];
 
+    # fetch and process current membership-levels
     $tx = $self->_ua->get($url->path('/api/v1/membership_levels') => $headers);
     ($data, $err) = process_response($tx);
 
@@ -319,6 +284,7 @@ sub proxy_user_get {
     my $membership_levels = {};
     map { $membership_levels->{$_->{id}} = lc $_->{name}} @{$data};
 
+    # fetch and process users's memberships
     $path = sprintf '/api/v1/contacts/%d/memberships', $uid;
     $tx =  $self->_ua->get($url->path($path) => $headers);
     ($data, $err) = process_response($tx);
@@ -337,6 +303,8 @@ sub proxy_user_get {
 
       # add groups to data and store all in session
       $user->{memberships} = $memberships;
+
+      # store for later
       $self->{members}{$uid} = $user;
     }
   }
