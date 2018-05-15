@@ -50,7 +50,7 @@
 <section class="section">
   <div class="container">
     <div class="row">
-      <div class="col-md-8 col-sm-7 col-xs-12">
+      <div class="col-sm-6">
         <h1 class="title">Welcome</h1>
 
         <p>We are a non-profit community group dedicated to providing education and resources to encourage skills in science, technology, engineering, arts and mathematics (STEAM). The Ballarat Hackerspace provides tools, connections, community and other resources to help improve the skills of its members and the community, as well as encourage a culture of participating in technology advances, rather than passively using them.</p>
@@ -62,14 +62,20 @@
         <h1 class="title space">Finding Us</h1>
         <p>We are located on the <a href="/about#space-location">Federation University</a> Lydiard Street South Campus also known as the SMB Campus (<a href="https://federation.edu.au/about-us/our-campuses/smb-campus/campus-map" target="_blank">campus map, pdf</a>). We're in room 903 which can be found in the walkway between buildings B and C on the ground floor. If you get lost trying to find us just send us a <a href="https://twitter.com/bhackerspace">tweet</a> and we'll send out a search party!</p>
       </div>
-      <div class="col-md-4 col-sm-5 col-xs-12">
+      <div class="col-sm-6">
         <div class="calendar">
           <h1 class="title">Calendar</h1>
-% for my $event (@{$events}) {
-          <div class="calendar-event">
-            <h4><%= $event->{title} %></h4>
-            <p><%= $event->{startTime}->strftime("%a, %e %b %Y") %></p>
-          </div>
+% if (@{$events}) {
+           <table class="table table-hover">
+%   for my $event (@{$events}) {
+            <tr>
+              <td><b><%= $event->{title} %></b></td>
+              <td><%= $event->{startTime}->strftime("%a, %e %b %Y @ %l:%M%p") %></td>
+            </tr>
+%   }
+          </table>
+% } else {
+          <p>No events found.</p>
 % }
         </div>
       </div><!--//item-->

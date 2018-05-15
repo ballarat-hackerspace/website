@@ -38,16 +38,17 @@ my $events = [];
 sub register {
   my ($self, $app, $config) = @_;
 
-  my $url = "https://www.googleapis.com/calendar/v3/calendars/" . ($config->{id} // '') . '/';
+  my $id = $config->{id} // '';
+  my $url = "https://www.googleapis.com/calendar/v3/calendars/$id/";
 
   $self->url($url);
   $self->api_key($config->{api_key} // 'bad');
 
-  $app->log->info('Collecting calendar events');
+  $app->log->info("Collecting calendar events from: $id");
   $self->_update_events;
 
   Mojo::IOLoop->recurring(10 * 60, sub {
-    $app->log->info('Collecting calendar events');
+    $app->log->info("Collecting calendar events from: $id");
     $self->_update_events;
   });
 
@@ -55,9 +56,10 @@ sub register {
     my $c = shift;
     my $limit = shift // 10;
 
-    $limit--;
+    return [] if $limit < 1;
+    return $events if ($limit > @{$events});
 
-    return [ @{$events}[0..$limit] ];
+    return [ @{$events}[0..$limit-1] ];
   });
 
   $app->helper('events.update' => sub {

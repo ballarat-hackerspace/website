@@ -141,7 +141,7 @@ get '/security'   => 'security';
 get '/' => sub {
   my $c = shift;
 
-  my $events = $c->events->list(10);
+  my $events = $c->events->list(15);
 
   $c->stash(events => $events);
 
