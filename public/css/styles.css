@@ -15,9 +15,7 @@ p {
   line-height: 1.5;
   text-align: justify;
 }
-.trophy {
-  color: gold;
-}
+
 a {
   color: #3498db;
 }
@@ -1659,16 +1657,6 @@ li, li > p {
 
 
 /*
-** SPONSORS
-*/
-
-#sponsors .spnsr-logo,
-#footer-bar .footer-image {
-  height: 84px;
-  margin: 16px 0;
-}
-
-/*
 ** FOOTER
 */
 
@@ -1806,6 +1794,27 @@ li, li > p {
   font-size: 18px;
   text-align: center;
   padding: 0;
+}
+
+/*
+** SPONSORS / SEEDERS
+*/
+
+.spnsr-logo {
+  height: 64px;
+  margin: 16px;
+}
+
+.table-seeders {
+}
+
+.table-seeders td {
+  line-height: 24px!important;
+}
+
+.trophy {
+  color: #ffcc22;
+  font-size: 24px;
 }
 
 /*
