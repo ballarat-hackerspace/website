@@ -39,15 +39,18 @@ sub register {
   my ($self, $app, $config) = @_;
 
   my $id = $config->{id} // '';
+  my $api_key = $config->{api_key} // 'bad';
+  my $update_interval = $config->{update_interval} // 10 * 60;
+
   my $url = "https://www.googleapis.com/calendar/v3/calendars/$id/";
 
   $self->url($url);
-  $self->api_key($config->{api_key} // 'bad');
+  $self->api_key($api_key);
 
-  $app->log->info("Collecting calendar events from: $id");
+  $app->log->info("Collecting calendar events every $update_interval seconds from: $id");
   $self->_update_events;
 
-  Mojo::IOLoop->recurring(10 * 60, sub {
+  Mojo::IOLoop->recurring($update_interval, sub {
     $app->log->info("Collecting calendar events from: $id");
     $self->_update_events;
   });
@@ -56,21 +59,23 @@ sub register {
     my $c = shift;
     my $limit = shift // 10;
 
+    # return empty for poor limit ranges
     return [] if $limit < 1;
+
+    # return all if limit is higher than our count
     return $events if ($limit > @{$events});
 
     return [ @{$events}[0..$limit-1] ];
-  });
-
-  $app->helper('events.update' => sub {
   });
 }
 
 sub _update_events {
   my $self = shift;
 
-  my $now = strftime("%FT00:00:00+1000", localtime);
-  my $url = $self->url . sprintf("events/?maxResults=50&singleEvents=true&orderBy=startTime&timeMin=%s&key=%s", url_escape($now), $self->api_key);
+  my $now = localtime;
+
+  my $time_min = strftime("%FT00:00:00+1000", localtime);
+  my $url = $self->url . sprintf("events/?maxResults=50&singleEvents=true&orderBy=startTime&timeMin=%s&key=%s", url_escape($time_min), $self->api_key);
 
   $self->_ua->get($url => sub {
     my ($ua, $tx) = @_;
@@ -81,12 +86,18 @@ sub _update_events {
     $events = [];
 
     foreach my $item (@{$data->{items} // []}) {
+      my $start_time = Time::Piece->strptime($item->{start}{dateTime}, "%Y-%m-%dT%H:%M:%S+10:00");
+      my $end_time = Time::Piece->strptime($item->{end}{dateTime}, "%Y-%m-%dT%H:%M:%S+10:00");
+
       push @{$events}, {
-        title     => $item->{summary},
-        startTime => Time::Piece->strptime($item->{start}{dateTime}, "%Y-%m-%dT%H:%M:%S+10:00"),
-        endTime   => Time::Piece->strptime($item->{end}{dateTime}, "%Y-%m-%dT%H:%M:%S+10:00"),
-        link      => $item->{htmlLink},
-        location  => $item->{location},
+        title       => $item->{summary},
+        startTime   => $start_time,
+        endTime     => $end_time,
+        link        => $item->{htmlLink},
+        location    => $item->{location},
+        now => $now,
+        in_progress => ($start_time <= $now) && ($now <= $end_time),
+        is_complete => ($now > $end_time)
       };
     }
   });

@@ -26,6 +26,11 @@ a:hover {
 a:focus {
   text-decoration: none;
 }
+
+/*
+** BUTTONS
+*/
+
 .btn {
   border-radius: 0;
   cursor: pointer;
@@ -46,10 +51,11 @@ a:focus {
   position: relative;
   vertical-align: top;
 
-  background: #bdc3c7;
-  border-bottom: 2px solid #acb2b7;
-  -webkit-box-shadow: inset 0 -2px #acb2b7;
-  box-shadow: inset 0 -2px #acb2b7;
+  background: #bbb;
+
+  border-bottom: 2px solid #aaa;
+  -webkit-box-shadow: inset 0 -2px #aaa;
+  box-shadow: inset 0 -2px #aaa;
 }
 
 .btn-cta:focus {
@@ -252,11 +258,6 @@ li, li > p {
   position: relative;
   top: 3px;
   font-size: 25px;
-}
-.google-calendar iframe {
-  max-width: 100%;
-  width: 100%;
-  height: 480px;
 }
 
 .blog-container {
@@ -1238,10 +1239,37 @@ li, li > p {
   margin-top: 30px;
 }
 
-/* ======= About Us ======= */
+/*
+** CALENDAR
+*/
+
+.table-calendar {
+}
+
+.table-calendar tr.in_progress {
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+.table-calendar tr.in_progress:hover {
+  background-color: #1f8c4c;
+}
+
+.table-calendar tr.is_complete {
+}
+
+.table-calendar tr.is_complete td {
+  opacity: 0.3;
+}
+
+/*
+** SECTIONS
+*/
+
 .section {
   padding: 64px 0 32px 0;
 }
+
 .section .title {
   font-size: 36px;
   font-family: 'Oswald', arial, sans-serif;
@@ -1285,6 +1313,10 @@ li, li > p {
   margin-top: 0;
   margin-bottom: 15px;
   color: #555;
+}
+
+.section-block {
+  margin-bottom: 64px;
 }
 
 .team {
@@ -1841,6 +1873,7 @@ li, li > p {
 
 /* extra small devices (phones, less than 768px) */
 @media (max-width: 767px) {
+  .carousel-caption { font-size: 12px; }
   .config-wrapper { display: none; }
   .header h1.logo {
     font-size: 20px;
