@@ -40,12 +40,13 @@ app->log->info('Configuration: ' . CONFIG_PATH);
 # PLUGINS
 #
 
-plugin 'JSONConfig'      => {file => CONFIG_PATH};
-plugin 'Plugins::Alarm'  => app->config->{alarm}  // {};
-plugin 'Plugins::Device' => app->config->{device} // {};
-plugin 'Plugins::Door'   => app->config->{door}   // {};
-plugin 'Plugins::Jekyll' => app->config->{blog}   // {};
-plugin 'Plugins::TidyHQ' => app->config->{tidyhq} // {};
+plugin 'JSONConfig'        => {file => CONFIG_PATH};
+plugin 'Plugins::Alarm'    => app->config->{alarm}    // {};
+plugin 'Plugins::Calendar' => app->config->{calendar} // {};
+plugin 'Plugins::Device'   => app->config->{device}   // {};
+plugin 'Plugins::Door'     => app->config->{door}     // {};
+plugin 'Plugins::Jekyll'   => app->config->{blog}     // {};
+plugin 'Plugins::TidyHQ'   => app->config->{tidyhq}   // {};
 
 #
 # HELPERS
@@ -127,7 +128,6 @@ hook 'after_dispatch' => sub {
 # ROUTES
 #
 
-get '/'           => 'index';
 get '/about'      => 'about';
 get '/faq'        => 'faq';
 get '/conduct'    => 'conduct';
@@ -137,6 +137,16 @@ get '/sponsors'   => 'sponsors';
 get '/women'      => 'women';
 get '/workshops'  => 'workshops';
 get '/security'   => 'security';
+
+get '/' => sub {
+  my $c = shift;
+
+  my $events = $c->events->list(10);
+
+  $c->stash(events => $events);
+
+  $c->render('index');
+};
 
 get '/blog' => sub {
   my $c = shift;
