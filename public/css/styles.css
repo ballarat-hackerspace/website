@@ -1812,9 +1812,13 @@ li, li > p {
   line-height: 24px!important;
 }
 
-.trophy {
+.trophy .fa {
   color: #ffcc22;
   font-size: 24px;
+}
+
+.trophy .fa+.fa {
+  margin-left: 4px;
 }
 
 /*
