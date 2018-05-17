@@ -7,8 +7,9 @@ CMD ["prefork"]
 
 RUN set -x \
   && apt-get update \
-  && DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes git libtext-multimarkdown-perl libyaml-tiny-perl libdbd-sqlite3-perl libio-socket-ssl-perl libnetaddr-ip-perl cpanminus make \
-  && cpanm Mojolicious \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes git libtext-multimarkdown-perl libyaml-tiny-perl libdbd-sqlite3-perl libio-socket-ssl-perl libnetaddr-ip-perl cpanminus make
+
+RUN ["cpanm", "Mojolicious"]
 
 COPY . /website/
 RUN set -x \
