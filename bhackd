@@ -217,6 +217,7 @@ group {
     $c->stash('uuid' => $c->device->uuid);
 
     return 1 if $c->tidyhq->is_authenticated;
+
     return $c->redirect_to('/');
   };
 
@@ -225,10 +226,10 @@ group {
   # device management
   get '/devices' => sub {
     my $c = shift;
-    $c->stash(
-      uuid    => $c->device->uuid,
-      devices => $c->device->find
-    );
+
+    return $c->redirect_to('/') unless $c->tidyhq->is_authenticated;
+
+    $c->stash(devices => $c->device->find);
     $c->render('members-devices');
   } => 'members-devices';
 

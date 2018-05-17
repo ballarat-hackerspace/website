@@ -75,7 +75,7 @@ sub register {
     my $c = shift;
     my $db = $self->db;
     my $sth = $db->prepare('SELECT * FROM devices;');
-    my $devices = !!($sth->execute) ? $sth->fetchall_arrayref({}) : undef;
+    my $devices = !!($sth->execute) ? $sth->fetchall_arrayref({}) : [];
 
     return $devices;
   });
