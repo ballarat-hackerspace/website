@@ -54,7 +54,7 @@ sub register {
   # prepare the cache
   $plugin->_cache_posts($conf->{directory});
 
-  $app->log->info(sprintf('Processing Jekyll blogs at: %s (%s)', $conf->{directory}, $conf->{style}));
+  $app->log->info(sprintf('Processing Jekyll blogs at: %s (type: %s, files: %s, posts: %s)', $conf->{directory}, $conf->{style}, scalar @{$plugin->files}, scalar @{$plugin->posts}));
 
   $app->helper(blog_summary => sub {
     my $self = shift;
