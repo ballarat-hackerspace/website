@@ -9,10 +9,10 @@
       <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="workshop1">
           <h4 class="panel-title">
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1">Build Your Own 3D Printer Workshop</a>
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1">Build Your Own 3D Printer Workshop</a>
           </h4>
         </div>
-        <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="workshop1">
+        <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="workshop1">
           <div class="panel-body">
             <div class="row">
               <div class="col-sm-12">
