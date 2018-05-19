@@ -29,14 +29,14 @@ use Time::Piece;
 our $VERSION = '0.1';
 
 has 'api_key';
-has 'events';
 has 'url';
-has _ua => sub { Mojo::UserAgent->new };
+has '_events';
+has '_ua' => sub { Mojo::UserAgent->new };
 
 my $events = [];
 
 sub register {
-  my ($self, $app, $config) = @_;
+  my ($plugin, $app, $config) = @_;
 
   my $id = $config->{id} // '';
   my $api_key = $config->{api_key} // 'bad';
@@ -44,15 +44,15 @@ sub register {
 
   my $url = "https://www.googleapis.com/calendar/v3/calendars/$id/";
 
-  $self->url($url);
-  $self->api_key($api_key);
+  $plugin->url($url);
+  $plugin->api_key($api_key);
 
-  $app->log->info("Collecting calendar events every $update_interval seconds from: $id");
-  $self->_update_events;
+  $app->log->info("Collecting Google calendar events every $update_interval seconds from: $id");
+  $plugin->_update_gcal_events;
 
   Mojo::IOLoop->recurring($update_interval, sub {
-    $app->log->info("Collecting calendar events from: $id");
-    $self->_update_events;
+    $app->log->info("Collecting Google calendar events from: $id");
+    $plugin->_update_gcal_events;
   });
 
   $app->helper('events.list' => sub {
@@ -65,11 +65,11 @@ sub register {
     # return all if limit is higher than our count
     return $events if ($limit > @{$events});
 
-    return [ @{$events}[0..$limit-1] ];
+    return [@{$events}[0..$limit-1]];
   });
 }
 
-sub _update_events {
+sub _update_gcal_events {
   my $self = shift;
 
   my $now = localtime;
@@ -86,18 +86,24 @@ sub _update_events {
     $events = [];
 
     foreach my $item (@{$data->{items} // []}) {
-      my $start_time = Time::Piece->strptime($item->{start}{dateTime}, "%Y-%m-%dT%H:%M:%S+10:00");
-      my $end_time = Time::Piece->strptime($item->{end}{dateTime}, "%Y-%m-%dT%H:%M:%S+10:00");
+      $item->{start}{dateTime} =~ s/([+-]\d\d):(\d\d)/$1$2/;
+      $item->{end}{dateTime} =~ s/([+-]\d\d):(\d\d)/$1$2/;
+
+      my $start_time = localtime(Time::Piece->strptime($item->{start}{dateTime}, "%Y-%m-%dT%H:%M:%S%z")->epoch);
+      my $end_time = localtime(Time::Piece->strptime($item->{end}{dateTime}, "%Y-%m-%dT%H:%M:%S%z")->epoch);
+
+      my $tags = [ grep { $_ } split(/\n?#/, $item->{description} // '') ];
 
       push @{$events}, {
-        title       => $item->{summary},
-        startTime   => $start_time,
-        endTime     => $end_time,
+        end_time    => $end_time,
+        in_progress => ($start_time <= $now) && ($now <= $end_time),
+        is_complete => ($now > $end_time),
         link        => $item->{htmlLink},
         location    => $item->{location},
-        now => $now,
-        in_progress => ($start_time <= $now) && ($now <= $end_time),
-        is_complete => ($now > $end_time)
+        now         => $now,
+        start_time  => $start_time,
+        tags        => $tags,
+        title       => $item->{summary},
       };
     }
   });

@@ -74,7 +74,7 @@
 %   for my $event (@{$events}) {
               <tr class="<%= $event->{in_progress} ? 'in_progress' : $event->{is_complete} ? 'is_complete' : '' %>">
                 <td><b><%= $event->{title} %></b></td>
-                <td><%= $event->{startTime}->strftime("%a, %e %b %Y @ %l:%M%p") %></td>
+                <td><%= $event->{start_time}->strftime("%a, %e %b %Y @ %l:%M%p") %></td>
                 <td>
 %     unless ($event->{in_progress} || $event->{is_complete}) {
                   <a class="btn btn-cta btn-cta-sm" href="<%= $event->{link} %>"><i class="fa fa-calendar"></i></a>
