@@ -1,4 +1,4 @@
-% layout 'page', active_page => '', page_title => 'Model Rules';
+% layout 'page', active_page => 'modelrules', page_title => 'Model Rules';
 
 <!-- model rules -->
 <section id="modelrules" class="section">

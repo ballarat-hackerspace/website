@@ -128,15 +128,15 @@ hook 'after_dispatch' => sub {
 # ROUTES
 #
 
-get '/about'      => 'about';
-get '/faq'        => 'faq';
-get '/conduct'    => 'conduct';
-get '/contact'    => 'contact';
-get '/join'       => 'join';
-get '/sponsors'   => 'sponsors';
-get '/women'      => 'women';
-get '/workshops'  => 'workshops';
-get '/security'   => 'security';
+get '/about'            => 'about';
+get '/faq'              => 'faq';
+get '/code-of-conduct'  => 'conduct';
+get '/contact'          => 'contact';
+get '/join'             => 'join';
+get '/sponsors'         => 'sponsors';
+get '/women'            => 'women';
+get '/workshops'        => 'workshops';
+get '/security'         => 'security';
 
 get '/' => sub {
   my $c = shift;
@@ -198,14 +198,16 @@ any '/logout' => sub {
   return $c->redirect_to($url);
 };
 
-get '/modelrules' => sub {
+get '/model-rules' => sub {
   my $c = shift;
 
-  #my $ua = Mojo::UserAgent->new;
-  #my $tx = $ua->get('https://raw.githubusercontent.com/ballarat-hackerspace/association/master/rules-of-the-association.md');
-  #$c->stash(rules_content => markdown($tx->res->body));
-
-  $c->render('modelrules');
+  $c->render_later;
+  my $ua = Mojo::UserAgent->new;
+  $ua->get('https://raw.githubusercontent.com/ballarat-hackerspace/association/master/rules-of-the-association.md' => sub {
+    my ($ua, $tx) = @_;
+    $c->stash(rules_content => markdown($tx->res->body));
+    $c->render('modelrules');
+  });
 };
 
 # members only

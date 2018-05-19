@@ -1,4 +1,4 @@
-% layout 'page', active_page => '',  page_title => 'Code Of Conduct';
+% layout 'page', active_page => 'codeofconduct',  page_title => 'Code Of Conduct';
 
 <!-- ******team Section****** -->
 <section id="team" class="section">

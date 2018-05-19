@@ -14,7 +14,7 @@
         </div><!--//navbar-header-->
         <div id="navbar-collapse" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="nav-item dropdown <%= 'active' if (grep {$_ eq $active} qw(about women sponsors contact faq)) %>">
+            <li class="nav-item dropdown <%= 'active' if (grep {$_ eq $active} qw(about women sponsors contact faq codeofconduct modelrules)) %>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About</a>
               <ul class="dropdown-menu">
                 <li class="nav-item <%= 'active' if ($active eq 'about') %>"><a href="/about">Overview</a></li>
@@ -23,6 +23,9 @@
                 <li role="separator" class="divider"></li>
                 <li class="nav-item <%= 'active' if ($active eq 'contact') %>"><a href="/contact">Contact</a> </li>
                 <li class="nav-item <%= 'active' if ($active eq 'faq') %>"> <a href="/faq">FAQ</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="nav-item <%= 'active' if ($active eq 'codeofconduct') %>"><a href="/code-of-conduct">Code of Conduct</a> </li>
+                <li class="nav-item <%= 'active' if ($active eq 'modelrules') %>"><a href="/model-rules">Model Rules</a></li>
               </ul>
             </li>
 
