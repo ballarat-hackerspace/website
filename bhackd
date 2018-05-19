@@ -34,6 +34,8 @@ use constant {
 
 use Plugins::Jekyll;
 
+my $ua = Mojo::UserAgent->new;
+
 app->log->info('Configuration: ' . CONFIG_PATH);
 
 #
@@ -202,9 +204,9 @@ get '/model-rules' => sub {
   my $c = shift;
 
   $c->render_later;
-  my $ua = Mojo::UserAgent->new;
   $ua->get('https://raw.githubusercontent.com/ballarat-hackerspace/association/master/rules-of-the-association.md' => sub {
     my ($ua, $tx) = @_;
+
     $c->stash(rules_content => markdown($tx->res->body));
     $c->render('modelrules');
   });
