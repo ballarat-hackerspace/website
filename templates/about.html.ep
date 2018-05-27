@@ -6,7 +6,18 @@
     <div class="row">
       <div class="col-sm-12">
         <h2 class="title text-center">About Us</h2>
-        <p>The Ballarat Hackerspace is modeled on an <a href="http://hackerspaces.org/">international community of like minded spaces</a> that started in Germany back in 1995. It supports and encourages Science, Technology, Engineering, Art and Mathematics culture in the Ballarat region by providing a physical space for residents to meet, interact, create and innovate.</p>
+        <p>The Ballrat Hackerspace is a community-run non-profit that supports and encourages Science, Technology, Engineering, Art and Mathematics (STEAM) culture in the Ballarat and surrounding regions in Victoria, Australia.</p>
+        <p>We run and provide a <a href="#workshop_info">workshop</a>, available to members with facilities for 3D printing, electronics development, soldering, prototyping, programming, and <i>anything</i> constructive its members wish to achieve.
+        We also support some destructive activities, in the name of learning.
+        </p>
+        <p>In addition, we promote these areas through engagement with the wider community, partnerships with other institutions (government, commercial, non-profit) and generally to anyone that will listen.</p>
+        <p>The Ballarat Hackerspace is modeled on an <a href="http://hackerspaces.org/">international community of like minded spaces</a> that started in Germany back in 1995.
+           Our philosphy is built around the idea that you should make, create, build, hack, develop and learn about how the world works, how technology works.
+        </p>
+        <p>Our members learn skills that expand their ability, increase employability (in an ever changing world) and express themselves through their craft.</p>
+        <p>The Ballarat Hackerspace is aggressively inclusive, with a strong and binding community rules around being awesome to each other.
+        This includes ventures such as our <a href="/women">Women's Wednesdays</a>, where women and their supporters can use the space for free on Wednesday nights.
+        </p>
       </div>
 </section>
 
@@ -78,7 +89,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2 class="title text-center">The Space</h2>
+        <h2 class="title text-center" id="workshop_info">The Space</h2>
         <p>We moved into our new space at Room 903, B Building, of the Federation University SMB Campus in January 2015. Please come along and check us out at our next meetup, or any time we are open. Check the calendar or the online community for opening times. If you would like to support our community please join the Ballarat Hackerspace.</p>
         <p>You are welcome to join the <a href="/contact#irc-channel">IRC channel</a>, or follow us on <a href="https://twitter.com/bHackerspace">Twitter</a> or <a href="https://plus.google.com/communities/106879016585907671427">Google+</a></p>
 
