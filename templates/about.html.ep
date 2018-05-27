@@ -18,7 +18,7 @@
         <p>The Ballarat Hackerspace is aggressively inclusive, with a strong and binding community rules around being awesome to each other.
         This includes ventures such as our <a href="/women">Women's Wednesdays</a>, where women and their supporters can use the space for free on Wednesday nights.
         </p>
-        <p>If formality is your thing, we also have our <a href="https://github.com/ballarat-hackerspace/association">Association Rules</a> available.</a> 
+        <p>If formality is your thing, we also have our <a href="https://github.com/ballarat-hackerspace/association">Association Rules</a> available.</a>
       </div>
 </section>
 
@@ -27,8 +27,12 @@
     <div class="row">
       <div class="col-sm-12">
         <h2 class="title text-center">Donations</h2>
-        <p>The Ballarat Hackerspace is a registered non-profit volunteer run organisation. We are entirely funded by our members and the generous donations of our sponsors. If you would like to support the work of the Ballarat Hackerspace Association to help with the running costs of the Hackerspace (e.g. rent, consumables, workshops, etc.) then any donation would be gladly accepted and put to good use!</p>
-        <p>Donations to the association can be made via bank deposit to:</p>
+        <p>The Ballarat Hackerspace is a registered non-profit volunteer run organisation. We are entirely by our members and the generous donations of our sponsors.
+        If you would like to support the work of the Ballarat Hackerspace Association to help with the running costs of the Hackerspace (e.g. rent, consumables, workshops, etc.) then any donation would be gladly accepted and put to good use!</p>
+
+        <p>If you share our vision, please help support us. You can provide time, expertise, money, equipment or anything else you think we can use.</p>
+        <p>If you or your company would like to sponsor us, please <a href="/contact">contact us directly</a>.</p>
+        <p>Donations to the association can be made in cash at the space itself, or via bank deposit to:</p>
         <blockquote>
           Account Name: Ballarat Hackerspace Inc<br/>
           BSB : 193-879<br/>
@@ -38,6 +42,7 @@
         <blockquote>
           <a href="https://blockchain.info/address/1BHackHL8bYsGb5PBaXURAot2ymLZtRpTo">1BHackHL8bYsGb5PBaXURAot2ymLZtRpTo</a>
         </blockquote>
+        <p>Let us know if your flavour of crypto is different and we can work it out.</p>
         <p>If, instead of money, you have time to donate then please <a href="/contact">contact us</a>.</p>
       </div>
     </div>
