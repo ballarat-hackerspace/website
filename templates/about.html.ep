@@ -11,7 +11,7 @@
         <p>We promote these areas through engagement with the broader community, partnerships with other institutions (government, commercial, non-profit) and generally to anyone that will listen.</p>
         <p>The Ballarat Hackerspace is modeled on an international community of like-minded spaces that started in Germany back in 1995. Our philosophy is the idea that you should make, create, build, hack, develop and learn about how the world works, how the technology around us works and anything else related to "the big question".</p>
         <p>Our members learn skills that expand their ability, increase employability (in an ever-changing world) and express themselves through their craft.</p>
-        <p>The Ballarat Hackerspace is aggressively inclusive, with firm and binding community rules around being excellent to each other. Our commitment to inclusiveness includes ventures such as our <a href="/women">Women's Wednesdays</a>, where women and their supporters can use the space for free on Wednesday nights.</p>
+        <p>The Ballarat Hackerspace is aggressively inclusive, with firm and binding community rules and <a href="#the_code">code of conduct</a> around being excellent to each other. Our commitment to inclusiveness includes ventures such as our <a href="/women">Women's Wednesdays</a>, where women and their supporters can use the space for free on Wednesday nights.</p>
         <p>If formalities are your thing, we also have our <a href="https://github.com/ballarat-hackerspace/association">Association Rules</a> available.</a>
       </div>
 </section>
@@ -137,7 +137,7 @@
             <tr>
               <th>Position</th>
               <th>Elected Representative</th>
-            </tr>
+            </tr>the_code
           </thead>
           <tbody>
             <tr>
@@ -167,7 +167,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2 class="title text-center">Code of Conduct</h2>
+        <h2 class="title text-center" id="the_code">Code of Conduct</h2>
         <p>Ballarat Hackerspace is dedicated to providing a harassment-free experience for everyone, regardless of gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, or religion. We do not tolerate harassment of people at our events or space in any form. People violating these rules may be sanctioned or expelled from the space or the event at the discretion of any Ballarat Hackerspace member.</p>
         <a href="/code-of-conduct" class="btn btn-cta btn-cta-primary">Read More</a>
       </div>
