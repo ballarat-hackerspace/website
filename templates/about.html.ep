@@ -6,19 +6,13 @@
     <div class="row">
       <div class="col-sm-12">
         <h2 class="title text-center">About Us</h2>
-        <p>The Ballrat Hackerspace is a community-run non-profit that supports and encourages Science, Technology, Engineering, Art and Mathematics (STEAM) culture in the Ballarat and surrounding regions in Victoria, Australia.</p>
-        <p>We run and provide a <a href="#workshop_info">workshop</a>, available to members with facilities for 3D printing, electronics development, soldering, prototyping, programming, and <i>anything</i> constructive its members wish to achieve.
-        We also support some destructive activities, in the name of learning.
-        </p>
-        <p>In addition, we promote these areas through engagement with the wider community, partnerships with other institutions (government, commercial, non-profit) and generally to anyone that will listen.</p>
-        <p>The Ballarat Hackerspace is modeled on an <a href="http://hackerspaces.org/">international community of like minded spaces</a> that started in Germany back in 1995.
-           Our philosphy is built around the idea that you should make, create, build, hack, develop and learn about how the world works, how technology works.
-        </p>
-        <p>Our members learn skills that expand their ability, increase employability (in an ever changing world) and express themselves through their craft.</p>
-        <p>The Ballarat Hackerspace is aggressively inclusive, with a strong and binding community rules around being awesome to each other.
-        This includes ventures such as our <a href="/women">Women's Wednesdays</a>, where women and their supporters can use the space for free on Wednesday nights.
-        </p>
-        <p>If formality is your thing, we also have our <a href="https://github.com/ballarat-hackerspace/association">Association Rules</a> available.</a>
+        <p>The Ballarat Hackerspace is a community-run non-profit that supports and encourages Science, Technology, Engineering, Art and Mathematics (STEAM) culture in the Ballarat and surrounding regions in Victoria, Australia.</p>
+        <p>We run and provide a workshop, available to members with facilities for 3D printing, electronics development, soldering, prototyping, programming, and anything constructive its members wish to achieve. We also support some destructive activities, in the name of learning.</p>
+        <p>We promote these areas through engagement with the broader community, partnerships with other institutions (government, commercial, non-profit) and generally to anyone that will listen.</p>
+        <p>The Ballarat Hackerspace is modeled on an international community of like-minded spaces that started in Germany back in 1995. Our philosophy is the idea that you should make, create, build, hack, develop and learn about how the world works, how the technology around us works and anything else related to "the big question".</p>
+        <p>Our members learn skills that expand their ability, increase employability (in an ever-changing world) and express themselves through their craft.</p>
+        <p>The Ballarat Hackerspace is aggressively inclusive, with firm and binding community rules around being excellent to each other. Our commitment to inclusiveness includes ventures such as our <a href="/women">Women's Wednesdays</a>, where women and their supporters can use the space for free on Wednesday nights.</p>
+        <p>If formalities are your thing, we also have our <a href="https://github.com/ballarat-hackerspace/association">Association Rules</a> available.</a>
       </div>
 </section>
 
