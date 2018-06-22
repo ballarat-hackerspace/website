@@ -1,27 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="bhack">
-<head>
-  <title><%= $page_title %></title>
+  <head>
+    <title><%= $page_title %></title>
 
-  %= include 'header.inc'
+    <!-- meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <!-- scripts -->
-  %= include 'scripts.inc'
-</head>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.ico" sizes="50x50">
 
-<body>
-<!-- header -->
-%= include 'navigation.inc', active => $active_page
+    <link href='//fonts.googleapis.com/css?family=Merriweather+Sans:700,300italic,400italic,700italic,300,400' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
 
-  <div class="page">
-%= content
-  </div>
+    <!-- global css -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- footer -->
-%= include 'footer.inc'
+    <!-- theme css -->
+    <link id="theme-style" rel="stylesheet" href="/css/styles.css">
 
-<!-- authenticate -->
-%= include 'authenticate.inc'
+    <!-- scripts -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.10/angular.js"></script>
 
-</body>
+    <script type="text/javascript" src="/js/plugins/back-to-top.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+  </head>
+
+  <body>
+    <!-- header -->
+    %= include 'navigation.inc', active => $active_page
+
+    <div class="page">
+      %= content
+    </div>
+
+    <!-- footer -->
+    %= include 'footer.inc'
+
+    <!-- authenticate -->
+    %= include 'authenticate.inc'
+  </body>
 </html>

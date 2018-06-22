@@ -1666,6 +1666,10 @@ li, li > p {
   width: 150px;
 }
 /* ======= Modal ======= */
+.modal-login .modal-dialog {
+  width: 400px;
+}
+
 .modal .modal-dialog {
   width: 760px;
 }
@@ -1983,6 +1987,8 @@ li, li > p {
 
   .config-wrapper { display: none; }
   .modal .modal-dialog { width: 660px; }
+  .modal-login .modal-dialog { width: 400px; }
+
   .latest-work .item .figure-container a { min-height: 440px; }
 }
 /* medium devices (desktops, 992px and up) */
@@ -2001,6 +2007,7 @@ li, li > p {
     padding-right: 15px;
   }
   .modal .modal-dialog { width: 760px; }
+  .modal-login .modal-dialog { width: 400px; }
   .latest-work .item .figure-container a { min-height: 440px; }
 }
 /* large devices (large desktops, 1200px and up) */
