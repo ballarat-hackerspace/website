@@ -38,13 +38,8 @@
       </tbody>
     </table>
 
-    <h3 id="irc-channel">On IRC</h3>
-    <p>Come and hang out on our IRC (Internet Relay Chat) channel on freenode. You can use the web client or your own client at irc.freenode.net #bhack.</p>
-
-    <ul>
-      <li><a href="http://webchat.freenode.net/?channels=bhack">Direct Webchat Link</a></li>
-      <li><a href="irc://irc.freenode.net/bhack">Direct link for IRC clients</a></li>
-    </ul>
+    <h3 id="irc-channel">On Slack</h3>
+    <p>Members have access to a Slack to communicate with other members. <a href="https://bhack.slack.com">You can access it here</a>.</p>
 
     <h3>Google+</h3>
     <p>A lot of discussion and announcements happen on our <a href="http://plus.bhack.in/">Google+ community page</a>, both members and non-members are welcome.</p>
