@@ -36,7 +36,12 @@
 % }
             <li class="nav-item <%= 'active' if ($active eq 'workshops') %>"><a href="/workshops">Workshops</a></li>
 
-            <li class="nav-item"><a href="/patreon">Patreon</a></li>
+            <li class="nav-item dropdown">
+              <a href="/patreon">Patreon</a>
+              <ul class="dropdown-menu">
+                <li class="nav-item-blurb">Be a financial supporter of the Ballarat Hackerspace for as little as $5/month to ensure our continued operation. In return we welcome you to attend any of our open times to learn how to use our facilities and get inspiration for potential projects of your own! Full information about patron benefits can be found on: <a href="/patreon">Patreon</a></li>
+              </ul>
+            </li>
 
             <li class="nav-item <%= 'active' if ($active eq 'blog') %>"><a href="/blog">Blog</a></li>
           </ul><!--//nav-->

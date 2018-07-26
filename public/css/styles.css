@@ -2014,3 +2014,13 @@ li, li > p {
 @media (min-width: 1200px) {
   .latest-work .item .figure-container a { min-height: 520px; }
 }
+
+@media (min-width: 768px) {
+  .dropdown:hover>.dropdown-menu {
+    display: block;
+  }
+}
+.nav-item-blurb {
+  margin: 15px;
+  width: 270px;
+}
