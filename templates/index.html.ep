@@ -58,11 +58,16 @@
           <p>We run regular workshops, community meetups, and encourage growth in the community in the broader Victorian goldfields region.</p>
 
           <p>We are generally <a href="/about#timetable">open for public walk-ins</a> on Mondays, Tuesdays and Saturdays with a dedicated meetup on the 1st Tuesday of each month having a dedicated theme. These meetups are where we invite you to join us to chat, participate in show and tell, get help or advice, or talk about your projects &mdash; <b>BIG</b> and <i>small</i>.</p>
-          <p><a class="btn btn-cta btn-cta-primary" href="/about">More About Us</a></p>
+          <p style="line-height:2.5;text-align:left;">
+            <a class="btn btn-cta btn-cta-primary" href="/about">More About Us</a>
+            <a class="btn btn-cta btn-cta-green" href="/join">Join Us</a>
+            <a class="btn btn-cta btn-cta-secondary" href="/patreon">Support Ballarat Hackerspace</a>
+          </p>
         </div>
         <div class="section-block">
           <h1 class="title">Finding Us</h1>
           <p>We are located on the <a href="/about#space-location">Federation University</a> SMB Campus (<a href="https://federation.edu.au/about-us/our-campuses/smb-campus/campus-map" target="_blank">campus map, pdf</a>). We're on the top floor of Building K (also the location of the Ballarat Tech School). Our main door is at the top of the stairs on the south side of that building (between Building K and Building I) or there is disabled access via the lift on the corner facing Albert Street. If you get lost trying to find us just send us a <a href="https://twitter.com/bhackerspace">tweet</a> and we'll send out a search party!</p>
+          <p><img class="img-responsive" src="/images/hackerspace_2018.png"></p>
         </div>
       </div>
       <div class="col-sm-6">
