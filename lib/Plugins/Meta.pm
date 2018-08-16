@@ -88,9 +88,7 @@ sub register {
 
     my $where = @{$filter} ? ' WHERE ' . join(' AND ', @{$filter}) : '';
     my $limit = $args->{limit} ? ' ORDER BY updated DESC LIMIT ' . $args->{limit} : '';
-
     my $sql = 'SELECT * FROM meta' . $where . $limit;
-    warn $sql;
 
     my $sth = $db->prepare($sql, @{$filter_arg});
     my $data = [];
