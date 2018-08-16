@@ -1,9 +1,12 @@
 logs/
 bhackd.conf
+bhackd.conf.dev
 
 # don't store temp files
 blog/*~
 blog/.*
+
+data/*
 
 # Don't add JetBrain's folder
 .idea/

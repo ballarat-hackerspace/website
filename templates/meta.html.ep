@@ -1,0 +1,41 @@
+% layout 'page', active_page => 'meta', page_title => 'Meta';
+
+<section id="team" class="section">
+  <div class="container">
+    <h2 class="title text-center">Meta</h2>
+    <p>The Ballarat Hackerspace aims to be as transparent and interactive as it can possibly be. To this end, this meta portal is the beginnings of that journey.</p>
+
+    <h3>Streams</h3>
+    <p>We have developed <i>streams</i> as a simple logging service for collecting data from the <a href="http://en.wikipedia.org/wiki/Internet_of_Things">Internet of Things</a>.
+% if (@{$meta}) {
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Stream</th>
+          <th>Type</th>
+          <th>Data</th>
+          <th>IP</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+% use Mojo::JSON 'to_json';
+%   for my $d (@{$meta}) {
+        <tr>
+          <td><%= $d->{stream} %></td>
+          <td><%= $d->{type} ? $d->{type} : '-' %></td>
+          <td><%= to_json $d->{data} %></td>
+          <td><%= $d->{meta}{ip} %></td>
+          <td><%= $d->{created} %></td>
+        </tr>
+%   }
+      </tbody>
+    </table>
+% } else {
+    <div>No streams found.</div>
+% }
+
+    <h3>SpaceAPI</h3>
+    <p>A full implementation of the <a href="https://spaceapi.net">SpaceAPI</a> is also planned.</p>
+  </div><!--//row-->
+</section>

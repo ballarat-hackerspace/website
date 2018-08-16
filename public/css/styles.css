@@ -195,6 +195,14 @@ a:focus {
 .nav .nav-item {
   margin-bottom: 0;
 }
+
+.nav .nav-item-blurb {
+  font-weight: 300;
+  margin: 15px;
+  text-align: justify;
+  width: 270px;
+}
+
 .nav>li>a {
   padding-left: 4px;
   padding-right: 4px;
@@ -525,7 +533,8 @@ li, li > p {
   background-color: #444;
 }
 
-.header .main-nav .nav .dropdown-menu .nav-item a {
+.header .main-nav .nav .dropdown-menu .nav-item a,
+.header .main-nav .nav .dropdown-menu .nav-item-blurb a {
   border-bottom: none;
   padding: 8px 16px;
   text-align: center;
@@ -1841,13 +1850,16 @@ li, li > p {
 .social-icons a:hover {
   background: #555;
 }
-.social-icons a:hover .fa {
+.social-icons a:hover .fa,
+.social-icons a:hover .fab {
   color: #fff;
 }
-.social-icons a .fa {
+.social-icons a .fa,
+.social-icons a .fab {
   color: rgba(255, 255, 255, 0.6);
 }
-.social-icons a .fa:before {
+.social-icons a .fa:before,
+.social-icons a .fab:before {
   font-size: 18px;
   text-align: center;
   padding: 0;
@@ -2019,8 +2031,4 @@ li, li > p {
   .dropdown:hover>.dropdown-menu {
     display: block;
   }
-}
-.nav-item-blurb {
-  margin: 15px;
-  width: 270px;
 }

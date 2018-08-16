@@ -45,7 +45,7 @@
               <td class="hidden-xs"><%= $d->{email} %></td>
               <td><%= $d->{name} %></td>
               <td><%= $d->{created} %></td>
-              <td><a href="<%= url_for('members-devices-remove', id => $d->{id}) %>" class="btn btn-cta btn-cta-sm btn-cta-red"><i class="fa fa-fw fa-remove"></i></a></td>
+              <td><a href="<%= url_for('members-devices-remove', id => $d->{id}) %>" class="btn btn-cta btn-cta-sm btn-cta-red"><i class="fa fa-fw fa-times"></i></a></td>
             </tr>
 %   }
 % }

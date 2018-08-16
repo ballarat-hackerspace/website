@@ -42,13 +42,15 @@ app->log->info('Configuration: ' . CONFIG_PATH);
 # PLUGINS
 #
 
-plugin 'JSONConfig'        => {file => CONFIG_PATH};
-plugin 'Plugins::Alarm'    => app->config->{alarm}    // {};
-plugin 'Plugins::Calendar' => app->config->{calendar} // {};
-plugin 'Plugins::Device'   => app->config->{device}   // {};
-plugin 'Plugins::Door'     => app->config->{door}     // {};
-plugin 'Plugins::Jekyll'   => app->config->{blog}     // {};
-plugin 'Plugins::TidyHQ'   => app->config->{tidyhq}   // {};
+plugin 'JSONConfig'          => {file => CONFIG_PATH};
+plugin 'Plugins::Alarm'      => app->config->{alarm}    // {};
+plugin 'Plugins::Calendar'   => app->config->{calendar} // {};
+plugin 'Plugins::Device'     => app->config->{device}   // {};
+plugin 'Plugins::Door'       => app->config->{door}     // {};
+plugin 'Plugins::Jekyll'     => app->config->{blog}     // {};
+plugin 'Plugins::Meta'       => app->config->{meta}     // {};
+plugin 'Plugins::RemoteIP';
+plugin 'Plugins::TidyHQ'     => app->config->{tidyhq}   // {};
 
 #
 # HELPERS
@@ -175,11 +177,11 @@ get '/blog/:date/:slug' => sub {
 post '/login' => sub {
   my $c = shift;
 
-  my $data = $c->req->json;
+  my $json = $c->req->json;
 
-  my $e   = $data->{email}    // $c->param('email');
-  my $p   = $data->{password} // $c->param('password');
-  my $url = $data->{rt}       // $c->param('rt') // 'index';
+  my $e   = $json->{email}    // $c->param('email');
+  my $p   = $json->{password} // $c->param('password');
+  my $url = $json->{rt}       // $c->param('rt') // 'index';
 
   $c->render_later;
   $c->tidyhq->login(email => $e, password => $p)->then(sub {
@@ -213,8 +215,69 @@ get '/model-rules' => sub {
 };
 
 get '/patreon' => sub {
+  shift->redirect_to('https://www.patreon.com/ballarathackerspace');
+};
+
+
+# interactive 'meta' portal
+get '/meta' => sub {
   my $c = shift;
-  $c = $c->redirect_to('https://www.patreon.com/ballarathackerspace');
+
+  my $meta = $c->meta->find(limit => 10);
+  $c->stash(meta => $meta);
+
+  $c->render('meta');
+};
+
+get '/meta/streams' => sub {
+  my $c = shift;
+
+  my $data = $c->meta->find(limit => 10);
+
+  $c->render(json => $data);
+};
+
+post '/meta/streams' => sub {
+  my $c = shift;
+
+  my $json = $c->req->json;
+
+  my $lifetime = $json->{lifetime} // $c->param('lifetime');
+  my $stream   = $json->{stream}   // $c->param('stream');
+  my $type     = $json->{type}     // $c->param('type');
+  my $data     = $json->{data}     // $c->param('data');
+
+  my $now = gmtime->epoch;
+
+  if (defined($data)) {
+    my $meta = {
+      ip => $c->remote_ip->addr,
+    };
+
+    $c->meta->publish(
+      stream   => $stream,
+      type     => $type,
+      lifetime => $lifetime,
+      data     => $data,
+      meta     => $meta
+    );
+
+    return $c->render(
+      json => {
+        message => 'congratulations!',
+        ts => gmtime->epoch
+      },
+      status => 200
+    );
+  }
+
+  return $c->render(
+    json => {
+      message => 'Some parameters were missing.',
+      ts => $now
+    },
+    status => 400
+  );
 };
 
 # members only

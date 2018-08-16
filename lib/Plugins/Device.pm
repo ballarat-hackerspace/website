@@ -20,7 +20,6 @@ use Mojo::Base 'Mojolicious::Plugin';
 
 use Carp 'croak';
 use DBI;
-use Mojo::Util qw(dumper);
 use Time::Piece;
 
 our $VERSION = '0.1';
@@ -33,7 +32,6 @@ sub register {
   my ($self, $app, $config) = @_;
 
   $config->{db}  //= '/tmp/bhack.db';
-  $config->{arp} //= '/usr/bin/arp';
   $self->dsn('dbi:SQLite:dbname='.$config->{db});
 
   # conditionally build table

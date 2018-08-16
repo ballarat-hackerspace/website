@@ -22,7 +22,7 @@
 
     .controls {
       margin: 0 auto 16px auto;
-      max-width: 320px;
+      max-width: 340px;
       text-align: center;
     }
     .footer { bottom: 0; height: 48px; position: fixed; width: 100%; }

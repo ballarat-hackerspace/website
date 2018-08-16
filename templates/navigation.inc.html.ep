@@ -43,13 +43,21 @@
               </ul>
             </li>
 
-            <li class="nav-item <%= 'active' if ($active eq 'blog') %>"><a href="/blog">Blog</a></li>
+            <li class="nav-item dropdown <%= 'active' if (grep {$_ eq $active} qw(blog meta)) %>">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Meta</a>
+              <ul class="dropdown-menu">
+                <li class="nav-item <%= 'active' if ($active eq 'blog') %>"><a href="/blog">Blog</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="nav-item <%= 'active' if ($active eq 'meta') %>"><a href="/meta">Meta</a></li>
+              </ul>
+            </li>
+
           </ul><!--//nav-->
           <form class="navbar-form navbar-left" role="search">
 % if ($c->tidyhq->is_authenticated) {
-            <a href="<%= url_for('logout')->query(rt => url_for('current')) %>" class="btn btn-cta btn-cta-secondary"><i class="fa fa-sign-out"></i></a>
+            <a href="<%= url_for('logout')->query(rt => url_for('current')) %>" class="btn btn-cta btn-cta-secondary"><i class="fa fa-sign-out-alt"></i></a>
 % } else {
-            <a href="#login" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-sign-in"></i></a>
+            <a href="#login" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-sign-in-alt"></i></a>
 % }
           </form>
         </div><!--//navabr-collapse-->
