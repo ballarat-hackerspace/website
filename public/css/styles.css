@@ -36,6 +36,15 @@ a:focus {
 }
 
 /*
+** CODE
+*/
+pre,
+pre code {
+  background-color: #fafafa;
+  border-radius: 0;
+}
+
+/*
 ** LABELS
 */
 
@@ -46,6 +55,7 @@ a:focus {
 .label-api {
   display: inline-block;
   font-size: 85%;
+  margin-right: 8px;
   padding: 8px;
   width: 56px;
 }

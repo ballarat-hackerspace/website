@@ -4,6 +4,7 @@
   <div class="container">
     <h2 class="title text-center">Meta</h2>
     <p>The Ballarat Hackerspace aims to be as transparent and interactive as it can possibly be. To this end, this meta portal is the beginnings of that journey.</p>
+    <p>We welcome any feedback on issues or features you would like to see included or improved upon.</p>
 
     <h3>Streams</h3>
 % if (@{$meta}) {
@@ -34,11 +35,98 @@
     <div class="alert alert-info">No streams found.</div>
 % }
     <p>We have developed <i>streams</i> as a simple logging service for collecting data from the <a href="http://en.wikipedia.org/wiki/Internet_of_Things">Internet of Things</a>.
-    <p>The API is simple, we have a single end point for publishing and a few end points for retrieving.</p>
+    <p>The API is simple, we have one end point for publishing and a two end points for interrogation and retrieval.</p>
     <p><span class="label label-api label-info">POST</span><code>/meta/streams</code> Add a new data point.
       <button class="btn btn-cta pull-right" type="button" data-toggle="collapse" data-target="#collapsePostStreams" aria-expanded="false" aria-controls="collapsePostStreams"><i class="fa fa-info"></i></button>
     </p>
     <div class="collapse" id="collapsePostStreams">
+      <div class="well">
+        <h4>Overview</h4>
+        <p>Data points are the individual pieces of your data.</p>
+        <h4>Parameters</h4>
+        <p>Adding data points consist of three main attributes, two optional and one mandatory.</p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Required</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>stream</td>
+              <td>N</td>
+              <td>Name of the stream.</td>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td>N</td>
+              <td>Type of the data point.</td>
+            </tr>
+            <tr>
+              <td>data</td>
+              <td>Y</td>
+              <td>JSON blob of data.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>Return</h4>
+        <p>A successful return will result in a HTTP return status code of 200 and a JSON body containing a message and a timestamp of the server utc time.</p>
+        <h5>Example</h5>
+        <pre><code>$ curl -H "Content-Type: application/json" -d '{"data":{"foo":"bar"}}' https://ballarathackerspace.org.au/meta/streams
+{"message":"congratulations!","ts":1534465584}</code></pre>
+        <p>An unsuccessful call will result in a HTTP return status code of 400 and a JSON body containing a message of the error and a timestamp of the server utc time.</p>
+        <h5>Example</h5>
+        <pre><code>$ curl -H "Content-Type: application/json" -d '{"stream":"@#$#", "data":{"foo":"bar"}}' https://ballarathackerspace.org.au/meta/streams
+{"message":"Stream name is invalid.","ts":1534490021}</code></pre>
+     </div>
+    </div>
+    <p><span class="label label-api label-success">GET</span><code>/meta/streams</code> List available streams.
+      <button class="btn btn-cta pull-right" type="button" data-toggle="collapse" data-target="#collapseGetStreams" aria-expanded="false" aria-controls="collapseGetStreams"><i class="fa fa-info"></i></button>
+    </p>
+    <div class="collapse" id="collapseGetStreams">
+      <div class="well">
+        <h4>Overview</h4>
+        <p>Lists all the available streams.</p>
+        <h4>Parameters</h4>
+        <p>There are no required attributes for listing data streams, and two optional ones for pagination.</p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Required</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>itemsPerPage</td>
+              <td>N</td>
+              <td>Number of items to return per page. Default is 1000.</td>
+            </tr>
+            <tr>
+              <td>page</td>
+              <td>N</td>
+              <td>The page to retrieve, starting at an index of 0.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>Return</h4>
+        <p>A successful return will result in a HTTP return status code of 200 and a JSON body containing an array of the available stream names and a timestamp of the server utc time.</p>
+        <h5>Example</h5>
+        <pre><code>curl  --header "Content-Type: application/json" localhost:3000/meta/streams.json
+{"streams":["","bar","foo"],"ts":1534540051}</code></pre>
+        <p>An unsuccessful call will result in a HTTP return status code of 400 and a JSON body containing a message of the error and a timestamp of the server utc time.</p>
+        <h5>Example</h5>
+        <pre><code>$ curl -H "Content-Type: application/json" -d '{"stream":"@#$#", "data":{"foo":"bar"}}' https://ballarathackerspace.org.au/meta/streams
+{"message":"Stream name is invalid.","ts":1534490021}</code></pre>
+      </div>
+    </div>
+    <p><span class="label label-api label-success">GET</span><code>/meta/streams/:stream</code> List data points from the specified <code>:stream</code>.
+      <button class="btn btn-cta pull-right" type="button" data-toggle="collapse" data-target="#collapseGetStreamsStream" aria-expanded="false" aria-controls="collapseGetStreamsStream"><i class="fa fa-info"></i></button>
+    </p>
+    <div class="collapse" id="collapseGetStreamsStream">
       <div class="well">
         <h4>Overview</h4>
         <p>Data points are the individual pieces of your data.</p>
@@ -71,29 +159,14 @@
           </tbody>
         </table>
         <h4>Return</h4>
-        <p>A successful return will result in a HTTP return status code of 200 and a JSON body message.</p>
-        <p>An unsuccessful call will result in a HTTP return status code of 400 and a JSON body message containing an error message.</p>
-        <h4>Example</h4>
-        <pre><code>
-$ curl -H "Content-Type: application/json" -d '{"data":{"foo":"bar"}}' https://ballarathackerspace.org.au/meta/streams
-{"message":"congratulations!","ts":1534465584}
-        </code></pre>
-      </div>
-    </div>
-    <p><span class="label label-api label-success">GET</span><code>/meta/streams</code> List available streams.
-      <button class="btn btn-cta pull-right" type="button" data-toggle="collapse" data-target="#collapseGetStreams" aria-expanded="false" aria-controls="collapseGetStreams"><i class="fa fa-info"></i></button>
-    </p>
-    <div class="collapse" id="collapseGetStreams">
-      <div class="well">
-        <p>Foo bar baz.</p>
-      </div>
-    </div>
-    <p><span class="label label-api label-success">GET</span><code>/meta/streams/:stream</code> List data points from the specified <code>:stream</code>.
-      <button class="btn btn-cta pull-right" type="button" data-toggle="collapse" data-target="#collapseGetStreamsStream" aria-expanded="false" aria-controls="collapseGetStreamsStream"><i class="fa fa-info"></i></button>
-    </p>
-    <div class="collapse" id="collapseGetStreamsStream">
-      <div class="well">
-        <p>Foo bar baz.</p>
+        <p>A successful return will result in a HTTP return status code of 200 and a JSON body containing a message and a timestamp of the server utc time.</p>
+        <h5>Example</h5>
+        <pre><code>$ curl -H "Content-Type: application/json" -d '{"data":{"foo":"bar"}}' https://ballarathackerspace.org.au/meta/streams
+{"message":"congratulations!","ts":1534465584}</code></pre>
+        <p>An unsuccessful call will result in a HTTP return status code of 400 and a JSON body containing a message of the error and a timestamp of the server utc time.</p>
+        <h5>Example</h5>
+        <pre><code>$ curl -H "Content-Type: application/json" -d '{"stream":"@#$#", "data":{"foo":"bar"}}' https://ballarathackerspace.org.au/meta/streams
+{"message":"Stream name is invalid.","ts":1534490021}</code></pre>
       </div>
     </div>
 

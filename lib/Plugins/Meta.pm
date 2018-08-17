@@ -116,8 +116,8 @@ sub register {
     my $args = @_%2 ? shift : {@_};
     my $db = $self->db;
 
-    my $limit = $args->{limit} ? ' ORDER BY updated DESC LIMIT ' . $args->{limit} : '';
-    my $sql = 'SELECT DISTINCT(stream) AS stream FROM meta' . $limit;
+    my $limit = $args->{limit} ? ' LIMIT ' . $args->{limit} : '';
+    my $sql = 'SELECT DISTINCT(stream) AS stream FROM meta ORDER BY stream' . $limit;
 
     my $sth = $db->prepare($sql);
     my $data = [];

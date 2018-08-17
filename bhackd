@@ -233,11 +233,12 @@ get '/meta/streams' => sub {
   my $c = shift;
 
   my $streams = $c->meta->streams;
+  my $now = gmtime->epoch;
 
   $c->stash(streams => $streams);
 
   $c->respond_to(
-    json => {json => $streams},
+    json => {json => {streams => $streams, ts => $now}},
     html => {template => 'meta-streams'},
   );
 };
@@ -282,10 +283,7 @@ post '/meta/streams' => sub {
   # validate stream name
   unless ($stream eq '' || $stream =~ m/[0-9a-zA-Z]{1,32}/) {
     return $c->render(
-      json => {
-        message => 'Stream name is invalid.',
-        ts => $now
-      },
+      json => {message => 'Stream name is invalid.', ts => $now},
       status => 400
     );
   }
@@ -314,10 +312,7 @@ post '/meta/streams' => sub {
     );
 
     return $c->render(
-      json => {
-        message => 'congratulations!',
-        ts => gmtime->epoch
-      },
+      json => {message => 'Congratulations!', ts => gmtime->epoch},
       status => 200
     );
   }
