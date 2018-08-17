@@ -28,6 +28,29 @@ a:focus {
 }
 
 /*
+** ALERTS
+*/
+
+.alert {
+  border-radius: 0;
+}
+
+/*
+** LABELS
+*/
+
+.label {
+  border-radius: 0;
+}
+
+.label-api {
+  display: inline-block;
+  font-size: 85%;
+  padding: 8px;
+  width: 56px;
+}
+
+/*
 ** BUTTONS
 */
 
@@ -1888,6 +1911,14 @@ li, li > p {
 
 .trophy .fa+.fa {
   margin-left: 4px;
+}
+
+/*
+** WELLS
+*/
+
+.well {
+  border-radius: 0;
 }
 
 /*

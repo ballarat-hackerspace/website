@@ -21,9 +21,11 @@ use Mojo::Base 'Mojolicious::Plugin';
 use Carp 'croak';
 use DBI;
 use Mojo::JSON qw(decode_json encode_json);
+use Mojo::Util 'dumper';
 use Time::Piece;
 
 our $VERSION = '0.1';
+our $DEFAULT_LIFETIME = 31 * 60 * 60; # 31 days
 
 has 'db'  => sub { return DBI->connect(shift->dsn, '', ''); };
 has 'dsn';
@@ -39,9 +41,9 @@ sub register {
   $self->db->do("
     CREATE TABLE IF NOT EXISTS meta (
       id       INTEGER PRIMARY KEY AUTOINCREMENT,
-      stream   CHAR(128) NOT NULL DEFAULT '',
+      stream   CHAR(32) NOT NULL DEFAULT '',
       type     CHAR(16) NOT NULL DEFAULT '',
-      lifetime INTEGER NOT NULL DEFAULT 2419200,
+      lifetime INTEGER NOT NULL DEFAULT $DEFAULT_LIFETIME,
       data     TEXT NOT NULL DEFAULT '{}',
       meta     TEXT NOT NULL DEFAULT '{}',
       created  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -54,18 +56,22 @@ sub register {
     my $args = @_%2 ? shift : {@_};
     my $db = $self->db;
 
-    $args->{lifetime} //= 2419200;  # 28 days
-    $args->{stream} //= 'common';
-    $args->{type} //= '';
+    my $stream = $args->{stream} // '';
 
-    my $sth = $db->prepare('INSERT INTO meta (stream, type, lifetime, data, meta) VALUES (?, ?, ?, ?, ?)');
-    return !!$sth->execute(
-      $args->{stream},
-      $args->{type},
-      $args->{lifetime},
-      encode_json($args->{data}),
-      encode_json($args->{meta})
-    );
+    # valid stream names are '' and [0-9a-zA-Z]{1,16}
+    unless ($stream eq '' || $stream =~ m/[0-9a-zA-Z]{1,32}/) {
+      return undef;
+    }
+
+    my $lifetime = $args->{lifetime} // $DEFAULT_LIFETIME;
+    my $type = $args->{type} // '';
+    my $created = $args->{timestamp} // gmtime->epoch;
+    my $data = encode_json($args->{data});
+    my $meta = encode_json($args->{meta});
+
+    my $sth = $db->prepare('INSERT INTO meta (stream, type, lifetime, data, meta, created) VALUES (?, ?, ?, ?, ?, ?)');
+
+    return !!$sth->execute($stream, $type, $lifetime, $data, $meta, $created);
   });
 
   $app->helper('meta.find' => sub {
@@ -76,12 +82,12 @@ sub register {
     my $filter = [];
     my $filter_arg = [];
 
-    if ($args->{stream}) {
+    if (exists($args->{stream})) {
       push @{$filter}, 'stream=?';
       push @{$filter_arg}, $args->{stream};
     }
 
-    if ($args->{type}) {
+    if (exists($args->{type})) {
       push @{$filter}, 'type=?';
       push @{$filter_arg}, $args->{type};
     }
@@ -90,10 +96,10 @@ sub register {
     my $limit = $args->{limit} ? ' ORDER BY updated DESC LIMIT ' . $args->{limit} : '';
     my $sql = 'SELECT * FROM meta' . $where . $limit;
 
-    my $sth = $db->prepare($sql, @{$filter_arg});
+    my $sth = $db->prepare($sql);
     my $data = [];
 
-    $sth->execute;
+    $sth->execute(@{$filter_arg});
     while (my $row = $sth->fetchrow_hashref) {
       $row->{data} = decode_json $row->{data};
       $row->{meta} = decode_json $row->{meta};
@@ -103,6 +109,39 @@ sub register {
     $sth->finish;
 
     return $data;
+  });
+
+  $app->helper('meta.streams' => sub {
+    my $c = shift;
+    my $args = @_%2 ? shift : {@_};
+    my $db = $self->db;
+
+    my $limit = $args->{limit} ? ' ORDER BY updated DESC LIMIT ' . $args->{limit} : '';
+    my $sql = 'SELECT DISTINCT(stream) AS stream FROM meta' . $limit;
+
+    my $sth = $db->prepare($sql);
+    my $data = [];
+
+    $sth->execute;
+    while (my $row = $sth->fetchrow_hashref) {
+      push @{$data}, $row->{stream};
+    };
+    $sth->finish;
+
+    return $data;
+  });
+
+  $app->helper('meta.to_csv' => sub {
+    my $c = shift;
+    my $data = shift;
+
+    my $csv = "stream,type,data,timestamp\n";
+
+    for my $row (@{$data}) {
+      $csv .= join(',', $row->{stream}, $row->{type}, encode_json($row->{data}), $row->{created}) . "\n";
+    }
+
+    return $csv;
   });
 }
 

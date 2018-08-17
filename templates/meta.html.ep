@@ -6,7 +6,6 @@
     <p>The Ballarat Hackerspace aims to be as transparent and interactive as it can possibly be. To this end, this meta portal is the beginnings of that journey.</p>
 
     <h3>Streams</h3>
-    <p>We have developed <i>streams</i> as a simple logging service for collecting data from the <a href="http://en.wikipedia.org/wiki/Internet_of_Things">Internet of Things</a>.
 % if (@{$meta}) {
     <table class="table table-hover">
       <thead>
@@ -22,7 +21,7 @@
 % use Mojo::JSON 'to_json';
 %   for my $d (@{$meta}) {
         <tr>
-          <td><%= $d->{stream} %></td>
+          <td><a href="<%= url_for('meta-stream', stream => $d->{stream} ? $d->{stream} : '-') %>"><%= $d->{stream} ? $d->{stream} : '-' %></a></td>
           <td><%= $d->{type} ? $d->{type} : '-' %></td>
           <td><%= to_json $d->{data} %></td>
           <td><%= $d->{meta}{ip} %></td>
@@ -32,8 +31,71 @@
       </tbody>
     </table>
 % } else {
-    <div>No streams found.</div>
+    <div class="alert alert-info">No streams found.</div>
 % }
+    <p>We have developed <i>streams</i> as a simple logging service for collecting data from the <a href="http://en.wikipedia.org/wiki/Internet_of_Things">Internet of Things</a>.
+    <p>The API is simple, we have a single end point for publishing and a few end points for retrieving.</p>
+    <p><span class="label label-api label-info">POST</span><code>/meta/streams</code> Add a new data point.
+      <button class="btn btn-cta pull-right" type="button" data-toggle="collapse" data-target="#collapsePostStreams" aria-expanded="false" aria-controls="collapsePostStreams"><i class="fa fa-info"></i></button>
+    </p>
+    <div class="collapse" id="collapsePostStreams">
+      <div class="well">
+        <h4>Overview</h4>
+        <p>Data points are the individual pieces of your data.</p>
+        <h4>Parameters</h4>
+        <p>Data points consist of three main attributes, two optional and one mandatory.</p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Required</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>stream</td>
+              <td>N</td>
+              <td>Name of the stream.</td>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td>N</td>
+              <td>Type of the data point.</td>
+            </tr>
+            <tr>
+              <td>data</td>
+              <td>Y</td>
+              <td>JSON blob of data.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>Return</h4>
+        <p>A successful return will result in a HTTP return status code of 200 and a JSON body message.</p>
+        <p>An unsuccessful call will result in a HTTP return status code of 400 and a JSON body message containing an error message.</p>
+        <h4>Example</h4>
+        <pre><code>
+$ curl -H "Content-Type: application/json" -d '{"data":{"foo":"bar"}}' https://ballarathackerspace.org.au/meta/streams
+{"message":"congratulations!","ts":1534465584}
+        </code></pre>
+      </div>
+    </div>
+    <p><span class="label label-api label-success">GET</span><code>/meta/streams</code> List available streams.
+      <button class="btn btn-cta pull-right" type="button" data-toggle="collapse" data-target="#collapseGetStreams" aria-expanded="false" aria-controls="collapseGetStreams"><i class="fa fa-info"></i></button>
+    </p>
+    <div class="collapse" id="collapseGetStreams">
+      <div class="well">
+        <p>Foo bar baz.</p>
+      </div>
+    </div>
+    <p><span class="label label-api label-success">GET</span><code>/meta/streams/:stream</code> List data points from the specified <code>:stream</code>.
+      <button class="btn btn-cta pull-right" type="button" data-toggle="collapse" data-target="#collapseGetStreamsStream" aria-expanded="false" aria-controls="collapseGetStreamsStream"><i class="fa fa-info"></i></button>
+    </p>
+    <div class="collapse" id="collapseGetStreamsStream">
+      <div class="well">
+        <p>Foo bar baz.</p>
+      </div>
+    </div>
 
     <h3>SpaceAPI</h3>
     <p>A full implementation of the <a href="https://spaceapi.net">SpaceAPI</a> is also planned.</p>

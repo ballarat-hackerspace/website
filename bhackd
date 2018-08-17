@@ -232,27 +232,78 @@ get '/meta' => sub {
 get '/meta/streams' => sub {
   my $c = shift;
 
-  my $data = $c->meta->find(limit => 10);
+  my $streams = $c->meta->streams;
 
-  $c->render(json => $data);
+  $c->stash(streams => $streams);
+
+  $c->respond_to(
+    json => {json => $streams},
+    html => {template => 'meta-streams'},
+  );
 };
+
+get '/meta/streams/:stream' => sub {
+  my $c = shift;
+
+  my $stream = $c->param('stream');
+
+  $stream = '' if $stream eq '-';
+
+  my $data = $c->meta->find(stream => $stream);
+
+  my $format = $c->stash('format') // 'html';
+
+  if ($format eq 'csv') {
+    $data = $c->meta->to_csv($data);
+  } elsif ($format eq 'html') {
+    $c->stash(stream => $stream, meta => $data);
+  }
+
+  $c->respond_to(
+    csv  => {text => $data},
+    json => {json => $data},
+    html => {template => 'meta-stream'},
+  );
+} => 'meta-stream';
+
 
 post '/meta/streams' => sub {
   my $c = shift;
 
   my $json = $c->req->json;
 
-  my $lifetime = $json->{lifetime} // $c->param('lifetime');
-  my $stream   = $json->{stream}   // $c->param('stream');
+  my $stream   = $json->{stream}   // $c->param('stream') // '';
   my $type     = $json->{type}     // $c->param('type');
+  my $lifetime = $json->{lifetime} // $c->param('lifetime');
   my $data     = $json->{data}     // $c->param('data');
 
   my $now = gmtime->epoch;
+
+  # validate stream name
+  unless ($stream eq '' || $stream =~ m/[0-9a-zA-Z]{1,32}/) {
+    return $c->render(
+      json => {
+        message => 'Stream name is invalid.',
+        ts => $now
+      },
+      status => 400
+    );
+  }
 
   if (defined($data)) {
     my $meta = {
       ip => $c->remote_ip->addr,
     };
+
+    if (ref($data) ne 'HASH') {
+      return $c->render(
+        json => {
+          message => 'The specified data is not valid JSON.',
+          ts => $now
+        },
+        status => 400
+      );
+    }
 
     $c->meta->publish(
       stream   => $stream,
@@ -273,7 +324,7 @@ post '/meta/streams' => sub {
 
   return $c->render(
     json => {
-      message => 'Some parameters were missing.',
+      message => 'Some required parameters were missing.',
       ts => $now
     },
     status => 400
@@ -324,7 +375,6 @@ group {
   } => 'members-devices-remove';
 
   get '/workshops' => 'members-workshops';
-
 };
 
 # local network only
