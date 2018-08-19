@@ -3,7 +3,7 @@
 <!-- ******team Section****** -->
 <section id="workshops" class="section">
   <div class="container">
-    <h1 class="title text-center">Members <i class="fa fa-fw fa-angle-double-right"></i> Online Workshops</h1>
+    <h1 class="title text-center"><a href="<%= url_for('members') %>">Members</a> <i class="fa fa-fw fa-angle-double-right"></i> Online Workshops</h1>
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
       <div class="panel panel-default">

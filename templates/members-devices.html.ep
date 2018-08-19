@@ -10,7 +10,7 @@
 % }
     <div class="row">
       <div class="col-sm-12">
-        <h1 class="title text-center">Members <i class="fa fa-fw fa-angle-double-right"></i> Devices</h1>
+        <h1 class="title text-center"><a href="<%= url_for('members') %>">Members</a> <i class="fa fa-fw fa-angle-double-right"></i> Devices</h1>
         <p>As a member you have privileged access to particular items on the network. To ensure the best experience whilst at the Ballarat Hackerspace please ensure you register your devices.</p>
 
         <div>

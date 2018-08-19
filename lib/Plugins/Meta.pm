@@ -79,6 +79,10 @@ sub register {
     my $args = @_%2 ? shift : {@_};
     my $db = $self->db;
 
+    my $itemsPerPage = $args->{itemsPerPage} // 1000;
+    my $page = $args->{page} // 0;
+    my $offset = $itemsPerPage * $page;
+
     my $filter = [];
     my $filter_arg = [];
 
@@ -93,8 +97,8 @@ sub register {
     }
 
     my $where = @{$filter} ? ' WHERE ' . join(' AND ', @{$filter}) : '';
-    my $limit = $args->{limit} ? ' ORDER BY updated DESC LIMIT ' . $args->{limit} : '';
-    my $sql = 'SELECT * FROM meta' . $where . $limit;
+    my $limit = " ORDER BY updated DESC LIMIT $itemsPerPage OFFSET $offset";
+    my $sql = 'SELECT stream,type,data,meta,STRFTIME("%s", updated) AS timestamp FROM meta' . $where . $limit;
 
     my $sth = $db->prepare($sql);
     my $data = [];
@@ -116,7 +120,7 @@ sub register {
     my $args = @_%2 ? shift : {@_};
     my $db = $self->db;
 
-    my $limit = $args->{limit} ? ' LIMIT ' . $args->{limit} : '';
+    my $limit = ' LIMIT ' . ($args->{limit} // 1000);
     my $sql = 'SELECT DISTINCT(stream) AS stream FROM meta ORDER BY stream' . $limit;
 
     my $sth = $db->prepare($sql);
@@ -138,7 +142,7 @@ sub register {
     my $csv = "stream,type,data,timestamp\n";
 
     for my $row (@{$data}) {
-      $csv .= join(',', $row->{stream}, $row->{type}, encode_json($row->{data}), $row->{created}) . "\n";
+      $csv .= join(',', $row->{stream}, $row->{type}, encode_json($row->{data}), $row->{timestamp}) . "\n";
     }
 
     return $csv;

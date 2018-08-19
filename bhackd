@@ -223,7 +223,7 @@ get '/patreon' => sub {
 get '/meta' => sub {
   my $c = shift;
 
-  my $meta = $c->meta->find(limit => 10);
+  my $meta = $c->meta->find(itemsPerPage => 10);
   $c->stash(meta => $meta);
 
   $c->render('meta');
