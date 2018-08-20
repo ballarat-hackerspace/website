@@ -79,8 +79,8 @@ sub register {
     my $args = @_%2 ? shift : {@_};
     my $db = $self->db;
 
-    my $itemsPerPage = $args->{itemsPerPage} // 1000;
-    my $page = $args->{page} // 0;
+    my $itemsPerPage = ($args->{itemsPerPage} // 1000)+0;
+    my $page = ($args->{page} // 0)+0;
     my $offset = $itemsPerPage * $page;
 
     my $filter = [];
@@ -99,16 +99,26 @@ sub register {
     my $where = @{$filter} ? ' WHERE ' . join(' AND ', @{$filter}) : '';
     my $limit = " ORDER BY updated DESC LIMIT $itemsPerPage OFFSET $offset";
     my $sql = 'SELECT stream,type,data,meta,STRFTIME("%s", updated) AS timestamp FROM meta' . $where . $limit;
+    my $sql_count = 'SELECT COUNT(id) FROM meta' . $where;
 
-    my $sth = $db->prepare($sql);
-    my $data = [];
+    my $sth = $db->prepare($sql_count);
+    my $totalItems = !!$sth->execute(@{$filter_arg}) ? $sth->fetchrow_arrayref->[0] : 0;
+    $sth->finish;
+
+    $sth = $db->prepare($sql);
+    my $data = {
+      itemsPerPage => $itemsPerPage,
+      totalItems => $totalItems,
+      page => $page,
+      items => []
+    };
 
     $sth->execute(@{$filter_arg});
     while (my $row = $sth->fetchrow_hashref) {
       $row->{data} = decode_json $row->{data};
       $row->{meta} = decode_json $row->{meta};
 
-      push @{$data}, $row;
+      push @{$data->{items}}, $row;
     };
     $sth->finish;
 
@@ -120,15 +130,29 @@ sub register {
     my $args = @_%2 ? shift : {@_};
     my $db = $self->db;
 
-    my $limit = ' LIMIT ' . ($args->{limit} // 1000);
+    my $itemsPerPage = ($args->{itemsPerPage} // 1000)+0;
+    my $page = ($args->{page} // 0)+0;
+    my $offset = $itemsPerPage * $page;
+
+    my $limit = " LIMIT $itemsPerPage OFFSET $offset";
     my $sql = 'SELECT DISTINCT(stream) AS stream FROM meta ORDER BY stream' . $limit;
+    my $sql_count = 'SELECT COUNT(DISTINCT(stream)) AS stream FROM meta ORDER BY stream' . $limit;
+
+    my $sth = $db->prepare($sql_count);
+    my $totalItems = !!$sth->execute ? $sth->fetchrow_arrayref->[0] : 0;
+    $sth->finish;
 
     my $sth = $db->prepare($sql);
-    my $data = [];
+    my $data = {
+      itemsPerPage => $itemsPerPage,
+      totalItems => $totalItems,
+      page => $page,
+      items => []
+    };
 
     $sth->execute;
     while (my $row = $sth->fetchrow_hashref) {
-      push @{$data}, $row->{stream};
+      push @{$data->{items}}, $row->{stream};
     };
     $sth->finish;
 

@@ -7,7 +7,7 @@
     <p>We welcome any feedback on issues or features you would like to see included or improved upon.</p>
 
     <h3>Streams</h3>
-% if (@{$meta}) {
+% if ($meta->{totalItems}) {
     <table class="table table-hover">
       <thead>
         <tr>
@@ -20,7 +20,7 @@
       </thead>
       <tbody>
 % use Mojo::JSON 'to_json';
-%   for my $d (@{$meta}) {
+%   for my $d (@{$meta->{items}}) {
         <tr>
           <td><a href="<%= url_for('meta-stream', stream => $d->{stream} ? $d->{stream} : '-') %>"><%= $d->{stream} ? $d->{stream} : '-' %></a></td>
           <td><%= $d->{type} ? $d->{type} : '-' %></td>
@@ -31,9 +31,14 @@
 %   }
       </tbody>
     </table>
+    <div class="text-right">
+      <span><b>Total streams/points: </b><%= $streams->{totalItems} %>/<%= $meta->{totalItems} %></span>
+    </div>
 % } else {
     <div class="alert alert-info">No streams found.</div>
 % }
+
+    <h4>Description</h4>
     <p>We have developed <i>streams</i> as a simple logging service for collecting data from the <a href="http://en.wikipedia.org/wiki/Internet_of_Things">Internet of Things</a>.
     <p>The API is simple, we have one end point for publishing and a two end points for interrogation and retrieval.</p>
     <p><span class="label label-api label-info">POST</span><code>/meta/streams</code> Add a new data point.
@@ -171,6 +176,6 @@
     </div>
 
     <h3>SpaceAPI</h3>
-    <p>A full implementation of the <a href="https://spaceapi.net">SpaceAPI</a> is also planned.</p>
+    <p>We have a minimal implementation of the <a href="https://spaceapi.net">SpaceAPI</a> also available at <a href="<%= url_for('spaceapi') %>"><code>/meta/space</code></a>.</p>
   </div><!--//row-->
 </section>

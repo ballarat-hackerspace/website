@@ -223,11 +223,42 @@ get '/patreon' => sub {
 get '/meta' => sub {
   my $c = shift;
 
+  my $streams = $c->meta->streams(itemsPerPage => 1);
   my $meta = $c->meta->find(itemsPerPage => 10);
-  $c->stash(meta => $meta);
+
+  $c->stash(streams => $streams, meta => $meta);
 
   $c->render('meta');
 };
+
+get '/meta/space' => sub {
+  my $c = shift;
+
+  my $base_url = 'https://ballarathackerspace.org.au';
+
+  $c->render(
+    json => {
+      api => 0.13,
+      space => 'Ballarat Hackerspace',
+      logo => "$base_url/images/bhack-logo-title-black.svg",
+      url => "$base_url",
+      location => {
+        address => 'Top Floor, Building K (Ballarat Tech School), Federation University SMB Campus, Ballarat',
+        lat => -37.565247,
+        lon => 143.857645
+      },
+      contact => {
+        email => 'committee@ballarathackerspace.org.au',
+        twitter => 'bhackerspace'
+      },
+      projects => [
+        'https://github.com/ballarat-hackerspace',
+        'https://gitlab.com/ballarat-hackerspace',
+      ]
+    },
+    status => 200
+  );
+} => 'spaceapi';
 
 get '/meta/streams' => sub {
   my $c = shift;
@@ -247,10 +278,12 @@ get '/meta/streams/:stream' => sub {
   my $c = shift;
 
   my $stream = $c->param('stream');
+  my $itemsPerPage = $c->param('itemsPerPage');
+  my $page = $c->param('page');
 
   $stream = '' if $stream eq '-';
 
-  my $data = $c->meta->find(stream => $stream);
+  my $data = $c->meta->find(stream => $stream, itemsPerPage => $itemsPerPage, page => $page);
 
   my $format = $c->stash('format') // 'html';
 
