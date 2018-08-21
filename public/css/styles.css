@@ -36,6 +36,22 @@ a:focus {
 }
 
 /*
+** BADGES
+*/
+.badges {
+  height: 64px;
+  width: 64px;
+}
+
+.badges+.badges {
+  margin-left: 16px;
+}
+.badges2x {
+  height: 128px;
+  width: 128px;
+}
+
+/*
 ** CODE
 */
 pre,

@@ -133,14 +133,15 @@ hook 'after_dispatch' => sub {
 #
 
 get '/about'            => 'about';
-get '/faq'              => 'faq';
+get '/badges'           => 'badges';
 get '/code-of-conduct'  => 'conduct';
 get '/contact'          => 'contact';
+get '/faq'              => 'faq';
 get '/join'             => 'join';
+get '/security'         => 'security';
 get '/sponsors'         => 'sponsors';
 get '/women'            => 'women';
 get '/workshops'        => 'workshops';
-get '/security'         => 'security';
 
 get '/' => sub {
   my $c = shift;

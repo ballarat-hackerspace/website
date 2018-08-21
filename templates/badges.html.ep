@@ -1,0 +1,56 @@
+% layout 'page', active_page => 'join', page_title => 'Badges';
+
+<!-- ******team Section****** -->
+<section id="team" class="section">
+  <div class="container">
+    <h2 class="title text-center">Badges</h2>
+    <p>Just as badges in the physical world serve many functions, our digital badges are employed in a variety of ways. Our badges can serve different functions depending on the activities with which they are associated.</p>
+    <p>These functions include, but are not limited to:</p>
+    <ul>
+      <li>Providing a competency-based signifier of a member's skills and achievements.</li>
+      <li>Capturing the complete learning path of our members.</li>
+      <li>Motivate engagement and collaboration.</li>
+      <li>Support innovation and flexibility in the skills that matter.</p>
+      <li>Building and formalising identity and reputation within our learning community.</li>
+    </ul>
+
+    <h3>Our Badges</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Badge</th>
+          <th>Title</th>
+          <th>Criteria</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Atomic Exploder</td>
+          <td><img src="/images/badges/badges-bs-atom.png" class="badges" /></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>3DP Artisan</td>
+          <td><img src="/images/badges/badges-bs-3dp.png" class="badges" /></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Alchemist</td>
+          <td><img src="/images/badges/badges-bs-molecule.png" class="badges" /></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Precision Blader</td>
+          <td><img src="/images/badges/badges-bs-blade.png" class="badges" /></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Troubleshooter</td>
+          <td><img src="/images/badges/badges-bs-multimeter.png" class="badges" /></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div><!--//row-->
+</section>
