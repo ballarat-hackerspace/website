@@ -40,8 +40,9 @@
               </ul>
             </li>
 
-% if ($c->tidyhq->is_authenticated) {
+% if ($c->member->current->is_authenticated) {
             <li class="nav-item <%= 'active' if ($active eq 'members') %>"><a href="/members">Members</a></li>
+            <li class="nav-item <%= 'active' if ($active eq 'profile') %>"><a href="/members/me">Me</a></li>
 % } else {
             <li class="nav-item dropdown">
               <a href="/patreon">Patreon</a>
@@ -54,7 +55,7 @@
 % }
           </ul><!--//nav-->
           <form class="navbar-form navbar-left" role="search">
-% if ($c->tidyhq->is_authenticated) {
+% if ($c->member->current->is_authenticated) {
             <a href="<%= url_for('logout')->query(rt => url_for('current')) %>" class="btn btn-cta btn-cta-secondary"><i class="fa fa-sign-out-alt"></i></a>
 % } else {
             <a href="#login" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-sign-in-alt"></i></a>

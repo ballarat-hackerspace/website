@@ -49,6 +49,7 @@ sub register {
       avatar_url         CHAR(128),
 
       membership         CHAR(32),
+      membership_active  INTEGER DEFAULT 0,
       membership_expires TIMESTAMP,
 
       waiver_sign        INTEGER DEFAULT 0,
@@ -69,27 +70,30 @@ sub register {
     my $email = $args->{email};
 
     unless ($email eq '' || length($email) > 128 || $email !~ m/[^@]+@[^\.]+\..+}/) {
-      warn 'FAIL';
       return undef;
     }
 
-    my $now = gmtime->epoch;
+    my $now = gmtime;
 
     my $name = $args->{name};
     my $avatar_url = $args->{avatar_url};
 
     my $membership = $args->{membership};
-    my $membership_expires = $args->{membership_expires};
+    my $membership_active = $args->{membership_active};
+    my $membership_expires = $args->{membership_expires}->strftime('%F %T');
 
     my $waiver_sign = $args->{waiver_sign} // 0;
     my $waiver_signed = $waiver_sign ? $now->strftime('%F %T') : undef;
 
+    # coercions
+    $args->{meta}{last_login} = $args->{meta}{last_login}->strftime('%F %T') if $args->{meta}{last_login};
+
+    my $sth = $db->prepare('INSERT INTO members (name, email, avatar_url, membership, membership_active, membership_expires, waiver_sign, waiver_signed, data, meta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+
     my $data = encode_json($args->{data} // {});
     my $meta = encode_json($args->{meta} // {});
 
-    my $sth = $db->prepare('INSERT INTO members (name, email, avatar_url, membership, membership_expires, waiver_sign, waiver_signed, data, meta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-
-    return !!$sth->execute($name, $email, $avatar_url, $membership, $membership_expires, $waiver_sign, $waiver_signed, $data, $meta);
+    return !!$sth->execute($name, $email, $avatar_url, $membership, $membership_active, $membership_expires, $waiver_sign, $waiver_signed, $data, $meta);
   });
 
   $app->helper('member.find' => sub {
@@ -112,10 +116,51 @@ sub register {
       $member->{data} = decode_json $member->{data};
       $member->{meta} = decode_json $member->{meta};
 
+      # coercions
+      $member->{created} = Time::Piece->strptime($member->{created}, '%Y-%m-%d %H:%M:%S');
+      $member->{updated} = Time::Piece->strptime($member->{updated}, '%Y-%m-%d %H:%M:%S');
+      $member->{membership_expires} = Time::Piece->strptime($member->{membership_expires}, '%Y-%m-%d %H:%M:%S') if $member->{membership_expires};
+      $member->{waiver_signed} = Time::Piece->strptime($member->{waiver_signed}, '%Y-%m-%d %H:%M:%S') if $member->{waiver_signed};
+      $member->{meta}{last_login} = Time::Piece->strptime($member->{meta}{last_login}, '%Y-%m-%d %H:%M:%S') if $member->{meta}{last_login};
+
       return $member;
     }
 
     return undef;
+  });
+
+  $app->helper('member.update' => sub {
+    my $c = shift;
+    my $args = @_%2 ? shift : {@_};
+    my $db = $self->db;
+
+    my $email = $args->{email};
+
+    unless ($email eq '' || length($email) > 128 || $email !~ m/[^@]+@[^\.]+\..+}/) {
+      return undef;
+    }
+
+    my $now = gmtime;
+
+    my $name = $args->{name};
+    my $avatar_url = $args->{avatar_url};
+
+    my $membership = $args->{membership};
+    my $membership_active = $args->{membership_active};
+    my $membership_expires = $args->{membership_expires}->strftime('%F %T');
+
+    my $waiver_sign = $args->{waiver_sign} // 0;
+    my $waiver_signed = $waiver_sign ? $now->strftime('%F %T') : undef;
+
+    # coercions
+    $args->{meta}{last_login} = $args->{meta}{last_login}->strftime('%F %T') if $args->{meta}{last_login};
+
+    my $sth = $db->prepare('UPDATE members SET name=?, avatar_url=?, membership=?, membership_active=?, membership_expires=?, waiver_sign=?, waiver_signed=?, data=?, meta=?, updated=CURRENT_TIMESTAMP WHERE email=?');
+
+    my $data = encode_json($args->{data} // {});
+    my $meta = encode_json($args->{meta} // {});
+
+    return !!$sth->execute($name, $avatar_url, $membership, $membership_active, $membership_expires, $waiver_sign, $waiver_signed, $data, $meta, $email);
   });
 
   $app->helper('member.login' => sub {
@@ -125,22 +170,54 @@ sub register {
       my $tidyhq = shift;
 
       my $member = $c->member->find(email => $email);
+      my $now = gmtime;
 
       unless ($member) {
-        my $now = gmtime->epoch;
 
-        my $ret = $c->member->create(
+        my $member_create = {
           email => $email,
+          name => sprintf('%s %s', $tidyhq->{contact}{first_name}, $tidyhq->{contact}{last_name}),
+          avatar_url => $tidyhq->{contact}{profile_image},
           meta => {
             tidyhq => $tidyhq,
             logins => 1,
             last_login => $now
           }
-        );
+        };
+
+        if (@{$tidyhq->{memberships}}) {
+          my $membership = $tidyhq->{memberships}->[0];
+          # use the first membership for now until we have tidyhq accounts with mulitple
+          $member_create->{membership} = $membership->{name};
+          $member_create->{membership_active} = $membership->{status} eq 'activated' ? 1 : 0;
+          $member_create->{membership_expires} = $membership->{end_date};
+        }
+
+        $c->member->create($member_create);
 
         my $member = $c->member->find(email => $email);
 
         return Mojo::Promise->new->reject('Unable to create new membership.') unless ($member);
+      } else {
+        if (@{$tidyhq->{memberships}}) {
+          my $membership = $tidyhq->{memberships}->[0];
+
+          # use the first membership for now until we have tidyhq accounts with mulitple
+          $member->{membership} = $membership->{name};
+          $member->{membership_active} = $membership->{status} eq 'activated' ? 1 : 0;
+          $member->{membership_expires} = $membership->{end_date};
+        } else {
+          $member->{membership} = undef;
+          $member->{membership_active} = 0;
+          $member->{membership_expires} = undef;
+        }
+
+        # update membership details
+        $member->{meta}{tidyhq} = $tidyhq;
+        $member->{meta}{logins} += 1;
+        $member->{meta}{last_login} = $now;
+
+        $c->member->update($member);
       }
 
       $c->session(user => $email);
@@ -161,8 +238,23 @@ sub register {
     # logout of any pateron sessions
   });
 
+  $app->helper('member.current.waiver_sign' => sub {
+    my $c = shift;
+
+    my $member = $c->member->find(email => $c->session('user'));
+    $member->{waiver_sign} = 1;
+
+    return $c->member->update($member);
+  });
+
   $app->helper('member.current.has_active_membership' => sub {
     my $c = shift;
+  });
+
+  $app->helper('member.current.is_authenticated' => sub {
+    my $c = shift;
+
+    return $c->tidyhq->is_authenticated;
   });
 
   $app->helper('member.current.is_gatekeeper' => sub {
@@ -183,5 +275,3 @@ sub register {
 }
 
 1;
-
-

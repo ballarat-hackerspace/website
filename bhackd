@@ -346,6 +346,23 @@ group {
 
   get '/' => 'members';
 
+  get '/waiver-sign' => sub {
+    my $c = shift;
+
+    $c->member->current->waiver_sign;
+
+    $c->redirect_to('profile');
+  } => 'waiver-sign';
+
+  get '/me' => sub {
+    my $c = shift;
+
+    $c->stash(devices => $c->device->find);
+
+    $c->render('profile');
+  } => 'profile';
+
+
   # device management
   get '/devices' => sub {
     my $c = shift;
