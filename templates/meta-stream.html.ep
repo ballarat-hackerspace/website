@@ -2,7 +2,7 @@
 
 <section id="team" class="section">
   <div class="container">
-    <h2 class="title text-center"><a href="<%= url_for('meta') %>">Meta</a> <i class="fa fa-fw fa-angle-double-right"></i> Stream <i class="fa fa-fw fa-angle-double-right"></i> <%= $stream ? $stream : '-' %></h2>
+    <h2 class="title text-center">Stream <i class="fa fa-fw fa-angle-double-right"></i> <%= $stream ? $stream : '-' %></h2>
 
 % if ($meta->{totalItems}) {
     <div class="text-right">
@@ -12,7 +12,7 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>Stream</th>
+          <th>Origin</th>
           <th>Type</th>
           <th>Data</th>
           <th>IP</th>
@@ -23,7 +23,7 @@
 % use Mojo::JSON 'to_json';
 %   for my $d (@{$meta->{items}}) {
         <tr>
-          <td><%= $d->{stream} ? $d->{stream} : '-' %></td>
+          <td><%= $d->{origin} ? $d->{origin} : '-' %></td>
           <td><%= $d->{type} ? $d->{type} : '-' %></td>
           <td><%= to_json $d->{data} %></td>
           <td><%= $d->{meta}{ip} %></td>

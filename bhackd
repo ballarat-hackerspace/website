@@ -295,6 +295,7 @@ post '/meta/streams' => sub {
   my $json = $c->req->json;
 
   my $stream   = $json->{stream}   // $c->param('stream') // '';
+  my $origin   = $json->{origin}   // $c->param('origin');
   my $type     = $json->{type}     // $c->param('type');
   my $lifetime = $json->{lifetime} // $c->param('lifetime');
   my $data     = $json->{data}     // $c->param('data');
@@ -326,6 +327,7 @@ post '/meta/streams' => sub {
 
     $c->meta->publish(
       stream   => $stream,
+      origin   => $origin,
       type     => $type,
       lifetime => $lifetime,
       data     => $data,

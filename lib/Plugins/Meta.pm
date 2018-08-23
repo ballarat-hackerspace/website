@@ -18,14 +18,16 @@
 package Plugins::Meta;
 use Mojo::Base 'Mojolicious::Plugin';
 
-use Carp 'croak';
-use DBI;
 use Mojo::JSON qw(decode_json encode_json);
 use Mojo::Util 'dumper';
+
+use Carp 'croak';
+use DBI;
+use List::Util 'min';
 use Time::Piece;
 
 our $VERSION = '0.1';
-our $DEFAULT_LIFETIME = 31 * 60 * 60; # 31 days
+our $DEFAULT_LIFETIME = 31 * 24 * 60 * 60; # 31 days
 
 has 'db'  => sub { return DBI->connect(shift->dsn, '', ''); };
 has 'dsn';
@@ -42,6 +44,7 @@ sub register {
     CREATE TABLE IF NOT EXISTS meta (
       id       INTEGER PRIMARY KEY AUTOINCREMENT,
       stream   CHAR(32) NOT NULL DEFAULT '',
+      origin   CHAR(32) NOT NULL DEFAULT '',
       type     CHAR(16) NOT NULL DEFAULT '',
       lifetime INTEGER NOT NULL DEFAULT $DEFAULT_LIFETIME,
       data     TEXT NOT NULL DEFAULT '{}',
@@ -59,19 +62,21 @@ sub register {
     my $stream = $args->{stream} // '';
 
     # valid stream names are '' and [0-9a-zA-Z]{1,16}
-    unless ($stream eq '' || $stream !~ m/[0-9a-zA-Z]{1,32}/) {
+    unless ($stream eq '' || $stream =~ m/[0-9a-zA-Z]{1,32}/) {
       return undef;
     }
 
-    my $lifetime = $args->{lifetime} // $DEFAULT_LIFETIME;
+    my $origin = $args->{origin} // '';
     my $type = $args->{type} // '';
-    my $created = $args->{timestamp} // gmtime->epoch;
+    my $lifetime = min($args->{lifetime} // $DEFAULT_LIFETIME, $DEFAULT_LIFETIME);
+
+    my $created = $args->{timestamp} // gmtime->strftime('%F %T');
     my $data = encode_json($args->{data});
     my $meta = encode_json($args->{meta});
 
-    my $sth = $db->prepare('INSERT INTO meta (stream, type, lifetime, data, meta, created) VALUES (?, ?, ?, ?, ?, ?)');
+    my $sth = $db->prepare('INSERT INTO meta (stream, origin, type, lifetime, data, meta, created) VALUES (?, ?, ?, ?, ?, ?, ?)');
 
-    return !!$sth->execute($stream, $type, $lifetime, $data, $meta, $created);
+    return !!$sth->execute($stream, $origin, $type, $lifetime, $data, $meta, $created);
   });
 
   $app->helper('meta.find' => sub {
@@ -89,6 +94,11 @@ sub register {
     if (exists($args->{stream})) {
       push @{$filter}, 'stream=?';
       push @{$filter_arg}, $args->{stream};
+    }
+
+    if (exists($args->{origin})) {
+      push @{$filter}, 'origin=?';
+      push @{$filter_arg}, $args->{origin};
     }
 
     if (exists($args->{type})) {
@@ -165,7 +175,7 @@ sub register {
 
     my $csv = "stream,type,data,timestamp\n";
 
-    for my $row (@{$data}) {
+    for my $row (@{$data->{items}}) {
       $csv .= join(',', $row->{stream}, $row->{type}, encode_json($row->{data}), $row->{timestamp}) . "\n";
     }
 

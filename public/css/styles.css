@@ -722,6 +722,30 @@ li, li > p {
 }
 
 /*
+** PANELS
+*/
+
+.panel {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.panel-api {
+  border-color: #ddd;
+  margin-bottom: 8px;
+}
+
+.panel-api>.panel-heading {
+  color: #333;
+  background-color: #f5f5f5;
+  border-color: #ddd;
+}
+
+.panel-api>.panel-heading button {
+  margin-top: 4px;
+}
+
+/*
 ** SECTIONS
 */
 

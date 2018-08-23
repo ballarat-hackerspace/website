@@ -29,7 +29,6 @@ use Mojo::Util 'dumper';
 use Time::Piece;
 
 our $VERSION = '0.1';
-our $DEFAULT_LIFETIME = 31 * 60 * 60; # 31 days
 
 has 'db'  => sub { return DBI->connect(shift->dsn, '', '', {RaiseError => 1}); };
 has 'dsn';
