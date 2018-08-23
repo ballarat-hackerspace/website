@@ -31,10 +31,6 @@ a:focus {
   vertical-align: middle!important;
 }
 
-.avatar {
-  border-radius: 50%;
-}
-
 /*
 ** ALERTS
 */
@@ -733,6 +729,10 @@ li, li > p {
   padding: 64px 0 32px 0;
 }
 
+.section + .section {
+  padding: 32px 0 32px 0;
+}
+
 .section .title {
   font-size: 36px;
   font-family: 'Oswald', arial, sans-serif;
@@ -776,6 +776,11 @@ li, li > p {
   margin-top: 0;
   margin-bottom: 15px;
   color: #555;
+}
+
+.section.section-profile {
+  background: #f5f5f5;
+  padding: 128px 0 48px 0;
 }
 
 .section-block {
@@ -916,6 +921,26 @@ li, li > p {
 }
 .footer .social-icons li {
   margin-bottom: 15px;
+}
+
+/*
+** PROFILE
+*/
+
+.avatar {
+  border-radius: 50%;
+}
+
+.profile-summary > h1 {
+  margin-bottom: 4px;
+}
+
+.profile-summary > p {
+  margin-bottom: 4px;
+}
+
+.profile-email {
+  margin-bottom: 16px!important;
 }
 
 /*

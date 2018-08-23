@@ -1,98 +1,105 @@
 % layout 'page', active_page => 'profile', page_title => 'Profile';
 % my $member = $c->stash('member');
 
-<section class="section" ng-controller="ProfileController as profileVm">
-  <div class="container">
-    <h2 class="title text-center">Profile</h2>
-
-    <div class="row">
-      <div class="col-sm-4 col-md-3 text-center">
-        <img class="avatar" src="<%= $member->{avatar_url} %>" />
-      </div>
-      <div class="col-sm-8 col-md-9">
-        <h1 class="text-center-sm"><%= $member->{name} %></h1>
-        <p class="text-center-sm"><%= $member->{email} %></p>
-        <p><span class="label <%= $member->{membership_active} ? 'label-success' : '' %>"><%= uc $member->{membership} %></span> - expires <%= $member->{membership_expires}->strftime('%e %b %Y') %></p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-12">
-        <h3>Waiver Release & Indemnification</h3>
-% if (!$member->{waiver_sign}) {
-        <p>In consideration of the acceptance of my membership or participation in events with the Ballarat Hackerspace.</p>
-        <ol>
-          <li>I waive all claims that I may have against the Ballarat Hackerspace Inc, its officers, directors, members, volunteers, employees, agents and sponsors, or its executors, administrators, heirs, successors or assigns (the organisers), and release them from all claims for death, injury or damage arising out of my participation in their club, their event and its related activities, together with any costs, including legal fees.</li>
-          <li>I agree to indemnify and keep indemnified the organisers against damage arising out of my participation in the events and its related activities.</li>
-          <li>I agree to comply with all the rules, regulations and instructions of the organisers.</li>
-          <li>In the event of injury or illness during participation, I consent to receive medical treatment, which may be deemed advisable by the organisers.</li>
-          <li>I acknowledge that I have sole responsibility for my personal possessions and equipment during the all events and activities.</li>
-          <li>I hereby permit the free use of my name and picture in any broadcasts, telecasts and the press including website as they pertain to the Ballarat Hackerspace their events and activities.</li>
-          <li>I understand that my membership or entry entry fee is non-transferable and not refundable.</li>
-          <li>I agree to have my personal details recorded and used by the Ballarat Hackerspace and related parties for further communications of future related events.</li>
-        </ol>
-
-        <div class="text-center">
-          <a href="<%= url_for('waiver-sign') %>" class="btn btn-cta btn-cta-green">I acknowledge and agree</a>
+<div ng-controller="ProfileController as profileVm">
+  <section class="section section-profile">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 col-md-3 text-center">
+          <img class="avatar" src="<%= $member->{avatar_url} %>" />
         </div>
-% } else {
-        <p>Acknowledged on <%= $member->{waiver_signed}->strftime('%e %b %Y'); %>. Thank you! We appreciate your participation.</p>
-      </div>
-    </div>
-% }
-
-    <div class="row">
-      <div class="col-sm-12">
-        <h3>Registered Devices</h3>
-        <p>The following devices have been registered for use on the network.</p>
-
-        <div class="hidden">
-          <span><b>Device UUID:</b> <%= $uuid %></span>
-          <span class="pull-right">
-            % if ($c->device->is_whitelisted) {
-            <a href="" class="btn btn-cta btn-cta-green" data-toggle="modal"><i class="fa fa-fw fa-check"></i> Device Registered</a>
-            % } else {
-            <a href="#device-add" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-fw fa-plus"></i> Register this Device</a>
-
-            % }
-          </span>
+        <div class="col-sm-8 col-md-9">
+          <div class="profile-summary">
+            <h1 class="text-center-sm"><%= $member->{name} %></h1>
+            <p class="text-center-sm profile-email"><%= $member->{email} %></p>
+            <p class="text-center-sm"><span class="label <%= $member->{membership_active} ? 'label-success' : '' %>"><%= uc $member->{membership} %></span> - expires <%= $member->{membership_expires}->strftime('%a, %e %b %Y') %></p>
+            <p class="text-center-sm">Logins: <%= $member->{meta}{logins} %> - last logged in <%= $member->{meta}{last_login}->strftime('%a, %e %b %Y') %></p>
+          </div>
         </div>
-
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Device</th>
-              <th>Registered</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-% for my $d (@{$devices}) {
-%   if ($d->{email} eq $member->{email}) {
-            <tr class="<%= $d->{uuid} eq $uuid ? 'success' : '' %>">
-              <td><%= $d->{name} %></td>
-              <td><%= $d->{created} %></td>
-              <td class="text-right"><a href="<%= url_for('members-devices-remove', id => $d->{id}) %>" class="btn btn-cta btn-cta-sm btn-cta-red"><i class="fa fa-fw fa-times"></i></a></td>
-            </tr>
-%   }
-% }
-          </tbody>
-        </table>
       </div>
     </div>
+  </section>
 
-    <div class="row hidden">
-      <div class="col-sm-12">
-        <h3>Achievements</h3>
-        <p>TODO: show badges</p>
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Waiver Release & Indemnification</h3>
+  % if (!$member->{waiver_sign}) {
+          <p>In consideration of the acceptance of my membership or participation in events with the Ballarat Hackerspace.</p>
+          <ol>
+            <li>I waive all claims that I may have against the Ballarat Hackerspace Inc, its officers, directors, members, volunteers, employees, agents and sponsors, or its executors, administrators, heirs, successors or assigns (the organisers), and release them from all claims for death, injury or damage arising out of my participation in their club, their event and its related activities, together with any costs, including legal fees.</li>
+            <li>I agree to indemnify and keep indemnified the organisers against damage arising out of my participation in the events and its related activities.</li>
+            <li>I agree to comply with all the rules, regulations and instructions of the organisers.</li>
+            <li>In the event of injury or illness during participation, I consent to receive medical treatment, which may be deemed advisable by the organisers.</li>
+            <li>I acknowledge that I have sole responsibility for my personal possessions and equipment during the all events and activities.</li>
+            <li>I hereby permit the free use of my name and picture in any broadcasts, telecasts and the press including website as they pertain to the Ballarat Hackerspace their events and activities.</li>
+            <li>I understand that my membership or entry entry fee is non-transferable and not refundable.</li>
+            <li>I agree to have my personal details recorded and used by the Ballarat Hackerspace and related parties for further communications of future related events.</li>
+          </ol>
+
+          <div class="text-center">
+            <a href="<%= url_for('waiver-sign') %>" class="btn btn-cta btn-cta-green">I acknowledge and agree</a>
+          </div>
+  % } else {
+          <p>Acknowledged on <%= $member->{waiver_signed}->strftime('%a, %e %b %Y'); %>. Thank you! We appreciate your participation.</p>
+        </div>
       </div>
-    </div>
+  % }
 
-    <div class="row hidden">
-      <div class="col-sm-12">
-        <pre><%= dumper $member %></pre>
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Registered Devices</h3>
+          <p>The following devices have been registered for use on the network.</p>
+
+          <div class="hidden">
+            <span><b>Device UUID:</b> <%= $uuid %></span>
+            <span class="pull-right">
+              % if ($c->device->is_whitelisted) {
+              <a href="" class="btn btn-cta btn-cta-green" data-toggle="modal"><i class="fa fa-fw fa-check"></i> Device Registered</a>
+              % } else {
+              <a href="#device-add" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-fw fa-plus"></i> Register this Device</a>
+
+              % }
+            </span>
+          </div>
+
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Device</th>
+                <th>Registered</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+  % for my $d (@{$devices}) {
+  %   if ($d->{email} eq $member->{email}) {
+              <tr class="<%= $d->{uuid} eq $uuid ? 'success' : '' %>">
+                <td><%= $d->{name} %></td>
+                <td><%= $d->{created} %></td>
+                <td class="text-right"><a href="<%= url_for('members-devices-remove', id => $d->{id}) %>" class="btn btn-cta btn-cta-sm btn-cta-red"><i class="fa fa-fw fa-times"></i></a></td>
+              </tr>
+  %   }
+  % }
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
 
-  </div>
-</section>
+      <div class="row hidden">
+        <div class="col-sm-12">
+          <h3>Achievements</h3>
+          <p>TODO: show badges</p>
+        </div>
+      </div>
+
+      <div class="row hidden">
+        <div class="col-sm-12">
+          <pre><%= dumper $member %></pre>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
