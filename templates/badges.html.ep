@@ -18,36 +18,56 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Badge</th>
           <th>Title</th>
+          <th class="text-center">Badge</th>
           <th>Criteria</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Atomic Exploder</td>
-          <td><img src="/images/badges/badges-bs-atom.png" class="badges" /></td>
-          <td></td>
+          <td class="text-middle">Atomiser</td>
+          <td class="text-center"><img src="/images/badges/badges-bs-atom.png" class="badges" /></td>
+          <td class="text-middle"></td>
         </tr>
         <tr>
-          <td>3DP Artisan</td>
-          <td><img src="/images/badges/badges-bs-3dp.png" class="badges" /></td>
-          <td></td>
+          <td class="text-middle">3DP Artisan</td>
+          <td class="text-center"><img src="/images/badges/badges-bs-3dp.png" class="badges" /></td>
+          <td class="text-middle"></td>
         </tr>
         <tr>
-          <td>Alchemist</td>
-          <td><img src="/images/badges/badges-bs-molecule.png" class="badges" /></td>
-          <td></td>
+          <td class="text-middle">Alchemist</td>
+          <td class="text-center"><img src="/images/badges/badges-bs-molecule.png" class="badges" /></td>
+          <td class="text-middle"></td>
         </tr>
         <tr>
-          <td>Precision Blader</td>
-          <td><img src="/images/badges/badges-bs-blade.png" class="badges" /></td>
-          <td></td>
+          <td class="text-middle">Precision Blader</td>
+          <td class="text-center"><img src="/images/badges/badges-bs-blade.png" class="badges" /></td>
+          <td class="text-middle"></td>
         </tr>
         <tr>
-          <td>Troubleshooter</td>
-          <td><img src="/images/badges/badges-bs-multimeter.png" class="badges" /></td>
-          <td></td>
+          <td class="text-middle">Troubleshooter</td>
+          <td class="text-center"><img src="/images/badges/badges-bs-multimeter.png" class="badges" /></td>
+          <td class="text-middle"></td>
+        </tr>
+        <tr>
+          <td class="text-middle">Transcendant One</td>
+          <td class="text-center"><img src="/images/badges/badges-bs-blank.png" class="badges" /></td>
+          <td class="text-middle"></td>
+        </tr>
+        <tr>
+          <td class="text-middle">Official Adventurer</td>
+          <td class="text-center"><img src="/images/badges/badges-bs-blank.png" class="badges" /></td>
+          <td class="text-middle"></td>
+        </tr>
+        <tr>
+          <td class="text-middle">Eagle Eye</td>
+          <td class="text-center"><img src="/images/badges/badges-bs-calipers.png" class="badges" /></td>
+          <td class="text-middle"></td>
+        </tr>
+        <tr>
+          <td class="text-middle">Speed of Light</td>
+          <td class="text-center"><img src="/images/badges/badges-bs-blank.png" class="badges" /></td>
+          <td class="text-middle"></td>
         </tr>
       </tbody>
     </table>
