@@ -14,7 +14,7 @@
         <p>The Ballarat Hackerspace is modelled on an <a href="http://hackerspaces.org/">international movement of like-minded communities</a> that started in Germany back in 1995. Our philosophy is the idea that you should make, create, build, hack, develop and learn about how the world works, how the technology around us works and anything else related to <a href="https://en.wikipedia.org/wiki/42_(number)#The_Hitchhiker's_Guide_to_the_Galaxy">"the ultimate question"</a>.</p>
         <p>Our members learn skills that expand their ability, increase employability (in an ever-changing world) and express themselves through their craft.</p>
         <p>The Ballarat Hackerspace is actively inclusive, with firm and binding community rules and a <a href="#the_code">code of conduct</a> centred around being excellent to each other. Our commitment to inclusiveness is shown through ventures such as our <a href="/women">Women's Wednesdays</a>, which encourages women and their supporters to use the space for free on Wednesday nights.</p>
-        <p>Our <a href="https://github.com/ballarat-hackerspace/association">Association Rules</a> are publicly available, if formalities are your thing.</a>
+        <p>Our  <a href="<%= url_for('modelrules') %>">Association Rules</a> are publicly available, if formalities are your thing.</a>
       </div>
 </section>
 
@@ -87,7 +87,7 @@
   </div>
 </section>
 
-<section id="space" class="section">
+<section id="space" class="section section-highlight">
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
@@ -150,7 +150,7 @@
             <tr>
               <th>Position</th>
               <th>Elected Representative</th>
-            </tr>the_code
+            </tr>
           </thead>
           <tbody>
             <tr>
