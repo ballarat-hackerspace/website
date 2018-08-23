@@ -25,7 +25,7 @@
                 <li class="nav-item <%= 'active' if ($active eq 'faq') %>"> <a href="/faq">FAQ</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="nav-item <%= 'active' if ($active eq 'codeofconduct') %>"><a href="/code-of-conduct">Code of Conduct</a> </li>
-                <li class="nav-item <%= 'active' if ($active eq 'modelrules') %>"><a href="/model-rules">Model Rules</a></li>
+                <li class="nav-item <%= 'active' if ($active eq 'modelrules') %>"><a href="/model-rules">Association Rules</a></li>
               </ul>
             </li>
 

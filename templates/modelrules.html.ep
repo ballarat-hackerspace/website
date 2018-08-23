@@ -1,11 +1,11 @@
-% layout 'page', active_page => 'modelrules', page_title => 'Model Rules';
+% layout 'page', active_page => 'modelrules', page_title => 'Association Rules';
 
 <!-- model rules -->
 <section id="modelrules" class="section">
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2 class="title text-center">Model Rules</h2>
+        <h2 class="title text-center">Association Rules</h2>
         <%== $rules_content %>
       </div>
     </div>
