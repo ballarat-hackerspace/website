@@ -1,0 +1,12 @@
+% layout 'page', active_page => 'space', page_title => 'Space API';
+
+<section id="team" class="section">
+  <div class="container">
+    <h2 class="title text-center">Space API</h2>
+
+    <p>We have a minimal implementation of the <a href="https://spaceapi.net">SpaceAPI</a> available at <a href="<%= url_for('spaceapi') %>.json"><code>/meta/space.json</code></a>.</p>
+
+    <pre><%= $space_pretty %></pre>
+  </div><!--//row-->
+</section>
+

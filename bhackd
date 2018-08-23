@@ -206,27 +206,38 @@ get '/meta/space' => sub {
 
   my $base_url = 'https://ballarathackerspace.org.au';
 
-  $c->render(
-    json => {
-      api => 0.13,
-      space => 'Ballarat Hackerspace',
-      logo => "$base_url/images/bhack-logo-title-black.svg",
-      url => "$base_url",
-      location => {
-        address => 'Top Floor, Building K (Ballarat Tech School), Federation University SMB Campus, Ballarat',
-        lat => -37.565247,
-        lon => 143.857645
-      },
-      contact => {
-        email => 'committee@ballarathackerspace.org.au',
-        twitter => 'bhackerspace'
-      },
-      projects => [
-        'https://github.com/ballarat-hackerspace',
-        'https://gitlab.com/ballarat-hackerspace',
-      ]
+  my $space = {
+    api => 0.13,
+    space => 'Ballarat Hackerspace',
+    logo => "$base_url/images/bhack-logo-title-black.svg",
+    url => "$base_url",
+    location => {
+      address => 'Top Floor, Building K (Ballarat Tech School), Federation University SMB Campus, Ballarat',
+      lat => -37.565247,
+      lon => 143.857645
     },
-    status => 200
+    contact => {
+      email => 'committee@ballarathackerspace.org.au',
+      twitter => 'bhackerspace'
+    },
+    projects => [
+      'https://github.com/ballarat-hackerspace',
+      'https://gitlab.com/ballarat-hackerspace',
+    ]
+  };
+
+  my $format = $c->stash('format') // 'html';
+
+  if ($format eq 'html') {
+    my $space_pretty = dumper $space;
+    $space_pretty =~ s/ =>/:/g;
+
+    $c->stash(space => $space, space_pretty => $space_pretty);
+  }
+
+  $c->respond_to(
+    json => {json => $space},
+    html => {template => 'meta-space'},
   );
 } => 'spaceapi';
 
@@ -237,6 +248,13 @@ get '/meta/streams' => sub {
   my $now = gmtime->epoch;
 
   $c->stash(streams => $streams);
+
+  my $format = $c->stash('format') // 'html';
+
+  if ($format eq 'html') {
+    my $meta = $c->meta->find(itemsPerPage => 10);
+    $c->stash(meta => $meta);
+  }
 
   $c->respond_to(
     json => {json => {streams => $streams, ts => $now}},

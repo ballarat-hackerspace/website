@@ -1,12 +1,13 @@
-% layout 'page', active_page => 'meta', page_title => 'Meta';
+% layout 'page', active_page => 'streams', page_title => 'Streams';
 
 <section id="team" class="section">
   <div class="container">
-    <h2 class="title text-center">Meta</h2>
-    <p>The Ballarat Hackerspace aims to be as transparent and interactive as it can possibly be. To this end, this meta portal is the beginnings of that journey.</p>
-    <p>We welcome any feedback on issues or features you would like to see included or improved upon.</p>
+    <h2 class="title text-center">Streams</h2>
+    <p>Want to make your project talk to the Internet? Connect your existing project to the Internet to log, stream, and interact with the data it produces? What about all this Internet-of-Things (IoT) stuff?</p>
+    <p><i>Streams</i> is a platform we've designed to display, respond, and interact with your project's data. <span class="hidden">We also keep your data private (data feeds are private by default) and secure (we will never sell or give this data away to another company) for you.</span></p>
+    <p>We couldn't find a good way to interact with them over the Internet. There are certainly a lot of great services out there for datalogging, or communicating with your microcontroller over the web, but these services are either too complicated to get started, or they aren't particularly fun to use. So, we decided to experiment with our own system, and that's <i>Streams</i>.</p>
 
-    <h3>Streams</h3>
+    <h4>Public Streams</h4>
 % if ($meta->{totalItems}) {
     <table class="table table-hover">
       <thead>
@@ -175,7 +176,17 @@
       </div>
     </div>
 
-    <h3>SpaceAPI</h3>
-    <p>We have a minimal implementation of the <a href="https://spaceapi.net">SpaceAPI</a> also available at <a href="<%= url_for('spaceapi') %>"><code>/meta/space</code></a>.</p>
+    <h4>IoT - Bill of Rights</h4>
+    <p>We believe Internet of Things devices should all come with a well established expectation of what they will and will not do with consumer's data.</p>
+
+    <ul>
+      <li>Open is better than closed; this ensures portability between Internet of Things devices.</li>
+      <li>Consumers, not companies, own the data collected by Internet of Things devices.</li>
+      <li>Internet of Things devices that collect public data must share that data.</li>
+      <li>Users have the right to keep their data private.</li>
+      <li>Users can delete or back up data collected by Internet of Things devices.</li>
+      <li>Let us take responsibility together for building systems that are easier to use for good and harder to use maliciously</li>
+      <li>Devices that are always listening have a physical OFF and ON switch that clearly indicates to the user if and when they're listening. For example, a good practice could include a physical OFF and ON switch, which breaks one of the power lines coming into the recording component, with an indicator LED powered and controlled only by the power line, that clearly indicates to the user when the devices is and isn't listening. Services/devices and API usage of such services/devices, including, for example, Amazon Alexa, Apple Siri, Google Home, and others should clearly indicate when they are ON and listening and OFF and are not.</li>
+    </ul>
   </div><!--//row-->
 </section>
