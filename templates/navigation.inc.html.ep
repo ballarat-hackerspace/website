@@ -29,19 +29,7 @@
               </ul>
             </li>
 
-% if ($c->tidyhq->is_authenticated) {
-            <li class="nav-item <%= 'active' if ($active eq 'members') %>"><a href="/members">Members</a></li>
-% } else {
-            <li class="nav-item <%= 'active' if ($active eq 'join') %>"><a href="/join">Join</a></li>
-% }
             <li class="nav-item <%= 'active' if ($active eq 'workshops') %>"><a href="/workshops">Workshops</a></li>
-
-            <li class="nav-item dropdown">
-              <a href="/patreon">Patreon</a>
-              <ul class="dropdown-menu">
-                <li class="nav-item-blurb">Be a financial supporter of the Ballarat Hackerspace for as little as $5/month to ensure our continued operation. In return we welcome you to attend any of our open times to learn how to use our facilities and get inspiration for potential projects of your own! Full information about patron benefits can be found on: <a href="/patreon">Patreon</a></li>
-              </ul>
-            </li>
 
             <li class="nav-item dropdown <%= 'active' if (grep {$_ eq $active} qw(blog meta)) %>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Meta</a>
@@ -52,6 +40,18 @@
               </ul>
             </li>
 
+% if ($c->tidyhq->is_authenticated) {
+            <li class="nav-item <%= 'active' if ($active eq 'members') %>"><a href="/members">Members</a></li>
+% } else {
+            <li class="nav-item dropdown">
+              <a href="/patreon">Patreon</a>
+              <ul class="dropdown-menu">
+                <li class="nav-item-blurb">Be a financial supporter of the Ballarat Hackerspace for as little as $5/month to ensure our continued operation. In return we welcome you to attend any of our open times to learn how to use our facilities and get inspiration for potential projects of your own! Full information about patron benefits can be found on: <a href="/patreon">Patreon</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item <%= 'active' if ($active eq 'join') %>"><a href="/join">Join</a></li>
+% }
           </ul><!--//nav-->
           <form class="navbar-form navbar-left" role="search">
 % if ($c->tidyhq->is_authenticated) {

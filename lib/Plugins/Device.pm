@@ -18,6 +18,9 @@
 package Plugins::Device;
 use Mojo::Base 'Mojolicious::Plugin';
 
+use Mojo::JSON qw(decode_json encode_json);
+use Mojo::Util qw(b64_decode b64_encode dumper sha1_sum);
+
 use Carp 'croak';
 use DBI;
 use Time::Piece;
@@ -92,13 +95,31 @@ sub register {
   $app->helper('device.uuid' => sub {
     my $c = shift;
 
-    # ensure we've set a uuid cookie from here on out
-    if (my $bhack = $c->stash('bhack')) {
-      return $bhack->{uuid};
+    my $bhack = {};
 
+    # read bhack cookie
+    if (my $cookie = $c->signed_cookie('bhack')) {
+      $cookie =~ y/-/=/;
+      $bhack = decode_json b64_decode $cookie;
+    };
+
+    # update cookie if no uuid present
+    unless ($bhack->{uuid}) {
+      $bhack->{uuid} = sha1_sum sprintf('%s-device-%s', rand, gmtime->epoch);
+      $bhack->{timestamp} = gmtime->epoch;
+
+      # write bhack cookie
+      my $cookie = b64_encode encode_json($bhack), '';
+      $cookie =~ y/=/-/;
+
+      $c->signed_cookie('bhack', $cookie, {
+        expires  => 2000000000,
+        httponly => 1,
+        path     => '/',
+      });
     }
 
-    return undef;
+    return $bhack->{uuid};
   });
 }
 

@@ -59,7 +59,7 @@ sub register {
     my $stream = $args->{stream} // '';
 
     # valid stream names are '' and [0-9a-zA-Z]{1,16}
-    unless ($stream eq '' || $stream =~ m/[0-9a-zA-Z]{1,32}/) {
+    unless ($stream eq '' || $stream !~ m/[0-9a-zA-Z]{1,32}/) {
       return undef;
     }
 
@@ -142,7 +142,7 @@ sub register {
     my $totalItems = !!$sth->execute ? $sth->fetchrow_arrayref->[0] : 0;
     $sth->finish;
 
-    my $sth = $db->prepare($sql);
+    $sth = $db->prepare($sql);
     my $data = {
       itemsPerPage => $itemsPerPage,
       totalItems => $totalItems,

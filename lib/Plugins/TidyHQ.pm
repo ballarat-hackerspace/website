@@ -156,9 +156,9 @@ sub register {
       # store all in session
       $c->session(TIDYHQ_SESSION_KEY() => $user);
 
-      # store in bhack session
       my $bhack = $c->stash('bhack');
-      my $bhack_tidyhq = {
+
+      my $tidyhq = {
         email_address => $user->{email_address},
         first_name    => $user->{first_name},
         groups        => $user->{groups},
@@ -168,9 +168,14 @@ sub register {
         memberships   => $user->{memberships},
       };
 
-      $bhack = {%{$bhack}, %{$bhack_tidyhq}};
+      $bhack = {%{$bhack}, %{$tidyhq}};
 
-      $c->stash('bhack' => $bhack);
+      # store in bhack session
+      if (0) {
+        $c->stash('bhack' => $bhack);
+      }
+
+      return Mojo::Promise->new->resolve($tidyhq);
     });
 
     return $promise;
@@ -292,7 +297,7 @@ sub proxy_user_get {
 
       for my $m (@{$data}) {
         push @{$memberships}, {
-          end_date => Time::Piece->strptime($m->{end_date}, '%Y-%m-%d'),
+          end_date => Time::Piece->strptime($m->{end_date}, '%F'),
           name     => $membership_levels->{$m->{membership_level_id}},
           status   => $m->{state},
         };

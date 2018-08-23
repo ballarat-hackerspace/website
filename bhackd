@@ -20,9 +20,8 @@ use FindBin;
 use lib "$FindBin::Bin/lib";
 
 use Mojolicious::Lite;
-use Mojo::JSON qw(decode_json encode_json);
 use Mojo::UserAgent;
-use Mojo::Util qw(b64_decode b64_encode dumper sha1_sum);
+use Mojo::Util qw(b64_decode b64_encode dumper);
 
 use NetAddr::IP;
 use Text::MultiMarkdown qw(markdown);
@@ -31,8 +30,6 @@ use Time::Piece;
 use constant {
   CONFIG_PATH => $ENV{BHACKD_CONFIG} // '/etc/bhackd.conf'
 };
-
-use Plugins::Jekyll;
 
 my $ua = Mojo::UserAgent->new;
 
@@ -48,6 +45,7 @@ plugin 'Plugins::Calendar'   => app->config->{calendar} // {};
 plugin 'Plugins::Device'     => app->config->{device}   // {};
 plugin 'Plugins::Door'       => app->config->{door}     // {};
 plugin 'Plugins::Jekyll'     => app->config->{blog}     // {};
+plugin 'Plugins::Member'     => app->config->{members}  // {};
 plugin 'Plugins::Meta'       => app->config->{meta}     // {};
 plugin 'Plugins::RemoteIP';
 plugin 'Plugins::TidyHQ'     => app->config->{tidyhq}   // {};
@@ -91,41 +89,10 @@ helper 'is_gatekeeper' => sub {
 # HOOKS
 #
 
-hook 'before_dispatch' => sub {
+hook 'before_routes' => sub {
   my $c = shift;
 
-  # default cookie value
-  my $bhack = {
-    uuid => sha1_sum sprintf('%s-device-%s', rand, gmtime->epoch)
-  };
-
-  # load bhack cookie
-  if (my $cookie = $c->signed_cookie('bhack')) {
-    $cookie =~ y/-/=/;
-    $bhack = decode_json b64_decode $cookie;
-  }
-
-  $c->stash(bhack  => $bhack);
-  $c->stash(tidyhq => $c->tidyhq->user);
-};
-
-hook 'after_dispatch' => sub {
-  my $c = shift;
-
-  # save bhack cookie
-  my $bhack = $c->stash('bhack') // {};
-  $bhack->{timestamp} = gmtime->epoch;
-
-  my $cookie = b64_encode encode_json($bhack), '';
-  $cookie =~ y/=/-/;
-
-  my $options = {
-    expires  => 2000000000,
-    httponly => 1,
-    path     => '/',
-  };
-
-  $c->signed_cookie('bhack', $cookie, $options);
+  $c->stash(member => $c->member->find(email => $c->session('user')));
 };
 
 #
@@ -185,17 +152,19 @@ post '/login' => sub {
   my $url = $json->{rt}       // $c->param('rt') // 'index';
 
   $c->render_later;
-  $c->tidyhq->login(email => $e, password => $p)->then(sub {
+
+  $c->member->login($e, $p)->then(sub {
     return $c->render(json => {'message' => 'success'}, status => 200);
   }, sub {
-    return $c->render(json => {'message' => 'error'}, status => 400);
+    my $error = shift;
+    return $c->render(json => {'message' => $error}, status => 400);
   });
 };
 
 any '/logout' => sub {
   my $c = shift;
 
-  $c->tidyhq->logout;
+  $c->member->logout;
 
   # extract the redirect url and fall back to the index
   my $url = $c->param('rt') // 'index';
@@ -370,7 +339,9 @@ group {
 
     return 1 if $c->tidyhq->is_authenticated;
 
-    return $c->redirect_to('/');
+    $c->redirect_to('/');
+
+    return undef;
   };
 
   get '/' => 'members';
@@ -378,8 +349,6 @@ group {
   # device management
   get '/devices' => sub {
     my $c = shift;
-
-    return $c->redirect_to('/') unless $c->tidyhq->is_authenticated;
 
     $c->stash(devices => $c->device->find);
     $c->render('members-devices');
@@ -426,7 +395,10 @@ group {
     $c->stash('uuid' => $c->device->uuid);
 
     return 1 if $c->is_local || $c->is_gatekeeper;
-    return $c->redirect_to('/');
+
+    $c->redirect_to('/');
+
+    return undef;
   };
 
   get '/' => 'door';
