@@ -24,7 +24,7 @@
               </div>
               <div>
                 <a href="/join" class="btn btn-cta btn-cta-secondary"><i class="fa fa-pencil"></i> Not a Member?</a>
-                <button class="btn btn-cta btn-cta-primary pull-right" ng-click="loginVm.login()" ng-disabled="loginVm.working">
+                <button class="btn btn-cta btn-cta-primary pull-right" ng-click="loginVm.login()" ng-disabled="!loginVm.canLogin()">
                   <i class="fa" ng-class="{'fa-sign-in': !loginVm.working, 'fa-spinner fa-spin': loginVm.working}"></i> Login
                 </button>
               </div>

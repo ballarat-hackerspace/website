@@ -27,10 +27,26 @@ angular.module('bhack', [])
     });
 
     angular.extend(this, {
+      canLogin: canLogin,
       login: login
     });
 
+    activate();
+
     ////////
+
+    function activate() {
+      // autofocus email input on modal show
+      $('#login').on('shown.bs.modal', function() {
+        $('input[name=email]').focus();
+      })
+    }
+
+    function canLogin() {
+      return !vm.working && 
+        (vm.email && vm.email.length > 3) &&
+        (vm.password && vm.password.length > 0);
+    }
 
     function login() {
       vm.working = true;
@@ -48,10 +64,21 @@ angular.module('bhack', [])
       }
 
       $http(req).then(function(data){
-        window.location.href = '/members';
+        window.location.href = '/members/me';
       }, function(err) {
         vm.working = false;
         console.error(err);
       });
     }
+  })
+  .controller('ProfileController', function($http, $location) {
+    var vm = angular.extend(this, {
+    });
+
+    angular.extend(this, {
+    });
+
+
+    ////////
+
   });
