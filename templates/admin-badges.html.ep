@@ -36,7 +36,7 @@
             <tr>
               <td class="text-middle"><%= $b->{title} %></td>
               <td class="text-center"><img class="badges" src="<%= $b->{image_url} %>" /></td>
-              <td class="text-middle"><%= $b->{criteria} %></td>
+              <td class="text-middle"><pre class="badge-criteria"><%= $b->{criteria} %></pre></td>
               <td class="text-middle"><%= $b->{lifetime} %></td>
               <td class="text-middle"><%= $b->{category} ? $b->{category} : '-' %></td>
               <td class="text-right text-middle">

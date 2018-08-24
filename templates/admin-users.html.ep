@@ -1,0 +1,43 @@
+% layout 'page', active_page => 'admin', page_title => 'Admin Users';
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center"><a href="/admin">Admin</a> <i class="fa fa-angle-double-right"></i> Users</h2>
+        <p>Manage the Ballarat Hackerspace members.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Members</h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Membership</th>
+              <th class="hidden-xs">Logins</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+% for my $m (@{$members}) {
+            <tr>
+              <td class="text-middle"><%= $m->{name} %></td>
+              <td class="text-middle"><%= $m->{email} %></td>
+              <td class="text-middle"><%= uc $m->{membership} %><%= $m->{membership_active} ? ' - expires ' . $m->{membership_expires}->strftime('%F') : 'Not active' %></td>
+              <td class="text-middle hidden-xs"><%= $m->{meta}{logins} %></td>
+              <td class="text-right text-middle">
+                <button class="btn btn-cta btn-cta-sm btn-cta-blue hidden"><i class="fa fa-fw fa-pencil-alt"></i></button>
+                <a href="<%= url_for('admin-members-remove', id => $m->{id}) %>" class="btn btn-cta btn-cta-sm btn-cta-red hidden"><i class="fa fa-fw fa-times"></i></a>
+              </td>
+            </tr>
+% }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

@@ -146,6 +146,39 @@ sub register {
     return undef;
   });
 
+  $app->helper('members.list' => sub {
+    my $c = shift;
+    my $args = @_%2 ? shift : {@_};
+    my $db = $self->db;
+
+    my $email = $args->{email};
+
+    my $sql = 'SELECT * FROM members';
+
+    my $sth = $db->prepare($sql);
+    $sth->execute;
+
+    my $members = [];
+
+    while (my $member = $sth->fetchrow_hashref) {
+
+      $member->{data} = decode_json $member->{data};
+      $member->{meta} = decode_json $member->{meta};
+
+      # coercions
+      $member->{created} = Time::Piece->strptime($member->{created}, '%Y-%m-%d %H:%M:%S');
+      $member->{updated} = Time::Piece->strptime($member->{updated}, '%Y-%m-%d %H:%M:%S');
+      $member->{membership_expires} = Time::Piece->strptime($member->{membership_expires}, '%Y-%m-%d %H:%M:%S') if $member->{membership_expires};
+      $member->{waiver_signed} = Time::Piece->strptime($member->{waiver_signed}, '%Y-%m-%d %H:%M:%S') if $member->{waiver_signed};
+      $member->{meta}{last_login} = Time::Piece->strptime($member->{meta}{last_login}, '%Y-%m-%d %H:%M:%S') if $member->{meta}{last_login};
+
+      push @{$members}, $member;
+    }
+
+    $sth->finish;
+
+    return $members;
+  });
   $app->helper('member.update' => sub {
     my $c = shift;
     my $args = @_%2 ? shift : {@_};

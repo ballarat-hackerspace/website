@@ -30,8 +30,8 @@
                 <div class="panel-title text-center"><%= $b->{title} %></div>
               </div>
               <div class="panel-body text-center">
-                <img class="badges" src="<%= $b->{image_url} %>" />
-                <p class="text-center"><%= $b->{criteria} %></p>
+                <img class="badges badges2x" src="<%= $b->{image_url} %>" />
+                <p><%= $b->{criteria} %></p>
               </div>
             </div>
           </div>

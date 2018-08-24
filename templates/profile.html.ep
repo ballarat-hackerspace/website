@@ -51,7 +51,7 @@
       <div class="row">
         <div class="col-sm-12">
           <h3>Registered Devices</h3>
-          <p>The following devices have been registered for use on the network.</p>
+          <p>You have the following devices registered for use on the "bhack" network.</p>
 
           <div class="hidden">
             <span><b>Device UUID:</b> <%= $uuid %></span>

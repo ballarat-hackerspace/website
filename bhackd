@@ -455,6 +455,13 @@ group {
 
     $c->redirect_to('admin-badges');
   } => 'admin-badges-add';
+
+  get '/members' => sub {
+    my $c = shift;
+
+    $c->stash(members => $c->members->list);
+    $c->render('admin-users');
+  } => 'admin-users';
 };
 
 # local network only
