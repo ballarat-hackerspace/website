@@ -1,6 +1,7 @@
 % layout 'page', active_page => 'profile', page_title => 'Profile';
 % my $member = $c->stash('member');
 
+% if ($member) {
 <div ng-controller="ProfileController as profileVm">
   <section class="section section-profile">
     <div class="container">
@@ -103,3 +104,16 @@
     </div>
   </section>
 </div>
+% } else {
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="alert alert-info">
+            <p>No profile information has been found. Please logout and then login again.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+% }

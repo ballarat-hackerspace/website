@@ -745,6 +745,21 @@ li, li > p {
   margin-top: 4px;
 }
 
+.panel-badge {
+  border-color: #ddd;
+  margin-bottom: 8px;
+}
+
+.panel-badge>.panel-heading {
+  color: #333;
+  background-color: #f5f5f5;
+  border-color: #ddd;
+}
+
+.panel-badge>.panel-heading>.panel-title {
+  font-weight: bold;
+}
+
 /*
 ** SECTIONS
 */

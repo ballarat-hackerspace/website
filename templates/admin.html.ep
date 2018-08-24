@@ -1,0 +1,24 @@
+% layout 'page', active_page => 'admin', page_title => 'Admin';
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center">Admin</h2>
+        <p>Remember Uncle Ben's wisdom that "with great power, comes great responsibility."</p>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <a href="<%= url_for('admin-users') %>"><h3>Users</h3></a>
+            <p>Manage the Ballarat Hackerspace members.</p>
+          </div>
+
+          <div class="col-sm-6">
+            <a href="/admin/badges"><h3>Badges</h3></a>
+            <p>Manage the badges.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

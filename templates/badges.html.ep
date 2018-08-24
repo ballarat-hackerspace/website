@@ -1,76 +1,54 @@
-% layout 'page', active_page => 'join', page_title => 'Badges';
+% layout 'page', active_page => 'badges', page_title => 'Badges';
 
-<!-- ******team Section****** -->
-<section id="team" class="section">
+<section class="section">
   <div class="container">
-    <h2 class="title text-center">Badges</h2>
-    <p>Just as badges in the physical world serve many functions, our digital badges are employed in a variety of ways. Our badges can serve different functions depending on the activities with which they are associated.</p>
-    <p>These functions include, but are not limited to:</p>
-    <ul>
-      <li>Providing a competency-based signifier of a member's skills and achievements.</li>
-      <li>Capturing the complete learning path of our members.</li>
-      <li>Motivate engagement and collaboration.</li>
-      <li>Support innovation and flexibility in the skills that matter.</p>
-      <li>Building and formalising identity and reputation within our learning community.</li>
-    </ul>
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center">Badges</h2>
+        <p>Just as badges in the physical world serve many functions, our digital badges are employed in a variety of ways. Our badges can serve different functions depending on the activities with which they are associated.</p>
+        <p>These functions include, but are not limited to:</p>
+        <ul>
+          <li>Providing a competency-based signifier of a member's skills and achievements.</li>
+          <li>Capturing the complete learning path of our members.</li>
+          <li>Motivate engagement and collaboration.</li>
+          <li>Support innovation and flexibility in the skills that matter.</p>
+          <li>Building and formalising identity and reputation within our learning community.</li>
+        </ul>
+      </div>
+    </div>
 
-    <h3>Our Badges</h3>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th class="text-center">Badge</th>
-          <th>Criteria</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="text-middle">Atomiser</td>
-          <td class="text-center"><img src="/images/badges/badges-bs-atom.png" class="badges" /></td>
-          <td class="text-middle"></td>
-        </tr>
-        <tr>
-          <td class="text-middle">3DP Artisan</td>
-          <td class="text-center"><img src="/images/badges/badges-bs-3dp.png" class="badges" /></td>
-          <td class="text-middle"></td>
-        </tr>
-        <tr>
-          <td class="text-middle">Alchemist</td>
-          <td class="text-center"><img src="/images/badges/badges-bs-molecule.png" class="badges" /></td>
-          <td class="text-middle"></td>
-        </tr>
-        <tr>
-          <td class="text-middle">Precision Blader</td>
-          <td class="text-center"><img src="/images/badges/badges-bs-blade.png" class="badges" /></td>
-          <td class="text-middle"></td>
-        </tr>
-        <tr>
-          <td class="text-middle">Troubleshooter</td>
-          <td class="text-center"><img src="/images/badges/badges-bs-multimeter.png" class="badges" /></td>
-          <td class="text-middle"></td>
-        </tr>
-        <tr>
-          <td class="text-middle">Transcendant One</td>
-          <td class="text-center"><img src="/images/badges/badges-bs-blank.png" class="badges" /></td>
-          <td class="text-middle"></td>
-        </tr>
-        <tr>
-          <td class="text-middle">Official Adventurer</td>
-          <td class="text-center"><img src="/images/badges/badges-bs-blank.png" class="badges" /></td>
-          <td class="text-middle"></td>
-        </tr>
-        <tr>
-          <td class="text-middle">Eagle Eye</td>
-          <td class="text-center"><img src="/images/badges/badges-bs-calipers.png" class="badges" /></td>
-          <td class="text-middle"></td>
-        </tr>
-        <tr>
-          <td class="text-middle">Speed of Light</td>
-          <td class="text-center"><img src="/images/badges/badges-bs-blank.png" class="badges" /></td>
-          <td class="text-middle"></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Our Badges</h3>
 
-  </div><!--//row-->
+% if (@{$badges->{items}}) {
+        <div class="row">
+% for my $b (@{$badges->{items}}) {
+          <div class="col-sm-3">
+            <div class="panel panel-badge">
+              <div class="panel-heading">
+                <div class="panel-title text-center"><%= $b->{title} %></div>
+              </div>
+              <div class="panel-body text-center">
+                <img class="badges" src="<%= $b->{image_url} %>" />
+                <p class="text-center"><%= $b->{criteria} %></p>
+              </div>
+            </div>
+          </div>
+% }
+        </div>
+% } else {
+        <div class="alert alert-info">
+          <p>We have no badges definte as yet. Check back soon!</p>
+        </div>
+% }
+      </div>
+
+      <div class="row hidden">
+        <div class="col-sm-12">
+          <pre><%= dumper $badges %></pre>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

@@ -41,8 +41,9 @@ app->log->info('Configuration: ' . CONFIG_PATH);
 
 plugin 'JSONConfig'          => {file => CONFIG_PATH};
 plugin 'Plugins::Alarm'      => app->config->{alarm}    // {};
+plugin 'Plugins::Badge'      => app->config->{members}  // {};
 plugin 'Plugins::Calendar'   => app->config->{calendar} // {};
-plugin 'Plugins::Device'     => app->config->{device}   // {};
+plugin 'Plugins::Device'     => app->config->{members}  // {};
 plugin 'Plugins::Door'       => app->config->{door}     // {};
 plugin 'Plugins::Jekyll'     => app->config->{blog}     // {};
 plugin 'Plugins::Member'     => app->config->{members}  // {};
@@ -100,7 +101,6 @@ hook 'before_routes' => sub {
 #
 
 get '/about'            => 'about';
-get '/badges'           => 'badges';
 get '/code-of-conduct'  => 'conduct';
 get '/contact'          => 'contact';
 get '/faq'              => 'faq';
@@ -199,6 +199,14 @@ get '/meta' => sub {
   $c->stash(streams => $streams, meta => $meta);
 
   $c->render('meta');
+};
+
+get '/meta/badges' => sub {
+  my $c = shift;
+
+  $c->stash(badges => $c->badges->find);
+
+  $c->render('badges');
 };
 
 get '/meta/space' => sub {
@@ -410,6 +418,43 @@ group {
   } => 'members-devices-remove';
 
   get '/workshops' => 'members-workshops';
+};
+
+group {
+  under '/admin' => sub {
+    my $c = shift;
+
+    # stash for later
+    $c->stash('uuid' => $c->device->uuid);
+
+    return 1 if $c->member->current->has_role('admin');
+
+    $c->redirect_to('/');
+
+    return undef;
+  };
+
+  get '/' => 'admin';
+
+  get '/badges' => sub {
+    my $c = shift;
+
+    $c->stash(badges => $c->badges->find);
+    $c->render('admin-badges');
+  } => 'admin-badges';
+
+  post '/badges/add' => sub {
+    my $c = shift;
+
+    $c->badges->add(
+      title     => $c->param('title'),
+      image_url => $c->param('image_url'),
+      criteria  => $c->param('criteria'),
+      lifetime  => $c->param('lifetime')
+    );
+
+    $c->redirect_to('admin-badges');
+  } => 'admin-badges-add';
 };
 
 # local network only

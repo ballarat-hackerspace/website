@@ -31,11 +31,12 @@
 
             <li class="nav-item <%= 'active' if ($active eq 'workshops') %>"><a href="/workshops">Workshops</a></li>
 
-            <li class="nav-item dropdown <%= 'active' if (grep {$_ eq $active} qw(blog streams space)) %>">
+            <li class="nav-item dropdown <%= 'active' if (grep {$_ eq $active} qw(blog badges streams space)) %>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Meta</a>
               <ul class="dropdown-menu">
                 <li class="nav-item <%= 'active' if ($active eq 'blog') %>"><a href="/blog">Blog</a></li>
                 <li role="separator" class="divider"></li>
+                <li class="nav-item <%= 'active' if ($active eq 'badges') %>"><a href="/meta/badges">Badges</a></li>
                 <li class="nav-item <%= 'active' if ($active eq 'streams') %>"><a href="/meta/streams">Streams</a></li>
                 <li class="nav-item <%= 'active' if ($active eq 'space') %>"><a href="/meta/space">Space API</a></li>
               </ul>
@@ -44,6 +45,11 @@
 % if ($c->member->current->is_authenticated) {
             <li class="nav-item <%= 'active' if ($active eq 'members') %>"><a href="/members">Members</a></li>
             <li class="nav-item <%= 'active' if ($active eq 'profile') %>"><a href="/members/me">Me</a></li>
+
+%   if ($c->member->current->has_role('admin')) {
+            <li class="nav-item <%= 'active' if ($active eq 'admin') %>"><a href="/admin">Admin</a></li>
+
+%   }
 % } else {
             <li class="nav-item dropdown">
               <a href="/patreon">Patreon</a>

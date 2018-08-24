@@ -19,7 +19,7 @@ package Plugins::Member;
 use Mojo::Base 'Mojolicious::Plugin';
 
 #
-# This plugin depends on plugins ::Device and ::TidyHQ
+# This plugin depends on plugins ::Badge, ::Device and ::TidyHQ
 #
 
 use Carp 'croak';
@@ -29,6 +29,11 @@ use Mojo::Util 'dumper';
 use Time::Piece;
 
 our $VERSION = '0.1';
+
+our $ROLES = {
+  admin => 0x80000000,
+  user  => 0x00000001
+};
 
 has 'db'  => sub { return DBI->connect(shift->dsn, '', '', {RaiseError => 1}); };
 has 'dsn';
@@ -47,6 +52,8 @@ sub register {
       name               CHAR(128),
       avatar_url         CHAR(128),
 
+      roles              INTEGER DEFAULT $ROLES->{user},
+
       membership         CHAR(32),
       membership_active  INTEGER DEFAULT 0,
       membership_expires TIMESTAMP,
@@ -58,6 +65,15 @@ sub register {
       meta               TEXT NOT NULL DEFAULT '{}',
       created            TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
       updated            TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )
+  ");
+
+  $self->db->do("
+    CREATE TABLE IF NOT EXISTS members_badges (
+      email    CHAR(128) NOT NULL,
+      badge_id INTEGER NOT NULL,
+      granted  TIMESTAMP NOT NULL,
+      expires  TIMESTAMP
     )
   ");
 
@@ -77,6 +93,8 @@ sub register {
     my $name = $args->{name};
     my $avatar_url = $args->{avatar_url};
 
+    my $roles = $args->{roles} // $ROLES->{user};
+
     my $membership = $args->{membership};
     my $membership_active = $args->{membership_active};
     my $membership_expires = $args->{membership_expires}->strftime('%F %T');
@@ -87,12 +105,12 @@ sub register {
     # coercions
     $args->{meta}{last_login} = $args->{meta}{last_login}->strftime('%F %T') if $args->{meta}{last_login};
 
-    my $sth = $db->prepare('INSERT INTO members (name, email, avatar_url, membership, membership_active, membership_expires, waiver_sign, waiver_signed, data, meta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    my $sth = $db->prepare('INSERT INTO members (name, email, avatar_url, roles, membership, membership_active, membership_expires, waiver_sign, waiver_signed, data, meta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
 
     my $data = encode_json($args->{data} // {});
     my $meta = encode_json($args->{meta} // {});
 
-    return !!$sth->execute($name, $email, $avatar_url, $membership, $membership_active, $membership_expires, $waiver_sign, $waiver_signed, $data, $meta);
+    return !!$sth->execute($name, $email, $avatar_url, $roles, $membership, $membership_active, $membership_expires, $waiver_sign, $waiver_signed, $data, $meta);
   });
 
   $app->helper('member.find' => sub {
@@ -144,6 +162,8 @@ sub register {
     my $name = $args->{name};
     my $avatar_url = $args->{avatar_url};
 
+    my $roles = $args->{roles} // $ROLES->{user};
+
     my $membership = $args->{membership};
     my $membership_active = $args->{membership_active};
     my $membership_expires = $args->{membership_expires}->strftime('%F %T');
@@ -154,12 +174,12 @@ sub register {
     # coercions
     $args->{meta}{last_login} = $args->{meta}{last_login}->strftime('%F %T') if $args->{meta}{last_login};
 
-    my $sth = $db->prepare('UPDATE members SET name=?, avatar_url=?, membership=?, membership_active=?, membership_expires=?, waiver_sign=?, waiver_signed=?, data=?, meta=?, updated=CURRENT_TIMESTAMP WHERE email=?');
+    my $sth = $db->prepare('UPDATE members SET name=?, avatar_url=?, roles=?, membership=?, membership_active=?, membership_expires=?, waiver_sign=?, waiver_signed=?, data=?, meta=?, updated=CURRENT_TIMESTAMP WHERE email=?');
 
     my $data = encode_json($args->{data} // {});
     my $meta = encode_json($args->{meta} // {});
 
-    return !!$sth->execute($name, $avatar_url, $membership, $membership_active, $membership_expires, $waiver_sign, $waiver_signed, $data, $meta, $email);
+    return !!$sth->execute($name, $avatar_url, $roles, $membership, $membership_active, $membership_expires, $waiver_sign, $waiver_signed, $data, $meta, $email);
   });
 
   $app->helper('member.login' => sub {
@@ -240,10 +260,30 @@ sub register {
   $app->helper('member.current.waiver_sign' => sub {
     my $c = shift;
 
-    my $member = $c->member->find(email => $c->session('user'));
+    my $user = $c->session('user') or return undef;
+
+    # fetch from stash if possible otherwise do a lookup
+    my $member = $c->stash('member');
+    $member = $c->member->find(email => $user) unless $member;
+
+
     $member->{waiver_sign} = 1;
 
     return $c->member->update($member);
+  });
+
+  $app->helper('member.current.has_role' => sub {
+    my ($c, $role) = @_;
+
+    my $user = $c->session('user') or return !!0;
+
+    # fetch from stash if possible otherwise do a lookup
+    my $member = $c->stash('member');
+    $member = $c->member->find(email => $user) unless $member;
+
+    return !!0 unless $member;
+
+    return ($member->{roles} & $ROLES->{$role}) == $ROLES->{$role};
   });
 
   $app->helper('member.current.has_active_membership' => sub {

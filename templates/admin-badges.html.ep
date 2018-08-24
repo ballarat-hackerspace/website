@@ -1,0 +1,102 @@
+% layout 'page', active_page => 'admin', page_title => 'Admin Badges';
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center"><a href="/admin">Admin</a> <i class="fa fa-angle-double-right"></i> Badges</h2>
+        <p>Manage the Ballarat Hackerspace badges.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <span class="pull-right">
+          <a href="#badge-add" class="btn btn-cta btn-cta-primary" data-toggle="modal"><i class="fa fa-fw fa-plus"></i> Create a Badge</a>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Available Badges</h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th class="text-center">Badge</th>
+              <th>Criteria</th>
+              <th>Lifetime</th>
+              <th>Category</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+% for my $b (@{$badges->{items}}) {
+            <tr>
+              <td class="text-middle"><%= $b->{title} %></td>
+              <td class="text-center"><img class="badges" src="<%= $b->{image_url} %>" /></td>
+              <td class="text-middle"><%= $b->{criteria} %></td>
+              <td class="text-middle"><%= $b->{lifetime} %></td>
+              <td class="text-middle"><%= $b->{category} ? $b->{category} : '-' %></td>
+              <td class="text-right text-middle">
+                <button class="btn btn-cta btn-cta-sm btn-cta-blue"><i class="fa fa-fw fa-pencil-alt"></i></button>
+                <a href="<%= url_for('admin-badges-remove', id => $b->{id}) %>" class="btn btn-cta btn-cta-sm btn-cta-red"><i class="fa fa-fw fa-times"></i></a>
+              </td>
+            </tr>
+% }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- device add modal -->
+<div class="modal modal-badge-add fade" id="badge-add" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i aria-hidden="true" class="fa fa-times"></i></button>
+        <h4 class="modal-title">Badges <i class="fa fa-angle-right"></i> Create</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <form action="<%= url_for('admin-badges-add') %>" method="post" class="form-signin" role="form">
+              <input type="hidden" name="rt" value="<%= url_for('current') %>">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-fw fa-tag"></i></span>
+                  <input name="title" type="text" class="form-control" placeholder="Title">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-fw fa-image"></i></span>
+                  <input name="image_url" type="text" class="form-control" placeholder="Image URL">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-fw fa-clock"></i></span>
+                  <input name="lifetime" type="number" class="form-control" placeholder="Device Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-fw fa-list"></i></span>
+                  <textarea name="criteria" type="number" class="form-control" rows="5" placeholder="Criteria"></textarea>
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-cta btn-cta-secondary" data-dismiss="modal" aria-label="Close"><i class="fa fa-pencil" aria-hidden="true"></i> Cancel</button>
+                <button class="btn btn-cta btn-cta-primary pull-right" type="submit"><i class="fa fa-plus"></i> Create</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
