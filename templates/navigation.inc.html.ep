@@ -44,7 +44,7 @@
 
 % if ($c->member->current->is_authenticated) {
             <li class="nav-item <%= 'active' if ($active eq 'members') %>"><a href="/members">Members</a></li>
-            <li class="nav-item <%= 'active' if ($active eq 'profile') %>"><a href="/members/me">Me</a></li>
+            <li class="nav-item <%= 'active' if ($active eq 'profile') %>"><a href="<%= url_for('members-profile-me') %>">Me</a></li>
 
 %   if ($c->member->current->has_role('admin')) {
             <li class="nav-item <%= 'active' if ($active eq 'admin') %>"><a href="/admin">Admin</a></li>

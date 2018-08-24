@@ -11,6 +11,7 @@
         </div>
         <div class="col-sm-8 col-md-9">
           <div class="profile-summary">
+            <a href="#profile-edit" class="btn btn-cta btn-cta-sm btn-cta-blue pull-right" data-toggle="modal"><i class="fa fa-fw fa-pencil-alt"></i></a>
             <h1 class="text-center-sm"><%= $member->{name} %></h1>
             <p class="text-center-sm profile-email"><%= $member->{email} %></p>
             <p class="text-center-sm"><span class="label <%= $member->{membership_active} ? 'label-success' : '' %>"><%= uc $member->{membership} %></span> - expires <%= $member->{membership_expires}->strftime('%a, %e %b %Y') %></p>
@@ -53,7 +54,7 @@
           <h3>Registered Devices</h3>
           <p>You have the following devices registered for use on the "bhack" network.</p>
 
-          <div class="hidden">
+          <div>
             <span><b>Device UUID:</b> <%= $uuid %></span>
             <span class="pull-right">
               % if ($c->device->is_whitelisted) {
@@ -117,3 +118,46 @@
     </div>
   </section>
 % }
+
+<!-- profile edit modal -->
+<div class="modal modal-profile-edit fade" id="profile-edit" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i aria-hidden="true" class="fa fa-times"></i></button>
+        <h4 class="modal-title">Profile <i class="fa fa-angle-right"></i> Update</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <form action="<%= url_for('members-profile-me-update') %>" method="post" class="form-signin" role="form">
+              <input type="hidden" name="rt" value="<%= url_for('current') %>">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-fw fa-envelope"></i></span>
+                  <input name="email" type="text" class="form-control" placeholder="Email" value="<%= $member->{email} %>" readonly>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+                  <input name="name" type="text" class="form-control" placeholder="Name" value="<%= $member->{name} %>">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-fw fa-smile"></i></span>
+                  <input name="avatar_url" type="text" class="form-control" value="<%= $member->{avatar_url} %>" placeholder="Avatar URL">
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-cta btn-cta-secondary" data-dismiss="modal" aria-label="Close"><i class="fa fa-pencil" aria-hidden="true"></i> Cancel</button>
+                <button class="btn btn-cta btn-cta-primary pull-right" type="submit"><i class="fa fa-save"></i> Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

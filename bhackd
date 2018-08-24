@@ -374,7 +374,30 @@ group {
 
   get '/' => 'members';
 
-  get '/waiver-sign' => sub {
+  post '/profile' => sub {
+    my $c = shift;
+
+    if (($c->stash('member')->{email} eq $c->param('email')) || $c->member->current->has_role('admin')) {
+      my $member = $c->members->find(email => $c->param('email'));
+
+      $member->{name} = $c->param('name');
+      $member->{avatar_url} = $c->param('avatar_url');
+
+      $c->member->update($member);
+    }
+
+    $c->redirect_to('members-profile-me');
+  } => 'members-profile-me-update';
+
+  get '/profile/me' => sub {
+    my $c = shift;
+
+    $c->stash(devices => $c->device->find);
+
+    $c->render('profile');
+  } => 'members-profile-me';
+
+  get '/profile/sign' => sub {
     my $c = shift;
 
     $c->member->current->waiver_sign;
@@ -382,14 +405,18 @@ group {
     $c->redirect_to('profile');
   } => 'waiver-sign';
 
-  get '/me' => sub {
+  get '/profile/#email' => sub {
     my $c = shift;
 
+    # only admins can view all profiles
+    return $c->redirect_to('/') unless $c->member->current->has_role('admin');
+
+    my $member = $c->member->find(email => $c->param('email'));
+    $c->stash(member => $member);
     $c->stash(devices => $c->device->find);
 
     $c->render('profile');
-  } => 'profile';
-
+  } => 'members-profile-member';
 
   # device management
   get '/devices' => sub {

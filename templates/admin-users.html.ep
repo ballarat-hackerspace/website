@@ -25,7 +25,7 @@
           <tbody>
 % for my $m (@{$members}) {
             <tr>
-              <td class="text-middle"><%= $m->{name} %></td>
+              <td class="text-middle"><a href="<%= url_for('members-profile-member', email => $m->{email}) %>"><%= $m->{name} %></a></td>
               <td class="text-middle"><%= $m->{email} %></td>
               <td class="text-middle"><%= uc $m->{membership} %><%= $m->{membership_active} ? ' - expires ' . $m->{membership_expires}->strftime('%F') : 'Not active' %></td>
               <td class="text-middle hidden-xs"><%= $m->{meta}{logins} %></td>
