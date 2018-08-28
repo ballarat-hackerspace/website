@@ -17,7 +17,25 @@ $(document).ready(function() {
   $('[data-toggle="tooltip"]').tooltip();
 });
 
+
 angular.module('bhack', [])
+  .directive('bhTime', function() {
+    return {
+      restrict: 'E',
+      scope: {
+        epoch: '@',
+        format: '@?'
+      },
+      template: '<span>{{time()}}</span>',
+      link: function(scope, el, attrs) {
+        scope.time = function() {
+          var m = moment.unix(scope.epoch);
+          var f = scope.format || 'YYYY-MM-DD HH:mm:ss (Z)';
+          return m.format(f);
+        }
+      }
+    };
+  })
   .controller('LoginController', function($http, $location) {
     var vm = angular.extend(this, {
       loggedIn: false,
@@ -78,7 +96,131 @@ angular.module('bhack', [])
     angular.extend(this, {
     });
 
+    ////////
+
+  })
+  .controller('StreamController', function($http, $timeout, $window) {
+    var vm = angular.extend(this, {
+      name: $window.streamName,
+      stream: $window.streamJson.items,
+      relative: [],
+      showMore: false
+    });
+
+    angular.extend(this, {
+      connect: connect,
+      fetchMore: fetchMore,
+    });
+
+    activate();
 
     ////////
 
+    function activate() {
+      // initial fetch of at least 10 items
+      vm.relative = !!$window.streamJson.relative ? $window.streamJson.relative : [];
+      vm.showMore = vm.relative.length > 0 && vm.stream.length >= 10;
+
+      connect();
+    }
+
+    function fetchMore() {
+      $http.get('/meta/streams/' + vm.name + '.json?relative_timestamp=' + vm.relative[0] + '&relative_id=' + vm.relative[1])
+        .then(function(res) {
+          // append our new results
+          vm.stream.push.apply(vm.stream, res.data.items);
+
+          // update
+          if (res.data.hasOwnProperty('relative')) {
+            vm.relative = res.data.relative;
+          } else {
+            vm.relative = [];
+          }
+
+          vm.showMore = vm.relative.length > 0 && res.data.items.length >= 10;
+        }, function(err) {
+          console.error(err);
+        });
+    }
+
+    function connect() {
+      console.debug('WS: connecting ...');
+      var url = 'ws://' + location.hostname + ':' + location.port + '/meta/streams-ws';
+      var ws = new WebSocket(url);
+
+      ws.onclose = function() {
+        console.debug('WS: closed!');
+        $timeout(connect, 10000);
+      };
+
+      ws.onopen = function () {
+        console.debug('WS: connected.');
+      };
+
+      ws.onerror = function() {
+        console.debug('WS: error!');
+      };
+
+      ws.onmessage = function (msg) {
+        var res = JSON.parse(msg.data);
+
+        if (res.hasOwnProperty('stream') && res.stream === vm.name) {
+          $timeout(function() {
+            vm.stream.unshift({
+              data: res.data,
+              timestamp: res.timestamp,
+            });
+          }, 0);
+        }
+      };
+    }
+  })
+  .controller('StreamsController', function($http, $timeout, $window) {
+    var vm = angular.extend(this, {
+      streams: $window.streamsJson.items,
+    });
+
+    angular.extend(this, {
+      connect: connect,
+    });
+
+    activate();
+
+    ////////
+
+    function activate() {
+      connect();
+    }
+
+    function connect() {
+      console.debug('WS: connecting ...');
+      var url = 'ws://' + location.hostname + ':' + location.port + '/meta/streams-ws';
+      var ws = new WebSocket(url);
+
+      ws.onclose = function() {
+        console.debug('WS: closed.');
+        $timeout(connect, 5000);
+      };
+
+      ws.onopen = function () {
+        console.debug('WS: connected.');
+      };
+
+      ws.onerror = function() {
+        console.debug('WS: error!');
+      };
+
+      ws.onmessage = function (msg) {
+        var res = JSON.parse(msg.data);
+
+        $timeout(function() {
+          vm.streams.unshift(res);
+
+          // truncate size to 15 entries
+          if (vm.streams.length > 15) {
+            vm.streams.pop() 
+          }
+        }, 0);
+      };
+    }
   });

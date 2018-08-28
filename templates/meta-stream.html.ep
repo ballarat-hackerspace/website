@@ -1,6 +1,6 @@
 % layout 'page', active_page => 'meta', page_title => 'Streams';
 
-<section id="team" class="section">
+<section class="section" ng-controller="StreamController as streamVm">
   <div class="container">
     <h2 class="title text-center">Stream <i class="fa fa-fw fa-angle-double-right"></i> <%= $stream_name ? $stream_name : '-' %></h2>
 
@@ -9,27 +9,23 @@
       <a class="btn btn-cta btn-cta-green" href="<%= url_for('current') %>.csv">CSV</a>
       <a class="btn btn-cta btn-cta-green" href="<%= url_for('current') %>.json">JSON</a>
     </div>
-    <table class="table table-hover" id="stream-table">
+    <table class="table table-striped table-hover" id="stream-table">
       <thead>
         <tr>
-          <th>Origin</th>
-          <th>Type</th>
           <th>Data</th>
           <th>Timestamp</th>
         </tr>
       </thead>
       <tbody>
-% use Mojo::JSON 'to_json';
-%   for my $d (@{$stream->{items}}) {
-        <tr>
-          <td><%= $d->{origin} ? $d->{origin} : '-' %></td>
-          <td><%= $d->{type} ? $d->{type} : '-' %></td>
-          <td><%= to_json $d->{data} %></td>
-          <td><bh-time value="<%= $d->{timestamp} %>" tz="UTC"><%= $d->{timestamp} %></bh-time></td>
+        <tr ng-repeat="item in streamVm.stream">
+          <td>{{item.data}}</td>
+          <td><bh-time epoch="{{item.timestamp}}"></bh-time></td>
         </tr>
-%   }
       </tbody>
     </table>
+    <div class="text-right">
+      <button class="btn btn-cta btn-cta-primary" ng-hide="!streamVm.showMore" ng-click="streamVm.fetchMore()">Show More</button>
+    </div>
 % } else {
     <div class="alert alert-info">No stream found.</div>
 % }
@@ -37,14 +33,7 @@
 </section>
 
 <script>
-  var ws = new WebSocket('ws://localhost:3000/meta/streams-ws');
-  ws.onopen = function () {
-    console.log('Connection opened');
-  };
-  
-  ws.onmessage = function (msg) {
-    var res = JSON.parse(msg.data);
-    console.log('[' + res.stream + '] ' + res.data); 
-    $('#stream-table > tbody').prepend('<tr><td>-</td><td>-</td><td>' + res.data + '</td><td>' + res.timestamp + '</td></tr>');
-  };
+% use Mojo::JSON 'encode_json';
+  window.streamName="<%== $stream_name %>";
+  window.streamJson=<%== encode_json $stream %>;
 </script>

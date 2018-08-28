@@ -121,8 +121,6 @@ helper 'broadcast_stream' => sub {
   my $c = shift;
   my $args = @_%2 ? shift : {@_};
 
-  warn dumper $args;
-
   for my $client (keys %{$clients}) {
     $clients->{$client}->send({json => $args});
   }
@@ -331,7 +329,7 @@ get '/meta/streams' => sub {
   my $format = $c->stash('format') // 'html';
 
   if ($format eq 'html') {
-    my $streams = $c->stream->find(fetch => 40);
+    my $streams = $c->stream->find(fetch => 15);
     $c->stash(streams => $streams);
   }
 
@@ -346,7 +344,11 @@ get '/meta/streams/:stream' => sub {
 
   my $stream_name = $c->param('stream');
   my $fetch = $c->param('fetch');
-  my $relative = $c->param('relative');
+  my $relative;
+
+  if ($c->param('relative_timestamp') || $c->param('relative_id')) {
+    $relative = [$c->param('relative_timestamp') // 0, $c->param('relative_id') // 0];
+  }
 
   $stream_name = '' if $stream_name eq '-';
 

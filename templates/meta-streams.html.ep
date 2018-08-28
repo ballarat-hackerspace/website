@@ -1,6 +1,6 @@
 % layout 'page', active_page => 'streams', page_title => 'Stream';
 
-<section id="team" class="section">
+<section class="section" ng-controller="StreamsController as streamsVm">
   <div class="container">
     <h2 class="title text-center">Streams</h2>
 
@@ -16,23 +16,16 @@
           <thead>
             <tr>
               <th>Stream</th>
-              <th>Origin</th>
-              <th>Type</th>
               <th>Data</th>
               <th>Timestamp</th>
             </tr>
           </thead>
           <tbody>
-% use Mojo::JSON 'to_json';
-%   for my $d (@{$streams->{items}}) {
-            <tr>
-              <td><a href="<%= url_for('meta-stream', stream => $d->{stream} ? $d->{stream} : '-') %>"><%= $d->{stream} ? $d->{stream} : '-' %></a></td>
-              <td><%= $d->{origin} ? $d->{origin} : '-' %></td>
-              <td><%= $d->{type} ? $d->{type} : '-' %></td>
-              <td><%= to_json $d->{data} %></td>
-              <td><%= Time::Piece->strptime($d->{timestamp}, '%s')->strftime('%F %T %Z') %></td>
-            </tr>
-%   }
+          <tr ng-repeat="item in streamsVm.streams">
+            <td><a href="/meta/streams/{{item.stream}}">{{item.stream}}</a></td>
+            <td>{{item.data}}</td>
+            <td><bh-time epoch="{{item.timestamp}}"></bh-time></td>
+          </tr>
           </tbody>
         </table>
 % } else {
@@ -216,3 +209,8 @@
     </div>
   </div>
 </section>
+
+<script>
+% use Mojo::JSON 'encode_json';
+  window.streamsJson=<%== encode_json $streams %>;
+</script>

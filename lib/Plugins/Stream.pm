@@ -85,7 +85,7 @@ sub register {
     my $args = @_%2 ? shift : {@_};
     my $db = $self->db;
 
-    my $fetch = $args->{fetch} // 100;
+    my $fetch = $args->{fetch} // 10;
     my $filter = [];
     my $filter_arg = [];
 
@@ -130,7 +130,12 @@ sub register {
 
     $sth->execute(@{$filter_arg});
     while (my $row = $sth->fetchrow_hashref) {
-      $row->{data} = decode_json $row->{data};
+      # attempt a JSON decode by default
+      eval {
+        $row->{data} = decode_json $row->{data};
+      };
+
+      $row->{timestamp} += 0;
       $row->{meta} = decode_json $row->{meta};
 
       $last_id = delete $row->{id};
