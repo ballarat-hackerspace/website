@@ -1,42 +1,50 @@
-% layout 'page', active_page => 'meta', page_title => 'Meta';
+% layout 'page', active_page => 'meta', page_title => 'Streams';
 
 <section id="team" class="section">
   <div class="container">
-    <h2 class="title text-center">Stream <i class="fa fa-fw fa-angle-double-right"></i> <%= $stream ? $stream : '-' %></h2>
+    <h2 class="title text-center">Stream <i class="fa fa-fw fa-angle-double-right"></i> <%= $stream_name ? $stream_name : '-' %></h2>
 
-% if ($meta->{totalItems}) {
+% if (@{$stream->{items}}) {
     <div class="text-right">
       <a class="btn btn-cta btn-cta-green" href="<%= url_for('current') %>.csv">CSV</a>
       <a class="btn btn-cta btn-cta-green" href="<%= url_for('current') %>.json">JSON</a>
     </div>
-    <table class="table table-hover">
+    <table class="table table-hover" id="stream-table">
       <thead>
         <tr>
           <th>Origin</th>
           <th>Type</th>
           <th>Data</th>
-          <th>IP</th>
           <th>Timestamp</th>
         </tr>
       </thead>
       <tbody>
 % use Mojo::JSON 'to_json';
-%   for my $d (@{$meta->{items}}) {
+%   for my $d (@{$stream->{items}}) {
         <tr>
           <td><%= $d->{origin} ? $d->{origin} : '-' %></td>
           <td><%= $d->{type} ? $d->{type} : '-' %></td>
           <td><%= to_json $d->{data} %></td>
-          <td><%= $d->{meta}{ip} %></td>
-          <td><%= Time::Piece->strptime($d->{timestamp}, '%s')->strftime('%F %T %Z') %></td>
+          <td><bh-time value="<%= $d->{timestamp} %>" tz="UTC"><%= $d->{timestamp} %></bh-time></td>
         </tr>
 %   }
       </tbody>
     </table>
-    <div class="text-right">
-      <span><b>Total points: </b><%= $meta->{totalItems} %></span>
-    </div>
 % } else {
     <div class="alert alert-info">No stream found.</div>
 % }
   </div><!--//row-->
 </section>
+
+<script>
+  var ws = new WebSocket('ws://localhost:3000/meta/streams-ws');
+  ws.onopen = function () {
+    console.log('Connection opened');
+  };
+  
+  ws.onmessage = function (msg) {
+    var res = JSON.parse(msg.data);
+    console.log('[' + res.stream + '] ' + res.data); 
+    $('#stream-table > tbody').prepend('<tr><td>-</td><td>-</td><td>' + res.data + '</td><td>' + res.timestamp + '</td></tr>');
+  };
+</script>

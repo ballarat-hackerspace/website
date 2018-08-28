@@ -1,4 +1,4 @@
-% layout 'page', active_page => 'streams', page_title => 'Streams';
+% layout 'page', active_page => 'streams', page_title => 'Stream';
 
 <section id="team" class="section">
   <div class="container">
@@ -11,7 +11,7 @@
         <p>We couldn't find a good way to interact with them over the Internet. There are certainly a lot of great services out there for datalogging, or communicating with your microcontroller over the web, but these services are either too complicated to get started, or they aren't particularly fun to use. So, we decided to experiment with our own system, and that's <i>Streams</i>.</p>
 
         <h4>Active Streams</h4>
-% if ($meta->{totalItems}) {
+% if (@{$streams->{items}}) {
         <table class="table table-hover">
           <thead>
             <tr>
@@ -19,27 +19,22 @@
               <th>Origin</th>
               <th>Type</th>
               <th>Data</th>
-              <th>IP</th>
               <th>Timestamp</th>
             </tr>
           </thead>
           <tbody>
 % use Mojo::JSON 'to_json';
-%   for my $d (@{$meta->{items}}) {
+%   for my $d (@{$streams->{items}}) {
             <tr>
               <td><a href="<%= url_for('meta-stream', stream => $d->{stream} ? $d->{stream} : '-') %>"><%= $d->{stream} ? $d->{stream} : '-' %></a></td>
               <td><%= $d->{origin} ? $d->{origin} : '-' %></td>
               <td><%= $d->{type} ? $d->{type} : '-' %></td>
               <td><%= to_json $d->{data} %></td>
-              <td><%= $d->{meta}{ip} %></td>
               <td><%= Time::Piece->strptime($d->{timestamp}, '%s')->strftime('%F %T %Z') %></td>
             </tr>
 %   }
           </tbody>
         </table>
-        <div class="text-right">
-          <span><b>Total streams/points: </b><%= $streams->{totalItems} %>/<%= $meta->{totalItems} %></span>
-        </div>
 % } else {
         <div class="alert alert-info">No streams found.</div>
 % }

@@ -15,7 +15,7 @@
 # under the License.
 #
 
-package Plugins::Meta;
+package Plugins::Stream;
 use Mojo::Base 'Mojolicious::Plugin';
 
 use Mojo::JSON qw(decode_json encode_json);
@@ -41,20 +41,20 @@ sub register {
 
   # conditionally build table
   $self->db->do("
-    CREATE TABLE IF NOT EXISTS meta (
+    CREATE TABLE IF NOT EXISTS streams (
       id       INTEGER PRIMARY KEY AUTOINCREMENT,
       stream   CHAR(32) NOT NULL DEFAULT '',
       origin   CHAR(32) NOT NULL DEFAULT '',
       type     CHAR(16) NOT NULL DEFAULT '',
+      private  INTEGER NOT NULL DEFAULT 0,
       lifetime INTEGER NOT NULL DEFAULT $DEFAULT_LIFETIME,
       data     TEXT NOT NULL DEFAULT '{}',
       meta     TEXT NOT NULL DEFAULT '{}',
-      created  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      updated  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+      created  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     )
   ");
 
-  $app->helper('meta.publish' => sub {
+  $app->helper('stream.publish' => sub {
     my $c = shift;
     my $args = @_%2 ? shift : {@_};
     my $db = $self->db;
@@ -71,23 +71,21 @@ sub register {
     my $lifetime = min($args->{lifetime} // $DEFAULT_LIFETIME, $DEFAULT_LIFETIME);
 
     my $created = $args->{timestamp} // gmtime->strftime('%F %T');
-    my $data = encode_json($args->{data});
-    my $meta = encode_json($args->{meta});
+    my $data = $args->{data};
+    $data = encode_json($data) if $type eq 'json';
+    my $meta = encode_json($args->{meta} // {});
 
-    my $sth = $db->prepare('INSERT INTO meta (stream, origin, type, lifetime, data, meta, created) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    my $sth = $db->prepare('INSERT INTO streams (stream, origin, type, lifetime, data, meta, created) VALUES (?, ?, ?, ?, ?, ?, ?)');
 
     return !!$sth->execute($stream, $origin, $type, $lifetime, $data, $meta, $created);
   });
 
-  $app->helper('meta.find' => sub {
+  $app->helper('stream.find' => sub {
     my $c = shift;
     my $args = @_%2 ? shift : {@_};
     my $db = $self->db;
 
-    my $itemsPerPage = ($args->{itemsPerPage} // 1000)+0;
-    my $page = ($args->{page} // 0)+0;
-    my $offset = $itemsPerPage * $page;
-
+    my $fetch = $args->{fetch} // 100;
     my $filter = [];
     my $filter_arg = [];
 
@@ -106,36 +104,48 @@ sub register {
       push @{$filter_arg}, $args->{type};
     }
 
-    my $where = @{$filter} ? ' WHERE ' . join(' AND ', @{$filter}) : '';
-    my $limit = " ORDER BY updated DESC LIMIT $itemsPerPage OFFSET $offset";
-    my $sql = 'SELECT stream,type,data,meta,STRFTIME("%s", updated) AS timestamp FROM meta' . $where . $limit;
-    my $sql_count = 'SELECT COUNT(id) FROM meta' . $where;
+    my $where = '';
 
-    my $sth = $db->prepare($sql_count);
-    my $totalItems = !!$sth->execute(@{$filter_arg}) ? $sth->fetchrow_arrayref->[0] : 0;
-    $sth->finish;
+    if (@{$filter} and ref($args->{relative}) eq 'ARRAY') {
+      $where = ' WHERE ' . join(' AND ', @{$filter}) . ' AND (timestamp, id) < (?, ?)';
+      push @{$filter_arg}, @{$args->{relative}};
+    }
+    elsif (@{$filter}) {
+      $where = ' WHERE ' . join(' AND ', @{$filter});
+    }
+    elsif (ref($args->{relative}) eq 'ARRAY') {
+      $where = ' WHERE (timestamp, id) < (?, ?)';
+      push @{$filter_arg}, @{$args->{relative}};
+    }
 
-    $sth = $db->prepare($sql);
+    my $limit = " ORDER BY created DESC, id DESC LIMIT $fetch";
+    my $sql = 'SELECT id, stream, type, private, data, meta, STRFTIME("%s", created) AS timestamp FROM streams' . $where . $limit;
+
     my $data = {
-      itemsPerPage => $itemsPerPage,
-      totalItems => $totalItems,
-      page => $page,
       items => []
     };
+
+    my $sth = $db->prepare($sql);
+    my $last_id;
 
     $sth->execute(@{$filter_arg});
     while (my $row = $sth->fetchrow_hashref) {
       $row->{data} = decode_json $row->{data};
       $row->{meta} = decode_json $row->{meta};
 
+      $last_id = delete $row->{id};
       push @{$data->{items}}, $row;
     };
+
     $sth->finish;
+
+    my $last = $data->{items}->[-1];
+    $data->{relative} = [$last->{timestamp}, $last_id] if $last;
 
     return $data;
   });
 
-  $app->helper('meta.streams' => sub {
+  $app->helper('stream.streams' => sub {
     my $c = shift;
     my $args = @_%2 ? shift : {@_};
     my $db = $self->db;
@@ -145,8 +155,8 @@ sub register {
     my $offset = $itemsPerPage * $page;
 
     my $limit = " LIMIT $itemsPerPage OFFSET $offset";
-    my $sql = 'SELECT DISTINCT(stream) AS stream FROM meta ORDER BY stream' . $limit;
-    my $sql_count = 'SELECT COUNT(DISTINCT(stream)) AS stream FROM meta ORDER BY stream' . $limit;
+    my $sql = 'SELECT DISTINCT(stream) AS stream FROM streams ORDER BY stream' . $limit;
+    my $sql_count = 'SELECT COUNT(DISTINCT(stream)) AS stream FROM streams ORDER BY stream' . $limit;
 
     my $sth = $db->prepare($sql_count);
     my $totalItems = !!$sth->execute ? $sth->fetchrow_arrayref->[0] : 0;
@@ -169,7 +179,7 @@ sub register {
     return $data;
   });
 
-  $app->helper('meta.to_csv' => sub {
+  $app->helper('stream.to_csv' => sub {
     my $c = shift;
     my $data = shift;
 
