@@ -42,6 +42,7 @@ a:focus {
 /*
 ** BADGES
 */
+
 .badges {
   height: 64px;
   width: 64px;
@@ -67,6 +68,7 @@ a:focus {
 /*
 ** CODE
 */
+
 pre,
 pre code {
   background-color: #fafafa;
@@ -79,6 +81,12 @@ pre code {
 
 .label {
   border-radius: 0;
+}
+
+.label-cta {
+  height: 34px;
+  display: inline-block;
+  padding: 6px 0;
 }
 
 .label-api {
@@ -727,6 +735,27 @@ li, li > p {
 
 .table-calendar tr.is_complete td {
   opacity: 0.3;
+}
+
+
+/*
+** ICONS
+*/
+
+.fa-blue {
+  color: #3498db;
+}
+
+.fa-green {
+  color: #2ecc71;
+}
+
+.fa-orange {
+  color: #f39c12;
+}
+
+.fa-red {
+  color: #e74c3c;
 }
 
 /*

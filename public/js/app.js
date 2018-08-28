@@ -82,7 +82,7 @@ angular.module('bhack', [])
       }
 
       $http(req).then(function(data){
-        window.location.href = '/members/me';
+        window.location.href = '/members/profile/me';
       }, function(err) {
         vm.working = false;
         console.error(err);
@@ -104,12 +104,14 @@ angular.module('bhack', [])
       name: $window.streamName,
       stream: $window.streamJson.items,
       relative: [],
-      showMore: false
+      showMore: false,
+      connected: false,
     });
 
     angular.extend(this, {
       connect: connect,
       fetchMore: fetchMore,
+      formatConnectedState: formatConnectedState,
     });
 
     activate();
@@ -122,6 +124,40 @@ angular.module('bhack', [])
       vm.showMore = vm.relative.length > 0 && vm.stream.length >= 10;
 
       connect();
+    }
+
+    function connect() {
+      console.debug('WS: connecting ...');
+      var url = 'ws://' + location.hostname + ':' + location.port + '/meta/streams-ws';
+      var ws = new WebSocket(url);
+
+      ws.onclose = function() {
+        console.debug('WS: closed!');
+        $timeout(function() {vm.connected = false;}, 0);
+        $timeout(connect, 10000);
+      };
+
+      ws.onopen = function () {
+        console.debug('WS: connected.');
+        $timeout(function() {vm.connected = true;}, 0);
+      };
+
+      ws.onerror = function() {
+        console.debug('WS: error!');
+      };
+
+      ws.onmessage = function (msg) {
+        var res = JSON.parse(msg.data);
+
+        if (res.hasOwnProperty('stream') && res.stream === vm.name) {
+          $timeout(function() {
+            vm.stream.unshift({
+              data: res.data,
+              timestamp: res.timestamp,
+            });
+          }, 0);
+        }
+      };
     }
 
     function fetchMore() {
@@ -143,40 +179,13 @@ angular.module('bhack', [])
         });
     }
 
-    function connect() {
-      console.debug('WS: connecting ...');
-      var url = 'ws://' + location.hostname + ':' + location.port + '/meta/streams-ws';
-      var ws = new WebSocket(url);
-
-      ws.onclose = function() {
-        console.debug('WS: closed!');
-        $timeout(connect, 10000);
-      };
-
-      ws.onopen = function () {
-        console.debug('WS: connected.');
-      };
-
-      ws.onerror = function() {
-        console.debug('WS: error!');
-      };
-
-      ws.onmessage = function (msg) {
-        var res = JSON.parse(msg.data);
-
-        if (res.hasOwnProperty('stream') && res.stream === vm.name) {
-          $timeout(function() {
-            vm.stream.unshift({
-              data: res.data,
-              timestamp: res.timestamp,
-            });
-          }, 0);
-        }
-      };
+    function formatConnectedState() {
+      return vm.connected ? 'Online' : 'Offline';
     }
   })
   .controller('StreamsController', function($http, $timeout, $window) {
     var vm = angular.extend(this, {
+      connected: false,
       streams: $window.streamsJson.items,
     });
 
@@ -199,11 +208,13 @@ angular.module('bhack', [])
 
       ws.onclose = function() {
         console.debug('WS: closed.');
+        $timeout(function() {vm.connected = false;}, 0);
         $timeout(connect, 5000);
       };
 
       ws.onopen = function () {
         console.debug('WS: connected.');
+        $timeout(function() {vm.connected = true;}, 0);
       };
 
       ws.onerror = function() {
