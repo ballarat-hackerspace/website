@@ -30,6 +30,8 @@ use constant {
   CONFIG_PATH => $ENV{BHACKD_CONFIG} // '/etc/bhackd.conf'
 };
 
+app->log->info('Configuration: ' . CONFIG_PATH);
+
 plugin 'JSONConfig'      => {file => CONFIG_PATH};
 plugin 'Plugins::Stream' => app->config->{meta}     // {};
 
@@ -48,10 +50,10 @@ sub mqttConnect() {
   $ua->websocket($mqtt_ws_url => ['mqttv3.1'] => sub {
     my ($ua, $tx) = @_;
 
-    say 'MQTT: connecting ...';
+    app->log->info('MQTT: connecting ...');
 
     unless ($tx->is_websocket) {
-      say 'MQTT: handshake failed!';
+      app->log->info('MQTT: handshake failed!');
       $connected = 0;
       $subscribed = 0;
 
@@ -60,7 +62,7 @@ sub mqttConnect() {
 
     $tx->on(finish => sub {
       my ($tx, $code) = @_;
-      say "MQTT: closed ($code).";
+      app->log->info("MQTT: closed ($code).");
 
       $connected = 0;
       $subscribed = 0;
@@ -74,7 +76,7 @@ sub mqttConnect() {
 
       # CONNACK
       if ($message->{type} == 2) {
-        say 'MQTT: subscribing ...';
+        app->log->info('MQTT: subscribing ...');
         my $m = Mojo::MQTT::Message->new(subscribe => {topics => [$mqtt_topic_prefix . '#']});
         $tx->send({binary => $m->encode});
       }
@@ -92,23 +94,23 @@ sub mqttConnect() {
           data     => $data,
         );
 
-        say 'MQTT: write ' . ($ret ? 'ok' : 'nok');
+        app->log->info('MQTT: write ' . ($ret ? 'ok' : 'nok'));
       }
       # SUBACK
       elsif ($message->{type} == 9) {
-        say 'MQTT: subscribed.';
+        app->log->info('MQTT: subscribed.');
         $subscribed = 1;
       }
       # PINGACK
       elsif ($message->{type} == 13) {
-        say 'MQTT: ping/pong.';
+        app->log->info('MQTT: ping/pong.');
       }
       else {
         warn 'MQTT: unhandled message.', dumper $message;
       }
     });
 
-    say 'MQTT: connected.';
+    app->log->info('MQTT: connected.');
     $connected = 1;
 
     # send connection request
