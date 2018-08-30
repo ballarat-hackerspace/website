@@ -1,0 +1,50 @@
+% layout 'page', active_page => 'resources', page_title => 'Resources';
+
+<section class="section">
+  <div class="container">
+    <h2 class="title text-center">Resources</h2>
+    <p>We're slowly curating a list of online resources that provide a diverse range of knowledge, inspiration and explanations of all things Science, Technology, Engineering, Art and Mathematics.</p>
+
+    <h3>Videos</h3>
+    <div class="row">
+      <div class="col-sm-4">
+        <h4>Minute Physics</h4>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLED25F943F8D6081C" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <h4>Numberphile</h4>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLt5AfwLFPxWIUYlCb5ip9f_s4qm1zi8kc" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <h4>X Robots</h4>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLpwJoq86vov-NYLfOhBh0JKrwfB1_i-RU" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <h4>Colin Furze - Crazy Inventions</h4>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLGjbAdaOBLBkRhaLzdPjTMvVrRnm1qTrf" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <h4>Smarter Everyday</h4>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLjHf9jaFs8XUXBnlkBAuRkOpUJosxJ0Vx" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <h4>The Hacksmith - Make It Real</h4>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLbncXbXlaNQenti4JF4-WgCOU2JsMVkrj" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

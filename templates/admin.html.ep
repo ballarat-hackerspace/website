@@ -14,8 +14,15 @@
           </div>
 
           <div class="col-sm-6">
-            <a href="/admin/badges"><h3>Badges</h3></a>
+            <a href="<%= url_for('admin-badges') %>"><h3>Badges</h3></a>
             <p>Manage the badges.</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <a href="<%= url_for('admin-streams') %>"><h3>Streams</h3></a>
+            <p>Manage the Ballarat Hackerspace streams.</p>
           </div>
         </div>
       </div>

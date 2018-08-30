@@ -103,7 +103,7 @@ sub mqttConnect() {
       }
       # PINGACK
       elsif ($message->{type} == 13) {
-        app->log->info('MQTT: ping/pong.');
+        app->log->debug('MQTT: ping/pong.');
       }
       else {
         app->log->debug('MQTT: unhandled message.', dumper $message);
@@ -310,6 +310,8 @@ get '/meta/badges' => sub {
   $c->render('badges');
 };
 
+get '/meta/resources' => 'meta-resources';
+
 get '/meta/space' => sub {
   my $c = shift;
 
@@ -380,8 +382,6 @@ get '/meta/streams/:stream' => sub {
     $relative = [$c->param('relative_timestamp') // 0, $c->param('relative_id') // 0];
   }
 
-  $stream_name = '' if $stream_name eq '-';
-
   my $stream = $c->stream->find(
     stream => $stream_name, fetch => $fetch, relative => $relative
   );
@@ -417,9 +417,9 @@ post '/meta/streams' => sub {
   my $now = gmtime->epoch;
 
   # validate stream name
-  unless ($stream eq '' || $stream =~ m/[0-9a-zA-Z]{1,32}/) {
+  unless ($stream =~ m/[0-9a-zA-Z]{1,32}/) {
     return $c->render(
-      json => {message => 'Stream name is invalid.', ts => $now},
+      json => {error => 'Stream name is missing/invalid.', ts => $now},
       status => 400
     );
   }
@@ -432,7 +432,7 @@ post '/meta/streams' => sub {
     unless (length $data) {
       return $c->render(
         json => {
-          message => 'No data specified.',
+          error => 'No data specified.',
           ts => $now
         },
         status => 400
@@ -460,11 +460,99 @@ post '/meta/streams' => sub {
 
   return $c->render(
     json => {
-      status => 'Some required parameters were missing.',
+      error => 'Some required parameters were missing.',
       ts => $now
     },
     status => 400
   );
+};
+
+group {
+  my $IFTTT_SERVICE_KEY = app->config->{ifttt}{service_key};
+
+  under '/meta/ifttt/v1' => sub {
+    return 1;
+  };
+
+  get '/status' => sub {
+    my $c = shift;
+
+    if (
+      ($c->req->headers->header('ifttt-service-key') ne $IFTTT_SERVICE_KEY) ||
+      ($c->req->headers->header('ifttt-channel-key') ne $IFTTT_SERVICE_KEY)
+    ) {
+      return $c->render(json => {}, status => 401);
+    }
+
+    $c->render(json => {}, status => 200);
+  };
+
+  post '/test/setup' => sub {
+    my $c = shift;
+
+    if (
+      ($c->req->headers->header('ifttt-service-key') ne $IFTTT_SERVICE_KEY) ||
+      ($c->req->headers->header('ifttt-channel-key') ne $IFTTT_SERVICE_KEY)
+    ) {
+      return $c->render(json => {}, status => 401);
+    }
+
+    my $setup = {
+      data => {
+        samples => {
+          triggers => {
+            last_stream_value_comparison => {
+              comparator => 'equals',
+              value      => '41'
+            }
+          }
+        }
+      }
+    };
+
+    $c->render(json => $setup, status => 200);
+  };
+
+  post '/triggers/last_stream_value_comparison' => sub {
+    my $c = shift;
+
+    if (
+      ($c->req->headers->header('ifttt-service-key') ne $IFTTT_SERVICE_KEY) ||
+      ($c->req->headers->header('ifttt-channel-key') ne $IFTTT_SERVICE_KEY)
+    ) {
+      return $c->render(json => {errors => [{"message" => "invalid service/channel key"}]}, status => 401);
+    }
+
+
+    my $json = $c->req->json;
+
+    warn dumper $json;
+
+    unless ($json->{triggerFields} && $json->{triggerFields}{comparator}) {
+      return $c->render(json => {errors => [{"message" => "triggerFields missing or incomplete."}]}, status => 400);
+    }
+
+    my $streams = $c->stream->last_values(fetch => $json->{limit});
+
+    my $data = {
+      data => []
+    };
+
+    for my $stream (@{$streams->{items}}) {
+      push @{$data->{data}}, {
+        stream => $stream->{stream},
+        value => $stream->{data},
+        meta => {
+          id => $stream->{id},
+          timestamp => $stream->{timestamp}
+        }
+      };
+    }
+
+    warn dumper $streams;
+
+    $c->render(json => $data, status => 200);
+  };
 };
 
 websocket '/meta/streams-ws' => sub {
@@ -607,6 +695,20 @@ group {
 
     $c->redirect_to('admin-badges');
   } => 'admin-badges-add';
+
+  get '/streams' => sub {
+    my $c = shift;
+
+    $c->render('admin-streams');
+  } => 'admin-streams';
+
+  post '/streams/delete' => sub {
+    my $c = shift;
+
+    $c->stream->delete;
+
+    $c->redirect_to('admin-streams');
+  } => 'admin-streams-delete';
 
   get '/members' => sub {
     my $c = shift;

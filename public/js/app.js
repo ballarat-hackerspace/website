@@ -36,6 +36,17 @@ angular.module('bhack', [])
       }
     };
   })
+  .directive("bhTooltip", function($timeout) {
+    return {
+      restrict: "A",
+      link: function(scope, el, attrs) {
+        $timeout(function() {
+          $(el).data('toggle', 'tooltip').data('title', attrs.bhTooltip);
+          $(el).tooltip();
+        });
+      }
+    }
+  })
   .controller('LoginController', function($http, $location) {
     var vm = angular.extend(this, {
       loggedIn: false,
@@ -128,7 +139,7 @@ angular.module('bhack', [])
 
     function connect() {
       console.debug('WS: connecting ...');
-      var url = 'ws://' + location.hostname + ':' + location.port + '/meta/streams-ws';
+      var url = (location.protocol === 'http:' ? 'ws://' : 'wss://') + location.hostname + ':' + location.port + '/meta/streams-ws';
       var ws = new WebSocket(url);
 
       ws.onclose = function() {
@@ -191,6 +202,8 @@ angular.module('bhack', [])
 
     angular.extend(this, {
       connect: connect,
+      formatConnectedState: formatConnectedState,
+      hasStreams: hasStreams,
     });
 
     activate();
@@ -203,7 +216,7 @@ angular.module('bhack', [])
 
     function connect() {
       console.debug('WS: connecting ...');
-      var url = 'ws://' + location.hostname + ':' + location.port + '/meta/streams-ws';
+      var url = (location.protocol === 'http:' ? 'ws://' : 'wss://') + location.hostname + ':' + location.port + '/meta/streams-ws';
       var ws = new WebSocket(url);
 
       ws.onclose = function() {
@@ -233,5 +246,13 @@ angular.module('bhack', [])
           }
         }, 0);
       };
+    }
+
+    function formatConnectedState() {
+      return vm.connected ? 'Online' : 'Offline';
+    }
+
+    function hasStreams() {
+      return vm.streams.length > 0;
     }
   });

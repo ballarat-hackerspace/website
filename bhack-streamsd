@@ -94,7 +94,7 @@ sub mqttConnect() {
           data     => $data,
         );
 
-        app->log->info('MQTT: write ' . ($ret ? 'ok' : 'nok'));
+        app->log->debug('MQTT: write ' . ($ret ? 'ok' : 'nok') . '.');
       }
       # SUBACK
       elsif ($message->{type} == 9) {
@@ -103,7 +103,7 @@ sub mqttConnect() {
       }
       # PINGACK
       elsif ($message->{type} == 13) {
-        app->log->info('MQTT: ping/pong.');
+        app->log->debug('MQTT: ping/pong.');
       }
       else {
         warn 'MQTT: unhandled message.', dumper $message;

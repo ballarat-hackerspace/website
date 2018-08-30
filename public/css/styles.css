@@ -759,6 +759,14 @@ li, li > p {
 }
 
 /*
+** INPUT/FORMS
+*/
+
+.help-block {
+  font-size: 12px;
+}
+
+/*
 ** PANELS
 */
 

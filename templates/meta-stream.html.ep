@@ -7,7 +7,7 @@
 % if (@{$stream->{items}}) {
     <div class="row">
       <div class="col-xs-6">
-        <span class="label-cta"><i class="fa fa-fw" ng-class="{'fa-exclamation-circle fa-red': !streamVm.connected, 'fa-check-circle fa-green': streamVm.connected}"></i> {{streamVm.formatConnectedState()}}</span>
+        <span class="label-cta" bh-tooltip="Real-time Status"><i class="fa fa-fw" ng-class="{'fa-exclamation-circle fa-red': !streamVm.connected, 'fa-check-circle fa-green': streamVm.connected}"></i> {{streamVm.formatConnectedState()}}</span>
       </div>
       <div class="col-xs-6 text-right">
         <a class="btn btn-cta btn-cta-green" href="<%= url_for('current') %>.csv">CSV</a>

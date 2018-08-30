@@ -1,0 +1,45 @@
+% layout 'page', active_page => 'admin', page_title => 'Admin Streams';
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center"><a href="/admin">Admin</a> <i class="fa fa-angle-double-right"></i> Streams</h2>
+        <p>Manage the Ballarat Hackerspace streams.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="text-right">
+          <a class="btn btn-cta btn-cta-red" href="#streams-delete" data-toggle="modal">Delete All Streams</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- streams delete modal -->
+<div class="modal modal-stream-delete fade" id="streams-delete" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i aria-hidden="true" class="fa fa-times"></i></button>
+        <h4 class="modal-title">Streams <i class="fa fa-angle-right"></i> Delete</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <form action="<%= url_for('admin-streams-delete') %>" method="post" class="form-signin" role="form">
+              <p>Are you sure you want to delete all current streams?</p>
+              <div>
+                <button class="btn btn-cta btn-cta-primary" data-dismiss="modal" aria-label="Close"><i class="fa fa-pencil" aria-hidden="true"></i> Cancel</button>
+                <button class="btn btn-cta btn-cta-red pull-right" type="submit">Yes, Delete</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

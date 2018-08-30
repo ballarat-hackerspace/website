@@ -62,16 +62,18 @@ sub register {
     my $stream = $args->{stream} // '';
 
     # valid stream names are '' and [0-9a-zA-Z]{1,16}
-    unless ($stream eq '' || $stream =~ m/[0-9a-zA-Z]{1,32}/) {
+    unless ($stream =~ m/[0-9a-zA-Z]{1,32}/) {
       return undef;
     }
 
+    my $data = $args->{data};
+
     my $origin = $args->{origin} // '';
-    my $type = $args->{type} // '';
+    my $type = $args->{type} // (ref $data eq 'HASH' ? 'json' : '');
+
     my $lifetime = min($args->{lifetime} // $DEFAULT_LIFETIME, $DEFAULT_LIFETIME);
 
     my $created = $args->{timestamp} // gmtime->strftime('%F %T');
-    my $data = $args->{data};
     $data = encode_json($data) if $type eq 'json';
     my $meta = encode_json($args->{meta} // {});
 
@@ -150,6 +152,45 @@ sub register {
     return $data;
   });
 
+  $app->helper('stream.last_values' => sub {
+    my $c = shift;
+    my $args = @_%2 ? shift : {@_};
+    my $db = $self->db;
+
+    my $fetch = $args->{fetch} // 10;
+
+    my $limit = " ORDER BY created DESC, id DESC LIMIT $fetch";
+    my $sql = 'SELECT id, stream, type, private, data, meta, STRFTIME("%s", created) AS timestamp FROM streams GROUP BY stream' . $limit;
+
+    my $data = {
+      items => []
+    };
+
+    my $sth = $db->prepare($sql);
+    my $last_id;
+
+    $sth->execute;
+    while (my $row = $sth->fetchrow_hashref) {
+      # attempt a JSON decode by default
+      eval {
+        $row->{data} = decode_json $row->{data};
+      };
+
+      $row->{timestamp} += 0;
+      $row->{meta} = decode_json $row->{meta};
+
+      $last_id = $row->{id};
+      push @{$data->{items}}, $row;
+    };
+
+    $sth->finish;
+
+    my $last = $data->{items}->[-1];
+    $data->{relative} = [$last->{timestamp}, $last_id] if $last;
+
+    return $data;
+  });
+
   $app->helper('stream.streams' => sub {
     my $c = shift;
     my $args = @_%2 ? shift : {@_};
@@ -182,6 +223,15 @@ sub register {
     $sth->finish;
 
     return $data;
+  });
+
+
+  $app->helper('stream.delete' => sub {
+    my $c = shift;
+    my $args = @_%2 ? shift : {@_};
+    my $db = $self->db;
+
+    return !!$db->do("DELETE FROM streams");
   });
 
   $app->helper('stream.to_csv' => sub {

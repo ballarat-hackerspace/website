@@ -9,12 +9,14 @@
         <p>Want to make your project talk to the Internet? Connect your existing project to the Internet to log, stream, and interact with the data it produces? What about all this  <a href="http://en.wikipedia.org/wiki/Internet_of_Things">Internet of Things</a> (IoT) stuff?</p>
         <p><i>Streams</i> is a platform we're designing to display, respond, and interact with your project's data. <span class="hidden">We also keep your data private (data feeds are private by default) and secure (we will never sell or give this data away to another company) for you.</span></p>
         <p>We couldn't find a good way to interact with them over the Internet. There are certainly a lot of great services out there for datalogging, or communicating with your microcontroller over the web, but these services are either too complicated to get started, or they aren't particularly fun to use. So, we decided to experiment with our own system, and that's <i>Streams</i>.</p>
-
-        <span class="label-cta pull-right"><i class="fa fa-fw" ng-class="{'fa-exclamation-circle fa-red': !streamsVm.connected, 'fa-check-circle fa-green': streamsVm.connected}"></i> {{streamVm.formatConnectedState()}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <span class="pull-right" bh-tooltip="Real-time Status"><i class="fa fa-fw" ng-class="{'fa-exclamation-circle fa-red': !streamsVm.connected, 'fa-check-circle fa-green': streamsVm.connected}"></i> {{streamsVm.formatConnectedState()}}</span>
         <h4>Active Streams</h4>
-        
-% if (@{$streams->{items}}) {
-        <table class="table table-hover">
+
+        <table class="table table-hover" ng-if="streamsVm.hasStreams()">
           <thead>
             <tr>
               <th>Stream</th>
@@ -23,23 +25,21 @@
             </tr>
           </thead>
           <tbody>
-          <tr ng-repeat="item in streamsVm.streams">
-            <td><a href="/meta/streams/{{item.stream}}">{{item.stream}}</a></td>
-            <td>{{item.data}}</td>
-            <td><bh-time epoch="{{item.timestamp}}"></bh-time></td>
-          </tr>
+            <tr ng-repeat="item in streamsVm.streams">
+              <td><a href="/meta/streams/{{item.stream}}">{{item.stream}}</a></td>
+              <td>{{item.data}}</td>
+              <td><bh-time epoch="{{item.timestamp}}"></bh-time></td>
+            </tr>
           </tbody>
         </table>
-% } else {
-        <div class="alert alert-info">No streams found.</div>
-% }
+        <div class="alert alert-info" ng-if="!streamsVm.hasStreams()">No streams found.</div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-sm-12">
         <h4>API Overview</h4>
-        <p>The API is simple, we have one end point for publishing and a two end points for interrogation and retrieval.</p>
+        <p>The API is simple, we have one end point for publishing and two end points for interrogation and retrieval.</p>
 
         <div class="panel panel-api">
           <div class="panel-heading">
@@ -52,7 +52,7 @@
               <h4>Overview</h4>
               <p>Adds data points to a stream.</p>
               <h4>Parameters</h4>
-              <p>Adding data points consist of three main attributes, two optional and one mandatory.</p>
+              <p>Adding data points consist of two required attributes and three optional.</p>
               <table class="table table-striped">
                 <thead>
                   <tr>
@@ -64,8 +64,13 @@
                 <tbody>
                   <tr>
                     <td>stream</td>
-                    <td>N</td>
-                    <td>Name of the stream. Max length of 32 characters from [0-9a-zA-Z]. Defaults to '-'.</td>
+                    <td>Y</td>
+                    <td>Name of the stream. Max length of 32 characters from [0-9a-zA-Z].</td>
+                  </tr>
+                  <tr>
+                    <td>data</td>
+                    <td>Y</td>
+                    <td>Arbitrary data to be stored.</td>
                   </tr>
                   <tr>
                     <td>origin</td>
@@ -82,21 +87,16 @@
                     <td>N</td>
                     <td>Lifetime of the data point in seconds. Defaults to 2,678,400 seconds (31 days).</td>
                   </tr>
-                  <tr>
-                    <td>data</td>
-                    <td>Y</td>
-                    <td>JSON blob of data.</td>
-                  </tr>
                 </tbody>
               </table>
               <h4>Return</h4>
               <p>A successful return has a HTTP status code of 200 and a JSON body containing a message and a timestamp of the server UTC time.</p>
               <p>An unsuccessful return has a HTTP status code of 400 and a JSON body containing a message of the error and a timestamp of the server UTC time.</p>
               <h4>Examples</h4>
-              <pre><code>$ curl -H "Content-Type: application/json" -d '{"data":{"foo":"bar"}}' https://ballarathackerspace.org.au/meta/streams
-{"message":"congratulations!","ts":1534465584}</code></pre>
+              <pre><code>$ curl -H "Content-Type: application/json" -d '{"stream":"foo","data":{"bar":"baz"}}' https://ballarathackerspace.org.au/meta/streams
+{"status":"ok","ts":1534465584}</code></pre>
               <pre><code>$ curl -H "Content-Type: application/json" -d '{"stream":"@#$#", "data":{"foo":"bar"}}' https://ballarathackerspace.org.au/meta/streams
-{"message":"Stream name is invalid.","ts":1534490021}</code></pre>
+{"error":"Stream name is missing/invalid.","ts":1534490021}</code></pre>
             </div>
           </div>
         </div>
