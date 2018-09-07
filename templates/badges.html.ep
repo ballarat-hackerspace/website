@@ -24,7 +24,7 @@
 % if (@{$badges->{items}}) {
         <div class="row">
 % for my $b (@{$badges->{items}}) {
-          <div class="col-sm-3">
+          <div class="col-sm-6 col-md-4">
             <div class="panel panel-badge">
               <div class="panel-heading">
                 <div class="panel-title text-center"><%= $b->{title} %></div>
