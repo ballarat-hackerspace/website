@@ -29,7 +29,7 @@ use Time::Piece;
 our $VERSION = '0.1';
 our $DEFAULT_LIFETIME = 31 * 24 * 60 * 60; # 31 days
 
-has 'db'  => sub { return DBI->connect(shift->dsn, '', ''); };
+has 'db'  => sub { return DBI->connect(shift->dsn, '', '', {sqlite_unicode => 1}); };
 has 'dsn';
 has 'uuid';
 

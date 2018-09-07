@@ -355,13 +355,12 @@ get '/meta/space' => sub {
 get '/meta/streams' => sub {
   my $c = shift;
 
-  my $streams = $c->stream->streams;
+  my $streams = $c->stream->find(fetch => 15);
   my $now = gmtime->epoch;
 
   my $format = $c->stash('format') // 'html';
 
   if ($format eq 'html') {
-    my $streams = $c->stream->find(fetch => 15);
     $c->stash(streams => $streams);
   }
 

@@ -47,6 +47,7 @@
 
 <script>
 % use Mojo::JSON 'encode_json';
+% use Mojo::Util 'decode';
   window.streamName="<%== $stream_name %>";
-  window.streamJson=<%== encode_json $stream %>;
+  window.streamJson=<%== decode 'UTF-8', encode_json $stream %>;
 </script>
