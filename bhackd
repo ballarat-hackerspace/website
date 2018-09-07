@@ -29,7 +29,7 @@ use Text::MultiMarkdown qw(markdown);
 use Time::Piece;
 
 use constant {
-  CONFIG_PATH => $ENV{BHACKD_CONFIG} // '/etc/bhackd.conf'
+  CONFIG_PATH => $ENV{BHACKD_CONFIG} // '/data/bhackd.conf'
 };
 
 my $ua = Mojo::UserAgent->new;
