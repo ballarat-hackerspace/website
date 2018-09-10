@@ -1,15 +1,13 @@
 FROM debian
 
-WORKDIR /website-streams
+WORKDIR /mosquitto
 ENTRYPOINT ["./bhackd-streams"]
 CMD ["prefork"]
 
 RUN set -x \
   && apt-get update \
-  && DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes git libdbd-sqlite3-perl libio-socket-ssl-perl cpanminus make
-
-RUN ["cpanm", "Mojolicious"]
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-downgrades mosquitto
 
 COPY bhackd-streams /website-streams/
 RUN set -x \
-  && cp /website/bhackd.conf.sample /etc/bhackd.conf
+  && cp /website/bhackd.conf.sample /conf/bhackd.conf
