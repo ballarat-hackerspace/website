@@ -4,7 +4,7 @@ services:
 before_install:
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" hub.srw.io
 install:
-- docker build -t hub.srw.io/bhack-website -f Dockerfile.git .
+- docker build -t hub.srw.io/bhack-website -f docker/website/Dockerfile .
 - docker run -d -p 127.0.0.1:3000:3000 hub.srw.io/bhack-website
 - docker ps -a
 before_script:
