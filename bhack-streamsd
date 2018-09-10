@@ -27,7 +27,7 @@ use Mojo::Util 'dumper';
 use Time::Piece;
 
 use constant {
-  CONFIG_PATH => $ENV{BHACKD_CONFIG} // '/data/bhackd.conf'
+  CONFIG_PATH => $ENV{BHACKD_CONFIG} // '/conf/bhackd.conf'
 };
 
 app->log->info('Configuration: ' . CONFIG_PATH);
