@@ -32,21 +32,18 @@ you're running the test instance on another server).
 
 ### The docker way
 
-To build an image from your checked out and modified source tree:
+To build an image see the specific README in the docker/ subdirectory.
+
+To start all the services generate an appropriate `.env` file from the example below.
 
 ```
-$ docker build -t bhack-website .
-$ docker run --rm -it -p 3000:3000 bhack-website
+$ docker-compose up
 ```
 
-Now browse to port 3000. If you wish to use a different local port change the
-left hand 3000 to the port of your choice.
-
-If you wish to build an image from what is already committed to github
-(ignoring any changes in your source tree):
+Example .env file:
 
 ```
-$ docker build -t bhack-website-git -f Dockerfile.git .
-$ docker run --rm -it -p 3000:3000 bhack-website-git
+BHACKD_MOSQUITTO_PORT=1883
+BHACKD_WEBSITE_PORT=10001
+BHACKD_CONFIG=/conf/bhackd.conf
 ```
-

@@ -2,6 +2,8 @@ logs/
 bhackd.conf
 bhackd.conf.dev
 
+.env
+
 # don't store temp files
 blog/*~
 blog/.*
