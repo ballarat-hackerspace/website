@@ -40,7 +40,6 @@ my $mqtt_ws_url = 'ws://127.0.0.1:9001/mqtt';
 my $mqtt_topic_prefix = 'streams/';
 
 my $keepAliveTimer;
-my $reconnectTimer;
 my $connected = 0;
 my $subscribed = 0;
 
@@ -61,18 +60,11 @@ sub mqttConnect() {
 
     $tx->on(finish => sub {
       my ($tx, $code) = @_;
-      app->log->info("MQTT: closed ($code), attempting reconnect in 5s.");
+      app->log->info("MQTT: closed ($code), attempting reconnect ...");
 
       $connected = 0;
       $subscribed = 0;
       Mojo::IOLoop->remove($keepAliveTimer) and undef $keepAliveTimer if $keepAliveTimer;
-
-      $reconnectTimer = Mojo::IOLoop->recurring(5 => sub {
-        unless ($connected) {
-          mqttConnect();
-        }
-      });
-
     });
 
     $tx->on(binary => sub {
@@ -112,7 +104,6 @@ sub mqttConnect() {
 
     app->log->info('MQTT: connected.');
     $connected = 1;
-    Mojo::IOLoop->remove($reconnectTimer) and undef $reconnectTimer if $reconnectTimer;
 
     # send connection request
     my $m = Mojo::MQTT::Message->new(connect => {client_id => 'streams-proxy-'.$$});
@@ -835,7 +826,12 @@ group {
   };
 };
 
-mqttConnect();
+# establish in case we can't connect
+Mojo::IOLoop->recurring(5 => sub {
+  unless ($connected) {
+    mqttConnect();
+  }
+});
 
 any '/*catch' => {catch => ''} => sub { shift->redirect_to('/'); };
 

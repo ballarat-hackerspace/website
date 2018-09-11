@@ -40,7 +40,6 @@ my $mqtt_ws_url = 'ws://127.0.0.1:9001/mqtt';
 my $mqtt_topic_prefix = 'streams/';
 
 my $keepAliveTimer;
-my $reconnectTimer;
 my $connected = 0;
 my $subscribed = 0;
 
