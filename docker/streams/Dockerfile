@@ -1,9 +1,7 @@
 FROM debian
 
-EXPOSE 1883
 WORKDIR /streams
-ENTRYPOINT ["./bhackd-streams"]
-CMD ["prefork"]
+ENTRYPOINT ["./bhack-streamsd"]
 
 RUN set -x \
   && apt-get update \
