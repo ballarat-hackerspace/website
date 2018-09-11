@@ -9,6 +9,19 @@ $ docker build -t bhack-website-dev -f Dockerfile.dev .
 $ docker run --rm -it -p 3000:3000 bhack-website-dev
 ```
 
+### Fedora
+
+```
+$ docker run \
+  --name=bhack-website-dev
+  --rm -it \
+  -p 3000:3000 \
+  -v $(pwd)/conf:/conf:z \
+  -v $(pwd)/data:/data:z \
+  -v $(pwd)/blog:/blog:z \
+  -e BHACKD_CONFIG=/conf/bhackd.conf.dev
+```
+
 Now browse to port 3000. If you wish to use a different local port change the
 left hand 3000 to the port of your choice.
 
