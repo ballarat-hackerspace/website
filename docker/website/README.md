@@ -1,11 +1,11 @@
-# Website
+# Ballarat Hackerspace - Website Docker
 
 ## Development
 
 To build an image from your checked out and modified source tree:
 
 ```
-$ docker build -t bhack-website-dev -f Dockerfile.dev .
+$ docker build -t bhack-website-dev -f docker/website/Dockerfile.dev .
 $ docker run --rm -it -p 3000:3000 bhack-website-dev
 ```
 
@@ -32,7 +32,7 @@ If you wish to build an image from what is already committed to github
 (ignoring any changes in your source tree):
 
 ```
-$ docker build -t bhack-website .
+$ docker build -t bhack-website -f docker/website/Dockerfile .
 $ docker run \
   --name=bhack-website \
   --restart=unless-stopped \

@@ -1,13 +1,11 @@
 FROM debian
 
-WORKDIR /mosquitto
-ENTRYPOINT ["./bhackd-streams"]
-CMD ["prefork"]
+EXPOSE 1883
+
+ENTRYPOINT ["/usr/sbin/mosquitto", "-c", "/conf/mosquitto.conf"]
 
 RUN set -x \
   && apt-get update \
-  && DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-downgrades mosquitto
-
-COPY bhackd-streams /website-streams/
-RUN set -x \
-  && cp /website/bhackd.conf.sample /conf/bhackd.conf
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-downgrades mosquitto \
+  && mkdir /conf \
+  && touch /conf/mosquitto.conf
