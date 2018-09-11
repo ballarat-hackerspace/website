@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  mosquitto:
+    build: ./docker/mosquitto
+    ports:
+      - "1883:1883"
+
+  website:
+    build: ./docker/website
+    ports:
+      - "3000:3000"

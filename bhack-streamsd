@@ -36,7 +36,7 @@ plugin 'JSONConfig'      => {file => CONFIG_PATH};
 plugin 'Plugins::Stream' => app->config->{meta}     // {};
 
 my $ua  = Mojo::UserAgent->new;
-my $mqtt_ws_url = 'ws://127.0.0.1:9001/mqtt';
+my $mqtt_ws_url = 'ws://mosquitto:9001/mqtt';
 my $mqtt_topic_prefix = 'streams/';
 
 my $keepAliveTimer;
