@@ -36,9 +36,9 @@ has _ua   => sub { Mojo::UserAgent->new };
 sub register {
   my ($self, $app, $config) = @_;
 
-  $app->log->fatal('No TidyHQ organisation set!') and die unless $config->{organisation};
+  $app->log->warn('No TidyHQ organisation set!') unless $config->{organisation};
 
-  my $url = Mojo::URL->new(sprintf 'https://%s.tidyhq.com/', $config->{organisation});
+  my $url = Mojo::URL->new(sprintf 'https://%s.tidyhq.com/', $config->{organisation} // 'api');
 
   $app->log->info('TidyHQ proxy registered for: ' . $url);
 
