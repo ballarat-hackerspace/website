@@ -33,10 +33,25 @@ has 'db'  => sub { return DBI->connect(shift->dsn, '', '', {sqlite_unicode => 1}
 has 'dsn';
 has 'uuid';
 
+my $ua = Mojo::UserAgent->new;
+
+my $keepAliveTimer;
+my $connected = 0;
+my $subscribed = 0;
+
+$ua->inactivity_timeout(0);
+
 sub register {
   my ($self, $app, $config) = @_;
 
-  $config->{db}  //= '/tmp/bhack.db';
+  $config->{db} //= '/tmp/bhack.db';
+
+  $app->log->info('Streams persisting to: ' . $config->{db});
+
+  $config->{mqtt_topic_prefix} //= 'streams/';
+  $config->{mqtt_ws_url}       //= 'ws://mosquitto:9001/mqtt';
+  $config->{mqtt_ws_proto}     //= 'mqttv3.1';
+
   $self->dsn('dbi:SQLite:dbname='.$config->{db});
 
   # conditionally build table
@@ -53,6 +68,84 @@ sub register {
       created  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     )
   ");
+
+  $app->helper('stream.mqtt.start' => sub {
+    my $c = shift;
+    my $args = @_%2 ? shift : {@_};
+
+    return if $connected;
+
+    $args->{on_connect} //= sub {};
+    $args->{on_data}    //= sub {};
+
+    $ua->websocket($config->{mqtt_ws_url} => [$config->{mqtt_ws_proto}] => sub {
+      my ($ua, $tx) = @_;
+      $app->log->info('MQTT: connecting ...');
+
+      unless ($tx->is_websocket) {
+        $app->log->info('MQTT: handshake failed!');
+        $connected = 0;
+        $subscribed = 0;
+
+        return;
+      }
+
+      $tx->on(finish => sub {
+        my ($tx, $code) = @_;
+        $app->log->info("MQTT: closed ($code), attempting reconnect ...");
+
+        $connected = 0;
+        $subscribed = 0;
+        Mojo::IOLoop->remove($keepAliveTimer) and undef $keepAliveTimer if $keepAliveTimer;
+      });
+
+      $tx->on(binary => sub {
+        my ($tx, $bytes) = @_;
+
+        my $message = Mojo::MQTT::Message->new_from_bytes($bytes);
+
+        # CONNACK
+        if ($message->{type} == 2) {
+          $app->log->info('MQTT: subscribing ...');
+          my $m = Mojo::MQTT::Message->new(subscribe => {topics => [$config->{mqtt_topic_prefix} . '#']});
+          $tx->send({binary => $m->encode});
+        }
+        # PUBLISH
+        elsif ($message->{type} == 3) {
+          my $stream = $message->{topic};
+          $stream =~ s/$config->{mqtt_topic_prefix}//;
+
+          my $data = $message->{data};
+
+          $args->{on_data}->(stream => $stream, data => $data, timestamp => gmtime->epoch);
+        }
+        # SUBACK
+        elsif ($message->{type} == 9) {
+          $app->log->info('MQTT: subscribed.');
+          $subscribed = 1;
+        }
+        # PINGACK
+        elsif ($message->{type} == 13) {
+          $app->log->debug('MQTT: ping/pong.');
+        }
+        else {
+          $app->log->debug('MQTT: unhandled message.', dumper $message);
+        }
+      });
+
+      $app->log->info('MQTT: connected.');
+      $connected = 1;
+
+      # send connection request
+      my $m = Mojo::MQTT::Message->new(connect => {client_id => 'streams-proxy-'.$$});
+      $tx->send({binary => $m->encode});
+
+      $keepAliveTimer = Mojo::IOLoop->recurring(60 => sub {
+        my $m = Mojo::MQTT::Message->new(pingreq => {});
+        $tx->send({binary => $m->encode});
+      });
+    });
+  });
 
   $app->helper('stream.publish' => sub {
     my $c = shift;

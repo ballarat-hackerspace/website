@@ -33,88 +33,7 @@ use constant {
 };
 
 my $ua = Mojo::UserAgent->new;
-
 my $clients = {};
-
-my $mqtt_ws_url = 'ws://mosquitto:9001/mqtt';
-my $mqtt_topic_prefix = 'streams/';
-
-my $keepAliveTimer;
-my $connected = 0;
-my $subscribed = 0;
-
-$ua->inactivity_timeout(0);
-
-sub mqttConnect() {
-  $ua->websocket($mqtt_ws_url => ['mqttv3.1'] => sub {
-    my ($ua, $tx) = @_;
-    app->log->info('MQTT: connecting ...');
-
-    unless ($tx->is_websocket) {
-      app->log->info('MQTT: handshake failed!');
-      $connected = 0;
-      $subscribed = 0;
-
-      return;
-    }
-
-    $tx->on(finish => sub {
-      my ($tx, $code) = @_;
-      app->log->info("MQTT: closed ($code), attempting reconnect ...");
-
-      $connected = 0;
-      $subscribed = 0;
-      Mojo::IOLoop->remove($keepAliveTimer) and undef $keepAliveTimer if $keepAliveTimer;
-    });
-
-    $tx->on(binary => sub {
-      my ($tx, $bytes) = @_;
-
-      my $message = Mojo::MQTT::Message->new_from_bytes($bytes);
-
-      # CONNACK
-      if ($message->{type} == 2) {
-        app->log->info('MQTT: subscribing ...');
-        my $m = Mojo::MQTT::Message->new(subscribe => {topics => [$mqtt_topic_prefix . '#']});
-        $tx->send({binary => $m->encode});
-      }
-      # PUBLISH
-      elsif ($message->{type} == 3) {
-        my $stream = $message->{topic};
-        $stream =~ s/$mqtt_topic_prefix//;
-
-        my $data = $message->{data};
-        my $now = gmtime->epoch;
-
-        app->broadcast_stream(stream => $stream, data => $data, timestamp => $now);
-      }
-      # SUBACK
-      elsif ($message->{type} == 9) {
-        app->log->info('MQTT: subscribed.');
-        $subscribed = 1;
-      }
-      # PINGACK
-      elsif ($message->{type} == 13) {
-        app->log->debug('MQTT: ping/pong.');
-      }
-      else {
-        app->log->debug('MQTT: unhandled message.', dumper $message);
-      }
-    });
-
-    app->log->info('MQTT: connected.');
-    $connected = 1;
-
-    # send connection request
-    my $m = Mojo::MQTT::Message->new(connect => {client_id => 'streams-proxy-'.$$});
-    $tx->send({binary => $m->encode});
-
-    $keepAliveTimer = Mojo::IOLoop->recurring(60 => sub {
-      my $m = Mojo::MQTT::Message->new(pingreq => {});
-      $tx->send({binary => $m->encode});
-    });
-  });
-}
 
 app->log->info('Configuration: ' . CONFIG_PATH);
 
@@ -130,7 +49,7 @@ plugin 'Plugins::Device'     => app->config->{members}  // {};
 plugin 'Plugins::Door'       => app->config->{door}     // {};
 plugin 'Plugins::Jekyll'     => app->config->{blog}     // {};
 plugin 'Plugins::Member'     => app->config->{members}  // {};
-plugin 'Plugins::Stream'     => app->config->{meta}     // {};
+plugin 'Plugins::Stream'     => app->config->{streams}  // {};
 plugin 'Plugins::RemoteIP';
 plugin 'Plugins::TidyHQ'     => app->config->{tidyhq}   // {};
 
@@ -826,14 +745,14 @@ group {
   };
 };
 
+any '/*catch' => {catch => ''} => sub { shift->redirect_to('/'); };
+
 # establish in case we can't connect
 Mojo::IOLoop->recurring(5 => sub {
-  unless ($connected) {
-    mqttConnect();
-  }
+  app->stream->mqtt->start(on_data => sub {
+    app->broadcast_stream(@_);
+  });
 });
-
-any '/*catch' => {catch => ''} => sub { shift->redirect_to('/'); };
 
 app->secrets(app->config->{secrets});
 app->start;
