@@ -3,22 +3,19 @@ version: "3"
 services:
   mosquitto:
     build: ./docker/mosquitto
-
+    restart: always
     ports:
       - "${BHACKD_MOSQUITTO_PORT}:1883"
-
     volumes:
       - ./conf:/conf:ro
 
   website:
     build: ./docker/website
-
+    restart: always
     ports:
       - "${BHACKD_WEBSITE_PORT}:3000"
-
     environment:
       - BHACKD_CONFIG
-
     volumes:
       - ./conf:/conf:ro
       - ./data:/data
@@ -26,10 +23,9 @@ services:
 
   streams:
     build: ./docker/streams
-
+    restart: always
     environment:
       - BHACKD_CONFIG
-
     volumes:
       - ./conf:/conf:ro
       - ./data:/data
