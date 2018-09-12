@@ -16,6 +16,8 @@
         <p>The Ballarat Hackerspace is actively inclusive, with firm and binding community rules and a <a href="#the_code">code of conduct</a> centred around being excellent to each other. Our commitment to inclusiveness is shown through ventures such as our <a href="/women">Women's Wednesdays</a>, which encourages women and their supporters to use the space for free on Wednesday nights.</p>
         <p>Our  <a href="<%= url_for('modelrules') %>">Association Rules</a> are publicly available, if formalities are your thing.</a>
       </div>
+    </div>
+  </div>
 </section>
 
 <section id="donations" class="section section-highlight">
