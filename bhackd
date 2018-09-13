@@ -745,6 +745,9 @@ group {
   };
 };
 
+#any '/404' => sub { shift->reply->not_found };
+any '/500' => sub { shift->reply->exception('Oh no!'); };
+
 any '/*catch' => {catch => ''} => sub { shift->redirect_to('/'); };
 
 # establish in case we can't connect

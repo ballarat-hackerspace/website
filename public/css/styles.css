@@ -31,6 +31,16 @@ a:focus {
   vertical-align: middle!important;
 }
 
+.page-tear {
+  display: inline-block;
+  height: 384px;
+  width: 384px;
+  background-image: url('/images/tear.png'), url('/images/cranks.gif');
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center;
+  background-size: cover, cover;
+}
+
 /*
 ** ALERTS
 */

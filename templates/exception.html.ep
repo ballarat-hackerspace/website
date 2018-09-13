@@ -1,0 +1,22 @@
+% layout 'error', page_title => 'Exception';
+
+<!-- about team -->
+<section id="team" class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center">Ooops! You broke it ...</h2>
+        <p>Well this is embarassing ... <i>or is it?!</i></p>
+        <p>First rule of hackerspace, if you can't fix it you don't own it. Second rule of hackerspace, you have to break it to learn how to fix it.</p>
+        <p>I'll grab the gaffa tape.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="text-center">
+          <div class="page-tear"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
