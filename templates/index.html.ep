@@ -56,8 +56,7 @@
 
           <p>We are a non-profit community group dedicated to providing education and resources to encourage skills in science, technology, engineering, arts and mathematics (STEAM). The Ballarat Hackerspace provides tools, connections, community and other resources to help improve the skills of its members and the community, as well as encourage a culture of participating in technology advances, rather than passively using them.</p>
           <p>We run regular workshops, community meetups, and encourage growth in the community in the broader Victorian goldfields region.</p>
-
-          <p>We are generally <a href="/about#timetable">open for public walk-ins</a> on Mondays, Tuesdays and Saturdays with a dedicated meetup on the 1st Tuesday of each month having a dedicated theme. These meetups are where we invite you to join us to chat, participate in show and tell, get help or advice, or talk about your projects &mdash; <b>BIG</b> and <i>small</i>.</p>
+          <p>We are generally <a href="/about#timetable">open for public walk-ins</a> on Mondays, Tuesdays and Saturdays. Come in for a chat, participate in show and tell, share some knowledge, or just tinker on your own projects &mdash; no matter how <b>BIG</b> or <i>small</i>.</p>
           <div class="text-center">
             <a class="btn btn-cta btn-cta-primary" href="/about">More About Us</a>
             <a class="btn btn-cta btn-cta-green" href="/join">Join Us</a>
@@ -78,9 +77,9 @@
             <table class="table table-hover table-calendar">
 %   for my $event (@{$events}) {
               <tr class="<%= $event->{in_progress} ? 'in_progress' : $event->{is_complete} ? 'is_complete' : '' %>">
-                <td><b><%= $event->{title} %></b></td>
-                <td><%= $event->{start_time}->strftime("%a, %e %b %Y @ %l:%M%p") %></td>
-                <td>
+                <td class="text-middle"><b><%= $event->{title} %></b></td>
+                <td class="text-middle"><%= $event->{start_time}->strftime("%a, %e %b %Y @ %l:%M%p") %></td>
+                <td class="text-middle">
 %     unless ($event->{in_progress} || $event->{is_complete}) {
                   <a class="btn btn-cta btn-cta-sm" href="<%= $event->{link} %>"><i class="fa fa-calendar-alt"></i></a>
 %     }
@@ -93,7 +92,7 @@
 % }
           </div>
         </div>
-      </div><!--//item-->
-    </div><!--//row-->
-  </div><!--//container-->
+      </div>
+    </div>
+  </div>
 </section>
