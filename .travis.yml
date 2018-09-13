@@ -11,11 +11,17 @@ before_script:
 - sleep 15
 script:
 - ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/images/bhack-logo-title-black.svg) -eq 200 ]]'
-- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/blog) -eq 200 ]]'
-- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/contact) -eq 200 ]]'
-- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/workshops) -eq 200 ]]'
 - ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/about) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/women) -eq 200 ]]'
 - ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/sponsors) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/workshops) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/contact) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/faq) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/blog) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/meta/badges) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/meta/resources) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/meta/streams) -eq 200 ]]'
+- ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/meta/space) -eq 200 ]]'
 - ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/join) -eq 200 ]]'
 - ! '[[ $(curl -sf -o /dev/null -w %{http_code} http://127.0.0.1:3000/not_found) -eq 302 ]]'
 after_success:
