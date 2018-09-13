@@ -5,44 +5,69 @@
     <h2 class="title text-center">Resources</h2>
     <p>We're slowly curating a list of online resources that provide a diverse range of knowledge, inspiration and explanations of all things Science, Technology, Engineering, Art and Mathematics.</p>
 
-    <h3>Videos</h3>
+    <h3>Science</h3>
     <div class="row">
       <div class="col-sm-4">
-        <h4>Minute Physics</h4>
+        <h4><a href="https://www.youtube.com/channel/UCUHW94eEFW7hkUMVaZz4eDg">Minute Physics</a></h4>
         <div class="video-container">
           <iframe src="https://www.youtube.com/embed/videoseries?list=PLED25F943F8D6081C" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
         </div>
       </div>
-      <div class="col-sm-4">
-        <h4>Numberphile</h4>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/videoseries?list=PLt5AfwLFPxWIUYlCb5ip9f_s4qm1zi8kc" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <h4>X Robots</h4>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/videoseries?list=PLpwJoq86vov-NYLfOhBh0JKrwfB1_i-RU" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
-        </div>
-      </div>
     </div>
+
+    <h3>Technology</h3>
     <div class="row">
       <div class="col-sm-4">
-        <h4>Colin Furze - Crazy Inventions</h4>
+        <h4><a href="https://www.youtube.com/user/colinfurze">Colin Furze</a></h4>
         <div class="video-container">
           <iframe src="https://www.youtube.com/embed/videoseries?list=PLGjbAdaOBLBkRhaLzdPjTMvVrRnm1qTrf" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
         </div>
       </div>
       <div class="col-sm-4">
-        <h4>Smarter Everyday</h4>
+        <h4><a href="https://www.youtube.com/user/destinws2">Smarter Everyday</a></h4>
         <div class="video-container">
           <iframe src="https://www.youtube.com/embed/videoseries?list=PLjHf9jaFs8XUXBnlkBAuRkOpUJosxJ0Vx" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
         </div>
       </div>
       <div class="col-sm-4">
-        <h4>The Hacksmith - Make It Real</h4>
+        <h4><a href="https://www.youtube.com/user/MstrJames">The Hacksmith</a></h4>
         <div class="video-container">
           <iframe src="https://www.youtube.com/embed/videoseries?list=PLbncXbXlaNQenti4JF4-WgCOU2JsMVkrj" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
+        </div>
+      </div>
+    </div>
+
+    <h3>Engineering</h3>
+    <div class="row">
+      <div class="col-sm-4">
+        <h4><a href="https://www.youtube.com/user/jamesbruton">X Robots</a></h4>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLpwJoq86vov_PkA0bla0eiUTsCAPi_mZf" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
+        </div>
+      </div>
+    </div>
+
+    <h3>Art</h3>
+    <div class="row">
+      <div class="col-sm-4">
+        <h4>Marble Machine X - Build Log</h4>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLLLYkE3G1HED6rW-bkliHbMroHYFf4ukv" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
+        </div>
+      </div>
+    </div>
+
+    <h3>Math</h3>
+    <div class="row">
+      <div class="col-sm-8">
+        <h4><a href="https://projecteuler.net">Project Euler</a></h4>
+        <p>Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. Although mathematics will help you arrive at elegant and efficient methods, the use of a computer and programming skills will be required to solve most problems.</p>
+        <p>The motivation for starting Project Euler, and its continuation, is to provide a platform for the inquiring mind to delve into unfamiliar areas and learn new concepts in a fun and recreational context.</p>
+      </div>
+      <div class="col-sm-4">
+        <h4><a href="https://www.youtube.com/channel/UCoxcjq-8xIDTYp3uz647V5A">Numberphile</a></h4>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLt5AfwLFPxWIUYlCb5ip9f_s4qm1zi8kc" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen=""></iframe>
         </div>
       </div>
     </div>
