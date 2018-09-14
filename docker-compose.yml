@@ -1,8 +1,11 @@
-version: "3"
+version: "2"
 
 services:
   mosquitto:
-    build: ./docker/mosquitto
+    container_name: bhack_mosquitto
+    image: "bhack_mosquitto:${BUILD}"
+    build:
+      context: ./docker/mosquitto
     restart: always
     ports:
       - "${BHACKD_MOSQUITTO_PORT}:1883"
@@ -10,7 +13,10 @@ services:
       - ./conf:/conf:ro
 
   website:
-    build: ./docker/website
+    container_name: bhack_website
+    image: "bhack_website:${BUILD}"
+    build:
+      context: ./docker/website
     restart: always
     ports:
       - "${BHACKD_WEBSITE_PORT}:3000"
@@ -22,7 +28,10 @@ services:
       - ./blog:/blog:ro
 
   streams:
-    build: ./docker/streams
+    container_name: bhack_streams
+    image: "bhack_streams:${BUILD}"
+    build:
+      context: ./docker/streams
     restart: always
     environment:
       - BHACKD_CONFIG
